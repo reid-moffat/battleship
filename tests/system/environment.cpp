@@ -6,6 +6,7 @@
  */
 
 #include "../tests.h"
+#include <gtest/gtest.h>
 #include <sys/stat.h>
 
 using std::string;
@@ -18,23 +19,21 @@ inline bool fileExists(const string &name) {
     return stat(name.c_str(), &buffer) == 0;
 }
 
-int main() {
+TEST(Environment, envtest) {
     ASSERT("Making sure there are no environment issues...");
 
     // Ensures essential files are present
     string files[] = {
-            "../build", "../include", "../res", "../src", "../tests", "../.gitignore", "../README.md",// Require repo structure/files
-            "../build/CMakeLists.txt", "../build/cmake_modules/FindSFML.cmake", "../build/assets",   // Application build files
-            "CMakeLists.txt", "cmake_modules/FindSFML.cmake", "assets"                               // Test build files
+            "build", "include", "res", "src", "tests", ".gitignore", "README.md",// Require repo structure/files
+            "build/cmake_modules/FindSFML.cmake", "build/assets",    // Application build files
+            "CMakeLists.txt"                               // Test build files
     };
+
     for (const string &file : files) {
         try {
-            // Executable is in cmake-build-debug so ../ needs to be added to each
-            ASSERT(fileExists("../" + file));
+            ASSERT(fileExists("../../" + file))
         } catch (std::invalid_argument &e) {
             throw std::invalid_argument("A required file is missing: " + file);
         }
     }
-
-    return 0;
 }
