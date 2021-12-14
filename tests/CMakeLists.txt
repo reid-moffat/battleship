@@ -10,9 +10,8 @@ file(GLOB TEST_FILES CONFIGURE_DEPENDS
         "system/*.cpp"
         "unit/*.cpp")
 
-add_executable(battleship-tests main.cpp ${TEST_FILES})
+add_executable(battleship-tests main.cpp assertions.h ${TEST_FILES})
 target_link_libraries(battleship-tests gtest gtest_main)
-
 
 
 #

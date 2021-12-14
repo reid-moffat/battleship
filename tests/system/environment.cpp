@@ -1,39 +1,31 @@
 /**
- * Test cases for the environment
- *
- * These tests ensure that the program's environment does not regress, attempting to catch
+ * These tests ensure that the program's architecture does not regress, attempting to catch
  * any deleted required files or fatal changes in structure
  */
 
-#include "../tests.h"
 #include <gtest/gtest.h>
 #include <sys/stat.h>
 
 using std::string;
 
-/**
- * Returns true if a file exists
- */
-inline bool fileExists(const string &name) {
-    struct stat buffer {};
-    return stat(name.c_str(), &buffer) == 0;
-}
-
 TEST(Environment, envtest) {
-    ASSERT("Making sure there are no environment issues...");
+    // Ensures required files are present
+    const string files[] = {
+            // Directory structure
+            "build", "googletest", "include", "res", "src", "tests",
 
-    // Ensures essential files are present
-    string files[] = {
-            "build", "include", "res", "src", "tests", ".gitignore", "README.md",// Require repo structure/files
-            "build/cmake_modules/FindSFML.cmake", "build/assets",    // Application build files
-            "CMakeLists.txt"                               // Test build files
-    };
+            // Build files
+            "CMakeLists.txt", "build/assets", "build/assets/.keep", "build/cmake_modules", "build/cmake_modules/FindSFML.cmake",
+
+            // Test files
+            "tests/CMakeLists.txt", "tests/main.cpp", "tests/assertions.h", "tests/unit", "tests/integration", "tests/system",
+
+            // VCS files
+            ".git", ".gitignore", "README.md", "LICENSE"};
 
     for (const string &file : files) {
-        try {
-            ASSERT(fileExists("../../" + file))
-        } catch (std::invalid_argument &e) {
-            throw std::invalid_argument("A required file is missing: " + file);
+        if (access(("../../" + file).c_str(), F_OK) == -1) {
+            throw std::invalid_argument("File/directory not found in repository root: " + file);
         }
     }
 }
