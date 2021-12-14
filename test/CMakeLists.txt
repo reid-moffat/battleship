@@ -3,35 +3,22 @@
 #
 cmake_minimum_required(VERSION 3.20)
 project(battleship-tests)
-
 set(CMAKE_CXX_STANDARD 14)
 
 
-#
-# Add your test cases here
-#
-# PLEASE READ: HOW TO TEST (IMPORTANT):
-#  1. Below, add these two lines (replacing the text in <>):
-#       add_executable(<executable_name> <path_to_test_file> <other_files_path (if needed)>)
-#       add_test(<test_name> <executable_name_from_the_last_line>)
-#  2. At the end of the "if (SFML_FOUND)" part below, add the following:
-#       target_link_libraries(<executable_name> ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-#
-enable_testing()
+add_subdirectory(lib/googletest)
+include_directories(lib/googletest/googletest/include)
+include_directories(lib/googletest/googlemock/include)
+include_directories(../include)
+include_directories(../src)
 
-# Environment testing
-add_executable(env environment.cpp)
-add_test(Environment env)
+add_subdirectory(integration)
+add_subdirectory(system)
+add_subdirectory(unit)
 
-# Unit testing
-add_executable(sm unit/screenManager.cpp ../src/screen/screenManager.cpp)
-add_test(ScreenManager sm)
 
-add_executable(st unit/screenTemplate.cpp ../src/screen/screenTemplate.cpp)
-add_test(ScreenTemplate st)
-
-add_executable(fp unit/fleetPlacement.cpp ../src/screen/fleetPlacement.cpp)
-add_test(FleetPlacement fp)
+add_executable(battleship-tests main.cpp)
+target_link_libraries(battleship-tests gtest gtest_main)
 
 
 #
@@ -43,10 +30,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
 find_package(SFML REQUIRED system window graphics)
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
-    target_link_libraries(env ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-    target_link_libraries(sm ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-    target_link_libraries(st ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-    target_link_libraries(fp ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
+    target_link_libraries(battleship-tests ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 endif ()
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

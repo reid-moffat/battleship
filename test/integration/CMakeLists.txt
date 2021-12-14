@@ -1,10 +1,6 @@
-cmake_minimum_required(VERSION 3.20)
-project(test)
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-set(CMAKE_CXX_STANDARD 14)
+add_executable(secondTest test1.cpp)
 
-
-# Test cases
-enable_testing()
-
-
+target_link_libraries(secondTest gtest gtest_main)
+#target_link_libraries(firstTest ../include ../src)

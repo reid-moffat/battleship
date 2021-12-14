@@ -1,3 +1,8 @@
+#
+# GitHub C++ gitignore
+# https://github.com/github/gitignore/blob/main/C++.gitignore
+#
+
 # Prerequisites
 *.d
 
@@ -43,8 +48,11 @@
 # Ignore all local history of files
 **/.history
 
+
+#
 # Clion .idea files to ignore
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+#
 
 # User-specific stuff
 .idea/**/workspace.xml
@@ -70,7 +78,7 @@
 .idea/**/libraries
 
 # CMake
-*/cmake-build-*/
+**/cmake-build-*
 
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml

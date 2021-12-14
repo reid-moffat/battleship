@@ -1,4 +1,5 @@
 # This script locates the SFML library
+# Source: https://github.com/SFML/SFML-Game-Development-Book/blob/master/CMake/FindSFML.cmake
 # ------------------------------------
 #
 # Usage
