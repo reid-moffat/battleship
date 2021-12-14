@@ -1,0 +1,8 @@
+/**
+ * Class ___
+ *
+ * Author: ___
+ * Notes: ___
+ */
+
+#include "../../include/<namespace>/<filename>.h"

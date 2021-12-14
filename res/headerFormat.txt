@@ -1,0 +1,22 @@
+/**
+ * Class ___ <explain what it does>
+ *
+ * Author: ___
+ * Notes: ___
+ */
+
+#ifndef BATTLESHIP_<filename>_H
+#define BATTLESHIP_<filename>_H
+
+namespace <name> {
+    class <classname> {
+    public:
+
+    protected:
+
+    private:
+
+    };
+}
+
+#endif //BATTLESHIP_<filename>_H

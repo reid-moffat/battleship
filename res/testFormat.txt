@@ -1,0 +1,12 @@
+/**
+ * Test for ___
+ *
+ * Author: ___
+ * Notes: ___
+ */
+
+#include "../tests.h"
+
+int main() {
+    ASSERT(1 + 1, ==, 2);
+}
