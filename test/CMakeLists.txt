@@ -6,15 +6,17 @@ project(battleship-tests)
 set(CMAKE_CXX_STANDARD 14)
 
 
-add_subdirectory(lib/googletest)
+add_subdirectory(lib/googletest) # Source files
 include_directories(lib/googletest/googletest/include)
 include_directories(lib/googletest/googlemock/include)
 include_directories(../include)
 include_directories(../src)
 
-add_subdirectory(integration)
-add_subdirectory(system)
-add_subdirectory(unit)
+include(CTest)
+enable_testing()
+add_subdirectory(integration) # Test cases
+#add_subdirectory(system)
+#add_subdirectory(unit)
 
 
 add_executable(battleship-tests main.cpp)
@@ -22,7 +24,7 @@ target_link_libraries(battleship-tests gtest gtest_main)
 
 
 #
-# SFML (don't touch please, except for adding target_link_libraries)
+# SFML
 #
 include_directories(src include C:/SFML/include)
 

@@ -4,10 +4,10 @@ project(battleship)
 set(CMAKE_CXX_STANDARD 14)
 
 file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
-        "../include/*.h"
-        "../include/**/*.h"
-        "../src/*.cpp"
-        "../src/**/*.cpp")
+        "include/*.h"
+        "include/**/*.h"
+        "src/*.cpp"
+        "src/**/*.cpp")
 
 add_executable(battleship ${SOURCE_FILES})
 
@@ -15,14 +15,14 @@ add_executable(battleship ${SOURCE_FILES})
 # SFML config
 include_directories(src include C:/SFML/include)
 
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/build/cmake_modules")
 find_package(SFML REQUIRED system window graphics)
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})
     target_link_libraries(battleship ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 endif ()
 
-file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY build/assets DESTINATION ${CMAKE_BINARY_DIR})
 
 # Copy dlls to build
 if (WIN32)

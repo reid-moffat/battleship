@@ -14,5 +14,5 @@ namespace {
 }// namespace
 
 TEST_F(testingClass1, test1) {
-   ASSERT_EQ(1, 1);
+   ASSERT_EQ(1, 2);
 }
