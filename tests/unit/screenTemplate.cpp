@@ -8,7 +8,7 @@
 using screen::ScreenTemplate;
 
 /**
- * Dummy base class to test abstract class 'functionality'
+ * Dummy base class to tests abstract class 'functionality'
  */
 class DummyScreen : screen::ScreenTemplate {
 public:

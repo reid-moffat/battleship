@@ -23,7 +23,7 @@ int main() {
 
     // Ensures essential files are present
     string files[] = {
-            "../build", "../include", "../res", "../src", "../test", "../.gitignore", "../README.md",// Require repo structure/files
+            "../build", "../include", "../res", "../src", "../tests", "../.gitignore", "../README.md",// Require repo structure/files
             "../build/CMakeLists.txt", "../build/cmake_modules/FindSFML.cmake", "../build/assets",   // Application build files
             "CMakeLists.txt", "cmake_modules/FindSFML.cmake", "assets"                               // Test build files
     };

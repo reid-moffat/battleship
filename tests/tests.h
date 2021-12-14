@@ -1,5 +1,5 @@
 /**
- * Provides helpful code for test files
+ * Provides helpful code for tests files
  */
 
 #ifndef TEST_TESTS_H
@@ -18,7 +18,7 @@
             std::stringstream errMsg;                                                                                          \
             errMsg << "\n\nASSERT FAILED: " << #statement << std::endl                                                         \
                    << "Value: " << statement << std::endl                                                                      \
-                   << "Location: " << path.substr(path.find("battleship\\test")) << " (line " << __LINE__ << ")" << std::endl; \
+                   << "Location: " << path.substr(path.find("battleship\\tests")) << " (line " << __LINE__ << ")" << std::endl; \
             throw std::invalid_argument(errMsg.str());                                                                         \
         }                                                                                                                      \
     }
@@ -30,7 +30,7 @@
             std::stringstream errMsg;                                                                 \
             errMsg << "\n\nASSERT FAILED: " << #left << " " << #operator<< " " << #right << std::endl \
                    << "Value: " << left << " " << #operator<< " " << right << std::endl               \
-                   << "Location: " << path.substr(path.find("battleship\\test"))                      \
+                   << "Location: " << path.substr(path.find("battleship\\tests"))                      \
                    << " (line " << __LINE__ << ")" << std::endl;                                      \
             throw std::invalid_argument(errMsg.str());                                                \
         }                                                                                             \

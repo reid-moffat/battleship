@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.20)
-project(battleship)
+project(battleship C CXX)
 
 set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
+enable_testing()
+add_subdirectory(tests)
 
 file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
         "include/*.h"
