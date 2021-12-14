@@ -3,15 +3,16 @@ project(battleship)
 
 set(CMAKE_CXX_STANDARD 14)
 
-file(GLOB SOURCE_FILES
+file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
         "../include/*.h"
-        "../include/*/*.h"
+        "../include/**/*.h"
         "../src/*.cpp"
-        "../src/*/*.cpp"
-        )
+        "../src/**/*.cpp")
 
 add_executable(battleship ${SOURCE_FILES})
 
+
+# SFML config
 include_directories(src include C:/SFML/include)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake_modules")

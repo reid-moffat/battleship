@@ -12,18 +12,18 @@ set(CMAKE_CXX_STANDARD 14)
 #
 # PLEASE READ: HOW TO TEST (IMPORTANT):
 #  1. Below, add these two lines (replacing the text in <>):
-#       add_executable(<executable_name> <path_to_test_file> <other_files_path (if needed)>)
+#       add_executable(<executable_name> <path_to_test_file> ${SOURCE_FILES})
 #       add_test(<test_name> <executable_name_from_the_last_line>)
-#  2. At the end of the "if (SFML_FOUND)" part below, add the following:
+#  2. At the end of the "if (SFML_FOUND)" part below (line ~50), add the following:
 #       target_link_libraries(<executable_name> ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 #
 enable_testing()
 
 file(GLOB SOURCE_FILES
         "../include/*.h"
-        "../include/*/*.h"
+        "../include/**/*.h"
         "../src/state.cpp"
-        "../src/*/*.cpp"
+        "../src/**/*.cpp"
         )
 
 # Environment testing
