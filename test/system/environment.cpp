@@ -5,7 +5,7 @@
  * any deleted required files or fatal changes in structure
  */
 
-#include "tests.h"
+#include "../tests.h"
 #include <sys/stat.h>
 
 using std::string;
