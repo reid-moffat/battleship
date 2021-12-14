@@ -1,5 +1,8 @@
 /**
  * Test cases for the environment
+ *
+ * These tests ensure that the program's environment does not regress, attempting to catch
+ * any deleted required files or fatal changes in structure
  */
 
 #include "tests.h"

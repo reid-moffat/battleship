@@ -19,19 +19,23 @@ set(CMAKE_CXX_STANDARD 14)
 #
 enable_testing()
 
+file(GLOB SOURCE_FILES
+        "../include/*.h"
+        "../include/*/*.h"
+        "../src/state.cpp"
+        "../src/*/*.cpp"
+        )
+
 # Environment testing
-add_executable(env environment.cpp)
+add_executable(env environment.cpp ${SOURCE_FILES})
 add_test(Environment env)
 
 # Unit testing
-add_executable(sm unit/screenManager.cpp ../src/screen/screenManager.cpp)
+add_executable(sm unit/screenManager.cpp ${SOURCE_FILES})
 add_test(ScreenManager sm)
 
-add_executable(st unit/screenTemplate.cpp ../src/screen/screenTemplate.cpp)
+add_executable(st unit/screenTemplate.cpp ${SOURCE_FILES})
 add_test(ScreenTemplate st)
-
-add_executable(fp unit/fleetPlacement.cpp ../src/screen/fleetPlacement.cpp)
-add_test(FleetPlacement fp)
 
 
 #
@@ -46,7 +50,6 @@ if (SFML_FOUND)
     target_link_libraries(env ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
     target_link_libraries(sm ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
     target_link_libraries(st ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
-    target_link_libraries(fp ${SFML_LIBRARIES} ${SFML_DEPENDENCIES})
 endif ()
 
 file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})

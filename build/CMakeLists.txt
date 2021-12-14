@@ -4,15 +4,10 @@ project(battleship)
 set(CMAKE_CXX_STANDARD 14)
 
 file(GLOB SOURCE_FILES
-        "../include/state.h"
-        "../include/entity/*.h"
-        "../include/screen/*.h"
-        "../include/user/*.h"
-        "../src/main.cpp"
-        "../src/state.cpp"
-        "../src/entity/*.cpp"
-        "../src/screen/*.cpp"
-        "../src/user/*.cpp"
+        "../include/*.h"
+        "../include/*/*.h"
+        "../src/*.cpp"
+        "../src/*/*.cpp"
         )
 
 add_executable(battleship ${SOURCE_FILES})
