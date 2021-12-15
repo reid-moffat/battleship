@@ -7,6 +7,7 @@
 #include "../../include/helpers/sprites.h"
 #include "../../include/helpers/userInput.h"
 #include "../../include/screen/gameplay.h"
+#include "../../include/helpers/backend.h"
 
 using screen::FleetPlacement;
 using std::get;
@@ -163,9 +164,13 @@ void FleetPlacement::randomize() {
     for (auto ship = shipSizes.rbegin(); ship != shipSizes.rend(); ++ship) {// Start with the big ships
         int size = ship->second;
         while (true) {
-            bool horizontal = rand() % 2 != 0;
-            int x = rand() % (10 - (horizontal ? size - 1 : 0));
-            int y = rand() % (10 - (horizontal ? 0 : size - 1));
+            bool horizontal = randomInt(0, 1) % 2 != 0;// Whether the ship is horizontal or vertical
+
+            // Determine a random x and y position for the ship (it will be on the board, but might already be occupied)
+            const int maxBoardIndex = 9;       // The maximum coordinate index on the board (since there are 10 squares)
+            const int maxShipStart = 10 - size;// The maximum coordinate index to start the ship at so that it fits on the board
+            int x = randomInt(0, horizontal ? maxShipStart : maxBoardIndex);
+            int y = randomInt(0, horizontal ? maxBoardIndex : maxShipStart);
 
             // Create a list of square to check
             vector<Coordinate> shipSquares;// Squares occupied by this ship and adjacent ones
@@ -297,11 +302,11 @@ void FleetPlacement::resetFleetLayout() {
     this->rowBoatSprite.setRotation(0);
 }
 
-void FleetPlacement::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    updateMousePosition(gui, mousePosition);
-    this->readyButton->updateButtonState(mousePosition);
-    this->randomizeButton->updateButtonState(mousePosition);
-    this->instructionsButton->updateButtonState(mousePosition);
+void FleetPlacement::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
+    updateMousePosition(gui, mousePos);
+    this->readyButton->updateButtonState(mousePos);
+    this->randomizeButton->updateButtonState(mousePos);
+    this->instructionsButton->updateButtonState(mousePos);
 }
 
 void FleetPlacement::poll(sf::RenderWindow &gui) {
@@ -370,7 +375,7 @@ void FleetPlacement::render(sf::RenderWindow &gui) {
         }
     }
 
-    if (layoutGenerated == true) {
+    if (layoutGenerated) {
         readyButton->render(gui);
     }
 

@@ -85,12 +85,12 @@ screen::DifficultySelection &DifficultySelection::operator=(const DifficultySele
     }
 }
 
-void DifficultySelection::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    updateMousePosition(gui, mousePosition);
-    this->easyButton->updateButtonState(mousePosition);
-    this->hardButton->updateButtonState(mousePosition);
-    this->backButton->updateButtonState(mousePosition);
-    this->instructionsButton->updateButtonState(mousePosition);
+void DifficultySelection::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
+    updateMousePosition(gui, mousePos);
+    this->easyButton->updateButtonState(mousePos);
+    this->hardButton->updateButtonState(mousePos);
+    this->backButton->updateButtonState(mousePos);
+    this->instructionsButton->updateButtonState(mousePos);
 }
 
 void DifficultySelection::poll(sf::RenderWindow &gui) {

@@ -98,7 +98,7 @@ namespace screen {
         /**
          * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
          */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void update(sf::RenderWindow &gui, sf::Vector2f mousePos);
 
         /**
          * Polls for system events

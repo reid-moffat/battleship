@@ -9,6 +9,7 @@
 #include <unistd.h>
 #endif
 
+#include "../../include/helpers/backend.h"
 #include "../../include/helpers/sprites.h"
 #include "../../include/helpers/userInput.h"
 #include "../../include/screen/gameplay.h"
@@ -297,7 +298,7 @@ void Gameplay::createCoordinateSet() {
 
 Coordinate Gameplay::randomAttack() {
     // Generate a random index
-    int randGen = rand() % this->coordinateSet.size();
+    int randGen = randomInt(0, this->coordinateSet.size() - 1);
     // Find the random coordinate
     auto itr = this->coordinateSet.begin();
     advance(itr, randGen);
