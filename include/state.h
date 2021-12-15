@@ -10,13 +10,11 @@
 #define BATTLESHIP_STATE_H
 
 #include "screen/screens.h"
-
 #include <SFML/Graphics.hpp>
-
 #include <iostream>
-#include <string>
 
 using screen::Screens;
+using std::string;
 
 class State {
 private:
@@ -36,40 +34,40 @@ private:
 
 public:
     /**
-     * Screen lock condition
+     * Screen lock condition (if this is true, no user input can be registered)
      */
     static bool lockedFlag;
 
     /**
-     * Enum of game modes
+     * The possible game modes: SinglePlayer and MultiPlayer
      */
     enum GameMode { SinglePlayer,
                     MultiPlayer };
 
     /**
-     * Selected game mode
+     * The selected game mode (SinglePlayer or MultiPlayer)
      */
     static GameMode gameMode;
 
     /**
-     * Enum of difficulties
+     * The possible game difficulties: Easy and Hard
      */
     enum Difficulty { EASY,
                       HARD };
 
     /**
-     * Selected difficulty
+     * The selected difficulty
      */
     static Difficulty difficulty;
 
     /**
-     * Enum of player types
+     * The two player 'names': P1 and P2
      */
     enum Player { P1,
                   P2 };
 
     /**
-     * Current player
+     * The current player (who is selecting their fleet/attacking currently)
      */
     static Player player;
 
@@ -82,16 +80,6 @@ public:
      * Height of the window in pixels
      */
     inline static const int height = 1080;
-
-    /**
-     * Loads a texture from the given path
-     */
-    static void loadTexture(sf::Texture &texture, const std::string &path);
-
-    /**
-     * Initializes a sprite
-     */
-    static void setSprite(sf::Vector2f position, sf::Vector2f scale, const sf::Texture &spriteTexture, sf::Sprite &sprite);
 
     /**
      * Returns the current screen
@@ -109,12 +97,25 @@ public:
     static void changeScreen(Screens newScreen);
 
     /**
-     * Returns to the previous screen (used for back buttons)
+     * Changes to the previous screen (used for back buttons)
      */
     static void previousScreen();
 
     /**
-     * Updates the current mouse position 
+     * Loads a texture from the given path
+     *
+     * Note: The texture path is relative to res/images
+     * For example, "homepage/ActivePlayButton.png"
+     */
+    static void loadTexture(sf::Texture &texture, const string &path);
+
+    /**
+     * Initializes a sprite
+     */
+    static void setSprite(sf::Vector2f position, sf::Vector2f scale, const sf::Texture &spriteTexture, sf::Sprite &sprite);
+
+    /**
+     * Updates the current mouse position of a Vector2f object
      */
     static void updateMousePosition(sf::RenderWindow &gui, sf::Vector2f &mousePosition);
 };
