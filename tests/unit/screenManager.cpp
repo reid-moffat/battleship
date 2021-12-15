@@ -2,13 +2,11 @@
 * Test cases for the User Interface
 */
 
-//#include "../../include/screen/screenManager.h"
-//
-//using screen::ScreenManager;
-//
-//int main() {
-//    ScreenManager smTest;
-//    smTest.run();
-//
-//    return 0;
-//}
+#include <gtest/gtest.h>
+#include "../../include/screen/screenManager.h"
+
+using screen::ScreenManager;
+
+TEST(Unit, screenManager) {
+    ScreenManager().run();
+}

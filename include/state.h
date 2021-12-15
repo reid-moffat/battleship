@@ -76,12 +76,12 @@ public:
     /**
      * Width of the window in pixels
      */
-    static const int width;
+    inline static const int width = 1920;
 
     /**
      * Height of the window in pixels
      */
-    static const int height;
+    inline static const int height = 1080;
 
     /**
      * Loads a texture from the given path
