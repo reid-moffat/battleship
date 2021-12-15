@@ -14,6 +14,7 @@ using screen::ScreenTemplate;
 class DummyScreen : screen::ScreenTemplate {
 private:
     int test{};
+
 public:
     DummyScreen() = default;
 
