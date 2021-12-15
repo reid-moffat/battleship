@@ -6,12 +6,12 @@
 #ifndef BATTLESHIP_GAMEPLAY_H
 #define BATTLESHIP_GAMEPLAY_H
 
-#include "../entity/button.h"
-#include "../entity/coordinate.h"
-#include "../entity/grid.h"
-#include "../entity/shipNames.h"
-#include "../entity/target.h"
-#include "screenTemplate.h"
+#include "../entity/button.hpp"
+#include "../entity/coordinate.hpp"
+#include "../entity/grid.hpp"
+#include "../entity/shipNames.hpp"
+#include "../entity/target.hpp"
+#include "screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 

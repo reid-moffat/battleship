@@ -7,12 +7,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
-        "include/*.h"
-        "include/**/*.h"
+        "include/*.hpp"
+        "include/**/*.hpp"
         "src/*.cpp"
         "src/**/*.cpp")
 
-add_executable(battleship ${SOURCE_FILES} include/helpers/sprites.h)
+add_executable(battleship ${SOURCE_FILES} include/helpers/sprites.hpp)
 
 
 # Add SFML

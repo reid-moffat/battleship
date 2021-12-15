@@ -3,9 +3,9 @@
  * Description: Front-end class that defines the behaviour of the Instructions screen
  */
 
-#include "../../include/screen/instructions.h"
-#include "../../include/helpers/sprites.h"
-#include "../../include/helpers/userInput.h"
+#include "../../include/screen/instructions.hpp"
+#include "../../include/helpers/sprites.hpp"
+#include "../../include/helpers/userInput.hpp"
 
 using screen::Instructions;
 

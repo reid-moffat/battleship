@@ -3,9 +3,9 @@
  * Description: Front-end class that defines the behaviour of the Game Mode selection screen
  */
 
-#include "../../include/screen/gameModeSelection.h"
-#include "../../include/helpers/sprites.h"
-#include "../../include/helpers/userInput.h"
+#include "../../include/screen/gameModeSelection.hpp"
+#include "../../include/helpers/sprites.hpp"
+#include "../../include/helpers/userInput.hpp"
 
 using screen::GameModeSelection;
 

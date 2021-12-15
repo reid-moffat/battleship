@@ -3,9 +3,9 @@
  * Description: Front-end class that defines the behaviour of the Game Over screen
  */
 
-#include "../../include/screen/gameOver.h"
-#include "../../include/helpers/sprites.h"
-#include "../../include/helpers/userInput.h"
+#include "../../include/screen/gameOver.hpp"
+#include "../../include/helpers/sprites.hpp"
+#include "../../include/helpers/userInput.hpp"
 
 using screen::GameOver;
 

@@ -3,7 +3,7 @@
  * Description: Front-end class that creates and manages the target
  */
 
-#include "../../include/entity/target.h"
+#include "../../include/entity/target.hpp"
 
 using entity::Target;
 

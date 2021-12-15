@@ -6,8 +6,8 @@
 #ifndef BATTLESHIP_DIFFICULTYSELECTION_H
 #define BATTLESHIP_DIFFICULTYSELECTION_H
 
-#include "../entity/button.h"
-#include "screenTemplate.h"
+#include "../entity/button.hpp"
+#include "screenTemplate.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;

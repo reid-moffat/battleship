@@ -7,8 +7,8 @@
 #ifndef BATTLESHIP_SCREENMANAGER_H
 #define BATTLESHIP_SCREENMANAGER_H
 
-#include "../state.h"
-#include "screenTemplate.h"
+#include "../state.hpp"
+#include "screenTemplate.hpp"
 
 #include <map>
 

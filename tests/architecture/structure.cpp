@@ -3,7 +3,7 @@
  * any deleted or renamed required files
  */
 
-#include <gtest/gtest.h>
+#include <gtest/gtest.hpp>
 #include <sys/stat.h>
 
 using std::string;

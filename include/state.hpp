@@ -9,7 +9,7 @@
 #ifndef BATTLESHIP_STATE_H
 #define BATTLESHIP_STATE_H
 
-#include "screen/screens.h"
+#include "screen/screens.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 

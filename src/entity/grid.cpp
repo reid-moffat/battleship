@@ -3,7 +3,7 @@
  *
  */
 
-#include "../../include/entity/grid.h"
+#include "../../include/entity/grid.hpp"
 
 using entity::Coordinate;
 using entity::Grid;

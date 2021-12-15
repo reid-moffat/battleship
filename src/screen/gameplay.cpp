@@ -9,10 +9,10 @@
 #include <unistd.h>
 #endif
 
-#include "../../include/helpers/backend.h"
-#include "../../include/helpers/sprites.h"
-#include "../../include/helpers/userInput.h"
-#include "../../include/screen/gameplay.h"
+#include "../../include/helpers/backend.hpp"
+#include "../../include/helpers/sprites.hpp"
+#include "../../include/helpers/userInput.hpp"
+#include "../../include/screen/gameplay.hpp"
 
 using entity::SquareType;
 using screen::Gameplay;

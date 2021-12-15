@@ -2,7 +2,7 @@
  * Global game state implementation
  */
 
-#include "../include/state.h"
+#include "../include/state.hpp"
 
 using std::string;
 

@@ -2,8 +2,8 @@
  * Test cases for screenTemplate
  */
 
-#include "../../include/screen/screenTemplate.h"
-#include "../assertions.h"
+#include "../../include/screen/screenTemplate.hpp"
+#include "../assertions.hpp"
 #include <gtest/gtest.h>
 
 using screen::ScreenTemplate;

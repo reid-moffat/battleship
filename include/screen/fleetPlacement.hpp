@@ -6,10 +6,10 @@
 #ifndef BATTLESHIP_FLEETPLACEMENT_H
 #define BATTLESHIP_FLEETPLACEMENT_H
 
-#include "../entity/button.h"
-#include "../entity/coordinate.h"
-#include "../entity/shipNames.h"
-#include "screenTemplate.h"
+#include "../entity/button.hpp"
+#include "../entity/coordinate.hpp"
+#include "../entity/shipNames.hpp"
+#include "screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 

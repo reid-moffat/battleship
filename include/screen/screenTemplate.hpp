@@ -5,7 +5,7 @@
 #ifndef BATTLESHIP_SCREENTEMPLATE_H
 #define BATTLESHIP_SCREENTEMPLATE_H
 
-#include "../state.h"
+#include "../state.hpp"
 
 namespace screen {
 
