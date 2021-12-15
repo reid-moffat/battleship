@@ -15,9 +15,9 @@ file(GLOB TEST_FILES CONFIGURE_DEPENDS
         "../src/state.cpp"
         "../src/**/*.cpp"
         "architecture/*.cpp"
+        "unit/*.cpp"
         "integration/*.cpp"
-        "system/*.cpp"
-        "unit/*.cpp")
+        "system/*.cpp")
 
 add_executable(battleship-tests main.cpp assertions.h ${TEST_FILES})
 
