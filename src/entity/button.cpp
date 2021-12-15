@@ -3,7 +3,7 @@
  * Description: Front-end class that creates buttons and manages button states, textures, and sprites
  */
 
-#include "../../include/entity/button.h"
+#include "../../include/entity/button.hpp"
 
 using entity::Button;
 

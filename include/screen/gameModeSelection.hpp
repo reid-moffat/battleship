@@ -6,8 +6,8 @@
 #ifndef BATTLESHIP_GAMEMODESELECTION_H
 #define BATTLESHIP_GAMEMODESELECTION_H
 
-#include "../entity/button.h"
-#include "screenTemplate.h"
+#include "../entity/button.hpp"
+#include "screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 

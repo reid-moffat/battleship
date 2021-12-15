@@ -3,9 +3,8 @@
  * Description: Front-end class that defines the behaviour of the Difficulty selection screen
  */
 
-#include "../../include/screen/difficultySelection.h"
-#include "../../include/helpers/sprites.h"
-#include "../../include/helpers/userInput.h"
+#include "../../include/screen/difficultySelection.hpp"
+#include "../../include/helpers/helpers.hpp"
 
 using screen::DifficultySelection;
 

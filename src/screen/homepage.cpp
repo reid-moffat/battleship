@@ -3,9 +3,8 @@
  * Description: Front-end class that defines the behaviour of the Homepage screen
  */
 
-#include "../../include/screen/homepage.h"
-#include "../../include/helpers/sprites.h"
-#include "../../include/helpers/userInput.h"
+#include "../../include/screen/homepage.hpp"
+#include "../../include/helpers/helpers.hpp"
 
 using screen::Homepage;
 

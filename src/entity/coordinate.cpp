@@ -3,7 +3,7 @@
  *
  */
 
-#include "../../include/entity/coordinate.h"
+#include "../../include/entity/coordinate.hpp"
 #include <string>
 
 using entity::Coordinate;

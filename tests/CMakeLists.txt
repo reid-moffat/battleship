@@ -10,8 +10,8 @@ enable_testing()
 add_subdirectory(googletest)
 
 file(GLOB TEST_FILES CONFIGURE_DEPENDS
-        "../include/*.h"
-        "../include/**/*.h"
+        "../include/*.hpp"
+        "../include/**/*.hpp"
         "../src/state.cpp"
         "../src/**/*.cpp"
         "architecture/*.cpp"
@@ -19,7 +19,7 @@ file(GLOB TEST_FILES CONFIGURE_DEPENDS
         "integration/*.cpp"
         "system/*.cpp")
 
-add_executable(battleship-tests main.cpp assertions.h ${TEST_FILES})
+add_executable(battleship-tests main.cpp assertions.hpp ${TEST_FILES})
 
 
 # Add SFML

@@ -1,55 +1,75 @@
 /**
- * File: intermediary.h
- * Description: Front-end class that defines the behaviour of the Intermediary screen
+ * File: gameOver.h
+ * Description: Front-end class that defines the behaviour of the Game Over screen
  */
 
-#ifndef BATTLESHIP_INTERMEDIARY_H
-#define BATTLESHIP_INTERMEDIARY_H
+#ifndef BATTLESHIP_GAMEOVER_H
+#define BATTLESHIP_GAMEOVER_H
 
-#include "../entity/button.h"
-#include "screenTemplate.h"
+#include "../entity/button.hpp"
+#include "screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 
 using entity::Button;
 
 namespace screen {
-    class Intermediary : public ScreenTemplate {
+    class GameOver : public ScreenTemplate {
     private:
+        /**
+         * Win background texture
+         */
+        sf::Texture gameOverWinBackgroundTexture;
+
+        /**
+         * Lose background texture
+         */
+        sf::Texture gameOverLoseBackgroundTexture;
+
         /**
          * P1 background texture
          */
-        sf::Texture intermediaryP1BackgroundTexture;
+        sf::Texture gameOverP1BackgroundTexture;
 
         /**
          * P2 background texture
          */
-        sf::Texture intermediaryP2BackgroundTexture;
+        sf::Texture gameOverP2BackgroundTexture;
 
         /**
-         * Idle continue button texture
+         * Idle homepage button texture
          */
-        sf::Texture idleContinueButtonTexture;
+        sf::Texture idleHomepageButtonTexture;
 
         /**
          * Active continue button texture
          */
-        sf::Texture activeContinueButtonTexture;
+        sf::Texture activeHomepageButtonTexture;
 
         /**
-         * Background P1 sprite
+         * Backgroud win sprite
+         */
+        sf::Sprite backgroundWinSprite;
+
+        /**
+         * Backgroud lose sprite
+         */
+        sf::Sprite backgroundLoseSprite;
+
+        /**
+         * Backgroud P1 sprite
          */
         sf::Sprite backgroundP1Sprite;
 
         /**
-         * Background P2 sprite
+         * Backgroud P2 sprite
          */
         sf::Sprite backgroundP2Sprite;
 
         /**
-         * Continue button 
+         * Homepage button 
          */
-        Button *continueButton;
+        Button *homepageButton;
 
         /**
          * Mouse position vector
@@ -80,28 +100,28 @@ namespace screen {
         /**
          * Constructor
          */
-        Intermediary();
+        GameOver();
 
         /**
          * Copy constructor
          */
-        Intermediary(const Intermediary &source);
+        GameOver(const GameOver &source);
 
         /**
          * Destructor
          */
-        ~Intermediary();
+        ~GameOver();
 
         /**
          * Overloaded assignment operator
          */
-        Intermediary &operator=(const Intermediary &source);
+        GameOver &operator=(const GameOver &source);
 
         /**
-         * Overriddenrun method of screenTemplate
+         * Overridden run method of screenTemplate
          */
         void run(sf::RenderWindow &gui) override;
     };
 }// namespace screen
 
-#endif// BATTLESHIP_INTERMEDIARY_H
+#endif// BATTLESHIP_GAMEOVER_H

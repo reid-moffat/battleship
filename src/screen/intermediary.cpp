@@ -3,9 +3,8 @@
  * Description: Front-end class that defines the behaviour of the Intermediary screen
  */
 
-#include "../../include/screen/intermediary.h"
-#include "../../include/helpers/sprites.h"
-#include "../../include/helpers/userInput.h"
+#include "../../include/screen/intermediary.hpp"
+#include "../../include/helpers/helpers.hpp"
 
 using screen::Intermediary;
 

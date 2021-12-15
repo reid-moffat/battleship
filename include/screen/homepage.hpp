@@ -6,8 +6,8 @@
 #ifndef BATTLESHIP_HOMEPAGE_H
 #define BATTLESHIP_HOMEPAGE_H
 
-#include "../entity/button.h"
-#include "screenTemplate.h"
+#include "../entity/button.hpp"
+#include "screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 

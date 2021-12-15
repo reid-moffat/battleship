@@ -2,7 +2,7 @@
  * Helper functions for SFML textures implementation
  */
 
-#include "../../include/helpers/sprites.h"
+#include "../../include/helpers/helpers.hpp"
 
 void loadTexture(sf::Texture &texture, const std::string &path) {
     if (!texture.loadFromFile("../res/images/" + path)) {

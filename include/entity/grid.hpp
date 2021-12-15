@@ -7,9 +7,9 @@
 #ifndef BATTLESHIP_GRID_H
 #define BATTLESHIP_GRID_H
 
-#include "coordinate.h"
-#include "shipNames.h"
-#include "squareType.h"
+#include "coordinate.hpp"
+#include "shipNames.hpp"
+#include "squareType.hpp"
 #include <vector>
 
 using std::map;

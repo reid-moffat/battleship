@@ -3,11 +3,9 @@
  * Description: Front-end class that defines the behaviour of the Fleet Placement screen
  */
 
-#include "../../include/screen/fleetPlacement.h"
-#include "../../include/helpers/sprites.h"
-#include "../../include/helpers/userInput.h"
-#include "../../include/screen/gameplay.h"
-#include "../../include/helpers/backend.h"
+#include "../../include/screen/fleetPlacement.hpp"
+#include "../../include/helpers/helpers.hpp"
+#include "../../include/screen/gameplay.hpp"
 
 using screen::FleetPlacement;
 using std::get;

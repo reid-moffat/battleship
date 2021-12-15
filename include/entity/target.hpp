@@ -6,7 +6,7 @@
 #ifndef BATTLESHIP_TARGET_H
 #define BATTLESHIP_TARGET_H
 
-#include "coordinate.h"
+#include "coordinate.hpp"
 
 #include <SFML/Graphics.hpp>
 
