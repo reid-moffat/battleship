@@ -351,7 +351,7 @@ namespace screen {
         /**
          * Checks if the game is lost
          */
-        bool lost(Grid &grid);
+        static bool lost(Grid &grid);
 
         /**
          * Updates grid markers
@@ -402,6 +402,11 @@ namespace screen {
          * Renders all sprites
          */
         void render(sf::RenderWindow &gui);
+
+        /**
+         * The sleep time after a player attacks in milliseconds
+         */
+        static constexpr int sleepTimeMS = 400;
 
     public:
         /**

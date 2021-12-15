@@ -36,7 +36,7 @@ namespace entity {
         /**
          * Constructor
          */
-        Button(sf::Vector2f position, sf::Vector2f scale, sf::Texture idleTexture, sf::Texture activeTexture);
+        Button(sf::Vector2f position, sf::Vector2f scale, const sf::Texture& idleTexture, const sf::Texture& activeTexture);
 
         /**
          * Copy Constructor
@@ -56,7 +56,7 @@ namespace entity {
         /**
          * Returns true if the button is active (i.e., the cursor is over the button)
          */
-        const bool getButtonState() const;
+        bool getButtonState() const;
 
         /**
          * Renders the button sprite on the window
@@ -66,7 +66,7 @@ namespace entity {
         /**
          * Updates the button state and sets the button sprite to idleTexture or activeTexture depending on the current state
          */
-        void updateButtonState(const sf::Vector2f mousePosition);
+        void updateButtonState(sf::Vector2f mousePosition);
     };
 
 }// namespace entity

@@ -10,10 +10,27 @@
 
 namespace entity {
     class Coordinate {
+    private:
+        /**
+         * Coordinate x position
+         */
+        int x;
+
+        /**
+         * Coordinate y position
+         */
+        int y;
+
     public:
-        // Accessors
-        int getX() const;
-        int getY() const;
+        /**
+         * Returns the x position of this coordinate
+         */
+        [[nodiscard]] int getX() const;
+
+        /**
+         * Returns the y position of this coordinate
+         */
+        [[nodiscard]] int getY() const;
 
         // Constructors
         Coordinate();
@@ -22,10 +39,6 @@ namespace entity {
         // Overloaded operators
         bool operator==(const Coordinate &rhs) const;
 
-    private:
-        // Data members
-        int x;
-        int y;
     };
 
     // Non-member operator overloading
@@ -35,7 +48,7 @@ namespace entity {
     class CoordinateException : std::exception {
     public:
         explicit CoordinateException(const char *message);
-        const char *what() const noexcept override;
+        [[nodiscard]] const char *what() const noexcept override;
 
     private:
         const char *errorMessage;

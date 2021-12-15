@@ -7,7 +7,7 @@
 
 using entity::Button;
 
-Button::Button(sf::Vector2f position, sf::Vector2f scale, sf::Texture idleTexture, sf::Texture activeTexture) {
+Button::Button(sf::Vector2f position, sf::Vector2f scale, const sf::Texture& idleTexture, const sf::Texture& activeTexture) {
     this->buttonState = false;
     this->idleTexture = idleTexture;
     this->activeTexture = activeTexture;
@@ -23,8 +23,7 @@ Button::Button(const Button &source) {
     this->sprite = source.sprite;
 }
 
-Button::~Button() {
-}
+Button::~Button() = default;
 
 Button &Button::operator=(const Button &source) {
     if (this == &source) {
@@ -42,7 +41,7 @@ void Button::render(sf::RenderWindow &window) const {
     window.draw(this->sprite);
 }
 
-const bool Button::getButtonState() const {
+bool Button::getButtonState() const {
     return this->buttonState;
 }
 
