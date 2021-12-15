@@ -34,29 +34,29 @@ private:
 
 public:
     /**
-     * Screen lock condition (if this is true, no user input can be registered)
+     * Screen lock condition (if this is true, no user input will be registered)
      */
     static bool lockedFlag;
 
     /**
-     * The possible game modes: SinglePlayer and MultiPlayer
+     * The possible game modes: SINGLE_PLAYER and MULTI_PLAYER
      */
-    enum GameMode { SinglePlayer,
-                    MultiPlayer };
+    enum GameMode { SINGLE_PLAYER,
+                    MULTI_PLAYER };
 
     /**
-     * The selected game mode (SinglePlayer or MultiPlayer)
+     * The selected game mode (SINGLE_PLAYER or MULTI_PLAYER)
      */
     static GameMode gameMode;
 
     /**
-     * The possible game difficulties: Easy and Hard
+     * The possible game difficulties: EASY and HARD
      */
     enum Difficulty { EASY,
                       HARD };
 
     /**
-     * The selected difficulty
+     * The selected difficulty (EASY or HARD)
      */
     static Difficulty difficulty;
 
@@ -67,7 +67,7 @@ public:
                   P2 };
 
     /**
-     * The current player (who is selecting their fleet/attacking currently)
+     * The current player (who is selecting their fleet/attacking currently): P1 or P2
      */
     static Player player;
 
@@ -82,12 +82,12 @@ public:
     inline static const int height = 1080;
 
     /**
-     * Returns the current screen
+     * Returns the current screen (enum name)
      */
     static Screens getCurrentScreen();
 
     /**
-     * Returns the previous screen
+     * Returns the previous screen (enum name)
      */
     static Screens getPreviousScreen();
 
@@ -101,23 +101,6 @@ public:
      */
     static void previousScreen();
 
-    /**
-     * Loads a texture from the given path
-     *
-     * Note: The texture path is relative to res/images
-     * For example, "homepage/ActivePlayButton.png"
-     */
-    static void loadTexture(sf::Texture &texture, const string &path);
-
-    /**
-     * Initializes a sprite
-     */
-    static void setSprite(sf::Vector2f position, sf::Vector2f scale, const sf::Texture &spriteTexture, sf::Sprite &sprite);
-
-    /**
-     * Updates the current mouse position of a Vector2f object
-     */
-    static void updateMousePosition(sf::RenderWindow &gui, sf::Vector2f &mousePosition);
 };
 
 #endif// BATTLESHIP_STATE_H

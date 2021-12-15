@@ -4,21 +4,23 @@
  */
 
 #include "../../include/screen/gameOver.h"
+#include "../../include/helpers/sprites.h"
+#include "../../include/helpers/userInput.h"
 
 using screen::GameOver;
 
 GameOver::GameOver() : ScreenTemplate() {
-    State::loadTexture(this->gameOverWinBackgroundTexture, "gameOver/GameOverWinBackground.png");
-    State::loadTexture(this->gameOverLoseBackgroundTexture, "gameOver/GameOverLoseBackground.png");
-    State::loadTexture(this->gameOverP1BackgroundTexture, "gameOver/GameOverP1Background.png");
-    State::loadTexture(this->gameOverP2BackgroundTexture, "gameOver/GameOverP2Background.png");
-    State::loadTexture(this->idleHomepageButtonTexture, "gameOver/IdleHomepageButton.png");
-    State::loadTexture(this->activeHomepageButtonTexture, "gameOver/ActiveHomepageButton.png");
+    loadTexture(this->gameOverWinBackgroundTexture, "gameOver/GameOverWinBackground.png");
+    loadTexture(this->gameOverLoseBackgroundTexture, "gameOver/GameOverLoseBackground.png");
+    loadTexture(this->gameOverP1BackgroundTexture, "gameOver/GameOverP1Background.png");
+    loadTexture(this->gameOverP2BackgroundTexture, "gameOver/GameOverP2Background.png");
+    loadTexture(this->idleHomepageButtonTexture, "gameOver/IdleHomepageButton.png");
+    loadTexture(this->activeHomepageButtonTexture, "gameOver/ActiveHomepageButton.png");
 
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverWinBackgroundTexture, this->backgroundWinSprite);
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverLoseBackgroundTexture, this->backgroundLoseSprite);
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverP1BackgroundTexture, this->backgroundP1Sprite);
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverP2BackgroundTexture, this->backgroundP2Sprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverWinBackgroundTexture, this->backgroundWinSprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverLoseBackgroundTexture, this->backgroundLoseSprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverP1BackgroundTexture, this->backgroundP1Sprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverP2BackgroundTexture, this->backgroundP2Sprite);
 
     this->homepageButton = new Button(sf::Vector2f(136 * 5, 108 * 5), sf::Vector2f(5, 5), this->idleHomepageButtonTexture, this->activeHomepageButtonTexture);
 }
@@ -66,7 +68,7 @@ screen::GameOver &GameOver::operator=(const GameOver &source) {
 }
 
 void GameOver::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    State::updateMousePosition(gui, mousePosition);
+    updateMousePosition(gui, mousePosition);
     this->homepageButton->updateButtonState(mousePosition);
 }
 
@@ -94,7 +96,7 @@ void GameOver::poll(sf::RenderWindow &gui) {
 
 void GameOver::render(sf::RenderWindow &gui) {
     gui.clear();
-    if (State::gameMode == State::GameMode::SinglePlayer) {
+    if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             gui.draw(this->backgroundLoseSprite);
         } else {

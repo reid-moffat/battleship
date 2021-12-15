@@ -5,39 +5,41 @@
 
 #include "../../include/screen/fleetPlacement.h"
 #include "../../include/screen/gameplay.h"
+#include "../../include/helpers/sprites.h"
+#include "../../include/helpers/userInput.h"
 
 using screen::FleetPlacement;
 using std::get;
 
 FleetPlacement::FleetPlacement() : ScreenTemplate() {
-    State::loadTexture(this->fleetPlacementDefaultBackgroundTexture, "fleetPlacement/FleetPlacementBackground.png");
-    State::loadTexture(this->fleetPlacementP1BackgroundTexture, "fleetPlacement/FleetPlacementP1Background.png");
-    State::loadTexture(this->fleetPlacementP2BackgroundTexture, "fleetPlacement/FleetPlacementP2Background.png");
+    loadTexture(this->fleetPlacementDefaultBackgroundTexture, "fleetPlacement/FleetPlacementBackground.png");
+    loadTexture(this->fleetPlacementP1BackgroundTexture, "fleetPlacement/FleetPlacementP1Background.png");
+    loadTexture(this->fleetPlacementP2BackgroundTexture, "fleetPlacement/FleetPlacementP2Background.png");
 
-    State::loadTexture(this->idleReadyButtonTexture, "fleetPlacement/IdleReadyButton.png");
-    State::loadTexture(this->activeReadyButtonTexture, "fleetPlacement/ActiveReadyButton.png");
-    State::loadTexture(this->idleRandomizeButtonTexture, "fleetPlacement/IdleRandomizeButton.png");
-    State::loadTexture(this->activeRandomizeButtonTexture, "fleetPlacement/ActiveRandomizeButton.png");
-    State::loadTexture(this->idleInstructionsButtonTexture, "fleetPlacement/IdleInstructionsButton.png");
-    State::loadTexture(this->activeInstructionsButtonTexture, "fleetPlacement/ActiveInstructionsButton.png");
+    loadTexture(this->idleReadyButtonTexture, "fleetPlacement/IdleReadyButton.png");
+    loadTexture(this->activeReadyButtonTexture, "fleetPlacement/ActiveReadyButton.png");
+    loadTexture(this->idleRandomizeButtonTexture, "fleetPlacement/IdleRandomizeButton.png");
+    loadTexture(this->activeRandomizeButtonTexture, "fleetPlacement/ActiveRandomizeButton.png");
+    loadTexture(this->idleInstructionsButtonTexture, "fleetPlacement/IdleInstructionsButton.png");
+    loadTexture(this->activeInstructionsButtonTexture, "fleetPlacement/ActiveInstructionsButton.png");
 
-    State::loadTexture(this->battleshipTexture, "fleetPlacement/BattleShip.png");
-    State::loadTexture(this->aircraftCarrierTexture, "fleetPlacement/AircraftCarrier.png");
-    State::loadTexture(this->destroyerTexture, "fleetPlacement/Destroyer.png");
-    State::loadTexture(this->submarineTexture, "fleetPlacement/Submarine.png");
-    State::loadTexture(this->patrolBoatTexture, "fleetPlacement/PatrolBoat.png");
-    State::loadTexture(this->rowBoatTexture, "fleetPlacement/RowBoat.png");
+    loadTexture(this->battleshipTexture, "fleetPlacement/BattleShip.png");
+    loadTexture(this->aircraftCarrierTexture, "fleetPlacement/AircraftCarrier.png");
+    loadTexture(this->destroyerTexture, "fleetPlacement/Destroyer.png");
+    loadTexture(this->submarineTexture, "fleetPlacement/Submarine.png");
+    loadTexture(this->patrolBoatTexture, "fleetPlacement/PatrolBoat.png");
+    loadTexture(this->rowBoatTexture, "fleetPlacement/RowBoat.png");
 
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->fleetPlacementDefaultBackgroundTexture, this->backgroundDefaultSprite);
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->fleetPlacementP1BackgroundTexture, this->backgroundP1Sprite);
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->fleetPlacementP2BackgroundTexture, this->backgroundP2Sprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->fleetPlacementDefaultBackgroundTexture, this->backgroundDefaultSprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->fleetPlacementP1BackgroundTexture, this->backgroundP1Sprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->fleetPlacementP2BackgroundTexture, this->backgroundP2Sprite);
 
-    State::setSprite(sf::Vector2f(21 * 5, 84 * 5), sf::Vector2f(5, 5), this->battleshipTexture, this->battleshipSprite);
-    State::setSprite(sf::Vector2f(42 * 5, 92 * 5), sf::Vector2f(5, 5), this->aircraftCarrierTexture, this->aircraftCarrierSprite);
-    State::setSprite(sf::Vector2f(61 * 5, 100 * 5), sf::Vector2f(5, 5), this->destroyerTexture, this->destroyerSprite);
-    State::setSprite(sf::Vector2f(61 * 5, 35 * 5), sf::Vector2f(5, 5), this->submarineTexture, this->submarineSprite);
-    State::setSprite(sf::Vector2f(42 * 5, 43 * 5), sf::Vector2f(5, 5), this->patrolBoatTexture, this->patrolBoatSprite);
-    State::setSprite(sf::Vector2f(21 * 5, 51 * 5), sf::Vector2f(5, 5), this->rowBoatTexture, this->rowBoatSprite);
+    setSprite(sf::Vector2f(21 * 5, 84 * 5), sf::Vector2f(5, 5), this->battleshipTexture, this->battleshipSprite);
+    setSprite(sf::Vector2f(42 * 5, 92 * 5), sf::Vector2f(5, 5), this->aircraftCarrierTexture, this->aircraftCarrierSprite);
+    setSprite(sf::Vector2f(61 * 5, 100 * 5), sf::Vector2f(5, 5), this->destroyerTexture, this->destroyerSprite);
+    setSprite(sf::Vector2f(61 * 5, 35 * 5), sf::Vector2f(5, 5), this->submarineTexture, this->submarineSprite);
+    setSprite(sf::Vector2f(42 * 5, 43 * 5), sf::Vector2f(5, 5), this->patrolBoatTexture, this->patrolBoatSprite);
+    setSprite(sf::Vector2f(21 * 5, 51 * 5), sf::Vector2f(5, 5), this->rowBoatTexture, this->rowBoatSprite);
 
     this->readyButton = new Button(sf::Vector2f(320 * 5, 124 * 5), sf::Vector2f(5, 5), this->idleReadyButtonTexture, this->activeReadyButtonTexture);
     this->randomizeButton = new Button(sf::Vector2f(328 * 5, 76 * 5), sf::Vector2f(5, 5), this->idleRandomizeButtonTexture, this->activeRandomizeButtonTexture);
@@ -296,7 +298,7 @@ void FleetPlacement::resetFleetLayout() {
 }
 
 void FleetPlacement::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    State::updateMousePosition(gui, mousePosition);
+    updateMousePosition(gui, mousePosition);
     this->readyButton->updateButtonState(mousePosition);
     this->randomizeButton->updateButtonState(mousePosition);
     this->instructionsButton->updateButtonState(mousePosition);
@@ -312,7 +314,7 @@ void FleetPlacement::poll(sf::RenderWindow &gui) {
 
             case sf::Event::MouseButtonReleased:
                 if ((event.mouseButton.button == sf::Mouse::Left) && (this->readyButton->getButtonState())) {
-                    if (State::gameMode == State::GameMode::SinglePlayer) {
+                    if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
                         Gameplay::setP1Grid(ships);
                         this->resetFleetLayout();
                         this->layoutGenerated = false;
@@ -358,7 +360,7 @@ void FleetPlacement::poll(sf::RenderWindow &gui) {
 void FleetPlacement::render(sf::RenderWindow &gui) {
     gui.clear();
 
-    if (State::gameMode == State::SinglePlayer) {
+    if (State::gameMode == State::SINGLE_PLAYER) {
         gui.draw(this->backgroundDefaultSprite);
     } else {
         if (State::player == State::Player::P1) {

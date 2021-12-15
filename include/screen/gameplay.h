@@ -384,7 +384,7 @@ namespace screen {
         void setFleetLayout(map<shipsNames, tuple<Coordinate, bool>> &fleetLayout);
 
         /**
-         * Calls State::updateMousePosition(), Button::updateButtonState(), Target::updateTargetState(), Grid::getShips(), and Gameplay::setFleetLayout()
+         * Calls helpers::updateMousePosition(), Button::updateButtonState(), Target::updateTargetState(), Grid::getShips(), and Gameplay::setFleetLayout()
          */
         void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
 

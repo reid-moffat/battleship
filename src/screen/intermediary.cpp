@@ -4,17 +4,19 @@
  */
 
 #include "../../include/screen/intermediary.h"
+#include "../../include/helpers/sprites.h"
+#include "../../include/helpers/userInput.h"
 
 using screen::Intermediary;
 
 Intermediary::Intermediary() : ScreenTemplate() {
-    State::loadTexture(this->intermediaryP1BackgroundTexture, "intermediary/IntermediaryP1Background.png");
-    State::loadTexture(this->intermediaryP2BackgroundTexture, "intermediary/IntermediaryP2Background.png");
-    State::loadTexture(this->idleContinueButtonTexture, "intermediary/IdleContinueButton.png");
-    State::loadTexture(this->activeContinueButtonTexture, "intermediary/ActiveContinueButton.png");
+    loadTexture(this->intermediaryP1BackgroundTexture, "intermediary/IntermediaryP1Background.png");
+    loadTexture(this->intermediaryP2BackgroundTexture, "intermediary/IntermediaryP2Background.png");
+    loadTexture(this->idleContinueButtonTexture, "intermediary/IdleContinueButton.png");
+    loadTexture(this->activeContinueButtonTexture, "intermediary/ActiveContinueButton.png");
 
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->intermediaryP1BackgroundTexture, this->backgroundP1Sprite);
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->intermediaryP2BackgroundTexture, this->backgroundP2Sprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->intermediaryP1BackgroundTexture, this->backgroundP1Sprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->intermediaryP2BackgroundTexture, this->backgroundP2Sprite);
 
     this->continueButton = new Button(sf::Vector2f(144 * 5, 108 * 5), sf::Vector2f(5, 5), this->idleContinueButtonTexture, this->activeContinueButtonTexture);
 }
@@ -52,9 +54,9 @@ screen::Intermediary &Intermediary::operator=(const Intermediary &source) {
     }
 }
 
-void Intermediary::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    State::updateMousePosition(gui, mousePosition);
-    this->continueButton->updateButtonState(mousePosition);
+void Intermediary::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
+    updateMousePosition(gui, mousePos);
+    this->continueButton->updateButtonState(mousePos);
 }
 
 void Intermediary::poll(sf::RenderWindow &gui) {

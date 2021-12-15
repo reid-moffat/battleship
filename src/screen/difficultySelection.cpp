@@ -4,21 +4,23 @@
  */
 
 #include "../../include/screen/difficultySelection.h"
+#include "../../include/helpers/sprites.h"
+#include "../../include/helpers/userInput.h"
 
 using screen::DifficultySelection;
 
 DifficultySelection::DifficultySelection() : ScreenTemplate() {
-    State::loadTexture(this->difficultyBackgroundTexture, "difficultySelection/DifficultyBackground.png");
-    State::loadTexture(this->idleEasyButtonTexture, "difficultySelection/IdleEasyButton.png");
-    State::loadTexture(this->activeEasyButtonTexture, "difficultySelection/ActiveEasyButton.png");
-    State::loadTexture(this->idleHardButtonTexture, "difficultySelection/IdleHardButton.png");
-    State::loadTexture(this->activeHardButtonTexture, "difficultySelection/ActiveHardButton.png");
-    State::loadTexture(this->idleBackButtonTexture, "difficultySelection/IdleBackButton.png");
-    State::loadTexture(this->activeBackButtonTexture, "difficultySelection/ActiveBackButton.png");
-    State::loadTexture(this->idleInstructionsButton, "difficultySelection/IdleInstructionsButton.png");
-    State::loadTexture(this->activeInstructionsButton, "difficultySelection/ActiveInstructionsButton.png");
+    loadTexture(this->difficultyBackgroundTexture, "difficultySelection/DifficultyBackground.png");
+    loadTexture(this->idleEasyButtonTexture, "difficultySelection/IdleEasyButton.png");
+    loadTexture(this->activeEasyButtonTexture, "difficultySelection/ActiveEasyButton.png");
+    loadTexture(this->idleHardButtonTexture, "difficultySelection/IdleHardButton.png");
+    loadTexture(this->activeHardButtonTexture, "difficultySelection/ActiveHardButton.png");
+    loadTexture(this->idleBackButtonTexture, "difficultySelection/IdleBackButton.png");
+    loadTexture(this->activeBackButtonTexture, "difficultySelection/ActiveBackButton.png");
+    loadTexture(this->idleInstructionsButton, "difficultySelection/IdleInstructionsButton.png");
+    loadTexture(this->activeInstructionsButton, "difficultySelection/ActiveInstructionsButton.png");
 
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->difficultyBackgroundTexture, this->backgroundSprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->difficultyBackgroundTexture, this->backgroundSprite);
 
     this->easyButton = new Button(sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleEasyButtonTexture, this->activeEasyButtonTexture);
     this->hardButton = new Button(sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleHardButtonTexture, this->activeHardButtonTexture);
@@ -84,7 +86,7 @@ screen::DifficultySelection &DifficultySelection::operator=(const DifficultySele
 }
 
 void DifficultySelection::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    State::updateMousePosition(gui, mousePosition);
+    updateMousePosition(gui, mousePosition);
     this->easyButton->updateButtonState(mousePosition);
     this->hardButton->updateButtonState(mousePosition);
     this->backButton->updateButtonState(mousePosition);
