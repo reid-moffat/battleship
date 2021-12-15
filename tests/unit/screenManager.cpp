@@ -8,5 +8,5 @@
 using screen::ScreenManager;
 
 TEST(Unit, screenManager) {
-    ScreenManager().run();
+    ;
 }

@@ -1,5 +1,5 @@
 #
-# Config
+# Application configuration (for tests, load tests/CMakeLists.txt)
 #
 cmake_minimum_required(VERSION 3.20)
 project(battleship C CXX)
@@ -15,7 +15,7 @@ file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
 add_executable(battleship ${SOURCE_FILES})
 
 
-# SFML config
+# Add SFML
 include_directories(src include C:/SFML/include)
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/build/cmake_modules")
