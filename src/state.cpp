@@ -8,9 +8,6 @@ using std::string;
 
 bool State::lockedFlag = false;
 
-const int State::width = 1920;
-const int State::height = 1080;
-
 State::Player State::player = State::Player::P1;
 State::GameMode State::gameMode = State::GameMode::SinglePlayer;
 State::Difficulty State::difficulty = State::Difficulty::EASY;

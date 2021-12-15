@@ -3,37 +3,36 @@
  */
 
 #include "../../include/screen/screenTemplate.h"
-#include "../tests.h"
+#include "../assertions.h"
+#include <gtest/gtest.h>
 
 using screen::ScreenTemplate;
 
 /**
- * Dummy base class to test abstract class 'functionality'
+ * Dummy base class to tests abstract class 'functionality'
  */
 class DummyScreen : screen::ScreenTemplate {
+private:
+    int test{};
+
 public:
-    int test;
+    DummyScreen() = default;
 
-    DummyScreen() {}
-
+    // Dummy methods
     void setT(int t) { test = t; }
-
-    DummyScreen(const DummyScreen &other) = default;
-
-    // Needed for dynamic memory
-    ~DummyScreen() override = default;
-
-    // Must be overridden
+    [[nodiscard]] int getT() const { return test; };
     void run(sf::RenderWindow &gui) override {}
 
-    ScreenTemplate &operator=(const DummyScreen &rhs) {
+    // Needed for dynamic memory
+    DummyScreen(const DummyScreen &other) = default;
+    ~DummyScreen() override = default;
+    DummyScreen &operator=(const DummyScreen &rhs) {
         test = rhs.test;
         return *this;
     }
 };
 
-
-int main() {
+TEST(unit, screenTemplate) {
     // These tests are mainly to understand base class implementation
     // and ensure the abstract class has a proper implementation
     DummyScreen testScreen;
@@ -42,13 +41,11 @@ int main() {
     testScreen.setT(10);
     testScreen1.setT(20);
 
-    ASSERT_OPERATION(testScreen.test, ==, 10);
-    ASSERT_OPERATION(testScreen1.test, ==, 20);
+    ASSERT_OPERATION(testScreen.getT(), ==, 10);
+    ASSERT_OPERATION(testScreen1.getT(), ==, 20);
     sf::RenderWindow rw;
     testScreen.run(rw);
     testScreen = testScreen1;
-    ASSERT_OPERATION(testScreen.test, ==, 20);
-    ASSERT_OPERATION(testScreen1.test, ==, 20);
-
-    return 0;
+    ASSERT_OPERATION(testScreen.getT(), ==, 20);
+    ASSERT_OPERATION(testScreen1.getT(), ==, 20);
 }
