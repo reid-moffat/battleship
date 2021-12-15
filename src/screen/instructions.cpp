@@ -4,15 +4,17 @@
  */
 
 #include "../../include/screen/instructions.h"
+#include "../../include/helpers/sprites.h"
+#include "../../include/helpers/userInput.h"
 
 using screen::Instructions;
 
 Instructions::Instructions() : ScreenTemplate() {
-    State::loadTexture(this->instructionsBackgroundTexture, "instructions/InstructionsBackground.png");
-    State::loadTexture(this->idleBackButtonTexture, "instructions/IdleBackButton.png");
-    State::loadTexture(this->activeBackButtonTexture, "instructions/ActiveBackButton.png");
+    loadTexture(this->instructionsBackgroundTexture, "instructions/InstructionsBackground.png");
+    loadTexture(this->idleBackButtonTexture, "instructions/IdleBackButton.png");
+    loadTexture(this->activeBackButtonTexture, "instructions/ActiveBackButton.png");
 
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->instructionsBackgroundTexture, this->backgroundSprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->instructionsBackgroundTexture, this->backgroundSprite);
 
     this->backButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleBackButtonTexture, this->activeBackButtonTexture);
 }
@@ -48,7 +50,7 @@ screen::Instructions &Instructions::operator=(const Instructions &source) {
 }
 
 void Instructions::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    State::updateMousePosition(gui, mousePosition);
+    updateMousePosition(gui, mousePosition);
     this->backButton->updateButtonState(mousePosition);
 }
 

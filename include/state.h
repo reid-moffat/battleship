@@ -10,13 +10,11 @@
 #define BATTLESHIP_STATE_H
 
 #include "screen/screens.h"
-
 #include <SFML/Graphics.hpp>
-
 #include <iostream>
-#include <string>
 
 using screen::Screens;
+using std::string;
 
 class State {
 private:
@@ -36,40 +34,40 @@ private:
 
 public:
     /**
-     * Screen lock condition
+     * Screen lock condition (if this is true, no user input will be registered)
      */
     static bool lockedFlag;
 
     /**
-     * Enum of game modes
+     * The possible game modes: SINGLE_PLAYER and MULTI_PLAYER
      */
-    enum GameMode { SinglePlayer,
-                    MultiPlayer };
+    enum GameMode { SINGLE_PLAYER,
+                    MULTI_PLAYER };
 
     /**
-     * Selected game mode
+     * The selected game mode (SINGLE_PLAYER or MULTI_PLAYER)
      */
     static GameMode gameMode;
 
     /**
-     * Enum of difficulties
+     * The possible game difficulties: EASY and HARD
      */
     enum Difficulty { EASY,
                       HARD };
 
     /**
-     * Selected difficulty
+     * The selected difficulty (EASY or HARD)
      */
     static Difficulty difficulty;
 
     /**
-     * Enum of player types
+     * The two player 'names': P1 and P2
      */
     enum Player { P1,
                   P2 };
 
     /**
-     * Current player
+     * The current player (who is selecting their fleet/attacking currently): P1 or P2
      */
     static Player player;
 
@@ -84,22 +82,12 @@ public:
     inline static const int height = 1080;
 
     /**
-     * Loads a texture from the given path
-     */
-    static void loadTexture(sf::Texture &texture, const std::string &path);
-
-    /**
-     * Initializes a sprite
-     */
-    static void setSprite(sf::Vector2f position, sf::Vector2f scale, const sf::Texture &spriteTexture, sf::Sprite &sprite);
-
-    /**
-     * Returns the current screen
+     * Returns the current screen (enum name)
      */
     static Screens getCurrentScreen();
 
     /**
-     * Returns the previous screen
+     * Returns the previous screen (enum name)
      */
     static Screens getPreviousScreen();
 
@@ -109,14 +97,9 @@ public:
     static void changeScreen(Screens newScreen);
 
     /**
-     * Returns to the previous screen (used for back buttons)
+     * Changes to the previous screen (used for back buttons)
      */
     static void previousScreen();
-
-    /**
-     * Updates the current mouse position 
-     */
-    static void updateMousePosition(sf::RenderWindow &gui, sf::Vector2f &mousePosition);
 };
 
 #endif// BATTLESHIP_STATE_H

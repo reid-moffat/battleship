@@ -4,21 +4,23 @@
  */
 
 #include "../../include/screen/gameModeSelection.h"
+#include "../../include/helpers/sprites.h"
+#include "../../include/helpers/userInput.h"
 
 using screen::GameModeSelection;
 
 GameModeSelection::GameModeSelection() : ScreenTemplate() {
-    State::loadTexture(this->gameModeBackgroundTexture, "gameModeSelection/GameModeBackground.png");
-    State::loadTexture(this->idleOnePlayerButtonTexture, "gameModeSelection/Idle1PlayerButton.png");
-    State::loadTexture(this->activeOnePlayerButtonTexture, "gameModeSelection/Active1PlayerButton.png");
-    State::loadTexture(this->idleTwoPlayerButtonTexture, "gameModeSelection/Idle2PlayerButton.png");
-    State::loadTexture(this->activeTwoPlayerButtonTexture, "gameModeSelection/Active2PlayerButton.png");
-    State::loadTexture(this->idleBackButtonTexture, "gameModeSelection/IdleBackButton.png");
-    State::loadTexture(this->activeBackButtonTexture, "gameModeSelection/ActiveBackButton.png");
-    State::loadTexture(this->idleInstructionsButtonTexture, "gameModeSelection/IdleInstructionsButton.png");
-    State::loadTexture(this->activeInstructionsButtonTexture, "gameModeSelection/ActiveInstructionsButton.png");
+    loadTexture(this->gameModeBackgroundTexture, "gameModeSelection/GameModeBackground.png");
+    loadTexture(this->idleOnePlayerButtonTexture, "gameModeSelection/Idle1PlayerButton.png");
+    loadTexture(this->activeOnePlayerButtonTexture, "gameModeSelection/Active1PlayerButton.png");
+    loadTexture(this->idleTwoPlayerButtonTexture, "gameModeSelection/Idle2PlayerButton.png");
+    loadTexture(this->activeTwoPlayerButtonTexture, "gameModeSelection/Active2PlayerButton.png");
+    loadTexture(this->idleBackButtonTexture, "gameModeSelection/IdleBackButton.png");
+    loadTexture(this->activeBackButtonTexture, "gameModeSelection/ActiveBackButton.png");
+    loadTexture(this->idleInstructionsButtonTexture, "gameModeSelection/IdleInstructionsButton.png");
+    loadTexture(this->activeInstructionsButtonTexture, "gameModeSelection/ActiveInstructionsButton.png");
 
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameModeBackgroundTexture, this->backgroundSprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameModeBackgroundTexture, this->backgroundSprite);
 
     this->onePlayerButton = new Button(sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleOnePlayerButtonTexture, this->activeOnePlayerButtonTexture);
     this->twoPlayerButton = new Button(sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleTwoPlayerButtonTexture, this->activeTwoPlayerButtonTexture);
@@ -84,7 +86,7 @@ screen::GameModeSelection &GameModeSelection::operator=(const GameModeSelection 
 }
 
 void GameModeSelection::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    State::updateMousePosition(gui, mousePosition);
+    updateMousePosition(gui, mousePosition);
     this->onePlayerButton->updateButtonState(mousePosition);
     this->twoPlayerButton->updateButtonState(mousePosition);
     this->backButton->updateButtonState(mousePosition);
@@ -101,11 +103,11 @@ void GameModeSelection::poll(sf::RenderWindow &gui) {
 
             case sf::Event::MouseButtonReleased:
                 if ((event.mouseButton.button == sf::Mouse::Left) && (this->onePlayerButton->getButtonState())) {
-                    State::gameMode = State::GameMode::SinglePlayer;
+                    State::gameMode = State::GameMode::SINGLE_PLAYER;
                     State::changeScreen(Screens::DIFFICULTY_SELECTION);
                     break;
                 } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->twoPlayerButton->getButtonState())) {
-                    State::gameMode = State::GameMode::MultiPlayer;
+                    State::gameMode = State::GameMode::MULTI_PLAYER;
                     State::changeScreen(Screens::FLEET_PLACEMENT);
                     break;
                 } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->backButton->getButtonState())) {

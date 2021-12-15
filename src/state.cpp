@@ -6,26 +6,16 @@
 
 using std::string;
 
+// Initialize the game state variables with their starting values
 bool State::lockedFlag = false;
 
 State::Player State::player = State::Player::P1;
-State::GameMode State::gameMode = State::GameMode::SinglePlayer;
+State::GameMode State::gameMode = State::GameMode::SINGLE_PLAYER;
 State::Difficulty State::difficulty = State::Difficulty::EASY;
 
 Screens State::previous = Screens::HOMEPAGE;
 Screens State::current = Screens::HOMEPAGE;
 
-void State::loadTexture(sf::Texture &texture, const std::string &path) {
-    if (!texture.loadFromFile("../res/images/" + path)) {
-        exit(-1);
-    }
-}
-
-void State::setSprite(sf::Vector2f position, sf::Vector2f scale, const sf::Texture &spriteTexture, sf::Sprite &sprite) {
-    sprite.setTexture(spriteTexture);
-    sprite.setPosition(position);
-    sprite.setScale(scale);
-}
 
 Screens State::getCurrentScreen() {
     return State::current;
@@ -65,8 +55,4 @@ void State::previousScreen() {
                                                           {Screens::GAME_OVER, "homepage"}};
             throw std::invalid_argument(string("Error: You can't go back from the current screen (") + screenNames[State::current] + "");
     }
-}
-
-void State::updateMousePosition(sf::RenderWindow &gui, sf::Vector2f &mousePosition) {
-    mousePosition = gui.mapPixelToCoords(sf::Mouse::getPosition(gui));
 }

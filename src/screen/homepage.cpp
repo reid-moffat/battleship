@@ -4,15 +4,17 @@
  */
 
 #include "../../include/screen/homepage.h"
+#include "../../include/helpers/sprites.h"
+#include "../../include/helpers/userInput.h"
 
 using screen::Homepage;
 
 Homepage::Homepage() : ScreenTemplate() {
-    State::loadTexture(this->homepageBackgroundTexture, "homepage/HomepageBackground.png");
-    State::loadTexture(this->idlePlayButtonTexture, "homepage/IdlePlayButton.png");
-    State::loadTexture(this->activePlayButtonTexture, "homepage/ActivePlayButton.png");
+    loadTexture(this->homepageBackgroundTexture, "homepage/HomepageBackground.png");
+    loadTexture(this->idlePlayButtonTexture, "homepage/IdlePlayButton.png");
+    loadTexture(this->activePlayButtonTexture, "homepage/ActivePlayButton.png");
 
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->homepageBackgroundTexture, this->backgroundSprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->homepageBackgroundTexture, this->backgroundSprite);
 
     this->playButton = new Button(sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5), this->idlePlayButtonTexture, this->activePlayButtonTexture);
 }
@@ -48,7 +50,7 @@ screen::Homepage &Homepage::operator=(const Homepage &source) {
 }
 
 void Homepage::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    State::updateMousePosition(gui, mousePosition);
+    updateMousePosition(gui, mousePosition);
     this->playButton->updateButtonState(mousePosition);
 }
 

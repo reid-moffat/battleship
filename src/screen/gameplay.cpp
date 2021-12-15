@@ -9,6 +9,9 @@
 #include <unistd.h>
 #endif
 
+#include "../../include/helpers/backend.h"
+#include "../../include/helpers/sprites.h"
+#include "../../include/helpers/userInput.h"
 #include "../../include/screen/gameplay.h"
 
 using entity::SquareType;
@@ -20,48 +23,48 @@ __attribute__((unused)) Grid *Gameplay::gridP1 = new Grid();
 __attribute__((unused)) Grid *Gameplay::gridP2 = new Grid();
 
 Gameplay::Gameplay() : ScreenTemplate() {
-    State::loadTexture(this->gameplayDefaultBackgroundTexture, "gameplay/GameplayBackground.png");
-    State::loadTexture(this->gameplayP1BackgroundTexture, "gameplay/GameplayP1Background.png");
-    State::loadTexture(this->gameplayP2BackgroundTexture, "gameplay/GameplayP2Background.png");
+    loadTexture(this->gameplayDefaultBackgroundTexture, "gameplay/GameplayBackground.png");
+    loadTexture(this->gameplayP1BackgroundTexture, "gameplay/GameplayP1Background.png");
+    loadTexture(this->gameplayP2BackgroundTexture, "gameplay/GameplayP2Background.png");
 
-    State::loadTexture(this->idleSurrenderButtonTexture, "gameplay/IdleSurrenderButton.png");
-    State::loadTexture(this->activeSurrenderButtonTexture, "gameplay/ActiveSurrenderButton.png");
-    State::loadTexture(this->idleInstructionsButtonTexture, "gameplay/IdleInstructionsButton.png");
-    State::loadTexture(this->activeInstructionsButtonTexture, "gameplay/ActiveInstructionsButton.png");
+    loadTexture(this->idleSurrenderButtonTexture, "gameplay/IdleSurrenderButton.png");
+    loadTexture(this->activeSurrenderButtonTexture, "gameplay/ActiveSurrenderButton.png");
+    loadTexture(this->idleInstructionsButtonTexture, "gameplay/IdleInstructionsButton.png");
+    loadTexture(this->activeInstructionsButtonTexture, "gameplay/ActiveInstructionsButton.png");
 
-    State::loadTexture(this->battleshipTexture, "gameplay/BattleShip.png");
-    State::loadTexture(this->aircraftCarrierTexture, "gameplay/AircraftCarrier.png");
-    State::loadTexture(this->destroyerTexture, "gameplay/Destroyer.png");
-    State::loadTexture(this->submarineTexture, "gameplay/Submarine.png");
-    State::loadTexture(this->patrolBoatTexture, "gameplay/PatrolBoat.png");
-    State::loadTexture(this->rowBoatTexture, "gameplay/RowBoat.png");
+    loadTexture(this->battleshipTexture, "gameplay/BattleShip.png");
+    loadTexture(this->aircraftCarrierTexture, "gameplay/AircraftCarrier.png");
+    loadTexture(this->destroyerTexture, "gameplay/Destroyer.png");
+    loadTexture(this->submarineTexture, "gameplay/Submarine.png");
+    loadTexture(this->patrolBoatTexture, "gameplay/PatrolBoat.png");
+    loadTexture(this->rowBoatTexture, "gameplay/RowBoat.png");
 
-    State::loadTexture(this->battleshipSunkTexture, "gameplay/BattleShipSunk.png");
-    State::loadTexture(this->aircraftCarrierSunkTexture, "gameplay/AircraftCarrierSunk.png");
-    State::loadTexture(this->destroyerSunkTexture, "gameplay/DestroyerSunk.png");
-    State::loadTexture(this->submarineSunkTexture, "gameplay/SubmarineSunk.png");
-    State::loadTexture(this->patrolBoatSunkTexture, "gameplay/PatrolBoatSunk.png");
-    State::loadTexture(this->rowBoatSunkTexture, "gameplay/RowBoatSunk.png");
+    loadTexture(this->battleshipSunkTexture, "gameplay/BattleShipSunk.png");
+    loadTexture(this->aircraftCarrierSunkTexture, "gameplay/AircraftCarrierSunk.png");
+    loadTexture(this->destroyerSunkTexture, "gameplay/DestroyerSunk.png");
+    loadTexture(this->submarineSunkTexture, "gameplay/SubmarineSunk.png");
+    loadTexture(this->patrolBoatSunkTexture, "gameplay/PatrolBoatSunk.png");
+    loadTexture(this->rowBoatSunkTexture, "gameplay/RowBoatSunk.png");
 
-    State::loadTexture(this->primaryHitMarkerTexture, "gameplay/PrimaryHitMarker.png");
-    State::loadTexture(this->primaryMissMarkerTexture, "gameplay/PrimaryMissMarker.png");
-    State::loadTexture(this->secondaryHitMarkerTexture, "gameplay/SecondaryHitMarker.png");
-    State::loadTexture(this->secondaryMissMarkerTexture, "gameplay/SecondaryMissMarker.png");
+    loadTexture(this->primaryHitMarkerTexture, "gameplay/PrimaryHitMarker.png");
+    loadTexture(this->primaryMissMarkerTexture, "gameplay/PrimaryMissMarker.png");
+    loadTexture(this->secondaryHitMarkerTexture, "gameplay/SecondaryHitMarker.png");
+    loadTexture(this->secondaryMissMarkerTexture, "gameplay/SecondaryMissMarker.png");
 
-    State::loadTexture(this->idlePrimaryTargetTexture, "gameplay/idlePrimaryTarget.png");
-    State::loadTexture(this->activePrimaryTargetTexture, "gameplay/ActivePrimaryTarget.png");
-    State::loadTexture(this->secondaryTargetTexture, "gameplay/SecondaryTarget.png");
+    loadTexture(this->idlePrimaryTargetTexture, "gameplay/idlePrimaryTarget.png");
+    loadTexture(this->activePrimaryTargetTexture, "gameplay/ActivePrimaryTarget.png");
+    loadTexture(this->secondaryTargetTexture, "gameplay/SecondaryTarget.png");
 
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayDefaultBackgroundTexture, this->backgroundDefaultSprite);
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayP1BackgroundTexture, this->backgroundP1Sprite);
-    State::setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayP2BackgroundTexture, this->backgroundP2Sprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayDefaultBackgroundTexture, this->backgroundDefaultSprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayP1BackgroundTexture, this->backgroundP1Sprite);
+    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayP2BackgroundTexture, this->backgroundP2Sprite);
 
-    State::setSprite(sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), this->battleshipSunkTexture, this->battleshipSunkSprite);
-    State::setSprite(sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), this->aircraftCarrierSunkTexture, this->aircraftCarrierSunkSprite);
-    State::setSprite(sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), this->destroyerSunkTexture, this->destroyerSunkSprite);
-    State::setSprite(sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), this->submarineSunkTexture, this->submarineSunkSprite);
-    State::setSprite(sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), this->patrolBoatSunkTexture, this->patrolBoatSunkSprite);
-    State::setSprite(sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), this->rowBoatSunkTexture, this->rowBoatSunkSprite);
+    setSprite(sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), this->battleshipSunkTexture, this->battleshipSunkSprite);
+    setSprite(sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), this->aircraftCarrierSunkTexture, this->aircraftCarrierSunkSprite);
+    setSprite(sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), this->destroyerSunkTexture, this->destroyerSunkSprite);
+    setSprite(sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), this->submarineSunkTexture, this->submarineSunkSprite);
+    setSprite(sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), this->patrolBoatSunkTexture, this->patrolBoatSunkSprite);
+    setSprite(sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), this->rowBoatSunkTexture, this->rowBoatSunkSprite);
 
     this->battleshipSprite.setTexture(this->battleshipTexture);
     this->battleshipSprite.setScale(sf::Vector2f(5, 5));
@@ -95,84 +98,7 @@ Gameplay::Gameplay() : ScreenTemplate() {
     this->createCoordinateSet();
 }
 
-Gameplay::Gameplay(const Gameplay &source) {
-    this->gameplayDefaultBackgroundTexture = source.gameplayDefaultBackgroundTexture;
-    this->gameplayP1BackgroundTexture = source.gameplayP1BackgroundTexture;
-    this->gameplayP2BackgroundTexture = source.gameplayP2BackgroundTexture;
-
-    this->idleSurrenderButtonTexture = source.idleSurrenderButtonTexture;
-    this->activeSurrenderButtonTexture = source.activeSurrenderButtonTexture;
-    this->idleInstructionsButtonTexture = source.idleInstructionsButtonTexture;
-    this->activeInstructionsButtonTexture = source.activeInstructionsButtonTexture;
-
-    this->battleshipTexture = source.battleshipTexture;
-    this->aircraftCarrierTexture = source.aircraftCarrierTexture;
-    this->destroyerTexture = source.destroyerTexture;
-    this->submarineTexture = source.submarineTexture;
-    this->patrolBoatTexture = source.patrolBoatTexture;
-    this->rowBoatTexture = source.rowBoatTexture;
-
-    this->battleshipSunkTexture = source.battleshipSunkTexture;
-    this->aircraftCarrierSunkTexture = source.aircraftCarrierSunkTexture;
-    this->destroyerSunkTexture = source.destroyerSunkTexture;
-    this->submarineSunkTexture = source.submarineSunkTexture;
-    this->patrolBoatSunkTexture = source.patrolBoatSunkTexture;
-    this->rowBoatSunkTexture = source.rowBoatSunkTexture;
-
-    this->primaryHitMarkerTexture = source.primaryHitMarkerTexture;
-    this->primaryMissMarkerTexture = source.primaryMissMarkerTexture;
-    this->secondaryHitMarkerTexture = source.secondaryHitMarkerTexture;
-    this->secondaryMissMarkerTexture = source.secondaryMissMarkerTexture;
-
-    this->idlePrimaryTargetTexture = source.idlePrimaryTargetTexture;
-    this->activePrimaryTargetTexture = source.activePrimaryTargetTexture;
-    this->secondaryTargetTexture = source.secondaryTargetTexture;
-
-    this->backgroundDefaultSprite = source.backgroundDefaultSprite;
-    this->backgroundP1Sprite = source.backgroundP1Sprite;
-    this->backgroundP2Sprite = source.backgroundP2Sprite;
-
-    this->battleshipSprite = source.battleshipSprite;
-    this->aircraftCarrierSprite = source.aircraftCarrierSprite;
-    this->destroyerSprite = source.destroyerSprite;
-    this->submarineSprite = source.submarineSprite;
-    this->patrolBoatSprite = source.patrolBoatSprite;
-    this->rowBoatSprite = source.rowBoatSprite;
-
-    this->battleshipSunkSprite = source.battleshipSunkSprite;
-    this->aircraftCarrierSunkSprite = source.aircraftCarrierSunkSprite;
-    this->destroyerSunkSprite = source.destroyerSunkSprite;
-    this->submarineSunkSprite = source.submarineSunkSprite;
-    this->patrolBoatSunkSprite = source.patrolBoatSunkSprite;
-    this->rowBoatSunkSprite = source.rowBoatSunkSprite;
-
-    this->primaryHitMarkerSprite = source.primaryHitMarkerSprite;
-    this->primaryMissMarkerSprite = source.primaryMissMarkerSprite;
-    this->secondaryHitMarkerSprite = source.secondaryHitMarkerSprite;
-    this->secondaryMissMarkerSprite = source.secondaryMissMarkerSprite;
-
-    this->secondaryTargetSprite = source.secondaryTargetSprite;
-
-    this->targetVector = source.targetVector;
-
-    this->primaryMarkersP1Vector = source.primaryMarkersP1Vector;
-    this->primaryMarkersP2Vector = source.primaryMarkersP2Vector;
-    this->secondaryMarkersP1Vector = source.secondaryMarkersP1Vector;
-    this->secondaryMarkersP2Vector = source.secondaryMarkersP2Vector;
-
-    this->fleetLayoutP1 = source.fleetLayoutP1;
-    this->fleetLayoutP2 = source.fleetLayoutP2;
-
-    this->coordinateSet = source.coordinateSet;
-    this->mousePosition = source.mousePosition;
-    this->event = source.event;
-
-    this->surrenderButton = new Button(*(source.surrenderButton));
-    this->instructionsButton = new Button(*(source.instructionsButton));
-
-    this->gridP1 = new Grid(*(source.gridP1));
-    this->gridP2 = new Grid(*(source.gridP2));
-}
+Gameplay::Gameplay(const Gameplay &source) = default;
 
 Gameplay::~Gameplay() {
     delete this->surrenderButton;
@@ -183,12 +109,6 @@ Gameplay::~Gameplay() {
 
     delete this->instructionsButton;
     this->instructionsButton = nullptr;
-
-    delete this->gridP1;
-    this->gridP1 = nullptr;
-
-    delete this->gridP2;
-    this->gridP2 = nullptr;
 }
 
 screen::Gameplay &Gameplay::operator=(const Gameplay &source) {
@@ -269,9 +189,6 @@ screen::Gameplay &Gameplay::operator=(const Gameplay &source) {
         this->surrenderButton = source.surrenderButton;
         this->instructionsButton = source.instructionsButton;
 
-        this->gridP1 = source.gridP2;
-        this->gridP2 = source.gridP1;
-
         return *this;
     }
 }
@@ -295,7 +212,7 @@ void Gameplay::createCoordinateSet() {
 
 Coordinate Gameplay::randomAttack() {
     // Generate a random index
-    int randGen = rand() % this->coordinateSet.size();
+    int randGen = randomInt(0, this->coordinateSet.size() - 1);
     // Find the random coordinate
     auto itr = this->coordinateSet.begin();
     advance(itr, randGen);
@@ -317,16 +234,11 @@ void Gameplay::setTargetVector() {
 
 bool Gameplay::lost(Grid &grid) {
     map<shipsNames, bool> shipStatus = grid.getShipStatus();
-    for (auto itr = shipStatus.begin(); itr != shipStatus.end(); itr++) {
-        if (itr->second == false) {
-            return false;
-        }
-    }
-    return true;
+    return std::all_of(shipStatus.cbegin(), shipStatus.cend(), [](const auto &ship) { return ship.second; });
 }
 
 void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
-    if (State::gameMode == State::GameMode::SinglePlayer) {
+    if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             if (attack == SquareType::WATER) {
                 this->primaryMissMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
@@ -390,7 +302,7 @@ void Gameplay::updateSecondaryTarget(Coordinate coordinate) {
 }
 
 void Gameplay::updateGrid(Coordinate coordinate, sf::RenderWindow &gui) {
-    if (State::gameMode == State::GameMode::SinglePlayer) {
+    if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             SquareType attack = this->gridP2->attack(coordinate);
             if (attack == SquareType::WATER) {
@@ -547,7 +459,7 @@ void Gameplay::setFleetLayout(map<shipsNames, tuple<Coordinate, bool>> &fleetLay
 }
 
 void Gameplay::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
-    State::updateMousePosition(gui, mousePos);
+    updateMousePosition(gui, mousePos);
 
     this->surrenderButton->updateButtonState(mousePos);
     this->instructionsButton->updateButtonState(mousePos);
@@ -556,7 +468,7 @@ void Gameplay::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
         target.updateTargetState(mousePos);
     }
 
-    if (State::gameMode == State::GameMode::SinglePlayer) {
+    if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         this->fleetLayoutP1 = this->gridP1->getShips();
         this->setFleetLayout(this->fleetLayoutP1);
     } else {
@@ -569,10 +481,11 @@ void Gameplay::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
         }
     }
 
-    if ((State::gameMode == State::GameMode::SinglePlayer) && (State::player == State::Player::P2)) {
+    if ((State::gameMode == State::GameMode::SINGLE_PLAYER) && (State::player == State::Player::P2)) {
         if (State::difficulty == State::Difficulty::EASY) {
             this->updateGrid(this->randomAttack(), gui);
         } else {
+            // TODO: Add hard algorithm
             this->updateGrid(this->randomAttack(), gui);
         }
     }
@@ -596,9 +509,9 @@ void Gameplay::poll(sf::RenderWindow &gui) {
                 } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->instructionsButton->getButtonState())) {
                     State::changeScreen(Screens::INSTRUCTIONS);
                     break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (State::lockedFlag == false)) {
+                } else if ((event.mouseButton.button == sf::Mouse::Left) && !State::lockedFlag) {
                     for (auto &target : this->targetVector) {
-                        if (target.getTargetState() == true) {
+                        if (target.getTargetState()) {
                             State::lockedFlag = true;
                             this->updateGrid(target.getTargetCoordinate(), gui);
                         }
@@ -617,27 +530,27 @@ void Gameplay::poll(sf::RenderWindow &gui) {
 void Gameplay::renderShipStatus(Grid &grid, sf::RenderWindow &gui) {
     map<shipsNames, bool> shipStatus = grid.getShipStatus();
 
-    if (shipStatus[shipsNames::BATTLESHIP] == true) {
+    if (shipStatus[shipsNames::BATTLESHIP]) {
         gui.draw(this->battleshipSunkSprite);
     }
 
-    if (shipStatus[shipsNames::AIRCRAFT_CARRIER] == true) {
+    if (shipStatus[shipsNames::AIRCRAFT_CARRIER]) {
         gui.draw(this->aircraftCarrierSunkSprite);
     }
 
-    if (shipStatus[shipsNames::DESTROYER] == true) {
+    if (shipStatus[shipsNames::DESTROYER]) {
         gui.draw(this->destroyerSunkSprite);
     }
 
-    if (shipStatus[shipsNames::SUBMARINE] == true) {
+    if (shipStatus[shipsNames::SUBMARINE]) {
         gui.draw(this->submarineSunkSprite);
     }
 
-    if (shipStatus[shipsNames::PATROL_BOAT] == true) {
+    if (shipStatus[shipsNames::PATROL_BOAT]) {
         gui.draw(this->patrolBoatSunkSprite);
     }
 
-    if (shipStatus[shipsNames::ROW_BOAT] == true) {
+    if (shipStatus[shipsNames::ROW_BOAT]) {
         gui.draw(this->rowBoatSunkSprite);
     }
 }
@@ -645,7 +558,7 @@ void Gameplay::renderShipStatus(Grid &grid, sf::RenderWindow &gui) {
 void Gameplay::render(sf::RenderWindow &gui) {
     gui.clear();
 
-    if (State::gameMode == State::SinglePlayer) {
+    if (State::gameMode == State::SINGLE_PLAYER) {
         gui.draw(this->backgroundDefaultSprite);
     } else {
         if (State::player == State::Player::P1) {
@@ -665,7 +578,7 @@ void Gameplay::render(sf::RenderWindow &gui) {
     gui.draw(this->patrolBoatSprite);
     gui.draw(this->rowBoatSprite);
 
-    if (State::gameMode == State::SinglePlayer) {
+    if (State::gameMode == State::SINGLE_PLAYER) {
         for (auto &primaryMarker : this->primaryMarkersP1Vector) {
             gui.draw(primaryMarker);
         }
@@ -692,15 +605,15 @@ void Gameplay::render(sf::RenderWindow &gui) {
         }
     }
 
-    if ((State::player == State::Player::P1) && (this->secondaryMarkersP1Vector.size() > 0)) {
+    if ((State::player == State::Player::P1) && !this->secondaryMarkersP1Vector.empty()) {
         gui.draw(this->secondaryTargetSprite);
     }
 
-    if ((State::player == State::Player::P2) && (this->secondaryMarkersP2Vector.size() > 0)) {
+    if ((State::player == State::Player::P2) && !this->secondaryMarkersP2Vector.empty()) {
         gui.draw(this->secondaryTargetSprite);
     }
 
-    if (State::gameMode == State::SinglePlayer) {
+    if (State::gameMode == State::SINGLE_PLAYER) {
         this->renderShipStatus(*(this->gridP2), gui);
     } else {
         if (State::player == State::Player::P1) {
@@ -727,8 +640,8 @@ void Gameplay::run(sf::RenderWindow &gui) {
 
 void screen::Gameplay::sleepMS() {
 #ifdef _WIN32
-    Sleep(500);
+    Sleep(sleepTimeMS);
 #else
-    usleep(500000);
+    usleep(sleepTimeMS * 1000);
 #endif// _WIN32
 }

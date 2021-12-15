@@ -6,13 +6,14 @@
 #ifndef BATTLESHIP_FLEETPLACEMENT_H
 #define BATTLESHIP_FLEETPLACEMENT_H
 
-#include <SFML/System.hpp>
-
 #include "../entity/button.h"
 #include "../entity/coordinate.h"
 #include "../entity/shipNames.h"
 #include "screenTemplate.h"
 
+#include <SFML/System.hpp>
+
+#include <random>
 #include <vector>
 
 using entity::Button;
@@ -181,7 +182,7 @@ namespace screen {
          */
         map<shipsNames, tuple<Coordinate, bool>> ships;
 
-        /*
+        /**
          * Adds a coordinate to a vector if the coordinate is valid
          */
         static void addCoord(vector<Coordinate> &coordinates, int x, int y);
@@ -202,9 +203,9 @@ namespace screen {
         void resetFleetLayout();
 
         /**
-         * Calls State::updateMousePosition() and entity::Button::updateButtonState()
+         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
          */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void update(sf::RenderWindow &gui, sf::Vector2f mousePos);
 
         /**
          * Polls for system events

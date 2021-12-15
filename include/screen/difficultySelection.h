@@ -8,7 +8,6 @@
 
 #include "../entity/button.h"
 #include "screenTemplate.h"
-
 #include <SFML/System.hpp>
 
 using entity::Button;
@@ -97,9 +96,9 @@ namespace screen {
         sf::Event event{};
 
         /**
-         * Calls State::updateMousePosition() and entity::Button::updateButtonState()
+         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
          */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void update(sf::RenderWindow &gui, sf::Vector2f mousePos);
 
         /**
          * Polls for system events

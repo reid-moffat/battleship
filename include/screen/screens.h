@@ -1,16 +1,11 @@
 /**
- * Enumeration for screen names
- *
+ * All screen names
  */
 
 #ifndef BATTLESHIP_SCREENS_H
 #define BATTLESHIP_SCREENS_H
 
 namespace screen {
-
-    /**
-     * List of screen names
-     */
     enum Screens {
         HOMEPAGE,
         INSTRUCTIONS,

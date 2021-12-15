@@ -351,7 +351,7 @@ namespace screen {
         /**
          * Checks if the game is lost
          */
-        bool lost(Grid &grid);
+        static bool lost(Grid &grid);
 
         /**
          * Updates grid markers
@@ -384,7 +384,7 @@ namespace screen {
         void setFleetLayout(map<shipsNames, tuple<Coordinate, bool>> &fleetLayout);
 
         /**
-         * Calls State::updateMousePosition(), Button::updateButtonState(), Target::updateTargetState(), Grid::getShips(), and Gameplay::setFleetLayout()
+         * Calls helpers::updateMousePosition(), Button::updateButtonState(), Target::updateTargetState(), Grid::getShips(), and Gameplay::setFleetLayout()
          */
         void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
 
@@ -402,6 +402,11 @@ namespace screen {
          * Renders all sprites
          */
         void render(sf::RenderWindow &gui);
+
+        /**
+         * The sleep time after a player attacks in milliseconds
+         */
+        static constexpr int sleepTimeMS = 400;
 
     public:
         /**
