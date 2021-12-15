@@ -100,7 +100,6 @@ public:
      * Changes to the previous screen (used for back buttons)
      */
     static void previousScreen();
-
 };
 
 #endif// BATTLESHIP_STATE_H

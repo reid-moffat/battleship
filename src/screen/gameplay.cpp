@@ -9,9 +9,9 @@
 #include <unistd.h>
 #endif
 
-#include "../../include/screen/gameplay.h"
 #include "../../include/helpers/sprites.h"
 #include "../../include/helpers/userInput.h"
+#include "../../include/screen/gameplay.h"
 
 using entity::SquareType;
 using screen::Gameplay;

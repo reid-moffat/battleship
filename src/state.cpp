@@ -17,8 +17,6 @@ Screens State::previous = Screens::HOMEPAGE;
 Screens State::current = Screens::HOMEPAGE;
 
 
-
-
 Screens State::getCurrentScreen() {
     return State::current;
 }

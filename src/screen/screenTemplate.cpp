@@ -1,6 +1,6 @@
 /**
-* ScreenTemplate "interface" implementation
-*/
+ * ScreenTemplate abstract class implementation
+ */
 
 #include "../../include/screen/screenTemplate.h"
 
@@ -8,8 +8,7 @@ using screen::ScreenTemplate;
 
 ScreenTemplate::ScreenTemplate() = default;
 
+// Big three
 ScreenTemplate::ScreenTemplate(const ScreenTemplate &other) = default;
-
-ScreenTemplate::~ScreenTemplate() = default;// I know this doesn't make sense, but it works
-
+ScreenTemplate::~ScreenTemplate() = default;
 ScreenTemplate &screen::ScreenTemplate::operator=(const ScreenTemplate &rhs) = default;
