@@ -109,13 +109,6 @@ Gameplay::~Gameplay() {
 
     delete this->instructionsButton;
     this->instructionsButton = nullptr;
-
-    // TODO: Figure out if static members should be deleted
-    delete gridP1;
-    gridP1 = nullptr;
-
-    delete gridP2;
-    gridP2 = nullptr;
 }
 
 screen::Gameplay &Gameplay::operator=(const Gameplay &source) {
