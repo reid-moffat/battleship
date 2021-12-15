@@ -4,8 +4,7 @@
  */
 
 #include "../../include/screen/gameModeSelection.hpp"
-#include "../../include/helpers/sprites.hpp"
-#include "../../include/helpers/userInput.hpp"
+#include "../../include/helpers/helpers.hpp"
 
 using screen::GameModeSelection;
 
