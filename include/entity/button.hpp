@@ -1,6 +1,6 @@
 /**
- * File: button.h
- * Description: Front-end class that creates buttons and manages button states, textures, and sprites
+ * Front-end class for a buttons that can render a texture, change textures
+ * and tell if the mouse is hovering over it
  */
 
 #ifndef BATTLESHIP_BUTTON_H
@@ -11,52 +11,21 @@
 namespace entity {
 
     class Button {
-    private:
-        /**
-         * Idle button texture
-         */
-        sf::Texture idleTexture;
-
-        /**
-         * Active button texture
-         */
-        sf::Texture activeTexture;
-
-        /**
-         * Button sprite
-         */
-        sf::Sprite sprite;
-
-        /**
-         * Button state (Active = true and Idle = false)
-         */
-        bool buttonState;
-
     public:
         /**
-         * Constructor
+         * Constructs a new button
+         *
+         * @param position the position on the screen
+         * @param scale a vector to scale the button by (e.g (2, 2) to double its width and height)
+         * @param idleTexture the texture of this button when the mouse is not hovering over it
+         * @param activeTexture the texture of this button when the mouse is hovering over it
          */
-        Button(sf::Vector2f position, sf::Vector2f scale, const sf::Texture& idleTexture, const sf::Texture& activeTexture);
-
-        /**
-         * Copy Constructor
-         */
-        Button(const Button &source);
-
-        /**
-         * Destructor:
-         */
-        ~Button();
-
-        /**
-         * Overloaded assignment operator
-         */
-        Button &operator=(const Button &source);
+        Button(sf::Vector2f position, sf::Vector2f scale, sf::Texture& idleTexture, sf::Texture& activeTexture);
 
         /**
          * Returns true if the button is active (i.e., the cursor is over the button)
          */
-        bool getButtonState() const;
+        [[nodiscard]] bool getButtonState() const;
 
         /**
          * Renders the button sprite on the window
@@ -64,9 +33,35 @@ namespace entity {
         void render(sf::RenderWindow &window) const;
 
         /**
-         * Updates the button state and sets the button sprite to idleTexture or activeTexture depending on the current state
+         * Updates the button state and texture if the mouse is over the button
          */
         void updateButtonState(sf::Vector2f mousePosition);
+
+        // Big three
+        Button(const Button &source);
+        ~Button();
+        Button &operator=(const Button &source);
+
+    private:
+        /**
+         * Texture when the button does not have the mouse over it
+         */
+        sf::Texture* idleTexture;
+
+        /**
+         * Texture when the button has the mouse over it
+         */
+        sf::Texture* activeTexture;
+
+        /**
+         * Button sprite (the object that renders)
+         */
+        sf::Sprite* sprite;
+
+        /**
+         * Button state (true and Idle = false)
+         */
+        bool active;
     };
 
 }// namespace entity
