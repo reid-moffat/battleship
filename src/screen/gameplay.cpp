@@ -15,10 +15,9 @@ using entity::SquareType;
 using screen::Gameplay;
 using std::get;
 
-// Static fields are required to be initialized
-// TODO: Find a better method for the grids
-__attribute__((unused)) Grid *Gameplay::gridP1 = new Grid();
-__attribute__((unused)) Grid *Gameplay::gridP2 = new Grid();
+// TODO: re-design the grid implementation
+Grid *Gameplay::gridP1 = new Grid();
+Grid *Gameplay::gridP2 = new Grid();
 
 Gameplay::Gameplay() : ScreenTemplate() {
     loadTexture(this->gameplayDefaultBackgroundTexture, "gameplay/GameplayBackground.png");
@@ -94,6 +93,9 @@ Gameplay::Gameplay() : ScreenTemplate() {
 
     this->setTargetVector();
     this->createCoordinateSet();
+
+    gridP1 = new Grid();
+    gridP2 = new Grid();
 }
 
 Gameplay::Gameplay(const Gameplay &source) = default;
@@ -615,9 +617,9 @@ void Gameplay::render(sf::RenderWindow &gui) {
         this->renderShipStatus(*(this->gridP2), gui);
     } else {
         if (State::player == State::Player::P1) {
-            this->renderShipStatus(*(this->gridP2), gui);
+            this->renderShipStatus(*(screen::Gameplay::gridP2), gui);
         } else {
-            this->renderShipStatus(*(this->gridP1), gui);
+            this->renderShipStatus(*(screen::Gameplay::gridP1), gui);
         }
     }
 

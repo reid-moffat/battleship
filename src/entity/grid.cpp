@@ -89,13 +89,19 @@ map<shipsNames, tuple<Coordinate, bool>> entity::Grid::getShips() {
     return shipPositions;
 }
 
-entity::Grid::Grid() = default;
+entity::Grid::Grid() {
+    ;
+}
 
 
 // Big three
-Grid::~Grid() = default;
+Grid::~Grid() {
+    ;
+}
 
-Grid::Grid(Grid &grid) = default;
+Grid::Grid(Grid &grid) {
+    ;
+}
 
 Grid &Grid::operator=(Grid *rhs) {
     if (this == rhs) return *this;

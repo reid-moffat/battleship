@@ -87,6 +87,7 @@ namespace entity {
          * Size of the grid (both width and height) i.e 10
          */
         static constexpr int size = 10;
+
     };
 }// namespace entity
 
