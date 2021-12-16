@@ -61,8 +61,8 @@ namespace entity {
         Grid();
 
         // Big three
-        Grid(Grid &other);
         ~Grid();
+        Grid(Grid &other);
         Grid &operator=(Grid *other);
 
     private:

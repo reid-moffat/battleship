@@ -15,10 +15,10 @@ using std::get;
 Grid::Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipOrientations) {
     // Initialize the grid itself
     squares = new SquareType *[size];
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; ++i) {
         squares[i] = new SquareType[size];
-        for (int k = 0; k < size; k++) {
-            squares[i][k] = WATER;
+        for (int j = 0; j < size; ++j) {
+            squares[i][j] = WATER;
         }
     }
 
@@ -96,16 +96,50 @@ entity::Grid::Grid() {
 
 // Big three
 Grid::~Grid() {
-    ;
+    for (int i = 0; i < size; ++i) {
+        delete[] squares[i];
+    }
+    delete[] squares;
 }
 
 Grid::Grid(Grid &grid) {
-    ;
+    // Copy the other ship's coordinates and number of hits
+    for (auto const &ship : grid.ships) {
+        *get<0>(ships[ship.first]) = *get<0>(ship.second);
+        get<1>(ships[ship.first]) = get<1>(ship.second);
+    }
+
+    // Copy the other ship's positions
+    for (auto const &ship: grid.shipPositions) {
+        get<0>(shipPositions[ship.first]) = get<0>(ship.second);
+        get<1>(shipPositions[ship.first]) = get<1>(ship.second);
+    }
+
+    // Copy the grid
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            this->squares[i][j] = grid.squares[i][j];
+        }
+    }
 }
 
 Grid &Grid::operator=(Grid *rhs) {
     if (this == rhs) return *this;
-    this->ships = rhs->ships;
-    this->squares = rhs->squares;
+
+    this->ships.clear();
+    for (const auto ship : rhs->ships) {
+        this->ships.insert(ship);
+    }
+
+    this->shipPositions.clear();
+    for (const auto ship : rhs->shipPositions) {
+        this->shipPositions.insert(ship);
+    }
+
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            squares[i][j] = rhs->squares[i][j];
+        }
+    }
     return *this;
 }
