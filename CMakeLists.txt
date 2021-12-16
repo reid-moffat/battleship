@@ -12,7 +12,7 @@ file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
         "src/*.cpp"
         "src/**/*.cpp")
 
-add_executable(battleship ${SOURCE_FILES})
+add_executable(battleship ${SOURCE_FILES} include/helpers/sprites.hpp)
 
 
 # Add SFML
