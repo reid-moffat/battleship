@@ -68,15 +68,11 @@ namespace entity {
     private:
         /**
          * The six ships on this board
-         * Includes their name, the coordinates of squares they occupy and the number of hits on this ship
+         * This map maps the six ships (their enumerated name) to:
+         *  -The coordinates it occupies on the board
+         *  -The number of hits on this ship
          */
         map<shipsNames, tuple<Coordinate *, int>> ships;
-
-        /**
-         * The location of each ship on this board
-         * (top-left square and if it is horizontal)
-         */
-        map<shipsNames, tuple<Coordinate, bool>> shipPositions;
 
         /**
          * 10-by-10 array of grid squares
