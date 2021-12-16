@@ -17,7 +17,6 @@ using screen::Gameplay;
 using std::get;
 
 // Static fields are required to be initialized
-// TODO: Find a better method for the grids
 __attribute__((unused)) Grid *Gameplay::gridP1 = new Grid();
 __attribute__((unused)) Grid *Gameplay::gridP2 = new Grid();
 
