@@ -7,8 +7,17 @@
 #define BATTLESHIP_HELPERS_H
 
 #include <SFML/Graphics.hpp>
+#include "../entity/shipNames.hpp"
 
 using std::string;
+using entity::shipsNames;
+
+/**
+ * Returns the size of a ship from its enum value
+ */
+constexpr int shipSize(shipsNames name) noexcept {
+    return (int) static_cast<std::underlying_type_t<shipsNames>>(name) + 1;
+}
 
 /**
  * Returns a random integer in the range [start, end] (both inclusive)
