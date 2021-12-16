@@ -1,6 +1,5 @@
 /**
- * File: gameplay.cpp
- * Description: Front-end class that defines the behaviour of the Gameplay screen
+ * Stores a player's 10-by-10 grid and their ships
  */
 
 #ifdef _WIN32
@@ -17,6 +16,7 @@ using screen::Gameplay;
 using std::get;
 
 // Static fields are required to be initialized
+// TODO: Find a better method for the grids
 __attribute__((unused)) Grid *Gameplay::gridP1 = new Grid();
 __attribute__((unused)) Grid *Gameplay::gridP2 = new Grid();
 

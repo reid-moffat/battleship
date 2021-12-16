@@ -12,7 +12,7 @@ using entity::SquareType;
 using std::get;
 
 
-Grid::Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipOrientations) : size(10) {
+Grid::Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipOrientations) {
     // Initialize the grid itself
     squares = new SquareType *[size];
     for (int i = 0; i < size; i++) {
@@ -89,7 +89,7 @@ map<shipsNames, tuple<Coordinate, bool>> entity::Grid::getShips() {
     return shipPositions;
 }
 
-entity::Grid::Grid() : size(0) {}
+entity::Grid::Grid() = default;
 
 
 // Big three

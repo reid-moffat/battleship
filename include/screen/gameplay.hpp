@@ -12,9 +12,7 @@
 #include "../entity/shipNames.hpp"
 #include "../entity/target.hpp"
 #include "screenTemplate.hpp"
-
 #include <SFML/System.hpp>
-
 #include <set>
 #include <vector>
 
@@ -32,7 +30,153 @@ using std::vector;
 
 namespace screen {
     class Gameplay : public ScreenTemplate {
+    public:
+        /**
+         * Constructor
+         */
+        Gameplay();
+
+        /**
+         * Copy constructor
+         */
+        Gameplay(const Gameplay &source);
+
+        /**
+         * Destructor
+         */
+        ~Gameplay() override;
+
+        /**
+         * Overloaded assignment operator
+         */
+        Gameplay &operator=(const Gameplay &source);
+
+        /**
+         * Initializes P1 grid
+         */
+        static void setP1Grid(const map<shipsNames, tuple<Coordinate, bool>> &ships);
+
+        /**
+         * Initializes P2 grid
+         */
+        static void setP2Grid(const map<shipsNames, tuple<Coordinate, bool>> &ships);
+
+        /**
+         * Overridden run method of screenTemplate
+         */
+        void run(sf::RenderWindow &gui) override;
+
     private:
+        /**
+         * Map of P1 fleet layout
+         */
+        map<shipsNames, tuple<Coordinate, bool>> fleetLayoutP1;
+
+        /**
+         * Map of P2 fleet layout
+         */
+        map<shipsNames, tuple<Coordinate, bool>> fleetLayoutP2;
+
+        /**
+         * P1 Grid
+         */
+        static Grid *gridP1;
+
+        /**
+         * P2 Grid
+         */
+        static Grid *gridP2;
+
+        /**
+         * Set of grid coordinates used by environment
+         */
+        set<Coordinate> coordinateSet;
+
+        /**
+         * Mouse position vector
+         */
+        sf::Vector2f mousePosition;
+
+        /**
+         * System event
+         */
+        sf::Event event{};
+
+        /**
+         * Generates a set of grid coordinates
+         */
+        void createCoordinateSet();
+
+        /**
+         * Selects a random coordinate from screen::Gameplay::coordinateSet
+         */
+        Coordinate randomAttack();
+
+        /**
+         * Initializes target vector
+         */
+        void setTargetVector();
+
+        /**
+         * Checks if the game is lost
+         */
+        static bool lost(Grid &grid);
+
+        /**
+         * Updates grid markers
+         */
+        void updateGridMarkers(SquareType attack, Coordinate coordinate);
+
+        /**
+         * Resets grid markers
+         */
+        void resetGridMarkers();
+
+        /**
+         * Updates secondary traget
+         */
+        void updateSecondaryTarget(Coordinate coordinate);
+
+        /**
+         * Sleeps the process (works for windows and unix-based systems)
+         */
+        static void sleepMS();
+
+        /**
+         * Updates grid state
+         */
+        void updateGrid(Coordinate coordinate, sf::RenderWindow &grid);
+
+        /**
+         * Sets the fleet layout of the current player
+         */
+        void setFleetLayout(map<shipsNames, tuple<Coordinate, bool>> &fleetLayout);
+
+        /**
+         * Calls helpers::updateMousePosition(), Button::updateButtonState(), Target::updateTargetState(), Grid::getShips(), and Gameplay::setFleetLayout()
+         */
+        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+
+        /**
+         * Polls for system events
+         */
+        void poll(sf::RenderWindow &gui);
+
+        /**
+         * Renders ship status
+         */
+        void renderShipStatus(Grid &grid, sf::RenderWindow &gui);
+
+        /**
+         * Renders all sprites
+         */
+        void render(sf::RenderWindow &gui);
+
+        /**
+         * The sleep time after a player attacks in milliseconds
+         */
+        static constexpr int sleepTimeMS = 400;
+
         /**
          * Default 1 Player background texture
          */
@@ -297,152 +441,6 @@ namespace screen {
          * Vector of P2 secondary markers
          */
         vector<sf::Sprite> secondaryMarkersP2Vector;
-
-        /**
-         * Map of P1 fleet layout
-         */
-        map<shipsNames, tuple<Coordinate, bool>> fleetLayoutP1;
-
-        /**
-         * Map of P2 fleet layout
-         */
-        map<shipsNames, tuple<Coordinate, bool>> fleetLayoutP2;
-
-        /**
-         * P1 Grid
-         */
-        static Grid *gridP1;
-
-        /**
-         * P2 Grid
-         */
-        static Grid *gridP2;
-
-        /**
-         * Set of grid coordinates used by environment
-         */
-        set<Coordinate> coordinateSet;
-
-        /**
-         * Mouse position vector
-         */
-        sf::Vector2f mousePosition;
-
-        /**
-         * System event
-         */
-        sf::Event event{};
-
-        /**
-         * Generates a set of grid coordinates
-         */
-        void createCoordinateSet();
-
-        /**
-         * Selects a random coordinate from screen::Gameplay::coordinateSet
-         */
-        Coordinate randomAttack();
-
-        /**
-         * Initializes target vector
-         */
-        void setTargetVector();
-
-        /**
-         * Checks if the game is lost
-         */
-        static bool lost(Grid &grid);
-
-        /**
-         * Updates grid markers
-         */
-        void updateGridMarkers(SquareType attack, Coordinate coordinate);
-
-        /**
-         * Resets grid markers
-         */
-        void resetGridMarkers();
-
-        /**
-         * Updates secondary traget
-         */
-        void updateSecondaryTarget(Coordinate coordinate);
-
-        /**
-         * Sleeps the process (works for windows and unix-based systems)
-         */
-        static void sleepMS();
-
-        /**
-         * Updates grid state
-         */
-        void updateGrid(Coordinate coordinate, sf::RenderWindow &grid);
-
-        /**
-         * Sets the fleet layout of the current player
-         */
-        void setFleetLayout(map<shipsNames, tuple<Coordinate, bool>> &fleetLayout);
-
-        /**
-         * Calls helpers::updateMousePosition(), Button::updateButtonState(), Target::updateTargetState(), Grid::getShips(), and Gameplay::setFleetLayout()
-         */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
-
-        /**
-         * Polls for system events
-         */
-        void poll(sf::RenderWindow &gui);
-
-        /**
-         * Renders ship status
-         */
-        void renderShipStatus(Grid &grid, sf::RenderWindow &gui);
-
-        /**
-         * Renders all sprites
-         */
-        void render(sf::RenderWindow &gui);
-
-        /**
-         * The sleep time after a player attacks in milliseconds
-         */
-        static constexpr int sleepTimeMS = 400;
-
-    public:
-        /**
-         * Constructor
-         */
-        Gameplay();
-
-        /**
-         * Copy constructor
-         */
-        Gameplay(const Gameplay &source);
-
-        /**
-         * Destructor
-         */
-        ~Gameplay() override;
-
-        /**
-         * Overloaded assignment operator
-         */
-        Gameplay &operator=(const Gameplay &source);
-
-        /**
-         * Initializes P1 grid
-         */
-        static void setP1Grid(const map<shipsNames, tuple<Coordinate, bool>> &ships);
-
-        /**
-         * Initializes P2 grid
-         */
-        static void setP2Grid(const map<shipsNames, tuple<Coordinate, bool>> &ships);
-
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run(sf::RenderWindow &gui) override;
     };
 }// namespace screen
 
