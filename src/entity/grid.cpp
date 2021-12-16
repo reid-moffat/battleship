@@ -1,6 +1,5 @@
 /**
  * Grid class implementation
- *
  */
 
 #include "../../include/entity/grid.hpp"
@@ -12,7 +11,7 @@ using entity::SquareType;
 using std::get;
 
 
-Grid::Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipOrientations) : size(10) {
+Grid::Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipOrientations) {
     // Initialize the grid itself
     squares = new SquareType *[size];
     for (int i = 0; i < size; i++) {
@@ -24,51 +23,43 @@ Grid::Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipOrientations) : s
 
     // Create the ship objects
     for (auto const &ship : shipOrientations) {
-        const int x = get<0>(ship.second).getX();// Topmost/leftmost square x and y
-        const int y = get<0>(ship.second).getY();
-        const bool horizontal = get<1>(ship.second);
-        get<0>(ships[ship.first]) = new Coordinate[shipSizes[ship.first]];// Array of coordinates this ship occupies
+        int x = get<0>(ship.second).getX();// Topmost/leftmost square x and y
+        int y = get<0>(ship.second).getY();
+        const bool horizontal = get<1>(ship.second);                         // If the ship is horizontally aligned
+        get<0>((*ships)[ship.first]) = new Coordinate[shipSizes[ship.first]];// Array of coordinates this ship occupies
 
         for (int i = 0; i < shipSizes[ship.first]; ++i) {
             // Initializes the i^th square (from the top left)
-            if (horizontal) {
-                get<0>(ships[ship.first])[i] = Coordinate(x + i, y);
-                squares[y][x + i] = SHIP;
-            } else {
-                get<0>(ships[ship.first])[i] = Coordinate(x, y + i);
-                squares[y + i][x] = SHIP;
-            }
+            x = horizontal ? x + i : x; // If the ship is horizontal, we move right each time
+            y = horizontal ? y : y + i;
+            get<0>((*ships)[ship.first])[i] = Coordinate(x, y);
+            squares[y][x] = SHIP;
         }
-        get<1>(ships[ship.first]) = 0;// Initialize hit count to 0
+        get<1>((*ships)[ship.first]) = 0;// Initialize hit count to 0
 
         // Also store the ship's orientation
-        this->shipPositions[ship.first] = ship.second;
+        (*this->shipPositions)[ship.first] = ship.second;
     }
 }
 
 SquareType Grid::attack(Coordinate coord) {
     // Determine the type of the square
     SquareType *status = &squares[coord.getY()][coord.getX()];
-    switch (*status) {
-        case WATER:
-            *status = HIT_WATER;
-            return WATER;
-        case SHIP:
-            *status = HIT_SHIP;
-            break;
-        default:
-            // For a square that has already been hit (HIT_SHIP or HIT_WATER)
-            // do nothing (the attack doesn't go through)
-            return *status;
+    if (*status == WATER) {
+        *status = HIT_WATER;
+        return WATER;
+    } else if (*status != SHIP) {// HIT_SHIP or HIT_WATER (do nothing)
+        return *status;
     }
 
-    // If this is a ship, find the ship in this square and hit it
-    for (auto const &ship : this->ships) {
+    // Since this is a ship, find the ship in this square and hit it
+    *status = HIT_SHIP;
+    for (auto const &ship : *this->ships) {
         // Loop through the squares in this ship
         Coordinate *coords = get<0>(ship.second);
         for (int i = 0; i < shipSizes[ship.first]; ++i) {
-            if (coords[i] == coord) {       // Found it!
-                get<1>(ships[ship.first])++;// Update hit count
+            if (coords[i] == coord) {          // Found it!
+                get<1>((*ships)[ship.first])++;// Update hit count
                 return SHIP;
             }
         }
@@ -77,29 +68,64 @@ SquareType Grid::attack(Coordinate coord) {
 }
 
 map<shipsNames, bool> Grid::getShipStatus() {
-    map<shipsNames, bool> shipStatuses;
-    for (auto const &ship : this->ships) {
-        // If this ship has as many hits as it has squares, it has been sunk
+    map<shipsNames, bool> shipStatuses;// Maps a ship to if it has been sunk or not
+    for (auto const &ship : *this->ships) {
+        // If a ship is sunk, this means all of its squares have been hit
         shipStatuses[ship.first] = get<1>(ship.second) == shipSizes[ship.first];
     }
     return shipStatuses;
 }
 
 map<shipsNames, tuple<Coordinate, bool>> entity::Grid::getShips() {
-    return shipPositions;
+    return *shipPositions;
 }
 
-entity::Grid::Grid() : size(0) {}
+entity::Grid::Grid() = default;
 
 
 // Big three
-Grid::~Grid() = default;
+Grid::Grid(Grid &grid) {
+    for (const auto ship : *grid.ships) {
+        this->ships->insert(ship);
+    }
 
-Grid::Grid(Grid &grid) = default;
+    for (const auto ship : *grid.shipPositions) {
+        this->shipPositions->insert(ship);
+    }
+
+    squares = new SquareType *[size];
+    for (int i = 0; i < size; ++i) {
+        squares[i] = new SquareType[size];
+        for (int j = 0; j < size; ++j) {
+            squares[i][j] = grid.squares[i][j];
+        }
+    }
+}
+
+Grid::~Grid() {
+    for (int i = 0; i < size; ++i) {
+        delete[] squares[i];
+    }
+    delete[] squares;
+}
 
 Grid &Grid::operator=(Grid *rhs) {
     if (this == rhs) return *this;
-    this->ships = rhs->ships;
-    this->squares = rhs->squares;
+
+    this->ships->clear();
+    for (const auto ship : *rhs->ships) {
+        this->ships->insert(ship);
+    }
+
+    this->shipPositions->clear();
+    for (const auto ship : *rhs->shipPositions) {
+        this->shipPositions->insert(ship);
+    }
+
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            squares[i][j] = rhs->squares[i][j];
+        }
+    }
     return *this;
 }
