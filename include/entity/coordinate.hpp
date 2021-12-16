@@ -1,5 +1,6 @@
 /**
- *  Header file for the Coordinate class.
+ * A coordinate objects stores an x and y position in the range [0, 9]
+ * Used to refer to squares on the battleship board
  */
 
 #ifndef BATTLESHIP_COORDINATE_H
@@ -8,7 +9,10 @@
 #include <exception>
 #include <iostream>
 
+using std::ostream;
+
 namespace entity {
+
     class Coordinate {
     private:
         /**
@@ -23,6 +27,16 @@ namespace entity {
 
     public:
         /**
+         * Initialize this coordinate with a position of (0, 0)
+         */
+        Coordinate();
+
+        /**
+         * Initialize this coordinate with a specified x and y value
+         */
+        Coordinate(int x, int y);
+
+        /**
          * Returns the x position of this coordinate
          */
         [[nodiscard]] int getX() const;
@@ -32,18 +46,22 @@ namespace entity {
          */
         [[nodiscard]] int getY() const;
 
-        // Constructors
-        Coordinate();
-        Coordinate(int xVal, int yVal);
-
-        // Overloaded operators
+        /**
+         * Returns true if both coordinates have the same x and y values
+         */
         bool operator==(const Coordinate &rhs) const;
 
-    };
+        /**
+         * Returns true if this coordinate's x OR y is less than the other coordinates'
+         * x or y respectively
+         */
+        bool operator<(const Coordinate &rhs) const;
 
-    // Non-member operator overloading
-    bool operator<(const Coordinate &left, const Coordinate &right);
-    std::ostream &operator<<(std::ostream &output, const Coordinate &coord);
+        /**
+         * Outputs this coordinate in the form (x, y)
+         */
+        friend ostream &operator<<(std::ostream &output, const Coordinate &coord);
+    };
 
     class CoordinateException : std::exception {
     public:
@@ -54,4 +72,5 @@ namespace entity {
         const char *errorMessage;
     };
 };    // namespace entity
+
 #endif//BATTLESHIP_COORDINATE_H
