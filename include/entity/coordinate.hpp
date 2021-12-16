@@ -14,17 +14,6 @@ using std::ostream;
 namespace entity {
 
     class Coordinate {
-    private:
-        /**
-         * Coordinate x position
-         */
-        int x;
-
-        /**
-         * Coordinate y position
-         */
-        int y;
-
     public:
         /**
          * Initialize this coordinate with a position of (0, 0)
@@ -61,6 +50,17 @@ namespace entity {
          * Outputs this coordinate in the form (x, y)
          */
         friend ostream &operator<<(std::ostream &output, const Coordinate &coord);
+
+    private:
+        /**
+         * Coordinate x position
+         */
+        int x;
+
+        /**
+         * Coordinate y position
+         */
+        int y;
     };
 
     class CoordinateException : std::exception {
@@ -71,6 +71,6 @@ namespace entity {
     private:
         const char *errorMessage;
     };
-};    // namespace entity
+}// namespace entity
 
 #endif//BATTLESHIP_COORDINATE_H
