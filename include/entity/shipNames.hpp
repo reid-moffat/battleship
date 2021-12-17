@@ -1,13 +1,9 @@
 /**
- *
+ * Enumeration for the names of each ship
  */
 
 #ifndef BATTLESHIP_SHIPNAMES_H
 #define BATTLESHIP_SHIPNAMES_H
-
-#include <map>
-
-using std::map;
 
 namespace entity {
 
