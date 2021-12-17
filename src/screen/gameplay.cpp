@@ -50,8 +50,7 @@ Gameplay::Gameplay() : ScreenTemplate() {
     loadTexture(this->secondaryHitMarkerTexture, "gameplay/SecondaryHitMarker.png");
     loadTexture(this->secondaryMissMarkerTexture, "gameplay/SecondaryMissMarker.png");
 
-    loadTexture(this->idlePrimaryTargetTexture, "gameplay/idlePrimaryTarget.png");
-    loadTexture(this->activePrimaryTargetTexture, "gameplay/ActivePrimaryTarget.png");
+    Target::initializeTextures();
     loadTexture(this->secondaryTargetTexture, "gameplay/SecondaryTarget.png");
 
     setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayDefaultBackgroundTexture, this->backgroundDefaultSprite);
@@ -226,8 +225,7 @@ void Gameplay::setTargetVector() {
     for (int y = 0; y < 10; y++) {
         for (int x = 0; x < 10; x++) {
             Coordinate coordinate(x, y);
-            Target target(coordinate, sf::Vector2f(((128 + (x * 16)) * 5), ((28 + (y * 16)) * 5)), sf::Vector2f(5, 5),
-                          this->idlePrimaryTargetTexture, this->activePrimaryTargetTexture);
+            Target target(coordinate, sf::Vector2f(((128 + (x * 16)) * 5), ((28 + (y * 16)) * 5)), sf::Vector2f(5, 5));
             targetVector.push_back(target);
         }
     }

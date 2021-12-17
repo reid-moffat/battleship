@@ -12,6 +12,7 @@
 #include "squareType.hpp"
 #include <memory>
 #include <vector>
+#include <map>
 
 using std::map;
 using std::tuple;
