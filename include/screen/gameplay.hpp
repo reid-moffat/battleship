@@ -14,19 +14,12 @@
 #include "screenTemplate.hpp"
 #include <SFML/System.hpp>
 #include <set>
-#include <vector>
 
 using entity::Button;
-using entity::Coordinate;
 using entity::Grid;
-using entity::shipSizes;
-using entity::shipsNames;
 using entity::SquareType;
 using entity::Target;
-using std::map;
 using std::set;
-using std::tuple;
-using std::vector;
 
 namespace screen {
     class Gameplay : public ScreenTemplate {
@@ -133,7 +126,7 @@ namespace screen {
         void resetGridMarkers();
 
         /**
-         * Updates secondary traget
+         * Updates secondary target
          */
         void updateSecondaryTarget(Coordinate coordinate);
 
@@ -308,7 +301,7 @@ namespace screen {
         sf::Texture secondaryTargetTexture;
 
         /**
-         * Defauly 1 player background sprite
+         * Default 1 player background sprite
          */
         sf::Sprite backgroundDefaultSprite;
 
@@ -318,7 +311,7 @@ namespace screen {
         sf::Sprite backgroundP1Sprite;
 
         /**
-         * P2 backgroudn sprite
+         * P2 background sprite
          */
         sf::Sprite backgroundP2Sprite;
 

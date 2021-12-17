@@ -18,7 +18,6 @@
 
 using entity::Button;
 using entity::Coordinate;
-using entity::shipSizes;
 using entity::shipsNames;
 using std::map;
 using std::tuple;

@@ -67,7 +67,6 @@ SquareType Grid::attack(Coordinate coord) {
         Coordinate *coords = get<0>(ship.second);
         for (int i = 0; i < shipSize(shipName); ++i) {
             if (coords[i] == coord) {// Found it!
-                // Update the number of hits on this ship and check if it has been sunk
                 hitCount++;
                 if (hitCount == shipSize(shipName)) {
                     shipStatuses[shipName] = true;// Ship has been sunk

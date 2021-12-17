@@ -158,9 +158,17 @@ void FleetPlacement::randomize() {
         }
     }
 
-    // Find spots for the ships
-    for (auto ship = shipSizes.rbegin(); ship != shipSizes.rend(); ++ship) {// Start with the big ships
-        int size = ship->second;
+    // Find spots for the ships (start with the big ships to speed it up)
+    static shipsNames allShips[6] = {
+            shipsNames::BATTLESHIP,
+            shipsNames::AIRCRAFT_CARRIER,
+            shipsNames::DESTROYER,
+            shipsNames::SUBMARINE,
+            shipsNames::PATROL_BOAT,
+            shipsNames::ROW_BOAT,
+    };
+    for (shipsNames ship : allShips) {
+        int size = shipSize(ship);
         while (true) {
             bool horizontal = randomInt(0, 1) % 2 != 0;// Whether the ship is horizontal or vertical
 
@@ -206,7 +214,7 @@ void FleetPlacement::randomize() {
             if (invalid) continue;// If not, try again
 
             // The ship is valid; now place it down
-            ships[ship->first] = {shipSquares.at(0), horizontal};// Ship coordinate and orientation
+            ships[ship] = {shipSquares.at(0), horizontal};// Ship coordinate and orientation
             for (int i = 0; i < size; ++i) {
                 // Only set the actual squares this ship is occupying
                 // It is ok if there is only one square in between ships

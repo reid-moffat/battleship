@@ -10,6 +10,7 @@
 using std::map;
 
 namespace entity {
+
     enum shipsNames {
         ROW_BOAT,
         PATROL_BOAT,
@@ -18,13 +19,6 @@ namespace entity {
         AIRCRAFT_CARRIER,
         BATTLESHIP
     };
-
-    static map<shipsNames, int> shipSizes = {{ROW_BOAT, 1},
-                                             {PATROL_BOAT, 2},
-                                             {SUBMARINE, 3},
-                                             {DESTROYER, 4},
-                                             {AIRCRAFT_CARRIER, 5},
-                                             {BATTLESHIP, 6}};
 
 }// namespace entity
 
