@@ -23,27 +23,25 @@ Grid::Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipPositions) {
 
     // Create the ship objects
     for (auto const &ship : shipPositions) {
-        // Topmost/leftmost square x and y coordinate and if the ship is horizontally-aligned
-        const int x = get<0>(ship.second).getX();
-        const int y = get<0>(ship.second).getY();
-        const bool horizontal = get<1>(ship.second);
+        // Information about the ship
+        shipsNames shipName = ship.first;
+        int x = get<0>(ship.second).getX();         // Topmost/leftmost x coordinate
+        int y = get<0>(ship.second).getY();         // Topmost/leftmost y coordinate
+        const bool horizontal = get<1>(ship.second);// If the ship is aligned horizontally
 
         // Array of coordinates this ship occupies
-        get<0>(ships[ship.first]) = new Coordinate[shipSizes[ship.first]];
+        Coordinate *&coordinates = get<0>(ships[shipName]);
+        coordinates = new Coordinate[shipSize(shipName)];
 
         // Initializes the squares the ship occupies (from the top/left)
-        for (int i = 0; i < shipSizes[ship.first]; ++i) {
-            if (horizontal) {
-                get<0>(ships[ship.first])[i] = Coordinate(x + i, y);
-                squares[y][x + i] = SHIP;
-            } else {
-                get<0>(ships[ship.first])[i] = Coordinate(x, y + i);
-                squares[y + i][x] = SHIP;
-            }
+        for (int i = 0; i < shipSize(shipName); ++i) {
+            coordinates[i] = Coordinate(x, y);
+            squares[y][x] = SHIP;
+            horizontal ? x++ : y++;
         }
-        get<1>(ships[ship.first]) = 0;// Initialize hit count to 0
 
-        shipStatuses[ship.first] = false;// Initialize the ship as 'not sunk'
+        get<1>(ships[shipName]) = 0;   // Initialize hit count to 0
+        shipStatuses[shipName] = false;// Initialize the ship as 'not sunk'
     }
 
     this->shipPositions = shipPositions;
