@@ -45,15 +45,15 @@ namespace entity {
         SquareType attack(Coordinate coord);
 
         /**
-         * Returns the status (whether it has been sunk) of each ship on the board
-         */
-        map<shipsNames, bool> getShipStatus();
-
-        /**
          * Returns the location of each ship on this board
          * (top-left square and if it is horizontal)
          */
-        map<shipsNames, tuple<Coordinate, bool>> getShips();
+        map<shipsNames, tuple<Coordinate, bool>> &getShips();
+
+        /**
+         * Returns the status (whether it has been sunk) of each ship on the board
+         */
+        map<shipsNames, bool> &getShipStatus();
 
         /**
          * Default, empty constructor (allows static grids to be initialized without data)
@@ -75,6 +75,18 @@ namespace entity {
         map<shipsNames, tuple<Coordinate *, int>> ships;
 
         /**
+         * Each ship with its top/left coordinate and whether it is horizontal or not
+         * Used to render the ships to the screen
+         */
+        map<shipsNames, tuple<Coordinate, bool>> shipPositions;
+
+        /**
+         * Whether each ship has been sunk or not
+         * USed to determine if the game has been finished and what ships have been sunk
+         */
+        map<shipsNames, bool> shipStatuses;
+
+        /**
          * 10-by-10 array of grid squares
          */
         SquareType **squares;
@@ -83,7 +95,6 @@ namespace entity {
          * Size of the grid (both width and height) i.e 10
          */
         static constexpr int size = 10;
-
     };
 }// namespace entity
 
