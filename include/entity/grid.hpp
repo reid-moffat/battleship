@@ -31,7 +31,7 @@ namespace entity {
          * @param ships the six ships on the grid with their orientations in the form
          *              nameOfShip: (topLeftCoordinate, isHorizontal)
          */
-        explicit Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipOrientations);
+        explicit Grid(const map<shipNames, tuple<Coordinate, bool>> &shipOrientations);
 
         /**
          * Tries to attack a grid square
@@ -48,12 +48,12 @@ namespace entity {
          * Returns the location of each ship on this board
          * (top-left square and if it is horizontal)
          */
-        map<shipsNames, tuple<Coordinate, bool>> &getShips();
+        map<shipNames, tuple<Coordinate, bool>> &getShips();
 
         /**
          * Returns the status (whether it has been sunk) of each ship on the board
          */
-        map<shipsNames, bool> &getShipStatus();
+        map<shipNames, bool> &getShipStatus();
 
         /**
          * Default, empty constructor (allows static grids to be initialized without data)
@@ -72,19 +72,19 @@ namespace entity {
          *  -The coordinates it occupies on the board
          *  -The number of hits on this ship
          */
-        map<shipsNames, tuple<Coordinate *, int>> ships;
+        map<shipNames, tuple<Coordinate *, int>> ships;
 
         /**
          * Each ship with its top/left coordinate and whether it is horizontal or not
          * Used to render the ships to the screen
          */
-        map<shipsNames, tuple<Coordinate, bool>> shipPositions;
+        map<shipNames, tuple<Coordinate, bool>> shipPositions;
 
         /**
          * Whether each ship has been sunk or not
          * USed to determine if the game has been finished and what ships have been sunk
          */
-        map<shipsNames, bool> shipStatuses;
+        map<shipNames, bool> shipStatuses;
 
         /**
          * 10-by-10 array of grid squares

@@ -159,15 +159,15 @@ void FleetPlacement::randomize() {
     }
 
     // Find spots for the ships (start with the big ships to speed it up)
-    static shipsNames allShips[6] = {
-            shipsNames::BATTLESHIP,
-            shipsNames::AIRCRAFT_CARRIER,
-            shipsNames::DESTROYER,
-            shipsNames::SUBMARINE,
-            shipsNames::PATROL_BOAT,
-            shipsNames::ROW_BOAT,
+    static shipNames allShips[6] = {
+            shipNames::BATTLESHIP,
+            shipNames::AIRCRAFT_CARRIER,
+            shipNames::DESTROYER,
+            shipNames::SUBMARINE,
+            shipNames::PATROL_BOAT,
+            shipNames::ROW_BOAT,
     };
-    for (shipsNames ship : allShips) {
+    for (shipNames ship : allShips) {
         int size = shipSize(ship);
         while (true) {
             bool horizontal = randomInt(0, 1) % 2 != 0;// Whether the ship is horizontal or vertical
@@ -227,63 +227,63 @@ void FleetPlacement::randomize() {
 }
 
 void FleetPlacement::updateFleetLayout() {
-    if (get<1>(this->ships[shipsNames::BATTLESHIP]) == 1) {
-        this->battleshipSprite.setPosition(sf::Vector2f((224 + (get<0>(this->ships[shipsNames::BATTLESHIP]).getX() * 16)) * 5,
-                                                        (28 + (get<0>(this->ships[shipsNames::BATTLESHIP]).getY() * 16)) * 5));
+    if (get<1>(this->ships[shipNames::BATTLESHIP]) == 1) {
+        this->battleshipSprite.setPosition(sf::Vector2f((224 + (get<0>(this->ships[shipNames::BATTLESHIP]).getX() * 16)) * 5,
+                                                        (28 + (get<0>(this->ships[shipNames::BATTLESHIP]).getY() * 16)) * 5));
         this->battleshipSprite.setRotation(90.f);
     } else {
-        this->battleshipSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipsNames::BATTLESHIP]).getX() * 16)) * 5,
-                                                        (28 + (get<0>(this->ships[shipsNames::BATTLESHIP]).getY() * 16)) * 5));
+        this->battleshipSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipNames::BATTLESHIP]).getX() * 16)) * 5,
+                                                        (28 + (get<0>(this->ships[shipNames::BATTLESHIP]).getY() * 16)) * 5));
         this->battleshipSprite.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipsNames::AIRCRAFT_CARRIER]) == 1) {
-        this->aircraftCarrierSprite.setPosition(sf::Vector2f((208 + (get<0>(this->ships[shipsNames::AIRCRAFT_CARRIER]).getX() * 16)) * 5,
-                                                             (28 + (get<0>(this->ships[shipsNames::AIRCRAFT_CARRIER]).getY() * 16)) * 5));
+    if (get<1>(this->ships[shipNames::AIRCRAFT_CARRIER]) == 1) {
+        this->aircraftCarrierSprite.setPosition(sf::Vector2f((208 + (get<0>(this->ships[shipNames::AIRCRAFT_CARRIER]).getX() * 16)) * 5,
+                                                             (28 + (get<0>(this->ships[shipNames::AIRCRAFT_CARRIER]).getY() * 16)) * 5));
         this->aircraftCarrierSprite.setRotation(90.f);
     } else {
-        this->aircraftCarrierSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipsNames::AIRCRAFT_CARRIER]).getX() * 16)) * 5,
-                                                             (28 + (get<0>(this->ships[shipsNames::AIRCRAFT_CARRIER]).getY() * 16)) * 5));
+        this->aircraftCarrierSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipNames::AIRCRAFT_CARRIER]).getX() * 16)) * 5,
+                                                             (28 + (get<0>(this->ships[shipNames::AIRCRAFT_CARRIER]).getY() * 16)) * 5));
         this->aircraftCarrierSprite.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipsNames::DESTROYER]) == 1) {
-        this->destroyerSprite.setPosition(sf::Vector2f((192 + (get<0>(this->ships[shipsNames::DESTROYER]).getX() * 16)) * 5,
-                                                       (28 + (get<0>(this->ships[shipsNames::DESTROYER]).getY() * 16)) * 5));
+    if (get<1>(this->ships[shipNames::DESTROYER]) == 1) {
+        this->destroyerSprite.setPosition(sf::Vector2f((192 + (get<0>(this->ships[shipNames::DESTROYER]).getX() * 16)) * 5,
+                                                       (28 + (get<0>(this->ships[shipNames::DESTROYER]).getY() * 16)) * 5));
         this->destroyerSprite.setRotation(90.f);
     } else {
-        this->destroyerSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipsNames::DESTROYER]).getX() * 16)) * 5,
-                                                       (28 + (get<0>(this->ships[shipsNames::DESTROYER]).getY() * 16)) * 5));
+        this->destroyerSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipNames::DESTROYER]).getX() * 16)) * 5,
+                                                       (28 + (get<0>(this->ships[shipNames::DESTROYER]).getY() * 16)) * 5));
         this->destroyerSprite.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipsNames::SUBMARINE]) == 1) {
-        this->submarineSprite.setPosition(sf::Vector2f((176 + (get<0>(this->ships[shipsNames::SUBMARINE]).getX() * 16)) * 5,
-                                                       (28 + (get<0>(this->ships[shipsNames::SUBMARINE]).getY() * 16)) * 5));
+    if (get<1>(this->ships[shipNames::SUBMARINE]) == 1) {
+        this->submarineSprite.setPosition(sf::Vector2f((176 + (get<0>(this->ships[shipNames::SUBMARINE]).getX() * 16)) * 5,
+                                                       (28 + (get<0>(this->ships[shipNames::SUBMARINE]).getY() * 16)) * 5));
         this->submarineSprite.setRotation(90.f);
     } else {
-        this->submarineSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipsNames::SUBMARINE]).getX() * 16)) * 5,
-                                                       (28 + (get<0>(this->ships[shipsNames::SUBMARINE]).getY() * 16)) * 5));
+        this->submarineSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipNames::SUBMARINE]).getX() * 16)) * 5,
+                                                       (28 + (get<0>(this->ships[shipNames::SUBMARINE]).getY() * 16)) * 5));
         this->submarineSprite.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipsNames::PATROL_BOAT]) == 1) {
-        this->patrolBoatSprite.setPosition(sf::Vector2f((160 + (get<0>(this->ships[shipsNames::PATROL_BOAT]).getX() * 16)) * 5,
-                                                        (28 + (get<0>(this->ships[shipsNames::PATROL_BOAT]).getY() * 16)) * 5));
+    if (get<1>(this->ships[shipNames::PATROL_BOAT]) == 1) {
+        this->patrolBoatSprite.setPosition(sf::Vector2f((160 + (get<0>(this->ships[shipNames::PATROL_BOAT]).getX() * 16)) * 5,
+                                                        (28 + (get<0>(this->ships[shipNames::PATROL_BOAT]).getY() * 16)) * 5));
         this->patrolBoatSprite.setRotation(90.f);
     } else {
-        this->patrolBoatSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipsNames::PATROL_BOAT]).getX() * 16)) * 5,
-                                                        (28 + (get<0>(this->ships[shipsNames::PATROL_BOAT]).getY() * 16)) * 5));
+        this->patrolBoatSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipNames::PATROL_BOAT]).getX() * 16)) * 5,
+                                                        (28 + (get<0>(this->ships[shipNames::PATROL_BOAT]).getY() * 16)) * 5));
         this->patrolBoatSprite.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipsNames::ROW_BOAT]) == 1) {
-        this->rowBoatSprite.setPosition(sf::Vector2f((144 + (get<0>(this->ships[shipsNames::ROW_BOAT]).getX() * 16)) * 5,
-                                                     (28 + (get<0>(this->ships[shipsNames::ROW_BOAT]).getY() * 16)) * 5));
+    if (get<1>(this->ships[shipNames::ROW_BOAT]) == 1) {
+        this->rowBoatSprite.setPosition(sf::Vector2f((144 + (get<0>(this->ships[shipNames::ROW_BOAT]).getX() * 16)) * 5,
+                                                     (28 + (get<0>(this->ships[shipNames::ROW_BOAT]).getY() * 16)) * 5));
         this->rowBoatSprite.setRotation(90.0);
     } else {
-        this->rowBoatSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipsNames::ROW_BOAT]).getX() * 16)) * 5,
-                                                     (28 + (get<0>(this->ships[shipsNames::ROW_BOAT]).getY() * 16)) * 5));
+        this->rowBoatSprite.setPosition(sf::Vector2f((128 + (get<0>(this->ships[shipNames::ROW_BOAT]).getX() * 16)) * 5,
+                                                     (28 + (get<0>(this->ships[shipNames::ROW_BOAT]).getY() * 16)) * 5));
         this->rowBoatSprite.setRotation(0);
     }
 }

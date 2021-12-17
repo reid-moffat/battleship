@@ -7,11 +7,11 @@
 
 using entity::Coordinate;
 using entity::Grid;
-using entity::shipsNames;
+using entity::shipNames;
 using entity::SquareType;
 using std::get;
 
-Grid::Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipPositions) {
+Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
     // Initialize the grid itself with all water to start
     squares = new SquareType *[size];
     for (int i = 0; i < size; ++i) {
@@ -24,7 +24,7 @@ Grid::Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipPositions) {
     // Create the ship objects
     for (auto const &ship : shipPositions) {
         // Information about the ship
-        shipsNames shipName = ship.first;
+        shipNames shipName = ship.first;
         int x = get<0>(ship.second).getX();         // Topmost/leftmost x coordinate
         int y = get<0>(ship.second).getY();         // Topmost/leftmost y coordinate
         const bool horizontal = get<1>(ship.second);// If the ship is aligned horizontally
@@ -60,7 +60,7 @@ SquareType Grid::attack(Coordinate coord) {
     // If it's not water or an already hit square, it is a ship. Find which ship it is and update it
     status = HIT_SHIP;
     for (auto const &ship : this->ships) {
-        shipsNames shipName = ship.first;
+        shipNames shipName = ship.first;
         int &hitCount = get<1>(ships[shipName]);
 
         // Loop through the squares in this ship to see if it was hit
@@ -78,11 +78,11 @@ SquareType Grid::attack(Coordinate coord) {
     throw std::invalid_argument("Ship was not found- this game is in an impossible state!");
 }
 
-map<shipsNames, tuple<Coordinate, bool>> &entity::Grid::getShips() {
+map<shipNames, tuple<Coordinate, bool>> &entity::Grid::getShips() {
     return this->shipPositions;
 }
 
-map<shipsNames, bool> &Grid::getShipStatus() {
+map<shipNames, bool> &Grid::getShipStatus() {
     return this->shipStatuses;
 }
 

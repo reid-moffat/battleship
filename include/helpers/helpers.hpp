@@ -10,13 +10,13 @@
 #include "../entity/shipNames.hpp"
 
 using std::string;
-using entity::shipsNames;
+using entity::shipNames;
 
 /**
  * Returns the size of a ship from its enum value
  */
-constexpr int shipSize(shipsNames name) noexcept {
-    return (int) static_cast<std::underlying_type_t<shipsNames>>(name) + 1;
+constexpr int shipSize(shipNames name) noexcept {
+    return (int) static_cast<std::underlying_type_t<shipNames>>(name) + 1;
 }
 
 /**

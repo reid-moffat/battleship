@@ -11,7 +11,7 @@ using std::map;
 
 namespace entity {
 
-    enum shipsNames {
+    enum shipNames {
         ROW_BOAT,
         PATROL_BOAT,
         SUBMARINE,

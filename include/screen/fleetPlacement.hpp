@@ -18,7 +18,7 @@
 
 using entity::Button;
 using entity::Coordinate;
-using entity::shipsNames;
+using entity::shipNames;
 using std::map;
 using std::tuple;
 using std::vector;
@@ -179,7 +179,7 @@ namespace screen {
          * Coordinate -> specifies the topmost or leftmost coordinate of the ship
          * Bool -> specifies the ship orientation (horizontal = true)
          */
-        map<shipsNames, tuple<Coordinate, bool>> ships;
+        map<shipNames, tuple<Coordinate, bool>> ships;
 
         /**
          * Adds a coordinate to a vector if the coordinate is valid

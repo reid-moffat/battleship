@@ -47,12 +47,12 @@ namespace screen {
         /**
          * Initializes P1 grid
          */
-        static void setP1Grid(const map<shipsNames, tuple<Coordinate, bool>> &ships);
+        static void setP1Grid(const map<shipNames, tuple<Coordinate, bool>> &ships);
 
         /**
          * Initializes P2 grid
          */
-        static void setP2Grid(const map<shipsNames, tuple<Coordinate, bool>> &ships);
+        static void setP2Grid(const map<shipNames, tuple<Coordinate, bool>> &ships);
 
         /**
          * Overridden run method of screenTemplate
@@ -63,12 +63,12 @@ namespace screen {
         /**
          * Map of P1 fleet layout
          */
-        map<shipsNames, tuple<Coordinate, bool>> fleetLayoutP1;
+        static map<shipNames, tuple<Coordinate, bool>> fleetLayoutP1;
 
         /**
          * Map of P2 fleet layout
          */
-        map<shipsNames, tuple<Coordinate, bool>> fleetLayoutP2;
+        static map<shipNames, tuple<Coordinate, bool>> fleetLayoutP2;
 
         /**
          * P1 Grid
@@ -111,7 +111,7 @@ namespace screen {
         void setTargetVector();
 
         /**
-         * Checks if the game is lost
+         * Checks if the game is lost for a specified player (true: P1, false: P2)
          */
         static bool lost(Grid &grid);
 
@@ -143,7 +143,7 @@ namespace screen {
         /**
          * Sets the fleet layout of the current player
          */
-        void setFleetLayout(map<shipsNames, tuple<Coordinate, bool>> &fleetLayout);
+        void setFleetLayout(map<shipNames, tuple<Coordinate, bool>> &fleetLayout);
 
         /**
          * Calls helpers::updateMousePosition(), Button::updateButtonState(), Target::updateTargetState(), Grid::getShips(), and Gameplay::setFleetLayout()
