@@ -1,6 +1,5 @@
 /**
- * File: target.h
- * Description: Front-end class that creates and manages the target
+ * Front-end class that creates and manages targets: a red box on squares the user is hovering over
  */
 
 #ifndef BATTLESHIP_TARGET_H
@@ -15,16 +14,47 @@ using entity::Coordinate;
 namespace entity {
 
     class Target {
+    public:
+        /**
+         * Constructs a target on a coordinate
+         */
+        Target(Coordinate coordinate, sf::Vector2f position, sf::Vector2f scale);
+
+        /**
+         * Loads the static textures for the target
+         */
+        static void initializeTextures();
+
+        /**
+         * Returns true if the target is active (i.e. the cursor is over the targetCoordinate)
+         */
+        bool getTargetState() const;
+
+        /**
+         * Returns the target coordinate
+         */
+        Coordinate getTargetCoordinate() const;
+
+        /**
+         * Renders the target sprite on the window
+         */
+        void render(sf::RenderWindow &window) const;
+
+        /**
+         * Updates the target state
+         */
+        void updateTargetState(sf::Vector2f mousePosition);
+
     private:
         /**
-         * Idle target exture
+         * Idle target texture
          */
-        sf::Texture idleTexture;
+        static sf::Texture idleTexture;
 
         /**
          * Active target texture
          */
-        sf::Texture activeTexture;
+        static sf::Texture activeTexture;
 
         /**
          * Target sprite
@@ -41,31 +71,6 @@ namespace entity {
          */
         Coordinate targetCoordinate;
 
-    public:
-        /**
-         * Constructor
-         */
-        Target(Coordinate coordinate, sf::Vector2f position, sf::Vector2f scale, sf::Texture idleTexture, sf::Texture activeTexture);
-
-        /**
-         * Returns true if the target is active (i.e., the cursor is over the targetCoordinate)
-         */
-        const bool getTargetState() const;
-
-        /**
-         * Returns the target coordinate
-         */
-        const Coordinate getTargetCoordinate() const;
-
-        /**
-         * Renders the target sprite on the window
-         */
-        void render(sf::RenderWindow &window) const;
-
-        /**
-         * Updates the target state
-         */
-        void updateTargetState(const sf::Vector2f mousePosition);
     };
 
 }// namespace entity

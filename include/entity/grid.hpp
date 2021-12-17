@@ -10,45 +10,29 @@
 #include "coordinate.hpp"
 #include "shipNames.hpp"
 #include "squareType.hpp"
+#include <memory>
 #include <vector>
+#include <map>
 
 using std::map;
 using std::tuple;
+using std::unique_ptr;
 using std::vector;
 
 namespace entity {
+
     class Grid {
-    private:
-        /**
-         * The six ships on this board
-         * Includes their name, the coordinates of squares they occupy and the number of hits on this ship
-         */
-        map<shipsNames, tuple<Coordinate *, int>> ships;
-
-        /**
-         * The location of each ship on this board
-         * (top-left square and if it is horizontal)
-         */
-        map<shipsNames, tuple<Coordinate, bool>> shipPositions;
-
-        /**
-         * 10-by-10 array of grid squares
-         */
-        SquareType **squares;
-
-        /**
-         * Size of the grid (both width and height) i.e 10
-         */
-        const int size;
-
     public:
         /**
          * Constructs a grid
+         * Constructs a grid with a list of ships
          *
          * @param ships the six ships on the grid with their orientations
          * @param isEnvironment if this is not for a real player, but for the environment
+         * @param ships the six ships on the grid with their orientations in the form
+         *              nameOfShip: (topLeftCoordinate, isHorizontal)
          */
-        Grid(const map<shipsNames, tuple<Coordinate, bool>> &shipOrientations);
+        explicit Grid(const map<shipNames, tuple<Coordinate, bool>> &shipOrientations);
 
         /**
          * Tries to attack a grid square
@@ -62,35 +46,56 @@ namespace entity {
         SquareType attack(Coordinate coord);
 
         /**
-         * Returns the status (whether it has been sunk) of each ship on the board
-         */
-        map<shipsNames, bool> getShipStatus();
-
-        /**
          * Returns the location of each ship on this board
          * (top-left square and if it is horizontal)
          */
-        map<shipsNames, tuple<Coordinate, bool>> getShips();
+        map<shipNames, tuple<Coordinate, bool>> &getShips();
+
+        /**
+         * Returns the status (whether it has been sunk) of each ship on the board
+         */
+        map<shipNames, bool> &getShipStatus();
 
         /**
          * Default, empty constructor (allows static grids to be initialized without data)
          */
         Grid();
 
-        /**
-         * Copy constructor for heap memory
-         */
-        Grid(Grid &other);
-
-        /**
-         * Destructor for heap memory
-         */
+        // Big three
         ~Grid();
+        Grid(Grid &other);
+        Grid &operator=(Grid *other);
+
+    private:
+        /**
+         * The six ships on this board
+         * This map maps the six ships (their enumerated name) to:
+         *  -The coordinates it occupies on the board
+         *  -The number of hits on this ship
+         */
+        map<shipNames, tuple<Coordinate *, int>> ships;
 
         /**
-         * Assignment operator overloading for heap memory
+         * Each ship with its top/left coordinate and whether it is horizontal or not
+         * Used to render the ships to the screen
          */
-        Grid &operator=(Grid *other);
+        map<shipNames, tuple<Coordinate, bool>> shipPositions;
+
+        /**
+         * Whether each ship has been sunk or not
+         * USed to determine if the game has been finished and what ships have been sunk
+         */
+        map<shipNames, bool> shipStatuses;
+
+        /**
+         * 10-by-10 array of grid squares
+         */
+        SquareType **squares;
+
+        /**
+         * Size of the grid (both width and height) i.e 10
+         */
+        static constexpr int size = 10;
     };
 }// namespace entity
 

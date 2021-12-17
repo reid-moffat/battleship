@@ -1,6 +1,5 @@
 /**
  * Coordinate class implementation
- *
  */
 
 #include "../../include/entity/coordinate.hpp"
@@ -9,22 +8,19 @@
 using entity::Coordinate;
 
 Coordinate::Coordinate() {
-    // No input creates a coordinate at (0,0)
-    x = 0;
-    y = 0;
+    this->x = 0;
+    this->y = 0;
 }
 
 Coordinate::Coordinate(int xVal, int yVal) {
     try {
-        if ((xVal > 9 || xVal < 0) || (yVal > 9 | yVal < 0)) {
-            // Since the exception class extends std::exception, it needs to pass
-            // a const char* as a parameter i.e a bunch of conversions are required
-            std::string errMsgString = "Error: X and y coordinates must be in the range [0, 9]. x value: " + std::to_string(x) + " y value: " + std::to_string(y);
-            const char *errMsg = errMsgString.c_str();
-            throw entity::CoordinateException(errMsg);
+        if (xVal > 9 || xVal < 0 || yVal > 9 | yVal < 0) {
+            std::string errMsgString = "Error: X and y coordinates must be in the range [0, 9]. x value: " +
+                                       std::to_string(xVal) + ", y value: " + std::to_string(yVal);
+            throw entity::CoordinateException(errMsgString.c_str());
         } else {
-            x = xVal;
-            y = yVal;
+            this->x = xVal;
+            this->y = yVal;
         }
     } catch (const CoordinateException &e) {
         std::cerr << e.what() << std::endl;
@@ -32,12 +28,10 @@ Coordinate::Coordinate(int xVal, int yVal) {
     }
 }
 
-// Getter: x
 int Coordinate::getX() const {
     return x;
 }
 
-// Getter: y
 int Coordinate::getY() const {
     return y;
 }
@@ -45,17 +39,15 @@ int Coordinate::getY() const {
 bool Coordinate::operator==(const Coordinate &rhs) const {
     return this->x == rhs.x && this->y == rhs.y;
 }
+bool entity::Coordinate::operator<(const Coordinate &rhs) const {
+    return this->x < rhs.getX() || this->y < rhs.getY();
+}
 
-namespace entity {
-    bool operator<(const Coordinate &left, const Coordinate &right) {
-        return (left.getX() < right.getX() || left.getY() < right.getY());
-    }
+ostream &operator<<(ostream &output, const Coordinate &coord) {
+    output << "(" << coord.getX() << ", " << coord.getY() << ")";
+    return output;
+}
 
-    std::ostream &operator<<(std::ostream &output, const Coordinate &coord) {
-        output << coord.getX() << ", " << coord.getY();
-        return output;
-    }
-}// namespace entity
 
 entity::CoordinateException::CoordinateException(const char *message) {
     this->errorMessage = message;

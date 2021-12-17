@@ -1,18 +1,24 @@
 /**
- * File: target.cpp
- * Description: Front-end class that creates and manages the target
+ * Target class implementation
  */
 
 #include "../../include/entity/target.hpp"
+#include "../../include/helpers/helpers.hpp"
 
 using entity::Target;
 
-Target::Target(Coordinate coordinate, sf::Vector2f position, sf::Vector2f scale, sf::Texture idleTexture, sf::Texture activeTexture) {
+sf::Texture Target::idleTexture = *new sf::Texture();
+sf::Texture Target::activeTexture = *new sf::Texture();
+
+void entity::Target::initializeTextures() {
+    loadTexture(Target::idleTexture, "gameplay/idlePrimaryTarget.png");
+    loadTexture(Target::activeTexture, "gameplay/ActivePrimaryTarget.png");
+}
+
+Target::Target(Coordinate coordinate, sf::Vector2f position, sf::Vector2f scale) {
     this->targetState = false;
     this->targetCoordinate = coordinate;
-    this->idleTexture = idleTexture;
-    this->activeTexture = activeTexture;
-    this->sprite.setTexture(this->idleTexture);
+    this->sprite.setTexture(idleTexture);
     this->sprite.setPosition(position);
     this->sprite.setScale(scale);
 }
@@ -21,20 +27,20 @@ void Target::render(sf::RenderWindow &window) const {
     window.draw(this->sprite);
 }
 
-const bool Target::getTargetState() const {
+bool Target::getTargetState() const {
     return this->targetState;
 }
 
-const Coordinate Target::getTargetCoordinate() const {
+Coordinate Target::getTargetCoordinate() const {
     return this->targetCoordinate;
 }
 
 void Target::updateTargetState(const sf::Vector2f mousePosition) {
     if (this->sprite.getGlobalBounds().contains(mousePosition)) {
         this->targetState = true;
-        this->sprite.setTexture(this->activeTexture);
+        this->sprite.setTexture(activeTexture);
     } else {
         this->targetState = false;
-        this->sprite.setTexture(this->idleTexture);
+        this->sprite.setTexture(idleTexture);
     }
 }
