@@ -3,7 +3,7 @@
  * any deleted or renamed required files
  */
 
-#include <gtest/gtest.hpp>
+#include <gtest/gtest.h>
 #include <sys/stat.h>
 
 using std::string;
@@ -20,7 +20,7 @@ TEST(Architecture, requiredFiles) {
 
             // Test files
             "tests/CMakeLists.txt", "tests/googletest", "tests/main.cpp",
-            "tests/assertions.h", "tests/unit", "tests/integration", "tests/system",
+            "tests/assertions.hpp", "tests/unit", "tests/integration", "tests/system",
 
             // VCS files
             ".git", ".gitignore", "README.md", "LICENSE"};

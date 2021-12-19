@@ -13,7 +13,7 @@ file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
         "src/**/*.cpp")
 
 add_executable(battleship ${SOURCE_FILES})
-
+add_subdirectory(tests)
 
 # Add SFML
 include_directories(src include C:/SFML/include)
