@@ -12,6 +12,7 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 file(GLOB TEST_FILES CONFIGURE_DEPENDS
         "../src/helpers.hpp"
+        "../src/**/*.hpp"
         "../src/**/*.cpp"
         "architecture/*.cpp"
         "unit/*.cpp"
@@ -23,4 +24,4 @@ add_executable(battleship-tests main.cpp assertions.hpp ${TEST_FILES})
 set(SFML_DIR include/SFML/lib/cmake/SFML)
 set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML 2.5 COMPONENTS graphics system REQUIRED)
-target_link_libraries(battleship sfml-graphics sfml-system)
+target_link_libraries(battleship-tests PUBLIC gtest gtest_main sfml-graphics sfml-system)

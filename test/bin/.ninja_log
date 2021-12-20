@@ -1,0 +1,42 @@
+# ninja log v5
+3	49	0	C:/Users/Reid Moffat/OneDrive - Queen's University/Coding/Projects/C++/battleship/test/bin/CMakeFiles/cmake.verify_globs	b4636bec98641fac
+29	1427	6616903233641938	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/entity/button.cpp.obj	fe3afc0956515328
+125	912	6616906440020455	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/entity/coordinate.cpp.obj	bb9110536958dfc8
+8	1408	6616903233271920	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/controllers/screenTemplate.cpp.obj	26dc75a573b8f266
+95	2069	6616903240301935	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/gameOver.cpp.obj	c7f53d9c656c1aac
+53	1951	6616903238771981	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/entity/target.cpp.obj	7e09adab423f6bc2
+36	1961	6616903238981956	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/controllers/state.cpp.obj	db5f0b333ff52a6e
+62	2025	6616903239821903	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/difficultySelection.cpp.obj	1c554bd22f0c0921
+15	2142	6616903241031928	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/controllers/screenManager.cpp.obj	c710d5b4bda5e855
+108	2184	6616903241411945	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/instructions.cpp.obj	1a0980cf135a6042
+83	2204	6616903241651946	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/gameModeSelection.cpp.obj	7ddf5dd2e1b8b110
+120	2254	6616903242151915	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/homepage.cpp.obj	d50e7eec12e93e97
+5	1229	6616906773232507	CMakeFiles/battleship-tests.dir/main.cpp.obj	500c9a879915338f
+72	2605	6616903245691886	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/fleetPlacement.cpp.obj	d398d71055ec1158
+44	2621	6616903245861988	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/entity/grid.cpp.obj	67a44f82ca3b0310
+1428	2988	6616903249541769	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/intermediary.cpp.obj	f234a364855e9578
+13	1309	6616906774046650	CMakeFiles/battleship-tests.dir/architecture/structure.cpp.obj	81013d4c524f978b
+1265	4028	6616903259948301	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/gameplay.cpp.obj	ee6f047726affb15
+3	45	0	C:/Users/Reid Moffat/OneDrive - Queen's University/Coding/Projects/C++/battleship/test/bin/CMakeFiles/cmake.verify_globs	b4636bec98641fac
+19	1811	6616907431118386	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/controllers/screenTemplate.cpp.obj	a838c7a728e1b65e
+26	1841	6616907431408377	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/entity/coordinate.cpp.obj	336ce9eba4cfce75
+41	1985	6616907433078411	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/entity/button.cpp.obj	562658b45fb88fd
+34	2128	6616907434088385	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/controllers/state.cpp.obj	4b36f170f474b6b4
+82	2629	6616907439098388	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/difficultySelection.cpp.obj	7480cc97599564f4
+5	2703	6616907439348416	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/controllers/screenManager.cpp.obj	bbfb126ec31e7c84
+70	2913	6616907442458382	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/entity/target.cpp.obj	dd9648a1b747f2c4
+111	2940	6616907442718401	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/homepage.cpp.obj	fbe52ecf11b08aff
+154	2948	6616907442798402	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/gameOver.cpp.obj	31a5fd1ec0de4f45
+134	2952	6616907442848379	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/gameModeSelection.cpp.obj	dc09f880963f03d8
+51	3047	6616907443848375	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/entity/grid.cpp.obj	b584f721f12ea458
+13	3163	6616907444918461	CMakeFiles/battleship-tests.dir/main.cpp.obj	975f79ee1952b749
+60	3417	6616907447559481	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/fleetPlacement.cpp.obj	4d05bde20d97c980
+1841	3655	6616907449937658	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/intermediary.cpp.obj	e00ebe8cff947481
+1986	3797	6616907451377628	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/instructions.cpp.obj	c78717f818b54789
+1812	4278	6616907456123019	CMakeFiles/battleship-tests.dir/architecture/structure.cpp.obj	c3305a29e471727c
+2630	4530	6616907458672289	googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.obj	74aa1c2963197851
+97	4565	6616907459055884	CMakeFiles/battleship-tests.dir/C_/Users/Reid_Moffat/OneDrive_-_Queen's_University/Coding/Projects/C++/battleship/src/screens/gameplay.cpp.obj	592cb4f40a3655a5
+2129	8574	6616907499069840	googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj	47d457d06fb36055
+8577	9583	6616907509229836	lib/libgtestd.a	f0ec7ef0c9a9f067
+9583	9724	6616907510646095	lib/libgtest_maind.a	7b753aee261b5eab
+9724	11732	6616907530632241	battleship-tests.exe	80222178af1a8d80
