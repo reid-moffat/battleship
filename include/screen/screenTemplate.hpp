@@ -16,16 +16,6 @@ namespace screen {
          */
         ScreenTemplate();
 
-        /**
-         * Copy constructor for heap memory
-         */
-        ScreenTemplate(const ScreenTemplate &other);
-
-        /**
-         * Destructor for heap memory
-         */
-        virtual ~ScreenTemplate() = 0;
-
     public:
         /**
          * Renders this screen to the GUI
@@ -33,9 +23,14 @@ namespace screen {
         virtual void run(sf::RenderWindow &gui) = 0;
 
         /**
+         * Copy constructor for heap memory
+         */
+        ScreenTemplate(const ScreenTemplate &other) = delete;
+
+        /**
          * Assignment operator overriding
          */
-        ScreenTemplate &operator=(const ScreenTemplate &rhs);
+        ScreenTemplate &operator=(const ScreenTemplate &rhs) = delete;
     };
 
 }// namespace screen
