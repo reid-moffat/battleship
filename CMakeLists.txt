@@ -20,4 +20,4 @@ set(SFML_STATIC_LIBRARIES TRUE)
 find_package(SFML 2.5 COMPONENTS graphics system REQUIRED)
 target_link_libraries(battleship sfml-graphics sfml-system)
 
-#add_subdirectory(test)
+add_subdirectory(test)
