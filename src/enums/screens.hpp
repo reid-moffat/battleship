@@ -6,6 +6,7 @@
 #define BATTLESHIP_SCREENS_H
 
 namespace screen {
+
     enum Screens {
         HOMEPAGE,
         INSTRUCTIONS,

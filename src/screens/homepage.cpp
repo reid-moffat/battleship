@@ -4,7 +4,7 @@
  */
 
 #include "homepage.hpp"
-#include "helpers.hpp"
+#include "../helpers.hpp"
 
 using screen::Homepage;
 

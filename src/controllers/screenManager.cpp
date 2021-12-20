@@ -3,14 +3,14 @@
  */
 
 #include "screenManager.hpp"
-#include "screens/difficultySelection.hpp"
-#include "screens/fleetPlacement.hpp"
-#include "screens/gameModeSelection.hpp"
-#include "screens/gameOver.hpp"
-#include "screens/gameplay.hpp"
-#include "screens/homepage.hpp"
-#include "screens/instructions.hpp"
-#include "screens/intermediary.hpp"
+#include "../screens/difficultySelection.hpp"
+#include "../screens/fleetPlacement.hpp"
+#include "../screens/gameModeSelection.hpp"
+#include "../screens/gameOver.hpp"
+#include "../screens/gameplay.hpp"
+#include "../screens/homepage.hpp"
+#include "../screens/instructions.hpp"
+#include "../screens/intermediary.hpp"
 
 using screen::ScreenManager;
 using screen::Screens;

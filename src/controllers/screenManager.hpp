@@ -7,7 +7,7 @@
 #define BATTLESHIP_SCREENMANAGER_H
 
 #include "state.hpp"
-#include "controllers/screenTemplate.hpp"
+#include "../controllers/screenTemplate.hpp"
 #include <map>
 
 namespace screen {

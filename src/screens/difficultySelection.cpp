@@ -4,7 +4,7 @@
  */
 
 #include "difficultySelection.hpp"
-#include "helpers.hpp"
+#include "../helpers.hpp"
 
 using screen::DifficultySelection;
 

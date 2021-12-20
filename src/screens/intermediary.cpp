@@ -4,7 +4,7 @@
  */
 
 #include "intermediary.hpp"
-#include "helpers.hpp"
+#include "../helpers.hpp"
 
 using screen::Intermediary;
 

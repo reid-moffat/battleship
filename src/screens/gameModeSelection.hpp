@@ -6,9 +6,8 @@
 #ifndef BATTLESHIP_GAMEMODESELECTION_H
 #define BATTLESHIP_GAMEMODESELECTION_H
 
-#include "entity/button.hpp"
-#include "controllers/screenTemplate.hpp"
-
+#include "../controllers/screenTemplate.hpp"
+#include "../entity/button.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
@@ -142,6 +141,6 @@ namespace screen {
          */
         void run() override;
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_GAMEMODESELECTION_H

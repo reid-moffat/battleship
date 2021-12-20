@@ -6,8 +6,8 @@
 #ifndef BATTLESHIP_INSTRUCTIONS_H
 #define BATTLESHIP_INSTRUCTIONS_H
 
-#include "entity/button.hpp"
-#include "controllers/screenTemplate.hpp"
+#include "../entity/button.hpp"
+#include "../controllers/screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 

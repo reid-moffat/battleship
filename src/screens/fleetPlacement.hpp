@@ -6,13 +6,11 @@
 #ifndef BATTLESHIP_FLEETPLACEMENT_H
 #define BATTLESHIP_FLEETPLACEMENT_H
 
-#include "entity/button.hpp"
-#include "entity/coordinate.hpp"
-#include "enums/shipNames.hpp"
-#include "controllers/screenTemplate.hpp"
-
+#include "../controllers/screenTemplate.hpp"
+#include "../entity/button.hpp"
+#include "../entity/coordinate.hpp"
+#include "../enums/shipNames.hpp"
 #include <SFML/System.hpp>
-
 #include <random>
 #include <vector>
 
@@ -245,9 +243,8 @@ namespace screen {
         /**
          *
          */
-        static FleetPlacement& getInstance();
-
+        static FleetPlacement &getInstance();
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_FLEETPLACEMENT_H

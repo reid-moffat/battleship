@@ -8,8 +8,8 @@
 #define BATTLESHIP_GRID_H
 
 #include "coordinate.hpp"
-#include "enums/shipNames.hpp"
-#include "enums/squareType.hpp"
+#include "../enums/shipNames.hpp"
+#include "../enums/squareType.hpp"
 #include <memory>
 #include <vector>
 #include <map>

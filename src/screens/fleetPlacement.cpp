@@ -4,7 +4,7 @@
  */
 
 #include "fleetPlacement.hpp"
-#include "helpers.hpp"
+#include "../helpers.hpp"
 #include "gameplay.hpp"
 
 using screen::FleetPlacement;

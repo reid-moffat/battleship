@@ -4,7 +4,7 @@
  */
 
 #include "gameOver.hpp"
-#include "helpers.hpp"
+#include "../helpers.hpp"
 
 using screen::GameOver;
 
