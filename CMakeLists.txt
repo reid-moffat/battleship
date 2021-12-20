@@ -17,7 +17,7 @@ add_executable(battleship ${SOURCE_FILES})
 # Add SFML
 set(SFML_DIR include/SFML/lib/cmake/SFML)
 set(SFML_STATIC_LIBRARIES TRUE)
-find_package(SFML 2.5 COMPONENTS graphics system REQUIRED)
+find_package(SFML COMPONENTS graphics system REQUIRED)
 target_link_libraries(battleship sfml-graphics sfml-system)
 
 add_subdirectory(test)
