@@ -18,37 +18,21 @@ using screen::Screens;
 ScreenManager::ScreenManager() {
     this->gui = new sf::RenderWindow(sf::VideoMode(State::width, State::height), "Battleship", sf::Style::Titlebar | sf::Style::Close);
     this->gui->setFramerateLimit(60);
+
+    screenList[HOMEPAGE] = &Homepage::getInstance();
+    screenList[INSTRUCTIONS] = &Instructions::getInstance();
+    screenList[GAME_MODE_SELECTION] = &GameModeSelection::getInstance();
+    screenList[DIFFICULTY_SELECTION] = &DifficultySelection::getInstance();
+    screenList[FLEET_PLACEMENT] = &FleetPlacement::getInstance();
+    screenList[GAMEPLAY] = &Gameplay::getInstance();
+    screenList[INTERMEDIARY] = &Intermediary::getInstance();
+    screenList[GAME_OVER] = &GameOver::getInstance();
 }
 
 void ScreenManager::run() {
     gui->setKeyRepeatEnabled(false);
 
     while (gui->isOpen()) {
-        switch (State::getCurrentScreen()) {
-            case HOMEPAGE:
-                Homepage::getInstance().run(*this->gui);
-                break;
-            case INSTRUCTIONS:
-                Instructions::getInstance().run(*this->gui);
-                break;
-            case GAME_MODE_SELECTION:
-                GameModeSelection::getInstance().run(*this->gui);
-                break;
-            case DIFFICULTY_SELECTION:
-                DifficultySelection::getInstance().run(*this->gui);
-                break;
-            case FLEET_PLACEMENT:
-                FleetPlacement::getInstance().run(*this->gui);
-                break;
-            case GAMEPLAY:
-                Gameplay::getInstance().run(*this->gui);
-                break;
-            case INTERMEDIARY:
-                Intermediary::getInstance().run(*this->gui);
-                break;
-            case GAME_OVER:
-                GameOver::getInstance().run(*this->gui);
-                break;
-        }
+        screenList[State::getCurrentScreen()]->run(*this->gui);
     }
 }

@@ -18,7 +18,7 @@ namespace screen {
         /**
         * All of the different screens, mapped to by their name
         */
-        std::map<Screens, ScreenTemplate&> screenList;
+        std::map<Screens, ScreenTemplate *> screenList;
 
         /**
         * SFML window for rendering
