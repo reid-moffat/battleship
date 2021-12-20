@@ -10,6 +10,8 @@
 using screen::FleetPlacement;
 using std::get;
 
+FleetPlacement* FleetPlacement::instance = nullptr;
+
 FleetPlacement::FleetPlacement() : ScreenTemplate() {
     loadTexture(this->fleetPlacementDefaultBackgroundTexture, "fleetPlacement/FleetPlacementBackground.png");
     loadTexture(this->fleetPlacementP1BackgroundTexture, "fleetPlacement/FleetPlacementP1Background.png");
@@ -45,100 +47,6 @@ FleetPlacement::FleetPlacement() : ScreenTemplate() {
     this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButtonTexture, this->activeInstructionsButtonTexture);
 
     this->layoutGenerated = false;
-}
-
-FleetPlacement::FleetPlacement(const FleetPlacement &source) {
-    this->fleetPlacementDefaultBackgroundTexture = source.fleetPlacementDefaultBackgroundTexture;
-    this->fleetPlacementP1BackgroundTexture = source.fleetPlacementP1BackgroundTexture;
-    this->fleetPlacementP2BackgroundTexture = source.fleetPlacementP2BackgroundTexture;
-
-    this->idleReadyButtonTexture = source.idleReadyButtonTexture;
-    this->activeReadyButtonTexture = source.activeReadyButtonTexture;
-    this->idleRandomizeButtonTexture = source.idleRandomizeButtonTexture;
-    this->activeRandomizeButtonTexture = source.activeRandomizeButtonTexture;
-    this->idleInstructionsButtonTexture = source.idleInstructionsButtonTexture;
-    this->activeInstructionsButtonTexture = source.activeInstructionsButtonTexture;
-
-    this->battleshipTexture = source.battleshipTexture;
-    this->aircraftCarrierTexture = source.aircraftCarrierTexture;
-    this->destroyerTexture = source.destroyerTexture;
-    this->submarineTexture = source.submarineTexture;
-    this->patrolBoatTexture = source.patrolBoatTexture;
-    this->rowBoatTexture = source.rowBoatTexture;
-
-    this->backgroundDefaultSprite = source.backgroundDefaultSprite;
-    this->backgroundP1Sprite = source.backgroundP1Sprite;
-    this->backgroundP2Sprite = source.backgroundP2Sprite;
-
-    this->battleshipSprite = source.battleshipSprite;
-    this->aircraftCarrierSprite = source.aircraftCarrierSprite;
-    this->destroyerSprite = source.destroyerSprite;
-    this->submarineSprite = source.submarineSprite;
-    this->patrolBoatSprite = source.patrolBoatSprite;
-    this->rowBoatSprite = source.rowBoatSprite;
-
-    this->mousePosition = source.mousePosition;
-    this->event = source.event;
-    this->ships = source.ships;
-
-    this->readyButton = new Button(*(source.readyButton));
-    this->randomizeButton = new Button(*(source.randomizeButton));
-    this->instructionsButton = new Button(*(source.instructionsButton));
-}
-
-FleetPlacement::~FleetPlacement() {
-    delete this->readyButton;
-    this->readyButton = nullptr;
-
-    delete this->randomizeButton;
-    this->randomizeButton = nullptr;
-
-    delete this->instructionsButton;
-    this->instructionsButton = nullptr;
-}
-
-FleetPlacement &FleetPlacement::operator=(const FleetPlacement &source) {
-    if (this == &source) {
-        return *this;
-    } else {
-        this->fleetPlacementDefaultBackgroundTexture = source.fleetPlacementDefaultBackgroundTexture;
-        this->fleetPlacementP1BackgroundTexture = source.fleetPlacementP1BackgroundTexture;
-        this->fleetPlacementP2BackgroundTexture = source.fleetPlacementP2BackgroundTexture;
-
-        this->idleReadyButtonTexture = source.idleReadyButtonTexture;
-        this->activeReadyButtonTexture = source.activeReadyButtonTexture;
-        this->idleRandomizeButtonTexture = source.idleRandomizeButtonTexture;
-        this->activeRandomizeButtonTexture = source.activeRandomizeButtonTexture;
-        this->idleInstructionsButtonTexture = source.idleInstructionsButtonTexture;
-        this->activeInstructionsButtonTexture = source.activeInstructionsButtonTexture;
-
-        this->battleshipTexture = source.battleshipTexture;
-        this->aircraftCarrierTexture = source.aircraftCarrierTexture;
-        this->destroyerTexture = source.destroyerTexture;
-        this->submarineTexture = source.submarineTexture;
-        this->patrolBoatTexture = source.patrolBoatTexture;
-        this->rowBoatTexture = source.rowBoatTexture;
-
-        this->backgroundDefaultSprite = source.backgroundDefaultSprite;
-        this->backgroundP1Sprite = source.backgroundP1Sprite;
-        this->backgroundP2Sprite = source.backgroundP2Sprite;
-
-        this->battleshipSprite = source.battleshipSprite;
-        this->aircraftCarrierSprite = source.aircraftCarrierSprite;
-        this->destroyerSprite = source.destroyerSprite;
-        this->submarineSprite = source.submarineSprite;
-        this->patrolBoatSprite = source.patrolBoatSprite;
-        this->rowBoatSprite = source.rowBoatSprite;
-
-        this->mousePosition = source.mousePosition;
-        this->event = source.event;
-        this->ships = source.ships;
-
-        this->readyButton = source.readyButton;
-        this->randomizeButton = source.randomizeButton;
-        this->instructionsButton = source.instructionsButton;
-        return *this;
-    }
 }
 
 void FleetPlacement::addCoord(vector<Coordinate> &coordinates, int x, int y) {
@@ -404,4 +312,11 @@ void FleetPlacement::run(sf::RenderWindow &gui) {
     this->update(gui, this->mousePosition);
     this->poll(gui);
     this->render(gui);
+}
+
+FleetPlacement &screen::FleetPlacement::getInstance() {
+    if (instance == nullptr) {
+        instance = new FleetPlacement();
+    }
+    return *instance;
 }
