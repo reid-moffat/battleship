@@ -121,3 +121,6 @@ test/googletest
 bin/*
 !bin/*.dll
 !bin/battleship.exe
+
+# No need for testing dlls
+test/bin/*
