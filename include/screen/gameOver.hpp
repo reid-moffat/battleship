@@ -96,31 +96,36 @@ namespace screen {
          */
         void render(sf::RenderWindow &gui);
 
-    public:
         /**
          * Constructor
          */
         GameOver();
 
         /**
-         * Copy constructor
+         *
          */
-        GameOver(const GameOver &source);
+        static GameOver *instance;
+
+    public:
+        /**
+         *
+         */
+        static GameOver &getInstance();
 
         /**
-         * Destructor
+         * Copy constructor
          */
-        ~GameOver();
+        GameOver(const GameOver &source) = delete;
 
         /**
          * Overloaded assignment operator
          */
-        GameOver &operator=(const GameOver &source);
+        GameOver &operator=(const GameOver &source) = delete;
 
         /**
          * Overridden run method of screenTemplate
          */
-        void run(sf::RenderWindow &gui) override;
+        void run() override;
     };
 }// namespace screen
 

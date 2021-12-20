@@ -8,6 +8,8 @@
 
 using screen::GameModeSelection;
 
+GameModeSelection *GameModeSelection::instance = nullptr;
+
 GameModeSelection::GameModeSelection() : ScreenTemplate() {
     loadTexture(this->gameModeBackgroundTexture, "gameModeSelection/GameModeBackground.png");
     loadTexture(this->idleOnePlayerButtonTexture, "gameModeSelection/Idle1PlayerButton.png");
@@ -25,63 +27,6 @@ GameModeSelection::GameModeSelection() : ScreenTemplate() {
     this->twoPlayerButton = new Button(sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleTwoPlayerButtonTexture, this->activeTwoPlayerButtonTexture);
     this->backButton = new Button(sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleBackButtonTexture, this->activeBackButtonTexture);
     this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButtonTexture, this->activeInstructionsButtonTexture);
-}
-
-GameModeSelection::GameModeSelection(const GameModeSelection &source) {
-    this->gameModeBackgroundTexture = source.gameModeBackgroundTexture;
-    this->idleOnePlayerButtonTexture = source.idleOnePlayerButtonTexture;
-    this->activeOnePlayerButtonTexture = source.activeOnePlayerButtonTexture;
-    this->idleTwoPlayerButtonTexture = source.idleTwoPlayerButtonTexture;
-    this->activeTwoPlayerButtonTexture = source.activeTwoPlayerButtonTexture;
-    this->idleBackButtonTexture = source.idleBackButtonTexture;
-    this->activeBackButtonTexture = source.activeBackButtonTexture;
-    this->idleInstructionsButtonTexture = source.idleInstructionsButtonTexture;
-    this->activeInstructionsButtonTexture = source.activeInstructionsButtonTexture;
-    this->backgroundSprite = source.backgroundSprite;
-    this->mousePosition = source.mousePosition;
-    this->event = source.event;
-    this->onePlayerButton = new Button(*(source.onePlayerButton));
-    this->twoPlayerButton = new Button(*(source.twoPlayerButton));
-    this->backButton = new Button(*(source.backButton));
-    this->instructionsButton = new Button(*(source.instructionsButton));
-}
-
-GameModeSelection::~GameModeSelection() {
-    delete this->onePlayerButton;
-    this->onePlayerButton = nullptr;
-
-    delete this->twoPlayerButton;
-    this->twoPlayerButton = nullptr;
-
-    delete this->backButton;
-    this->backButton = nullptr;
-
-    delete this->instructionsButton;
-    this->instructionsButton = nullptr;
-}
-
-screen::GameModeSelection &GameModeSelection::operator=(const GameModeSelection &source) {
-    if (this == &source) {
-        return *this;
-    } else {
-        this->gameModeBackgroundTexture = source.gameModeBackgroundTexture;
-        this->idleOnePlayerButtonTexture = source.idleOnePlayerButtonTexture;
-        this->activeOnePlayerButtonTexture = source.activeOnePlayerButtonTexture;
-        this->idleTwoPlayerButtonTexture = source.idleTwoPlayerButtonTexture;
-        this->activeTwoPlayerButtonTexture = source.activeTwoPlayerButtonTexture;
-        this->idleBackButtonTexture = source.idleBackButtonTexture;
-        this->activeBackButtonTexture = source.activeBackButtonTexture;
-        this->idleInstructionsButtonTexture = source.idleInstructionsButtonTexture;
-        this->activeInstructionsButtonTexture = source.activeInstructionsButtonTexture;
-        this->backgroundSprite = source.backgroundSprite;
-        this->mousePosition = source.mousePosition;
-        this->event = source.event;
-        this->onePlayerButton = source.onePlayerButton;
-        this->twoPlayerButton = source.twoPlayerButton;
-        this->backButton = source.backButton;
-        this->instructionsButton = source.instructionsButton;
-        return *this;
-    }
 }
 
 void GameModeSelection::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
@@ -139,8 +84,15 @@ void GameModeSelection::render(sf::RenderWindow &gui) {
     }
 }
 
-void GameModeSelection::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void GameModeSelection::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
+}
+
+GameModeSelection &screen::GameModeSelection::getInstance() {
+    if (instance == nullptr) {
+        instance = new GameModeSelection();
+    }
+    return *instance;
 }

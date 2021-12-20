@@ -8,7 +8,22 @@
 
 using screen::Homepage;
 
-Homepage::Homepage() : ScreenTemplate() {
+Homepage* Homepage::instance = nullptr;
+
+Homepage &screen::Homepage::getInstance() {
+    if (instance == nullptr) {
+        instance = new Homepage();
+    }
+    return *instance;
+}
+
+void Homepage::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
+}
+
+Homepage::Homepage() {
     loadTexture(this->homepageBackgroundTexture, "homepage/HomepageBackground.png");
     loadTexture(this->idlePlayButtonTexture, "homepage/IdlePlayButton.png");
     loadTexture(this->activePlayButtonTexture, "homepage/ActivePlayButton.png");
@@ -16,36 +31,6 @@ Homepage::Homepage() : ScreenTemplate() {
     setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->homepageBackgroundTexture, this->backgroundSprite);
 
     this->playButton = new Button(sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5), this->idlePlayButtonTexture, this->activePlayButtonTexture);
-}
-
-Homepage::Homepage(const Homepage &source) {
-    this->homepageBackgroundTexture = source.homepageBackgroundTexture;
-    this->idlePlayButtonTexture = source.idlePlayButtonTexture;
-    this->activePlayButtonTexture = source.activePlayButtonTexture;
-    this->backgroundSprite = source.backgroundSprite;
-    this->mousePosition = source.mousePosition;
-    this->event = source.event;
-    this->playButton = new Button(*(source.playButton));
-}
-
-Homepage::~Homepage() {
-    delete this->playButton;
-    this->playButton = nullptr;
-}
-
-screen::Homepage &Homepage::operator=(const Homepage &source) {
-    if (this == &source) {
-        return *this;
-    } else {
-        this->homepageBackgroundTexture = source.homepageBackgroundTexture;
-        this->idlePlayButtonTexture = source.idlePlayButtonTexture;
-        this->activePlayButtonTexture = source.activePlayButtonTexture;
-        this->backgroundSprite = source.backgroundSprite;
-        this->mousePosition = source.mousePosition;
-        this->event = source.event;
-        this->playButton = source.playButton;
-        return *this;
-    }
 }
 
 void Homepage::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
@@ -84,10 +69,4 @@ void Homepage::render(sf::RenderWindow &gui) {
     if (State::getCurrentScreen() == Screens::HOMEPAGE) {
         gui.display();
     }
-}
-
-void Homepage::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
 }

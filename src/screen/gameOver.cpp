@@ -8,6 +8,8 @@
 
 using screen::GameOver;
 
+GameOver *GameOver::instance = nullptr;
+
 GameOver::GameOver() : ScreenTemplate() {
     loadTexture(this->gameOverWinBackgroundTexture, "gameOver/GameOverWinBackground.png");
     loadTexture(this->gameOverLoseBackgroundTexture, "gameOver/GameOverLoseBackground.png");
@@ -22,48 +24,6 @@ GameOver::GameOver() : ScreenTemplate() {
     setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverP2BackgroundTexture, this->backgroundP2Sprite);
 
     this->homepageButton = new Button(sf::Vector2f(136 * 5, 108 * 5), sf::Vector2f(5, 5), this->idleHomepageButtonTexture, this->activeHomepageButtonTexture);
-}
-
-GameOver::GameOver(const GameOver &source) {
-    this->gameOverWinBackgroundTexture = source.gameOverWinBackgroundTexture;
-    this->gameOverLoseBackgroundTexture = source.gameOverLoseBackgroundTexture;
-    this->gameOverP1BackgroundTexture = source.gameOverP1BackgroundTexture;
-    this->gameOverP2BackgroundTexture = source.gameOverP2BackgroundTexture;
-    this->idleHomepageButtonTexture = source.idleHomepageButtonTexture;
-    this->activeHomepageButtonTexture = source.activeHomepageButtonTexture;
-    this->backgroundWinSprite = source.backgroundWinSprite;
-    this->backgroundLoseSprite = source.backgroundLoseSprite;
-    this->backgroundP1Sprite = source.backgroundP1Sprite;
-    this->backgroundP2Sprite = source.backgroundP2Sprite;
-    this->mousePosition = source.mousePosition;
-    this->event = source.event;
-    this->homepageButton = new Button(*(source.homepageButton));
-}
-
-GameOver::~GameOver() {
-    delete this->homepageButton;
-    this->homepageButton = nullptr;
-}
-
-screen::GameOver &GameOver::operator=(const GameOver &source) {
-    if (this == &source) {
-        return *this;
-    } else {
-        this->gameOverWinBackgroundTexture = source.gameOverWinBackgroundTexture;
-        this->gameOverLoseBackgroundTexture = source.gameOverLoseBackgroundTexture;
-        this->gameOverP1BackgroundTexture = source.gameOverP1BackgroundTexture;
-        this->gameOverP2BackgroundTexture = source.gameOverP2BackgroundTexture;
-        this->idleHomepageButtonTexture = source.idleHomepageButtonTexture;
-        this->activeHomepageButtonTexture = source.activeHomepageButtonTexture;
-        this->backgroundWinSprite = source.backgroundWinSprite;
-        this->backgroundLoseSprite = source.backgroundLoseSprite;
-        this->backgroundP1Sprite = source.backgroundP1Sprite;
-        this->backgroundP2Sprite = source.backgroundP2Sprite;
-        this->mousePosition = source.mousePosition;
-        this->event = source.event;
-        this->homepageButton = source.homepageButton;
-        return *this;
-    }
 }
 
 void GameOver::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
@@ -116,8 +76,15 @@ void GameOver::render(sf::RenderWindow &gui) {
     }
 }
 
-void GameOver::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void GameOver::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
+}
+
+GameOver& screen::GameOver::getInstance() {
+    if (instance == nullptr) {
+        instance = new GameOver();
+    }
+    return *instance;
 }

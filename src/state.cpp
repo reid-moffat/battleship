@@ -7,6 +7,7 @@
 using std::string;
 
 // Initialize the game state variables with their starting values
+sf::RenderWindow *State::gui = nullptr;
 bool State::lockedFlag = false;
 
 State::Player State::player = State::Player::P1;
@@ -15,7 +16,6 @@ State::Difficulty State::difficulty = State::Difficulty::EASY;
 
 Screens State::previous = Screens::HOMEPAGE;
 Screens State::current = Screens::HOMEPAGE;
-
 
 Screens State::getCurrentScreen() {
     return State::current;

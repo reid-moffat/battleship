@@ -16,23 +16,23 @@ using screen::ScreenManager;
 using screen::Screens;
 
 ScreenManager::ScreenManager() {
-    this->gui = new sf::RenderWindow(sf::VideoMode(State::width, State::height), "Battleship", sf::Style::Titlebar | sf::Style::Close);
-    this->gui->setFramerateLimit(60);
+    State::gui = new sf::RenderWindow(sf::VideoMode(State::width, State::height), "Battleship", sf::Style::Titlebar | sf::Style::Close);
+    State::gui->setFramerateLimit(60);
 
-    screenList[HOMEPAGE] = new Homepage();
-    screenList[INSTRUCTIONS] = new Instructions();
-    screenList[GAME_MODE_SELECTION] = new GameModeSelection();
-    screenList[DIFFICULTY_SELECTION] = new DifficultySelection();
-    screenList[FLEET_PLACEMENT] = new FleetPlacement();
-    screenList[INTERMEDIARY] = new Intermediary();
-    screenList[GAMEPLAY] = new Gameplay();
-    screenList[GAME_OVER] = new GameOver();
-};
+    screenList[HOMEPAGE] = &Homepage::getInstance();
+    screenList[INSTRUCTIONS] = &Instructions::getInstance();
+    screenList[GAME_MODE_SELECTION] = &GameModeSelection::getInstance();
+    screenList[DIFFICULTY_SELECTION] = &DifficultySelection::getInstance();
+    screenList[FLEET_PLACEMENT] = &FleetPlacement::getInstance();
+    screenList[GAMEPLAY] = &Gameplay::getInstance();
+    screenList[INTERMEDIARY] = &Intermediary::getInstance();
+    screenList[GAME_OVER] = &GameOver::getInstance();
+}
 
 void ScreenManager::run() {
-    gui->setKeyRepeatEnabled(false);
+    State::gui->setKeyRepeatEnabled(false);
 
-    while (gui->isOpen()) {
-        this->screenList[State::getCurrentScreen()]->run(*this->gui);
+    while (State::gui->isOpen()) {
+        screenList[State::getCurrentScreen()]->run();
     }
 }

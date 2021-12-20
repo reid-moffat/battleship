@@ -216,31 +216,37 @@ namespace screen {
          */
         void render(sf::RenderWindow &gui);
 
-    public:
         /**
          * Constructor
          */
         FleetPlacement();
 
         /**
+         *
+         */
+        static FleetPlacement *instance;
+
+    public:
+        /**
          * Copy constructor
          */
-        FleetPlacement(const FleetPlacement &source);
-
-        /**
-         * Destructor
-         */
-        ~FleetPlacement() override;
+        FleetPlacement(const FleetPlacement &source) = delete;
 
         /**
          * Overloaded assignment operator
          */
-        FleetPlacement &operator=(const FleetPlacement &source);
+        FleetPlacement &operator=(const FleetPlacement &source) = delete;
 
         /**
          * Overridden run method of screenTemplate
          */
-        void run(sf::RenderWindow &gui) override;
+        void run() override;
+
+        /**
+         *
+         */
+        static FleetPlacement& getInstance();
+
     };
 }// namespace screen
 

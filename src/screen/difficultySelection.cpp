@@ -8,6 +8,8 @@
 
 using screen::DifficultySelection;
 
+DifficultySelection* DifficultySelection::instance = nullptr;
+
 DifficultySelection::DifficultySelection() : ScreenTemplate() {
     loadTexture(this->difficultyBackgroundTexture, "difficultySelection/DifficultyBackground.png");
     loadTexture(this->idleEasyButtonTexture, "difficultySelection/IdleEasyButton.png");
@@ -27,61 +29,11 @@ DifficultySelection::DifficultySelection() : ScreenTemplate() {
     this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButton, this->activeInstructionsButton);
 }
 
-DifficultySelection::DifficultySelection(const DifficultySelection &source) {
-    this->difficultyBackgroundTexture = source.difficultyBackgroundTexture;
-    this->idleEasyButtonTexture = source.idleEasyButtonTexture;
-    this->activeEasyButtonTexture = source.activeEasyButtonTexture;
-    this->idleHardButtonTexture = source.idleHardButtonTexture;
-    this->activeHardButtonTexture = source.activeHardButtonTexture;
-    this->idleBackButtonTexture = source.idleBackButtonTexture;
-    this->activeBackButtonTexture = source.activeBackButtonTexture;
-    this->idleInstructionsButton = source.idleInstructionsButton;
-    this->activeInstructionsButton = source.activeInstructionsButton;
-    this->backgroundSprite = source.backgroundSprite;
-    this->mousePosition = source.mousePosition;
-    this->event = source.event;
-    this->easyButton = new Button(*(source.easyButton));
-    this->hardButton = new Button(*(source.hardButton));
-    this->backButton = new Button(*(source.backButton));
-    this->instructionsButton = new Button(*(source.instructionsButton));
-}
-
-DifficultySelection::~DifficultySelection() {
-    delete this->easyButton;
-    this->easyButton = nullptr;
-
-    delete this->hardButton;
-    this->hardButton = nullptr;
-
-    delete this->backButton;
-    this->backButton = nullptr;
-
-    delete this->instructionsButton;
-    this->instructionsButton = nullptr;
-}
-
-screen::DifficultySelection &DifficultySelection::operator=(const DifficultySelection &source) {
-    if (this == &source) {
-        return *this;
-    } else {
-        this->difficultyBackgroundTexture = source.difficultyBackgroundTexture;
-        this->idleEasyButtonTexture = source.idleEasyButtonTexture;
-        this->activeEasyButtonTexture = source.activeEasyButtonTexture;
-        this->idleHardButtonTexture = source.idleHardButtonTexture;
-        this->activeHardButtonTexture = source.activeHardButtonTexture;
-        this->idleBackButtonTexture = source.idleBackButtonTexture;
-        this->activeBackButtonTexture = source.activeBackButtonTexture;
-        this->idleInstructionsButton = source.idleInstructionsButton;
-        this->activeInstructionsButton = source.activeInstructionsButton;
-        this->backgroundSprite = source.backgroundSprite;
-        this->mousePosition = source.mousePosition;
-        this->event = source.event;
-        this->easyButton = source.easyButton;
-        this->hardButton = source.hardButton;
-        this->backButton = source.backButton;
-        this->instructionsButton = source.instructionsButton;
-        return *this;
+DifficultySelection &screen::DifficultySelection::getInstance() {
+    if (instance == nullptr) {
+        instance = new DifficultySelection();
     }
+    return *instance;
 }
 
 void DifficultySelection::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
@@ -139,8 +91,8 @@ void DifficultySelection::render(sf::RenderWindow &gui) {
     }
 }
 
-void DifficultySelection::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void DifficultySelection::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
 }

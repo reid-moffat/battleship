@@ -7,8 +7,3 @@
 using screen::ScreenTemplate;
 
 ScreenTemplate::ScreenTemplate() = default;
-
-// Big three
-ScreenTemplate::ScreenTemplate(const ScreenTemplate &other) = default;
-ScreenTemplate::~ScreenTemplate() = default;
-ScreenTemplate &screen::ScreenTemplate::operator=(const ScreenTemplate &rhs) = default;
