@@ -14,7 +14,38 @@ using entity::Button;
 
 namespace screen {
     class DifficultySelection : public ScreenTemplate {
+    public:
+        /**
+         *
+         */
+        static DifficultySelection& getInstance();
+
+        /**
+         * Copy constructor
+         */
+        DifficultySelection(const DifficultySelection &source) = delete;
+
+        /**
+         * Overloaded assignment operator
+         */
+        DifficultySelection &operator=(const DifficultySelection &source) = delete;
+
+        /**
+         * Overridden run method of screenTemplate
+         */
+        void run(sf::RenderWindow &gui) override;
+
     private:
+        /**
+         *
+         */
+        static DifficultySelection *instance;
+
+        /**
+         *
+         */
+        DifficultySelection();
+
         /**
          * Background texture
          */
@@ -110,31 +141,6 @@ namespace screen {
          */
         void render(sf::RenderWindow &gui);
 
-    public:
-        /**
-         * Constructor
-         */
-        DifficultySelection();
-
-        /**
-         * Copy constructor
-         */
-        DifficultySelection(const DifficultySelection &source);
-
-        /**
-         * Destructor
-         */
-        ~DifficultySelection() override;
-
-        /**
-         * Overloaded assignment operator
-         */
-        DifficultySelection &operator=(const DifficultySelection &source);
-
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run(sf::RenderWindow &gui) override;
     };
 }// namespace screen
 
