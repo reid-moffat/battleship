@@ -122,5 +122,5 @@ bin/*
 !bin/*.dll
 !bin/battleship.exe
 
-# No need for testing dlls
+# No need for testing dlls/exe
 test/bin/*

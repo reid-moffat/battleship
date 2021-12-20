@@ -10,16 +10,18 @@ enable_testing()
 add_subdirectory(googletest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-file(GLOB TEST_FILES CONFIGURE_DEPENDS
+file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
         "../src/helpers.hpp"
         "../src/**/*.hpp"
-        "../src/**/*.cpp"
+        "../src/**/*.cpp")
+
+file(GLOB TEST_FILES CONFIGURE_DEPENDS
         "architecture/*.cpp"
         "unit/*.cpp"
         "integration/*.cpp"
         "system/*.cpp")
 
-add_executable(battleship-tests main.cpp assertions.hpp ${TEST_FILES})
+add_executable(battleship-tests main.cpp assertions.hpp ${SOURCE_FILES} ${TEST_FILES})
 
 set(SFML_DIR include/SFML/lib/cmake/SFML)
 set(SFML_STATIC_LIBRARIES TRUE)

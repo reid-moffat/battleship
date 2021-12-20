@@ -12,15 +12,15 @@ TEST(Architecture, requiredFiles) {
     // Ensures required files are present
     const string files[] = {
             // Directory structure
-            "build", "include", "res", "src", "test",
+            "bin", "include", "res", "src", "test",
 
             // Build files
-            "CMakeLists.txt", "build/assets", "build/assets/.keep",
-            "build/cmake_modules", "build/cmake_modules/FindSFML.cmake",
+            "CMakeLists.txt", "include/SFML",
 
             // Test files
-            "test/CMakeLists.txt", "test/googletest", "test/main.cpp",
+            "test/CMakeLists.txt", "test/googletest", "test/include/SFML", "test/main.cpp",
             "test/assertions.hpp", "test/unit", "test/integration", "test/system",
+            "test/architecture",
 
             // VCS files
             ".git", ".gitignore", "README.md", "LICENSE"};
