@@ -115,4 +115,7 @@ fabric.properties
 #
 
 # googletest can be cloned from github: git clone https://github.com/google/googletest.git
-tests/googletest
+test/googletest
+bin/
+!bin/*.dll
+!bin/battleship.exe

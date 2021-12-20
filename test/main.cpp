@@ -1,5 +1,5 @@
 /**
- * Connects and runs all of the tests with GoogleTest
+ * Connects and runs all of the test with GoogleTest
  */
 
 #include <gtest/gtest.h>

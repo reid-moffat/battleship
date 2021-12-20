@@ -9,7 +9,7 @@
 using screen::ScreenTemplate;
 
 /**
- * Dummy base class to tests abstract class 'functionality'
+ * Dummy base class to test abstract class 'functionality'
  */
 class DummyScreen : screen::ScreenTemplate {
 private:
@@ -33,7 +33,7 @@ public:
 };
 
 TEST(unit, screenTemplate) {
-    // These tests are mainly to understand base class implementation
+    // These test are mainly to understand base class implementation
     // and ensure the abstract class has a proper implementation
     DummyScreen testScreen;
     DummyScreen testScreen1;
