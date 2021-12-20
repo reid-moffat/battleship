@@ -111,26 +111,31 @@ namespace screen {
          */
         void render(sf::RenderWindow &gui);
 
-    public:
         /**
          * Constructor
          */
         GameModeSelection();
 
         /**
-         * Copy constructor
+         *
          */
-        GameModeSelection(const GameModeSelection &source);
+        static GameModeSelection *instance;
+
+    public:
+        /**
+         *
+         */
+        static GameModeSelection &getInstance();
 
         /**
-         * Destructor
+         * Copy constructor
          */
-        ~GameModeSelection();
+        GameModeSelection(const GameModeSelection &source) = delete;
 
         /**
          * Overloaded assignment operator
          */
-        GameModeSelection &operator=(const GameModeSelection &source);
+        GameModeSelection &operator=(const GameModeSelection &source) = delete;
 
         /**
          * Overridden run method of screenTemplate

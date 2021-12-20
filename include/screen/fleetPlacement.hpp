@@ -245,7 +245,7 @@ namespace screen {
         /**
          *
          */
-        FleetPlacement& getInstance();
+        static FleetPlacement& getInstance();
 
     };
 }// namespace screen
