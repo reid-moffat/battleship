@@ -2,8 +2,8 @@
  * Target class implementation
  */
 
-#include "../../include/entity/target.hpp"
-#include "../../include/helpers/helpers.hpp"
+#include "target.hpp"
+#include "../helpers.hpp"
 
 using entity::Target;
 
