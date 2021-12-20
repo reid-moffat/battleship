@@ -535,10 +535,10 @@ void Gameplay::render(sf::RenderWindow &gui) {
     }
 }
 
-void Gameplay::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void Gameplay::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
 }
 
 void screen::Gameplay::sleepMS() {

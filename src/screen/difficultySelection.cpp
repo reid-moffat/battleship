@@ -91,8 +91,8 @@ void DifficultySelection::render(sf::RenderWindow &gui) {
     }
 }
 
-void DifficultySelection::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void DifficultySelection::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
 }

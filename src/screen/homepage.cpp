@@ -17,10 +17,10 @@ Homepage &screen::Homepage::getInstance() {
     return *instance;
 }
 
-void Homepage::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void Homepage::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
 }
 
 Homepage::Homepage() {

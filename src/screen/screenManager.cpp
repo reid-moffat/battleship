@@ -16,8 +16,8 @@ using screen::ScreenManager;
 using screen::Screens;
 
 ScreenManager::ScreenManager() {
-    this->gui = new sf::RenderWindow(sf::VideoMode(State::width, State::height), "Battleship", sf::Style::Titlebar | sf::Style::Close);
-    this->gui->setFramerateLimit(60);
+    State::gui = new sf::RenderWindow(sf::VideoMode(State::width, State::height), "Battleship", sf::Style::Titlebar | sf::Style::Close);
+    State::gui->setFramerateLimit(60);
 
     screenList[HOMEPAGE] = &Homepage::getInstance();
     screenList[INSTRUCTIONS] = &Instructions::getInstance();
@@ -30,9 +30,9 @@ ScreenManager::ScreenManager() {
 }
 
 void ScreenManager::run() {
-    gui->setKeyRepeatEnabled(false);
+    State::gui->setKeyRepeatEnabled(false);
 
-    while (gui->isOpen()) {
-        screenList[State::getCurrentScreen()]->run(*this->gui);
+    while (State::gui->isOpen()) {
+        screenList[State::getCurrentScreen()]->run();
     }
 }

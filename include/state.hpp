@@ -24,6 +24,11 @@ public:
     static bool lockedFlag;
 
     /**
+     * SFML window for rendering
+     */
+    static sf::RenderWindow *gui;
+
+    /**
      * The possible game modes: SINGLE_PLAYER and MULTI_PLAYER
      */
     enum GameMode { SINGLE_PLAYER,

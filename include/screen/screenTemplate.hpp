@@ -10,17 +10,11 @@
 namespace screen {
 
     class ScreenTemplate {
-    protected:
-        /**
-         * Constructor for all children to call
-         */
-        ScreenTemplate();
-
     public:
         /**
          * Renders this screen to the GUI
          */
-        virtual void run(sf::RenderWindow &gui) = 0;
+        virtual void run() = 0;
 
         /**
          * Copy constructor for heap memory
@@ -31,6 +25,12 @@ namespace screen {
          * Assignment operator overriding
          */
         ScreenTemplate &operator=(const ScreenTemplate &rhs) = delete;
+
+    protected:
+        /**
+         * Constructor for all children to call
+         */
+        ScreenTemplate();
     };
 
 }// namespace screen

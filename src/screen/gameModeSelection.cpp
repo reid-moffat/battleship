@@ -84,10 +84,10 @@ void GameModeSelection::render(sf::RenderWindow &gui) {
     }
 }
 
-void GameModeSelection::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void GameModeSelection::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
 }
 
 GameModeSelection &screen::GameModeSelection::getInstance() {

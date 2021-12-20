@@ -308,10 +308,10 @@ void FleetPlacement::render(sf::RenderWindow &gui) {
     }
 }
 
-void FleetPlacement::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void FleetPlacement::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
 }
 
 FleetPlacement &screen::FleetPlacement::getInstance() {

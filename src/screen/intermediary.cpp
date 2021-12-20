@@ -75,10 +75,10 @@ void Intermediary::render(sf::RenderWindow &gui) {
     }
 }
 
-void Intermediary::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void Intermediary::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
 }
 
 Intermediary &screen::Intermediary::getInstance() {

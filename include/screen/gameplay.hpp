@@ -52,7 +52,7 @@ namespace screen {
         /**
          * Overridden run method of screenTemplate
          */
-        void run(sf::RenderWindow &gui) override;
+        void run() override;
 
     private:
         /**

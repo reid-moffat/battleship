@@ -76,10 +76,10 @@ void GameOver::render(sf::RenderWindow &gui) {
     }
 }
 
-void GameOver::run(sf::RenderWindow &gui) {
-    this->update(gui, this->mousePosition);
-    this->poll(gui);
-    this->render(gui);
+void GameOver::run() {
+    this->update(*State::gui, this->mousePosition);
+    this->poll(*State::gui);
+    this->render(*State::gui);
 }
 
 GameOver& screen::GameOver::getInstance() {
