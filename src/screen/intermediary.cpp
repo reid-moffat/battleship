@@ -8,6 +8,8 @@
 
 using screen::Intermediary;
 
+Intermediary *Intermediary::instance = nullptr;
+
 Intermediary::Intermediary() : ScreenTemplate() {
     loadTexture(this->intermediaryP1BackgroundTexture, "intermediary/IntermediaryP1Background.png");
     loadTexture(this->intermediaryP2BackgroundTexture, "intermediary/IntermediaryP2Background.png");
@@ -18,39 +20,6 @@ Intermediary::Intermediary() : ScreenTemplate() {
     setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->intermediaryP2BackgroundTexture, this->backgroundP2Sprite);
 
     this->continueButton = new Button(sf::Vector2f(144 * 5, 108 * 5), sf::Vector2f(5, 5), this->idleContinueButtonTexture, this->activeContinueButtonTexture);
-}
-
-Intermediary::Intermediary(const Intermediary &source) {
-    this->intermediaryP1BackgroundTexture = source.intermediaryP1BackgroundTexture;
-    this->intermediaryP2BackgroundTexture = source.intermediaryP2BackgroundTexture;
-    this->idleContinueButtonTexture = source.idleContinueButtonTexture;
-    this->activeContinueButtonTexture = source.activeContinueButtonTexture;
-    this->backgroundP1Sprite = source.backgroundP1Sprite;
-    this->backgroundP2Sprite = source.backgroundP2Sprite;
-    this->mousePosition = source.mousePosition;
-    this->event = source.event;
-    this->continueButton = new Button(*(source.continueButton));
-}
-
-Intermediary::~Intermediary() {
-    delete this->continueButton;
-    this->continueButton = nullptr;
-}
-
-screen::Intermediary &Intermediary::operator=(const Intermediary &source) {
-    if (this == &source) {
-        return *this;
-    } else {
-        this->intermediaryP1BackgroundTexture = source.intermediaryP1BackgroundTexture;
-        this->intermediaryP2BackgroundTexture = source.intermediaryP2BackgroundTexture;
-        this->idleContinueButtonTexture = source.idleContinueButtonTexture;
-        this->activeContinueButtonTexture = source.activeContinueButtonTexture;
-        this->backgroundP1Sprite = source.backgroundP1Sprite;
-        this->backgroundP2Sprite = source.backgroundP2Sprite;
-        this->event = source.event;
-        this->continueButton = source.continueButton;
-        return *this;
-    }
 }
 
 void Intermediary::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
@@ -110,4 +79,11 @@ void Intermediary::run(sf::RenderWindow &gui) {
     this->update(gui, this->mousePosition);
     this->poll(gui);
     this->render(gui);
+}
+
+Intermediary &screen::Intermediary::getInstance() {
+    if (instance == nullptr) {
+        instance = new Intermediary();
+    }
+    return *instance;
 }

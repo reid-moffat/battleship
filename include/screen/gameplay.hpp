@@ -25,24 +25,19 @@ namespace screen {
     class Gameplay : public ScreenTemplate {
     public:
         /**
-         * Constructor
+         *
          */
-        Gameplay();
+        static Gameplay &getInstance();
 
         /**
          * Copy constructor
          */
-        Gameplay(const Gameplay &source);
-
-        /**
-         * Destructor
-         */
-        ~Gameplay() override;
+        Gameplay(const Gameplay &source) = delete;
 
         /**
          * Overloaded assignment operator
          */
-        Gameplay &operator=(const Gameplay &source);
+        Gameplay &operator=(const Gameplay &source) = delete;
 
         /**
          * Initializes P1 grid
@@ -60,6 +55,16 @@ namespace screen {
         void run(sf::RenderWindow &gui) override;
 
     private:
+        /**
+         * Constructor
+         */
+        Gameplay();
+
+        /**
+         *
+         */
+        static Gameplay *instance;
+
         /**
          * Map of P1 fleet layout
          */

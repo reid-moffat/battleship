@@ -66,26 +66,31 @@ namespace screen {
          */
         void render(sf::RenderWindow &gui);
 
-    public:
         /**
          * Constructor
          */
         Instructions();
 
         /**
-         * Copy constructor
+         *
          */
-        Instructions(const Instructions &source);
+        static Instructions *instance;
+
+    public:
+        /**
+         *
+         */
+        static Instructions &getInstance();
 
         /**
-         * Destructor
+         * Copy constructor
          */
-        ~Instructions();
+        Instructions(const Instructions &source) = delete;
 
         /**
          * Overloaded assignment operator
          */
-        Instructions &operator=(const Instructions &source);
+        Instructions &operator=(const Instructions &source) = delete;
 
         /**
          * Overridden run method of screenTemplate

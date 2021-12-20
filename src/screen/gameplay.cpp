@@ -21,6 +21,8 @@ Grid *Gameplay::gridP2 = new Grid();
 map<shipNames, tuple<Coordinate, bool>> Gameplay::fleetLayoutP1 = *new map<shipNames, tuple<Coordinate, bool>>;
 map<shipNames, tuple<Coordinate, bool>> Gameplay::fleetLayoutP2 = *new map<shipNames, tuple<Coordinate, bool>>;
 
+Gameplay *Gameplay::instance = nullptr;
+
 Gameplay::Gameplay() : ScreenTemplate() {
     loadTexture(this->gameplayDefaultBackgroundTexture, "gameplay/GameplayBackground.png");
     loadTexture(this->gameplayP1BackgroundTexture, "gameplay/GameplayP1Background.png");
@@ -94,101 +96,6 @@ Gameplay::Gameplay() : ScreenTemplate() {
 
     this->setTargetVector();
     this->createCoordinateSet();
-}
-
-Gameplay::Gameplay(const Gameplay &source) = default;
-
-Gameplay::~Gameplay() {
-    delete this->surrenderButton;
-    this->surrenderButton = nullptr;
-
-    delete this->instructionsButton;
-    this->instructionsButton = nullptr;
-
-    delete this->instructionsButton;
-    this->instructionsButton = nullptr;
-}
-
-screen::Gameplay &Gameplay::operator=(const Gameplay &source) {
-    if (this == &source) {
-        return *this;
-    } else {
-        this->gameplayDefaultBackgroundTexture = source.gameplayDefaultBackgroundTexture;
-        this->gameplayP1BackgroundTexture = source.gameplayP1BackgroundTexture;
-        this->gameplayP2BackgroundTexture = source.gameplayP2BackgroundTexture;
-
-        this->idleSurrenderButtonTexture = source.idleSurrenderButtonTexture;
-        this->activeSurrenderButtonTexture = source.activeSurrenderButtonTexture;
-        this->idleInstructionsButtonTexture = source.idleInstructionsButtonTexture;
-        this->activeInstructionsButtonTexture = source.activeInstructionsButtonTexture;
-
-        this->battleshipTexture = source.battleshipTexture;
-        this->aircraftCarrierTexture = source.aircraftCarrierTexture;
-        this->destroyerTexture = source.destroyerTexture;
-        this->submarineTexture = source.submarineTexture;
-        this->patrolBoatTexture = source.patrolBoatTexture;
-        this->rowBoatTexture = source.rowBoatTexture;
-
-        this->battleshipSunkTexture = source.battleshipSunkTexture;
-        this->aircraftCarrierSunkTexture = source.aircraftCarrierSunkTexture;
-        this->destroyerSunkTexture = source.destroyerSunkTexture;
-        this->submarineSunkTexture = source.submarineSunkTexture;
-        this->patrolBoatSunkTexture = source.patrolBoatSunkTexture;
-        this->rowBoatSunkTexture = source.rowBoatSunkTexture;
-
-        this->primaryHitMarkerTexture = source.primaryHitMarkerTexture;
-        this->primaryMissMarkerTexture = source.primaryMissMarkerTexture;
-        this->secondaryHitMarkerTexture = source.secondaryHitMarkerTexture;
-        this->secondaryMissMarkerTexture = source.secondaryMissMarkerTexture;
-
-        this->idlePrimaryTargetTexture = source.idlePrimaryTargetTexture;
-        this->activePrimaryTargetTexture = source.activePrimaryTargetTexture;
-        this->secondaryTargetTexture = source.secondaryTargetTexture;
-
-        this->backgroundDefaultSprite = source.backgroundDefaultSprite;
-        this->backgroundP1Sprite = source.backgroundP1Sprite;
-        this->backgroundP2Sprite = source.backgroundP2Sprite;
-
-        this->battleshipSprite = source.battleshipSprite;
-        this->aircraftCarrierSprite = source.aircraftCarrierSprite;
-        this->destroyerSprite = source.destroyerSprite;
-        this->submarineSprite = source.submarineSprite;
-        this->patrolBoatSprite = source.patrolBoatSprite;
-        this->rowBoatSprite = source.rowBoatSprite;
-
-        this->battleshipSunkSprite = source.battleshipSunkSprite;
-        this->aircraftCarrierSunkSprite = source.aircraftCarrierSunkSprite;
-        this->destroyerSunkSprite = source.destroyerSunkSprite;
-        this->submarineSunkSprite = source.submarineSunkSprite;
-        this->patrolBoatSunkSprite = source.patrolBoatSunkSprite;
-        this->rowBoatSunkSprite = source.rowBoatSunkSprite;
-
-        this->primaryHitMarkerSprite = source.primaryHitMarkerSprite;
-        this->primaryMissMarkerSprite = source.primaryMissMarkerSprite;
-        this->secondaryHitMarkerSprite = source.secondaryHitMarkerSprite;
-        this->secondaryMissMarkerSprite = source.secondaryMissMarkerSprite;
-
-        this->secondaryTargetSprite = source.secondaryTargetSprite;
-
-        this->targetVector = source.targetVector;
-
-        this->primaryMarkersP1Vector = source.primaryMarkersP1Vector;
-        this->primaryMarkersP2Vector = source.primaryMarkersP2Vector;
-        this->secondaryMarkersP1Vector = source.secondaryMarkersP1Vector;
-        this->secondaryMarkersP2Vector = source.secondaryMarkersP2Vector;
-
-        this->fleetLayoutP1 = source.fleetLayoutP1;
-        this->fleetLayoutP2 = source.fleetLayoutP2;
-
-        this->coordinateSet = source.coordinateSet;
-        this->mousePosition = source.mousePosition;
-        this->event = source.event;
-
-        this->surrenderButton = source.surrenderButton;
-        this->instructionsButton = source.instructionsButton;
-
-        return *this;
-    }
 }
 
 void Gameplay::setP1Grid(const map<shipNames, tuple<Coordinate, bool>> &ships) {
@@ -640,4 +547,11 @@ void screen::Gameplay::sleepMS() {
 #else
     usleep(sleepTimeMS * 1000);
 #endif// _WIN32
+}
+
+Gameplay &screen::Gameplay::getInstance() {
+    if (instance == nullptr) {
+        instance = new Gameplay;
+    }
+    return *instance;
 }

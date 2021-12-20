@@ -8,6 +8,8 @@
 
 using screen::Instructions;
 
+Instructions *Instructions::instance = nullptr;
+
 Instructions::Instructions() : ScreenTemplate() {
     loadTexture(this->instructionsBackgroundTexture, "instructions/InstructionsBackground.png");
     loadTexture(this->idleBackButtonTexture, "instructions/IdleBackButton.png");
@@ -16,36 +18,6 @@ Instructions::Instructions() : ScreenTemplate() {
     setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->instructionsBackgroundTexture, this->backgroundSprite);
 
     this->backButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleBackButtonTexture, this->activeBackButtonTexture);
-}
-
-Instructions::Instructions(const Instructions &source) {
-    this->instructionsBackgroundTexture = source.instructionsBackgroundTexture;
-    this->idleBackButtonTexture = source.idleBackButtonTexture;
-    this->activeBackButtonTexture = source.activeBackButtonTexture;
-    this->backgroundSprite = source.backgroundSprite;
-    this->mousePosition = source.mousePosition;
-    this->event = source.event;
-    this->backButton = new Button(*(source.backButton));
-}
-
-Instructions::~Instructions() {
-    delete this->backButton;
-    this->backButton = nullptr;
-}
-
-screen::Instructions &Instructions::operator=(const Instructions &source) {
-    if (this == &source) {
-        return *this;
-    } else {
-        this->instructionsBackgroundTexture = source.instructionsBackgroundTexture;
-        this->idleBackButtonTexture = source.idleBackButtonTexture;
-        this->activeBackButtonTexture = source.activeBackButtonTexture;
-        this->backgroundSprite = source.backgroundSprite;
-        this->mousePosition = source.mousePosition;
-        this->event = source.event;
-        this->backButton = source.backButton;
-        return *this;
-    }
 }
 
 void Instructions::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
@@ -90,4 +62,11 @@ void Instructions::run(sf::RenderWindow &gui) {
     this->update(gui, this->mousePosition);
     this->poll(gui);
     this->render(gui);
+}
+
+Instructions &screen::Instructions::getInstance() {
+    if (instance == nullptr) {
+        instance = new Instructions;
+    }
+    return *instance;
 }

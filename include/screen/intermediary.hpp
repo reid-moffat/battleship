@@ -76,29 +76,34 @@ namespace screen {
          */
         void render(sf::RenderWindow &gui);
 
-    public:
+        /**
+         *
+         */
+        static Intermediary *instance;
+
         /**
          * Constructor
          */
         Intermediary();
 
+    public:
+        /**
+         *
+         */
+        static Intermediary &getInstance();
+
         /**
          * Copy constructor
          */
-        Intermediary(const Intermediary &source);
-
-        /**
-         * Destructor
-         */
-        ~Intermediary();
+        Intermediary(const Intermediary &source) = delete;
 
         /**
          * Overloaded assignment operator
          */
-        Intermediary &operator=(const Intermediary &source);
+        Intermediary &operator=(const Intermediary &source) = delete;
 
         /**
-         * Overriddenrun method of screenTemplate
+         * Overridden run method of screenTemplate
          */
         void run(sf::RenderWindow &gui) override;
     };
