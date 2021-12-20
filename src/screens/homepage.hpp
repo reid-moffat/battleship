@@ -1,12 +1,12 @@
 /**
- * Description: Front-end class that defines the behaviour of the Homepage screen
+ * Description: Front-end class that defines the behaviour of the Homepage screens
  */
 
 #ifndef BATTLESHIP_HOMEPAGE_H
 #define BATTLESHIP_HOMEPAGE_H
 
-#include "../entity/button.hpp"
-#include "screenTemplate.hpp"
+#include "entity/button.hpp"
+#include "controllers/screenTemplate.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
@@ -95,6 +95,6 @@ namespace screen {
          */
         sf::Event event{};
     };
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_HOMEPAGE_H

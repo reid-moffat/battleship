@@ -2,7 +2,7 @@
  * Global game state implementation
  */
 
-#include "../include/state.hpp"
+#include "state.hpp"
 
 using std::string;
 
@@ -27,7 +27,7 @@ Screens State::getPreviousScreen() {
 
 void State::changeScreen(Screens newScreen) {
     if (State::current == newScreen) {
-        throw std::invalid_argument("Error: You are trying to swap to the screen that is already being rendered");
+        throw std::invalid_argument("Error: You are trying to swap to the screens that is already being rendered");
     }
 
     State::previous = State::current;
@@ -37,8 +37,8 @@ void State::changeScreen(Screens newScreen) {
 void State::previousScreen() {
     switch (State::current) {
         case Screens::HOMEPAGE:// Cannot go back from the homepage
-            throw std::invalid_argument("Error: You can't go back from the home screen");
-        case Screens::INSTRUCTIONS:// Goes back to the previously rendered screen for Instructions
+            throw std::invalid_argument("Error: You can't go back from the home screens");
+        case Screens::INSTRUCTIONS:// Goes back to the previously rendered screens for Instructions
             State::current = State::previous;
             break;
         case Screens::GAME_MODE_SELECTION:// Go back to the homepage for game mode selection
@@ -53,6 +53,6 @@ void State::previousScreen() {
                                                           {Screens::GAMEPLAY, "homepage"},
                                                           {Screens::INTERMEDIARY, "homepage"},
                                                           {Screens::GAME_OVER, "homepage"}};
-            throw std::invalid_argument(string("Error: You can't go back from the current screen (") + screenNames[State::current] + "");
+            throw std::invalid_argument(string("Error: You can't go back from the current screens (") + screenNames[State::current] + "");
     }
 }

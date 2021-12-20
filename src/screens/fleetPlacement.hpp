@@ -1,15 +1,15 @@
 /**
  * File: fleetPlacement.h
- * Description: Front-end class that defines the behaviour of the Fleet Placement screen
+ * Description: Front-end class that defines the behaviour of the Fleet Placement screens
  */
 
 #ifndef BATTLESHIP_FLEETPLACEMENT_H
 #define BATTLESHIP_FLEETPLACEMENT_H
 
-#include "../entity/button.hpp"
-#include "../entity/coordinate.hpp"
-#include "../entity/shipNames.hpp"
-#include "screenTemplate.hpp"
+#include "entity/button.hpp"
+#include "entity/coordinate.hpp"
+#include "enums/shipNames.hpp"
+#include "controllers/screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 
@@ -248,6 +248,6 @@ namespace screen {
         static FleetPlacement& getInstance();
 
     };
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_FLEETPLACEMENT_H

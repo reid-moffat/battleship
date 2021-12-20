@@ -2,7 +2,7 @@
  * ScreenTemplate abstract class implementation
  */
 
-#include "../../include/screen/screenTemplate.hpp"
+#include "screenTemplate.hpp"
 
 using screen::ScreenTemplate;
 

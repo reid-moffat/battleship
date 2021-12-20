@@ -1,10 +1,10 @@
 /**
  * File: instructions.cpp
- * Description: Front-end class that defines the behaviour of the Instructions screen
+ * Description: Front-end class that defines the behaviour of the Instructions screens
  */
 
-#include "../../include/screen/instructions.hpp"
-#include "../../include/helpers/helpers.hpp"
+#include "instructions.hpp"
+#include "helpers.hpp"
 
 using screen::Instructions;
 

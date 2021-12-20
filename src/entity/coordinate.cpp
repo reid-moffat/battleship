@@ -2,7 +2,7 @@
  * Coordinate class implementation
  */
 
-#include "../../include/entity/coordinate.hpp"
+#include "coordinate.hpp"
 #include <string>
 
 using entity::Coordinate;

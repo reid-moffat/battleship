@@ -5,14 +5,14 @@
 #ifndef BATTLESHIP_SCREENTEMPLATE_H
 #define BATTLESHIP_SCREENTEMPLATE_H
 
-#include "../state.hpp"
+#include "state.hpp"
 
 namespace screen {
 
     class ScreenTemplate {
     public:
         /**
-         * Renders this screen to the GUI
+         * Renders this screens to the GUI
          */
         virtual void run() = 0;
 
@@ -33,6 +33,6 @@ namespace screen {
         ScreenTemplate();
     };
 
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_SCREENTEMPLATE_H

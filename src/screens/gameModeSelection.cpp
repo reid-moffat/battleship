@@ -1,10 +1,10 @@
 /**
  * File: gameModeSelection.cpp
- * Description: Front-end class that defines the behaviour of the Game Mode selection screen
+ * Description: Front-end class that defines the behaviour of the Game Mode selection screens
  */
 
-#include "../../include/screen/gameModeSelection.hpp"
-#include "../../include/helpers/helpers.hpp"
+#include "gameModeSelection.hpp"
+#include "helpers.hpp"
 
 using screen::GameModeSelection;
 

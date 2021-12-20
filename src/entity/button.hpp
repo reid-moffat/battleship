@@ -15,7 +15,7 @@ namespace entity {
         /**
          * Constructs a new button
          *
-         * @param position the position on the screen
+         * @param position the position on the screens
          * @param scale a vector to scale the button by (e.g (2, 2) to double its width and height)
          * @param idleTexture the texture of this button when the mouse is not hovering over it
          * @param activeTexture the texture of this button when the mouse is hovering over it

@@ -1,5 +1,5 @@
 /**
- * All screen names
+ * All screens names
  */
 
 #ifndef BATTLESHIP_SCREENS_H
@@ -17,6 +17,6 @@ namespace screen {
         GAME_OVER
     };
 
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_SCREENS_H

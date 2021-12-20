@@ -1,10 +1,10 @@
 /**
  * File: difficultySelection.cpp
- * Description: Front-end class that defines the behaviour of the Difficulty selection screen
+ * Description: Front-end class that defines the behaviour of the Difficulty selection screens
  */
 
-#include "../../include/screen/difficultySelection.hpp"
-#include "../../include/helpers/helpers.hpp"
+#include "difficultySelection.hpp"
+#include "helpers.hpp"
 
 using screen::DifficultySelection;
 

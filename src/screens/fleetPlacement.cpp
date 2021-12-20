@@ -1,11 +1,11 @@
 /**
  * File: fleetPlacement.cpp
- * Description: Front-end class that defines the behaviour of the Fleet Placement screen
+ * Description: Front-end class that defines the behaviour of the Fleet Placement screens
  */
 
-#include "../../include/screen/fleetPlacement.hpp"
-#include "../../include/helpers/helpers.hpp"
-#include "../../include/screen/gameplay.hpp"
+#include "fleetPlacement.hpp"
+#include "helpers.hpp"
+#include "gameplay.hpp"
 
 using screen::FleetPlacement;
 using std::get;

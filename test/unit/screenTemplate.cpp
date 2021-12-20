@@ -2,7 +2,7 @@
  * Test cases for screenTemplate
  */
 
-#include "../../include/screen/screenTemplate.hpp"
+#include "../../src/controllers/screenTemplate.hpp"
 #include "../assertions.hpp"
 #include <gtest/gtest.h>
 

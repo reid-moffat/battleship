@@ -13,7 +13,7 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 file(GLOB TEST_FILES CONFIGURE_DEPENDS
         "../include/*.hpp"
         "../include/**/*.hpp"
-        "../src/state.cpp"
+        "../src/controllers/state.cpp"
         "../src/**/*.cpp"
         "architecture/*.cpp"
         "unit/*.cpp"

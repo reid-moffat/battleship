@@ -1,10 +1,10 @@
 /**
  * File: homepage.cpp
- * Description: Front-end class that defines the behaviour of the Homepage screen
+ * Description: Front-end class that defines the behaviour of the Homepage screens
  */
 
-#include "../../include/screen/homepage.hpp"
-#include "../../include/helpers/helpers.hpp"
+#include "homepage.hpp"
+#include "helpers.hpp"
 
 using screen::Homepage;
 

@@ -9,7 +9,7 @@
 #ifndef BATTLESHIP_STATE_H
 #define BATTLESHIP_STATE_H
 
-#include "screen/screens.hpp"
+#include "enums/screens.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -72,36 +72,36 @@ public:
     constexpr static int height = 1080;
 
     /**
-     * Returns the current screen (enum name)
+     * Returns the current screens (enum name)
      */
     static Screens getCurrentScreen();
 
     /**
-     * Returns the previous screen (enum name)
+     * Returns the previous screens (enum name)
      */
     static Screens getPreviousScreen();
 
     /**
-     * Changes the currently rendered screen to the specified screen
+     * Changes the currently rendered screens to the specified screens
      */
     static void changeScreen(Screens newScreen);
 
     /**
-     * Changes to the previous screen (used for back buttons)
+     * Changes to the previous screens (used for back buttons)
      */
     static void previousScreen();
 
 private:
     /**
-     * The screen that is currently being rendered
+     * The screens that is currently being rendered
      */
     static Screens current;
 
     /**
-     * The previously rendered screen
+     * The previously rendered screens
      *
-     * Used by the information screen since multiple possible screens could
-     * switch to it, and thus we do not know what screen to return to. Also
+     * Used by the information screens since multiple possible screens could
+     * switch to it, and thus we do not know what screens to return to. Also
      * makes going back easier and less buggy
      */
     static Screens previous;

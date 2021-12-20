@@ -1,17 +1,17 @@
 /**
  * File: gameplay.h
- * Description: Front-end class that defines the behaviour of the Gameplay screen
+ * Description: Front-end class that defines the behaviour of the Gameplay screens
  */
 
 #ifndef BATTLESHIP_GAMEPLAY_H
 #define BATTLESHIP_GAMEPLAY_H
 
-#include "../entity/button.hpp"
-#include "../entity/coordinate.hpp"
-#include "../entity/grid.hpp"
-#include "../entity/shipNames.hpp"
-#include "../entity/target.hpp"
-#include "screenTemplate.hpp"
+#include "entity/button.hpp"
+#include "entity/coordinate.hpp"
+#include "entity/grid.hpp"
+#include "enums/shipNames.hpp"
+#include "entity/target.hpp"
+#include "controllers/screenTemplate.hpp"
 #include <SFML/System.hpp>
 #include <set>
 
@@ -106,7 +106,7 @@ namespace screen {
         void createCoordinateSet();
 
         /**
-         * Selects a random coordinate from screen::Gameplay::coordinateSet
+         * Selects a random coordinate from screens::Gameplay::coordinateSet
          */
         Coordinate randomAttack();
 
@@ -440,6 +440,6 @@ namespace screen {
          */
         vector<sf::Sprite> secondaryMarkersP2Vector;
     };
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_GAMEPLAY_H

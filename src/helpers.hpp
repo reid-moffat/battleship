@@ -6,7 +6,7 @@
 #ifndef BATTLESHIP_HELPERS_H
 #define BATTLESHIP_HELPERS_H
 
-#include "../entity/shipNames.hpp"
+#include "enums/shipNames.hpp"
 #include <SFML/Graphics.hpp>
 #include <random>
 

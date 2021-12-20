@@ -2,8 +2,8 @@
  * Grid class implementation
  */
 
-#include "../../include/entity/grid.hpp"
-#include "../../include/helpers/helpers.hpp"
+#include "grid.hpp"
+#include "helpers.hpp"
 
 using entity::Coordinate;
 using entity::Grid;

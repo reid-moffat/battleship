@@ -6,8 +6,8 @@
 #ifndef BATTLESHIP_SCREENMANAGER_H
 #define BATTLESHIP_SCREENMANAGER_H
 
-#include "../state.hpp"
-#include "screenTemplate.hpp"
+#include "state.hpp"
+#include "controllers/screenTemplate.hpp"
 #include <map>
 
 namespace screen {
@@ -25,10 +25,10 @@ namespace screen {
 
     private:
         /**
-         * All of the different screen instances, mapped to by their name
+         * All of the different screens instances, mapped to by their name
          */
         std::map<Screens, ScreenTemplate *> screenList;
     };
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_SCREENMANAGER_H

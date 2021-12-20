@@ -8,8 +8,8 @@
 #define BATTLESHIP_GRID_H
 
 #include "coordinate.hpp"
-#include "shipNames.hpp"
-#include "squareType.hpp"
+#include "enums/shipNames.hpp"
+#include "enums/squareType.hpp"
 #include <memory>
 #include <vector>
 #include <map>
@@ -77,7 +77,7 @@ namespace entity {
 
         /**
          * Each ship with its top/left coordinate and whether it is horizontal or not
-         * Used to render the ships to the screen
+         * Used to render the ships to the screens
          */
         map<shipNames, tuple<Coordinate, bool>> shipPositions;
 

@@ -1,10 +1,10 @@
 /**
  * File: gameOver.cpp
- * Description: Front-end class that defines the behaviour of the Game Over screen
+ * Description: Front-end class that defines the behaviour of the Game Over screens
  */
 
-#include "../../include/screen/gameOver.hpp"
-#include "../../include/helpers/helpers.hpp"
+#include "gameOver.hpp"
+#include "helpers.hpp"
 
 using screen::GameOver;
 

@@ -8,8 +8,8 @@
 #include <unistd.h>
 #endif
 
-#include "../../include/helpers/helpers.hpp"
-#include "../../include/screen/gameplay.hpp"
+#include "helpers.hpp"
+#include "gameplay.hpp"
 
 using entity::SquareType;
 using screen::Gameplay;

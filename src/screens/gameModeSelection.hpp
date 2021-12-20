@@ -1,13 +1,13 @@
 /**
  * File: gameModeSelection.h
- * Description: Front-end class that defines the behaviour of the Game Mode selection screen
+ * Description: Front-end class that defines the behaviour of the Game Mode selection screens
  */
 
 #ifndef BATTLESHIP_GAMEMODESELECTION_H
 #define BATTLESHIP_GAMEMODESELECTION_H
 
-#include "../entity/button.hpp"
-#include "screenTemplate.hpp"
+#include "entity/button.hpp"
+#include "controllers/screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 
@@ -142,6 +142,6 @@ namespace screen {
          */
         void run() override;
     };
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_GAMEMODESELECTION_H

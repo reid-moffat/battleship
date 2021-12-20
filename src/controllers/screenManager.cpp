@@ -2,15 +2,15 @@
  * ScreenManager class implementation
  */
 
-#include "../../include/screen/screenManager.hpp"
-#include "../../include/screen/difficultySelection.hpp"
-#include "../../include/screen/fleetPlacement.hpp"
-#include "../../include/screen/gameModeSelection.hpp"
-#include "../../include/screen/gameOver.hpp"
-#include "../../include/screen/gameplay.hpp"
-#include "../../include/screen/homepage.hpp"
-#include "../../include/screen/instructions.hpp"
-#include "../../include/screen/intermediary.hpp"
+#include "screenManager.hpp"
+#include "screens/difficultySelection.hpp"
+#include "screens/fleetPlacement.hpp"
+#include "screens/gameModeSelection.hpp"
+#include "screens/gameOver.hpp"
+#include "screens/gameplay.hpp"
+#include "screens/homepage.hpp"
+#include "screens/instructions.hpp"
+#include "screens/intermediary.hpp"
 
 using screen::ScreenManager;
 using screen::Screens;

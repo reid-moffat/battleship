@@ -1,13 +1,13 @@
 /**
  * File: gameOver.h
- * Description: Front-end class that defines the behaviour of the Game Over screen
+ * Description: Front-end class that defines the behaviour of the Game Over screens
  */
 
 #ifndef BATTLESHIP_GAMEOVER_H
 #define BATTLESHIP_GAMEOVER_H
 
-#include "../entity/button.hpp"
-#include "screenTemplate.hpp"
+#include "entity/button.hpp"
+#include "controllers/screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 
@@ -127,6 +127,6 @@ namespace screen {
          */
         void run() override;
     };
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_GAMEOVER_H

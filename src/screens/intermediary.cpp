@@ -1,10 +1,10 @@
 /**
  * File: intermediary.cpp
- * Description: Front-end class that defines the behaviour of the Intermediary screen
+ * Description: Front-end class that defines the behaviour of the Intermediary screens
  */
 
-#include "../../include/screen/intermediary.hpp"
-#include "../../include/helpers/helpers.hpp"
+#include "intermediary.hpp"
+#include "helpers.hpp"
 
 using screen::Intermediary;
 

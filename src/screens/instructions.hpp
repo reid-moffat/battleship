@@ -1,13 +1,13 @@
 /**
  * File: instructions.h
- * Description: Front-end class that defines the behaviour of the Instructions screen
+ * Description: Front-end class that defines the behaviour of the Instructions screens
  */
 
 #ifndef BATTLESHIP_INSTRUCTIONS_H
 #define BATTLESHIP_INSTRUCTIONS_H
 
-#include "../entity/button.hpp"
-#include "screenTemplate.hpp"
+#include "entity/button.hpp"
+#include "controllers/screenTemplate.hpp"
 
 #include <SFML/System.hpp>
 
@@ -97,6 +97,6 @@ namespace screen {
          */
         void run() override;
     };
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_INSTRUCTIONS_H

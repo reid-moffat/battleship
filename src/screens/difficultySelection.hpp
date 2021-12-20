@@ -1,13 +1,13 @@
 /**
  * File: difficultySelection.h
- * Description: Front-end class that defines the behaviour of the Difficulty selection screen
+ * Description: Front-end class that defines the behaviour of the Difficulty selection screens
  */
 
 #ifndef BATTLESHIP_DIFFICULTYSELECTION_H
 #define BATTLESHIP_DIFFICULTYSELECTION_H
 
-#include "../entity/button.hpp"
-#include "screenTemplate.hpp"
+#include "entity/button.hpp"
+#include "controllers/screenTemplate.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
@@ -142,6 +142,6 @@ namespace screen {
         void render(sf::RenderWindow &gui);
 
     };
-}// namespace screen
+}// namespace screens
 
 #endif// BATTLESHIP_DIFFICULTYSELECTION_H
