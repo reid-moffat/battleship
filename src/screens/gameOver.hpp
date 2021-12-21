@@ -70,11 +70,6 @@ namespace screen {
         Button *homepageButton;
 
         /**
-         * System event
-         */
-        sf::Event event{};
-
-        /**
          * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
          */
         void update();

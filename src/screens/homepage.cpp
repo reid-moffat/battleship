@@ -3,7 +3,9 @@
  */
 
 #include "homepage.hpp"
+
 #include "../helpers.hpp"
+#include <memory>
 
 using screen::Homepage;
 
@@ -29,7 +31,7 @@ Homepage::Homepage() {
 
     setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->homepageBackgroundTexture, this->backgroundSprite);
 
-    this->playButton = new Button(sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5), this->idlePlayButtonTexture, this->activePlayButtonTexture);
+    this->playButton = std::make_unique<Button>(sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5), this->idlePlayButtonTexture, this->activePlayButtonTexture);
 }
 
 void Homepage::update() {
@@ -39,8 +41,10 @@ void Homepage::update() {
 
 void Homepage::poll() {
     sf::RenderWindow &gui = *State::gui;
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+    sf::Event &event = State::event;
+
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();

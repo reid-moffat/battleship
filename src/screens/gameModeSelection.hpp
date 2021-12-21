@@ -86,11 +86,6 @@ namespace screen {
         Button *instructionsButton;
 
         /**
-         * System event
-         */
-        sf::Event event{};
-
-        /**
          * Updates the buttons on this screen
          */
         void update();

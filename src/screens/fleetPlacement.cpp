@@ -10,7 +10,7 @@
 using screen::FleetPlacement;
 using std::get;
 
-FleetPlacement* FleetPlacement::instance = nullptr;
+FleetPlacement *FleetPlacement::instance = nullptr;
 
 FleetPlacement::FleetPlacement() : ScreenTemplate() {
     loadTexture(this->fleetPlacementDefaultBackgroundTexture, "fleetPlacement/FleetPlacementBackground.png");
@@ -225,9 +225,10 @@ void FleetPlacement::update() {
 
 void FleetPlacement::poll() {
     sf::RenderWindow &gui = *State::gui;
+    sf::Event &event = State::event;
 
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();

@@ -91,11 +91,6 @@ namespace screen {
         set<Coordinate> coordinateSet;
 
         /**
-         * System event
-         */
-        sf::Event event{};
-
-        /**
          * Generates a set of grid coordinates
          */
         void createCoordinateSet();

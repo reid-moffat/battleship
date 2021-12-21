@@ -5,8 +5,8 @@
 #ifndef BATTLESHIP_HOMEPAGE_H
 #define BATTLESHIP_HOMEPAGE_H
 
-#include "../entity/button.hpp"
 #include "../controllers/screenTemplate.hpp"
+#include "../entity/button.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
@@ -51,8 +51,13 @@ namespace screen {
         void poll();
         void render();
 
-        enum textureNames {Background, IdlePlayButton, ActivePlayButton};
+        enum textureNames { Background,
+                            IdlePlayButton,
+                            ActivePlayButton };
 
+        /**
+         * Background and button textures
+         */
         map<textureNames, sf::Texture> textures;
 
         /**
@@ -78,13 +83,8 @@ namespace screen {
         /**
          * Play button 
          */
-        Button *playButton;
-
-        /**
-         * System event
-         */
-        sf::Event event{};
+        std::unique_ptr<Button> playButton;
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_HOMEPAGE_H

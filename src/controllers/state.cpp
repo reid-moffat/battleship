@@ -7,7 +7,8 @@
 using std::string;
 
 // Initialize the game state variables with their starting values
-sf::RenderWindow *State::gui = nullptr;
+unique_ptr<sf::RenderWindow> State::gui = nullptr;
+sf::Event State::event;
 bool State::lockedFlag = false;
 
 State::Player State::player = State::Player::P1;

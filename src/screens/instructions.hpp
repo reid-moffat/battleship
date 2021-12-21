@@ -42,11 +42,6 @@ namespace screen {
         Button *backButton;
 
         /**
-         * System event
-         */
-        sf::Event event{};
-
-        /**
          * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
          */
         void update();

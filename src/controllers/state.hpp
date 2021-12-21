@@ -15,13 +15,19 @@
 
 using screen::Screens;
 using std::string;
+using std::unique_ptr;
 
 class State {
 public:
     /**
      * SFML window for rendering
      */
-    static sf::RenderWindow *gui;
+    static unique_ptr<sf::RenderWindow> gui;
+
+    /**
+     * Stores the current SFML event (MouseClicked, Closed, etc)
+     */
+    static sf::Event event;
 
     /**
      * Screen lock condition (if this is true, no user input will be registered)

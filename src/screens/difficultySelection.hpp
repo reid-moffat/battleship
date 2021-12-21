@@ -117,11 +117,6 @@ namespace screen {
         Button *instructionsButton;
 
         /**
-         * System event
-         */
-        sf::Event event{};
-
-        /**
          * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
          */
         void update();

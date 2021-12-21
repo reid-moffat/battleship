@@ -27,9 +27,10 @@ void Instructions::update() {
 
 void Instructions::poll() {
     sf::RenderWindow &gui = *State::gui;
+    sf::Event &event = State::event;
 
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();
