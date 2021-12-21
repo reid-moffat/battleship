@@ -47,7 +47,7 @@ Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
     this->shipPositions = shipPositions;
 }
 
-SquareType Grid::attack(Coordinate coord) {
+SquareType Grid::attack(Coordinate &coord) {
     // Determine the type of the square
     SquareType &status = squares[coord.getY()][coord.getX()];
     if (status == WATER) {// We need to note if water has been hit

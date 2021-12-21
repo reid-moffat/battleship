@@ -207,7 +207,7 @@ void Gameplay::updateSecondaryTarget(Coordinate coordinate) {
     this->secondaryTargetSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
 }
 
-void Gameplay::updateGrid(Coordinate coordinate, sf::RenderWindow &gui) {
+void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             SquareType attack = this->gridP2->attack(coordinate);
@@ -386,10 +386,12 @@ void Gameplay::update() {
 
     if ((State::gameMode == State::GameMode::SINGLE_PLAYER) && (State::player == State::Player::P2)) {
         if (State::difficulty == State::Difficulty::EASY) {
-            this->updateGrid(this->randomAttack(), *State::gui);
+            Coordinate attack = this->randomAttack();
+            this->updateGrid(attack, *State::gui);
         } else {
             // TODO: Add hard algorithm
-            this->updateGrid(this->randomAttack(), *State::gui);
+            Coordinate attack = this->randomAttack();
+            this->updateGrid(attack, *State::gui);
         }
     }
 
@@ -416,7 +418,8 @@ void Gameplay::poll(sf::RenderWindow &gui) {
                     for (auto &target : this->targetVector) {
                         if (target.getTargetState()) {
                             State::lockedFlag = true;
-                            this->updateGrid(target.getTargetCoordinate(), gui);
+                            Coordinate targetCoord = target.getTargetCoordinate();
+                            this->updateGrid(targetCoord, gui);
                         }
                     }
                     break;

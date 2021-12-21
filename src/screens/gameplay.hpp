@@ -138,7 +138,7 @@ namespace screen {
         /**
          * Updates grid state
          */
-        void updateGrid(Coordinate coordinate, sf::RenderWindow &grid);
+        void updateGrid(Coordinate &coordinate, sf::RenderWindow &grid);
 
         /**
          * Sets the fleet layout of the current player
