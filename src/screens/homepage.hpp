@@ -51,14 +51,17 @@ namespace screen {
         void poll();
         void render();
 
+        /**
+         * Names to refer to the textures on this screen
+         */
         enum textureNames { Background,
                             IdlePlayButton,
                             ActivePlayButton };
 
         /**
-         * Background and button textures
+         * Names to refer to the sprites on this screen
          */
-        map<textureNames, sf::Texture> textures;
+        enum spriteNames {};
 
         /**
          * Background texture

@@ -7,6 +7,8 @@
 
 #include "state.hpp"
 
+using std::map;
+
 namespace screen {
 
     class ScreenTemplate {
@@ -31,8 +33,28 @@ namespace screen {
          * Constructor for all children to call
          */
         ScreenTemplate();
+
+        /**
+         * Names to refer to the textures on this screen
+         */
+        enum textureNames {};
+
+        /**
+         * All the textures for this screen, mapped to by their enumerated name
+         */
+        map<textureNames, sf::Texture> textures;
+
+        /**
+         * Names to refer to the sprites on this screen
+         */
+        enum spriteNames {};
+
+        /**
+         * All the sprites for this screen, mapped to by their enumerated name
+         */
+        map<spriteNames, sf::Sprite> sprites;
     };
 
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_SCREENTEMPLATE_H
