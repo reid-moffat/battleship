@@ -32,9 +32,9 @@ Homepage::Homepage() {
     this->playButton = new Button(sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5), this->idlePlayButtonTexture, this->activePlayButtonTexture);
 }
 
-void Homepage::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    updateMousePosition(gui, mousePosition);
-    this->playButton->updateButtonState(mousePosition);
+void Homepage::update(const sf::RenderWindow &gui, sf::Vector2f mousePos) {
+    updateMousePosition(gui, mousePos);
+    this->playButton->updateButtonState(mousePos);
 }
 
 void Homepage::poll(sf::RenderWindow &gui) {

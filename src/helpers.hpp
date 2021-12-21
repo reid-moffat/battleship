@@ -16,14 +16,14 @@ using std::string;
 /**
  * Returns the size of a ship from its enum value
  */
-constexpr int shipSize(shipNames name) noexcept {
+constexpr int shipSize(const shipNames name) noexcept {
     return (int) static_cast<std::underlying_type_t<shipNames>>(name) + 1;
 }
 
 /**
  * Returns a random integer in the range [start, end] (both inclusive)
  */
-inline int randomInt(int start, int end) {
+inline int randomInt(const int start, const int end) {
     static std::random_device rd; // Obtain a random number from hardware
     static std::mt19937 eng(rd());// Seed the generator
     std::uniform_int_distribution<> dist(start, end);
@@ -45,7 +45,7 @@ inline void loadTexture(sf::Texture &texture, const string &path) {
 /**
  * Initializes a sprite with a texture, position and scale
  */
-inline void setSprite(sf::Vector2f position, sf::Vector2f scale, const sf::Texture &spriteTexture, sf::Sprite &sprite) {
+inline void setSprite(const sf::Vector2f position, const sf::Vector2f scale, const sf::Texture &spriteTexture, sf::Sprite &sprite) {
     sprite.setTexture(spriteTexture);
     sprite.setPosition(position);
     sprite.setScale(scale);
@@ -54,7 +54,7 @@ inline void setSprite(sf::Vector2f position, sf::Vector2f scale, const sf::Textu
 /**
  * Updates a Vector2f object with the current mouse position
  */
-inline void updateMousePosition(sf::RenderWindow &gui, sf::Vector2f &mousePosition) {
+inline void updateMousePosition(const sf::RenderWindow &gui, sf::Vector2f &mousePosition) {
     mousePosition = gui.mapPixelToCoords(sf::Mouse::getPosition(gui));
 }
 

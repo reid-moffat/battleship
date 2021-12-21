@@ -18,15 +18,21 @@ using std::string;
 
 class State {
 public:
-    /**
-     * Screen lock condition (if this is true, no user input will be registered)
-     */
-    static bool lockedFlag;
 
     /**
      * SFML window for rendering
      */
     static sf::RenderWindow *gui;
+
+    /**
+     * The current mouse position
+     */
+    static sf::Vector2f mousePosition;
+
+    /**
+     * Screen lock condition (if this is true, no user input will be registered)
+     */
+    static bool lockedFlag;
 
     /**
      * The possible game modes: SINGLE_PLAYER and MULTI_PLAYER

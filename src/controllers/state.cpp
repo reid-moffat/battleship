@@ -37,7 +37,7 @@ void State::changeScreen(Screens newScreen) {
 void State::previousScreen() {
     switch (State::current) {
         case Screens::HOMEPAGE:// Cannot go back from the homepage
-            throw std::invalid_argument("Error: You can't go back from the home screens");
+            throw std::invalid_argument("Error: You can't go back from the home screen");
         case Screens::INSTRUCTIONS:// Goes back to the previously rendered screens for Instructions
             State::current = State::previous;
             break;
@@ -50,9 +50,9 @@ void State::previousScreen() {
         default:
             std::map<Screens, std::string> screenNames = {{Screens::HOMEPAGE, "homepage"},
                                                           {Screens::FLEET_PLACEMENT, "homepage"},
-                                                          {Screens::GAMEPLAY, "homepage"},
-                                                          {Screens::INTERMEDIARY, "homepage"},
-                                                          {Screens::GAME_OVER, "homepage"}};
+                                                          {Screens::GAMEPLAY, "Gameplay"},
+                                                          {Screens::INTERMEDIARY, "Intermediary"},
+                                                          {Screens::GAME_OVER, "Game Over"}};
             throw std::invalid_argument(string("Error: You can't go back from the current screens (") + screenNames[State::current] + "");
     }
 }
