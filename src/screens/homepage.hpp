@@ -54,14 +54,14 @@ namespace screen {
         /**
          * Names to refer to the textures on this screen
          */
-        enum textureNames { Background,
-                            IdlePlayButton,
-                            ActivePlayButton };
+        enum class textureNames { Background,
+                                  IdlePlayButton,
+                                  ActivePlayButton };
 
         /**
          * Names to refer to the sprites on this screen
          */
-        enum spriteNames {};
+        enum class spriteNames { Background };
 
         /**
          * Background texture

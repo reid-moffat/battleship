@@ -37,22 +37,22 @@ namespace screen {
         /**
          * Names to refer to the textures on this screen
          */
-        enum textureNames {};
+        enum class textureNames {};
 
         /**
          * All the textures for this screen, mapped to by their enumerated name
          */
-        map<textureNames, sf::Texture> textures;
+        const map<textureNames, sf::Texture> textures;
 
         /**
          * Names to refer to the sprites on this screen
          */
-        enum spriteNames {};
+        enum class spriteNames {};
 
         /**
          * All the sprites for this screen, mapped to by their enumerated name
          */
-        map<spriteNames, sf::Sprite> sprites;
+        const map<spriteNames, sf::Sprite> sprites;
     };
 
 }// namespace screen
