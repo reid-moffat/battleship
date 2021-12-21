@@ -6,8 +6,8 @@
 #ifndef BATTLESHIP_HELPERS_H
 #define BATTLESHIP_HELPERS_H
 
+#include "controllers/state.hpp"
 #include "enums/shipNames.hpp"
-#include <SFML/Graphics.hpp>
 #include <random>
 
 using entity::shipNames;
@@ -49,13 +49,6 @@ inline void setSprite(const sf::Vector2f position, const sf::Vector2f scale, con
     sprite.setTexture(spriteTexture);
     sprite.setPosition(position);
     sprite.setScale(scale);
-}
-
-/**
- * Updates a Vector2f object with the current mouse position
- */
-inline void updateMousePosition(const sf::RenderWindow &gui, sf::Vector2f &mousePosition) {
-    mousePosition = gui.mapPixelToCoords(sf::Mouse::getPosition(gui));
 }
 
 #endif//BATTLESHIP_HELPERS_H

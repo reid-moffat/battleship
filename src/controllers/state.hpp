@@ -18,16 +18,10 @@ using std::string;
 
 class State {
 public:
-
     /**
      * SFML window for rendering
      */
     static sf::RenderWindow *gui;
-
-    /**
-     * The current mouse position
-     */
-    static sf::Vector2f mousePosition;
 
     /**
      * Screen lock condition (if this is true, no user input will be registered)
@@ -97,6 +91,11 @@ public:
      */
     static void previousScreen();
 
+    /**
+     * Returns the current mouse position as a 2-d vector of floats
+     */
+    static inline sf::Vector2f getMousePosition();
+
 private:
     /**
      * The screens that is currently being rendered
@@ -111,6 +110,7 @@ private:
      * makes going back easier and less buggy
      */
     static Screens previous;
+
 };
 
 #endif// BATTLESHIP_STATE_H

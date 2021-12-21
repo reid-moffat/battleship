@@ -48,6 +48,7 @@ void State::previousScreen() {
             State::current = Screens::GAME_MODE_SELECTION;
             break;
         default:
+            // TODO: Update this
             std::map<Screens, std::string> screenNames = {{Screens::HOMEPAGE, "homepage"},
                                                           {Screens::FLEET_PLACEMENT, "homepage"},
                                                           {Screens::GAMEPLAY, "Gameplay"},
@@ -55,4 +56,8 @@ void State::previousScreen() {
                                                           {Screens::GAME_OVER, "Game Over"}};
             throw std::invalid_argument(string("Error: You can't go back from the current screens (") + screenNames[State::current] + "");
     }
+}
+
+inline sf::Vector2f State::getMousePosition() {
+    return State::gui->mapPixelToCoords(sf::Mouse::getPosition(*State::gui));
 }
