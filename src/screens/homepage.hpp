@@ -47,7 +47,7 @@ namespace screen {
         Homepage();
 
         // SFML event loop helpers
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void update(const sf::RenderWindow &gui, sf::Vector2f mousePosition);
         void poll(sf::RenderWindow &gui);
         void render(sf::RenderWindow &gui);
 
