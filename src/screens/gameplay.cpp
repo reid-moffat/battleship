@@ -364,14 +364,14 @@ void Gameplay::setFleetLayout(map<shipNames, tuple<Coordinate, bool>> &fleetLayo
     }
 }
 
-void Gameplay::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
-    updateMousePosition(gui, mousePos);
+void Gameplay::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
 
-    this->surrenderButton->updateButtonState(mousePos);
-    this->instructionsButton->updateButtonState(mousePos);
+    this->surrenderButton->updateButtonState(mousePosition);
+    this->instructionsButton->updateButtonState(mousePosition);
 
     for (auto &target : this->targetVector) {
-        target.updateTargetState(mousePos);
+        target.updateTargetState(mousePosition);
     }
 
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
@@ -386,10 +386,10 @@ void Gameplay::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
 
     if ((State::gameMode == State::GameMode::SINGLE_PLAYER) && (State::player == State::Player::P2)) {
         if (State::difficulty == State::Difficulty::EASY) {
-            this->updateGrid(this->randomAttack(), gui);
+            this->updateGrid(this->randomAttack(), *State::gui);
         } else {
             // TODO: Add hard algorithm
-            this->updateGrid(this->randomAttack(), gui);
+            this->updateGrid(this->randomAttack(), *State::gui);
         }
     }
 
@@ -536,7 +536,7 @@ void Gameplay::render(sf::RenderWindow &gui) {
 }
 
 void Gameplay::run() {
-    this->update(*State::gui, this->mousePosition);
+    this->update();
     this->poll(*State::gui);
     this->render(*State::gui);
 }

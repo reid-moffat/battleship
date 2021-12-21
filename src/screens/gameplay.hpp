@@ -91,11 +91,6 @@ namespace screen {
         set<Coordinate> coordinateSet;
 
         /**
-         * Mouse position vector
-         */
-        sf::Vector2f mousePosition;
-
-        /**
          * System event
          */
         sf::Event event{};
@@ -153,7 +148,7 @@ namespace screen {
         /**
          * Calls helpers::updateMousePosition(), Button::updateButtonState(), Target::updateTargetState(), Grid::getShips(), and Gameplay::setFleetLayout()
          */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void update();
 
         /**
          * Polls for system events

@@ -94,7 +94,7 @@ public:
     /**
      * Returns the current mouse position as a 2-d vector of floats
      */
-    static inline sf::Vector2f getMousePosition();
+    static sf::Vector2f getMousePosition();
 
 private:
     /**

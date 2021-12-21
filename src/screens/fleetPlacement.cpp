@@ -216,11 +216,11 @@ void FleetPlacement::resetFleetLayout() {
     this->rowBoatSprite.setRotation(0);
 }
 
-void FleetPlacement::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
-    updateMousePosition(gui, mousePos);
-    this->readyButton->updateButtonState(mousePos);
-    this->randomizeButton->updateButtonState(mousePos);
-    this->instructionsButton->updateButtonState(mousePos);
+void FleetPlacement::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
+    this->readyButton->updateButtonState(mousePosition);
+    this->randomizeButton->updateButtonState(mousePosition);
+    this->instructionsButton->updateButtonState(mousePosition);
 }
 
 void FleetPlacement::poll(sf::RenderWindow &gui) {
@@ -309,7 +309,7 @@ void FleetPlacement::render(sf::RenderWindow &gui) {
 }
 
 void FleetPlacement::run() {
-    this->update(*State::gui, this->mousePosition);
+    this->update();
     this->poll(*State::gui);
     this->render(*State::gui);
 }

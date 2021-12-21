@@ -22,9 +22,9 @@ Intermediary::Intermediary() : ScreenTemplate() {
     this->continueButton = new Button(sf::Vector2f(144 * 5, 108 * 5), sf::Vector2f(5, 5), this->idleContinueButtonTexture, this->activeContinueButtonTexture);
 }
 
-void Intermediary::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
-    updateMousePosition(gui, mousePos);
-    this->continueButton->updateButtonState(mousePos);
+void Intermediary::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
+    this->continueButton->updateButtonState(mousePosition);
 }
 
 void Intermediary::poll(sf::RenderWindow &gui) {
@@ -76,7 +76,7 @@ void Intermediary::render(sf::RenderWindow &gui) {
 }
 
 void Intermediary::run() {
-    this->update(*State::gui, this->mousePosition);
+    this->update();
     this->poll(*State::gui);
     this->render(*State::gui);
 }

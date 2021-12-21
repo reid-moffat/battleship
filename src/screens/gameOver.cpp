@@ -1,5 +1,4 @@
 /**
- * File: gameOver.cpp
  * Description: Front-end class that defines the behaviour of the Game Over screens
  */
 
@@ -26,8 +25,8 @@ GameOver::GameOver() : ScreenTemplate() {
     this->homepageButton = new Button(sf::Vector2f(136 * 5, 108 * 5), sf::Vector2f(5, 5), this->idleHomepageButtonTexture, this->activeHomepageButtonTexture);
 }
 
-void GameOver::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    updateMousePosition(gui, mousePosition);
+void GameOver::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
     this->homepageButton->updateButtonState(mousePosition);
 }
 
@@ -77,7 +76,7 @@ void GameOver::render(sf::RenderWindow &gui) {
 }
 
 void GameOver::run() {
-    this->update(*State::gui, this->mousePosition);
+    this->update();
     this->poll(*State::gui);
     this->render(*State::gui);
 }

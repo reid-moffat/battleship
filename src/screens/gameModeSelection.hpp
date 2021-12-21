@@ -86,19 +86,14 @@ namespace screen {
         Button *instructionsButton;
 
         /**
-         * Mouse position vector
-         */
-        sf::Vector2f mousePosition;
-
-        /**
          * System event
          */
         sf::Event event{};
 
         /**
-         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
+         * Updates the buttons on this screen
          */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void update();
 
         /**
          * Polls for system events

@@ -29,8 +29,8 @@ GameModeSelection::GameModeSelection() : ScreenTemplate() {
     this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButtonTexture, this->activeInstructionsButtonTexture);
 }
 
-void GameModeSelection::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    updateMousePosition(gui, mousePosition);
+void GameModeSelection::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
     this->onePlayerButton->updateButtonState(mousePosition);
     this->twoPlayerButton->updateButtonState(mousePosition);
     this->backButton->updateButtonState(mousePosition);
@@ -85,7 +85,7 @@ void GameModeSelection::render(sf::RenderWindow &gui) {
 }
 
 void GameModeSelection::run() {
-    this->update(*State::gui, this->mousePosition);
+    this->update();
     this->poll(*State::gui);
     this->render(*State::gui);
 }

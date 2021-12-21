@@ -42,11 +42,6 @@ namespace screen {
         Button *backButton;
 
         /**
-         * Mouse position vector
-         */
-        sf::Vector2f mousePosition;
-
-        /**
          * System event
          */
         sf::Event event{};
@@ -54,7 +49,7 @@ namespace screen {
         /**
          * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
          */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void update();
 
         /**
          * Polls for system events

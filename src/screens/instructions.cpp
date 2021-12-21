@@ -20,8 +20,8 @@ Instructions::Instructions() : ScreenTemplate() {
     this->backButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleBackButtonTexture, this->activeBackButtonTexture);
 }
 
-void Instructions::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    updateMousePosition(gui, mousePosition);
+void Instructions::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
     this->backButton->updateButtonState(mousePosition);
 }
 
@@ -59,7 +59,7 @@ void Instructions::render(sf::RenderWindow &gui) {
 }
 
 void Instructions::run() {
-    this->update(*State::gui, this->mousePosition);
+    this->update();
     this->poll(*State::gui);
     this->render(*State::gui);
 }

@@ -58,6 +58,6 @@ void State::previousScreen() {
     }
 }
 
-inline sf::Vector2f State::getMousePosition() {
+sf::Vector2f State::getMousePosition() {
     return State::gui->mapPixelToCoords(sf::Mouse::getPosition(*State::gui));
 }
