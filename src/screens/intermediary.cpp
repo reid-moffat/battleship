@@ -27,7 +27,9 @@ void Intermediary::update() {
     this->continueButton->updateButtonState(mousePosition);
 }
 
-void Intermediary::poll(sf::RenderWindow &gui) {
+void Intermediary::poll() {
+    sf::RenderWindow &gui = *State::gui;
+
     while (gui.pollEvent(this->event)) {
         switch (this->event.type) {
 
@@ -60,7 +62,8 @@ void Intermediary::poll(sf::RenderWindow &gui) {
     }
 }
 
-void Intermediary::render(sf::RenderWindow &gui) {
+void Intermediary::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     if (State::player == State::Player::P2) {
@@ -77,8 +80,8 @@ void Intermediary::render(sf::RenderWindow &gui) {
 
 void Intermediary::run() {
     this->update();
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->poll();
+    this->render();
 }
 
 Intermediary &screen::Intermediary::getInstance() {

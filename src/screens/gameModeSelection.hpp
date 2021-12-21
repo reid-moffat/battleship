@@ -98,12 +98,12 @@ namespace screen {
         /**
          * Polls for system events
          */
-        void poll(sf::RenderWindow &gui);
+        void poll();
 
         /**
          * Renders all sprites
          */
-        void render(sf::RenderWindow &gui);
+        void render();
 
         /**
          * Constructor

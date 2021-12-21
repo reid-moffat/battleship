@@ -37,7 +37,9 @@ void GameModeSelection::update() {
     this->instructionsButton->updateButtonState(mousePosition);
 }
 
-void GameModeSelection::poll(sf::RenderWindow &gui) {
+void GameModeSelection::poll() {
+    sf::RenderWindow &gui = *State::gui;
+
     while (gui.pollEvent(this->event)) {
         switch (this->event.type) {
 
@@ -70,7 +72,8 @@ void GameModeSelection::poll(sf::RenderWindow &gui) {
     }
 }
 
-void GameModeSelection::render(sf::RenderWindow &gui) {
+void GameModeSelection::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     gui.draw(this->backgroundSprite);
@@ -86,8 +89,8 @@ void GameModeSelection::render(sf::RenderWindow &gui) {
 
 void GameModeSelection::run() {
     this->update();
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->poll();
+    this->render();
 }
 
 GameModeSelection &screen::GameModeSelection::getInstance() {

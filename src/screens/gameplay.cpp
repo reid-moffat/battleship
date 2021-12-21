@@ -213,12 +213,12 @@ void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
             SquareType attack = this->gridP2->attack(coordinate);
             if (attack == SquareType::WATER) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 sleepMS();
                 State::player = State::Player::P2;
             } else if (attack == SquareType::SHIP) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 sleepMS();
                 if (lost(*(this->gridP2))) {
                     this->resetGridMarkers();
@@ -254,14 +254,14 @@ void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
             SquareType attack = this->gridP2->attack(coordinate);
             if (attack == SquareType::WATER) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 this->updateSecondaryTarget(coordinate);
                 sleepMS();
                 State::player = State::Player::P2;
                 State::changeScreen(Screens::INTERMEDIARY);
             } else if (attack == SquareType::SHIP) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 this->updateSecondaryTarget(coordinate);
                 sleepMS();
                 if (lost(*(this->gridP2))) {
@@ -278,14 +278,14 @@ void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
             SquareType attack = this->gridP1->attack(coordinate);
             if (attack == SquareType::WATER) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 this->updateSecondaryTarget(coordinate);
                 sleepMS();
                 State::player = State::Player::P1;
                 State::changeScreen(Screens::INTERMEDIARY);
             } else if (attack == SquareType::SHIP) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 this->updateSecondaryTarget(coordinate);
                 if (lost(*(this->gridP1))) {
                     sleepMS();
@@ -398,7 +398,9 @@ void Gameplay::update() {
     State::lockedFlag = false;
 }
 
-void Gameplay::poll(sf::RenderWindow &gui) {
+void Gameplay::poll() {
+    sf::RenderWindow &gui = *State::gui;
+
     while (gui.pollEvent(this->event)) {
         switch (this->event.type) {
 
@@ -433,7 +435,8 @@ void Gameplay::poll(sf::RenderWindow &gui) {
     }
 }
 
-void Gameplay::renderShipStatus(Grid &grid, sf::RenderWindow &gui) {
+void Gameplay::renderShipStatus(Grid &grid) {
+    sf::RenderWindow &gui = *State::gui;
     map<shipNames, bool> shipStatus = grid.getShipStatus();
 
     if (shipStatus[shipNames::BATTLESHIP]) {
@@ -461,7 +464,8 @@ void Gameplay::renderShipStatus(Grid &grid, sf::RenderWindow &gui) {
     }
 }
 
-void Gameplay::render(sf::RenderWindow &gui) {
+void Gameplay::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     if (State::gameMode == State::SINGLE_PLAYER) {
@@ -520,12 +524,12 @@ void Gameplay::render(sf::RenderWindow &gui) {
     }
 
     if (State::gameMode == State::SINGLE_PLAYER) {
-        this->renderShipStatus(*(this->gridP2), gui);
+        this->renderShipStatus(*(this->gridP2));
     } else {
         if (State::player == State::Player::P1) {
-            this->renderShipStatus(*(screen::Gameplay::gridP2), gui);
+            this->renderShipStatus(*(screen::Gameplay::gridP2));
         } else {
-            this->renderShipStatus(*(screen::Gameplay::gridP1), gui);
+            this->renderShipStatus(*(screen::Gameplay::gridP1));
         }
     }
 
@@ -540,8 +544,8 @@ void Gameplay::render(sf::RenderWindow &gui) {
 
 void Gameplay::run() {
     this->update();
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->poll();
+    this->render();
 }
 
 void screen::Gameplay::sleepMS() {

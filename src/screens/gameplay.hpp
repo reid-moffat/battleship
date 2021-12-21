@@ -153,17 +153,17 @@ namespace screen {
         /**
          * Polls for system events
          */
-        void poll(sf::RenderWindow &gui);
+        void poll();
 
         /**
          * Renders ship status
          */
-        void renderShipStatus(Grid &grid, sf::RenderWindow &gui);
+        void renderShipStatus(Grid &grid);
 
         /**
          * Renders all sprites
          */
-        void render(sf::RenderWindow &gui);
+        void render();
 
         /**
          * The sleep time after a player attacks in milliseconds

@@ -48,8 +48,8 @@ namespace screen {
 
         // SFML event loop helpers
         void update();
-        void poll(sf::RenderWindow &gui);
-        void render(sf::RenderWindow &gui);
+        void poll();
+        void render();
 
         enum textureNames {Background, IdlePlayButton, ActivePlayButton};
 

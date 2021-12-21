@@ -44,7 +44,9 @@ void DifficultySelection::update() {
     this->instructionsButton->updateButtonState(mousePosition);
 }
 
-void DifficultySelection::poll(sf::RenderWindow &gui) {
+void DifficultySelection::poll() {
+    sf::RenderWindow &gui = *State::gui;
+
     while (gui.pollEvent(this->event)) {
         switch (this->event.type) {
 
@@ -77,7 +79,8 @@ void DifficultySelection::poll(sf::RenderWindow &gui) {
     }
 }
 
-void DifficultySelection::render(sf::RenderWindow &gui) {
+void DifficultySelection::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     gui.draw(this->backgroundSprite);
@@ -93,6 +96,6 @@ void DifficultySelection::render(sf::RenderWindow &gui) {
 
 void DifficultySelection::run() {
     this->update();
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->poll();
+    this->render();
 }

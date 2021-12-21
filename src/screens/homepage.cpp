@@ -18,8 +18,8 @@ Homepage &Homepage::getInstance() {
 
 void Homepage::run() {
     this->update();
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->poll();
+    this->render();
 }
 
 Homepage::Homepage() {
@@ -37,7 +37,8 @@ void Homepage::update() {
     this->playButton->updateButtonState(mousePosition);
 }
 
-void Homepage::poll(sf::RenderWindow &gui) {
+void Homepage::poll() {
+    sf::RenderWindow &gui = *State::gui;
     while (gui.pollEvent(this->event)) {
         switch (this->event.type) {
 
@@ -59,7 +60,8 @@ void Homepage::poll(sf::RenderWindow &gui) {
     }
 }
 
-void Homepage::render(sf::RenderWindow &gui) {
+void Homepage::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     gui.draw(this->backgroundSprite);

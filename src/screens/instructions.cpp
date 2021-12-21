@@ -25,7 +25,9 @@ void Instructions::update() {
     this->backButton->updateButtonState(mousePosition);
 }
 
-void Instructions::poll(sf::RenderWindow &gui) {
+void Instructions::poll() {
+    sf::RenderWindow &gui = *State::gui;
+
     while (gui.pollEvent(this->event)) {
         switch (this->event.type) {
 
@@ -47,7 +49,8 @@ void Instructions::poll(sf::RenderWindow &gui) {
     }
 }
 
-void Instructions::render(sf::RenderWindow &gui) {
+void Instructions::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     gui.draw(this->backgroundSprite);
@@ -60,8 +63,8 @@ void Instructions::render(sf::RenderWindow &gui) {
 
 void Instructions::run() {
     this->update();
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->poll();
+    this->render();
 }
 
 Instructions &screen::Instructions::getInstance() {

@@ -223,7 +223,9 @@ void FleetPlacement::update() {
     this->instructionsButton->updateButtonState(mousePosition);
 }
 
-void FleetPlacement::poll(sf::RenderWindow &gui) {
+void FleetPlacement::poll() {
+    sf::RenderWindow &gui = *State::gui;
+
     while (gui.pollEvent(this->event)) {
         switch (this->event.type) {
 
@@ -276,7 +278,8 @@ void FleetPlacement::poll(sf::RenderWindow &gui) {
     }
 }
 
-void FleetPlacement::render(sf::RenderWindow &gui) {
+void FleetPlacement::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     if (State::gameMode == State::SINGLE_PLAYER) {
@@ -310,8 +313,8 @@ void FleetPlacement::render(sf::RenderWindow &gui) {
 
 void FleetPlacement::run() {
     this->update();
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->poll();
+    this->render();
 }
 
 FleetPlacement &screen::FleetPlacement::getInstance() {

@@ -30,7 +30,8 @@ void GameOver::update() {
     this->homepageButton->updateButtonState(mousePosition);
 }
 
-void GameOver::poll(sf::RenderWindow &gui) {
+void GameOver::poll() {
+    sf::RenderWindow &gui = *State::gui;
     while (gui.pollEvent(this->event)) {
         switch (this->event.type) {
 
@@ -52,7 +53,9 @@ void GameOver::poll(sf::RenderWindow &gui) {
     }
 }
 
-void GameOver::render(sf::RenderWindow &gui) {
+void GameOver::render() {
+    sf::RenderWindow &gui = *State::gui;
+
     gui.clear();
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
@@ -77,8 +80,8 @@ void GameOver::render(sf::RenderWindow &gui) {
 
 void GameOver::run() {
     this->update();
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->poll();
+    this->render();
 }
 
 GameOver& screen::GameOver::getInstance() {
