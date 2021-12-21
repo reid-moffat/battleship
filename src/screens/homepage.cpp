@@ -1,5 +1,4 @@
 /**
- * File: homepage.cpp
  * Description: Front-end class that defines the behaviour of the Homepage screens
  */
 
@@ -8,11 +7,11 @@
 
 using screen::Homepage;
 
-Homepage* Homepage::instance = nullptr;
+std::unique_ptr<Homepage> Homepage::instance = nullptr;
 
-Homepage &screen::Homepage::getInstance() {
+Homepage &Homepage::getInstance() {
     if (instance == nullptr) {
-        instance = new Homepage();
+        instance.reset(new Homepage());
     }
     return *instance;
 }

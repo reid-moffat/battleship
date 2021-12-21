@@ -10,6 +10,7 @@
 #include <SFML/System.hpp>
 
 using entity::Button;
+using std::map;
 
 namespace screen {
     class Homepage : public ScreenTemplate {
@@ -38,27 +39,21 @@ namespace screen {
         /**
          * Singleton instance
          */
-        static Homepage *instance;
+        static std::unique_ptr<Homepage> instance;
 
         /**
-         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
-         */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
-
-        /**
-         * Polls for system events
-         */
-        void poll(sf::RenderWindow &gui);
-
-        /**
-         * Renders all sprites
-         */
-        void render(sf::RenderWindow &gui);
-
-        /**
-         * Constructor
+         * Singleton constructor
          */
         Homepage();
+
+        // SFML event loop helpers
+        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void poll(sf::RenderWindow &gui);
+        void render(sf::RenderWindow &gui);
+
+        enum textureNames {Background, IdlePlayButton, ActivePlayButton};
+
+        map<textureNames, sf::Texture> textures;
 
         /**
          * Background texture
