@@ -8,7 +8,7 @@
 #include <unistd.h>
 #endif
 
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 #include "gameplay.hpp"
 
 using entity::SquareType;

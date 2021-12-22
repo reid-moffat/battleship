@@ -3,7 +3,7 @@
  */
 
 #include "grid.hpp"
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 
 using entity::Coordinate;
 using entity::Grid;

@@ -11,7 +11,7 @@ add_subdirectory(googletest)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
 file(GLOB SOURCE_FILES CONFIGURE_DEPENDS
-        "../src/helpers.hpp"
+        "../src/helpers/helperFunctions.hpp"
         "../src/**/*.hpp"
         "../src/**/*.cpp")
 

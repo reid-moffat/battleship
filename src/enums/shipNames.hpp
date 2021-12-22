@@ -7,7 +7,7 @@
 
 namespace entity {
 
-    enum shipNames {
+    enum class shipNames {
         ROW_BOAT,
         PATROL_BOAT,
         SUBMARINE,

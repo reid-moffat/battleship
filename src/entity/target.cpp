@@ -3,7 +3,7 @@
  */
 
 #include "target.hpp"
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 
 using entity::Target;
 

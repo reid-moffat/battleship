@@ -1,0 +1,5 @@
+/**
+ *
+ */
+
+#include "ImagesManager.hpp"
