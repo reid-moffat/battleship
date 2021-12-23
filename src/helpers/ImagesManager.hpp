@@ -7,35 +7,35 @@
 
 #include "helperFunctions.hpp"
 
-using std::map;
+using std::vector;
 
 class ImagesManager {
 public:
     /**
-     *
+     * Initializes this manager with
      */
     ImagesManager();
 
     /**
      * Returns a reference to the specified texture
      */
-    sf::Texture &getTexture(const unsigned int name);
+    sf::Texture &getTexture(int index);
 
     /**
      * Returns a reference to the specified sprite
      */
-    sf::Sprite &getSprite(const unsigned int name);
+    sf::Sprite &getSprite(int index);
 
 private:
     /**
      *
      */
-    map<int, sf::Texture> textures;
+    vector<sf::Texture> textures;
 
     /**
      *
      */
-    map<int, sf::Sprite> sprites;
+    vector<sf::Sprite> sprites;
 };
 
 
