@@ -6,11 +6,23 @@
 #include "ImagesManager.hpp"
 
 ImagesManager::ImagesManager(const std::string texturePaths[], const std::string spritePaths[]) {
+    int currIndex = 0;
     for (auto x : *texturePaths) {
         this->textures.emplace_back();
-        this->textures[0]; // TODO: Load from file
+        if (!this->textures[currIndex].loadFromFile("../res/images/" + texturePaths[currIndex])) {
+            exit(-1);
+        }
+        currIndex++;
     }
-    // TODO: Do the same for the sprites
+
+    currIndex = 0;
+    for (auto x : *spritePaths) {
+        this->sprites.emplace_back();
+//        sprites[currIndex].setTexture(spriteTexture); // TODO
+//        sprites[currIndex].setPosition(position);
+//        sprites[currIndex].setScale(scale);
+        currIndex++;
+    }
 }
 
 sf::Texture &ImagesManager::getTexture(const int index) {
