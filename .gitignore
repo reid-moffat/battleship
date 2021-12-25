@@ -115,12 +115,9 @@ fabric.properties
 #
 
 # googletest can be cloned from github: git clone https://github.com/google/googletest.git
-test/googletest
+include/googletest
 
 # dlls and the executable are kept in so users can run the app without an IDE
 bin/*
 !bin/*.dll
 !bin/battleship.exe
-
-# No need for testing dlls/exe
-test/bin/*
