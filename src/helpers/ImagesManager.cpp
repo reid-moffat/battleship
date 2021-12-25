@@ -5,6 +5,14 @@
 #include <sstream>
 #include "ImagesManager.hpp"
 
+ImagesManager::ImagesManager(const std::string texturePaths[], const std::string spritePaths[]) {
+    for (auto x : *texturePaths) {
+        this->textures.emplace_back();
+        this->textures[0]; // TODO: Load from file
+    }
+    // TODO: Do the same for the sprites
+}
+
 sf::Texture &ImagesManager::getTexture(const int index) {
     if (index > textures.size()) {
         std::ostringstream errMsg;
