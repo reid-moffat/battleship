@@ -8,13 +8,20 @@
 #include "helperFunctions.hpp"
 
 using std::vector;
+using std::tuple;
 
 class ImagesManager {
 public:
     /**
-     * Initializes this manager with
+     * Initializes this manager with textures and sprites
+     *
+     * @param texturePaths paths to textures to load relative to res/images
+     * @param sprites data to initialize each sprite:
+     *                -The initial position (sf::Vector2f)
+     *                -The scale of the sprite (sf::Vector2f)
+     *                -The corresponding texture (its index in the texturePaths)
      */
-    ImagesManager(const std::string texturePaths[], const std::string spritePaths[]);
+    ImagesManager(const vector<string>& texturePaths, const vector<tuple<sf::Vector2f, sf::Vector2f, int>>& sprites);
 
     /**
      * Returns a reference to the texture at the specified index

@@ -7,6 +7,7 @@
 #include <memory>
 
 using screen::Homepage;
+using std::vector;
 
 std::unique_ptr<Homepage> Homepage::instance = nullptr;
 
@@ -24,6 +25,7 @@ void Homepage::run() {
 }
 
 Homepage::Homepage() {
+    // vector<int> textures{ 10, 20, 30 }; TODO
     loadTexture(this->homepageBackgroundTexture, "homepage/HomepageBackground.png");
     loadTexture(this->idlePlayButtonTexture, "homepage/IdlePlayButton.png");
     loadTexture(this->activePlayButtonTexture, "homepage/ActivePlayButton.png");
