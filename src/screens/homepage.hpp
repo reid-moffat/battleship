@@ -7,7 +7,6 @@
 
 #include "../controllers/screenTemplate.hpp"
 #include "../entity/button.hpp"
-#include <SFML/System.hpp>
 
 using entity::Button;
 using std::map;
@@ -54,37 +53,17 @@ namespace screen {
         /**
          * Names to refer to the textures on this screen
          */
-        enum class textureNames { Background,
-                                  IdlePlayButton,
-                                  ActivePlayButton };
+        enum textureNames { Background,
+                            IdlePlayButton,
+                            ActivePlayButton };
 
         /**
          * Names to refer to the sprites on this screen
          */
-        enum class spriteNames { Background };
+        enum spriteNames { Backgrounds };
 
         /**
-         * Background texture
-         */
-        sf::Texture homepageBackgroundTexture;
-
-        /**
-         * Idle play button texture
-         */
-        sf::Texture idlePlayButtonTexture;
-
-        /**
-         * Active play button texture
-         */
-        sf::Texture activePlayButtonTexture;
-
-        /**
-         * Background sprite
-         */
-        sf::Sprite backgroundSprite;
-
-        /**
-         * Play button 
+         * Play button
          */
         std::unique_ptr<Button> playButton;
     };

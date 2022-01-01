@@ -24,6 +24,11 @@ public:
     ImagesManager(const vector<string>& texturePaths, const vector<tuple<sf::Vector2f, sf::Vector2f, int>>& sprites);
 
     /**
+     * Default constructor
+     */
+    ImagesManager();
+
+    /**
      * Returns a reference to the texture at the specified index
      */
     sf::Texture &getTexture(int index);

@@ -48,3 +48,5 @@ sf::Sprite &ImagesManager::getSprite(const int index) {
     }
     return sprites[index];
 }
+
+ImagesManager::ImagesManager() = default;

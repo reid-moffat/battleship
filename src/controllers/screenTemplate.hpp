@@ -5,7 +5,9 @@
 #ifndef BATTLESHIP_SCREENTEMPLATE_H
 #define BATTLESHIP_SCREENTEMPLATE_H
 
+#include "../helpers/ImagesManager.hpp"
 #include "state.hpp"
+#include <SFML/System.hpp>
 
 using std::map;
 
@@ -35,24 +37,9 @@ namespace screen {
         ScreenTemplate();
 
         /**
-         * Names to refer to the textures on this screen
+         * All the textures and sprites for this screen
          */
-        enum class textureNames {};
-
-        /**
-         * All the textures for this screen, mapped to by their enumerated name
-         */
-        const map<textureNames, sf::Texture> textures;
-
-        /**
-         * Names to refer to the sprites on this screen
-         */
-        enum class spriteNames {};
-
-        /**
-         * All the sprites for this screen, mapped to by their enumerated name
-         */
-        const map<spriteNames, sf::Sprite> sprites;
+        ImagesManager images;
     };
 
 }// namespace screen
