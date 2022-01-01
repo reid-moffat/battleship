@@ -5,7 +5,11 @@
 #ifndef BATTLESHIP_SCREENTEMPLATE_H
 #define BATTLESHIP_SCREENTEMPLATE_H
 
+#include "../helpers/ImagesManager.hpp"
 #include "state.hpp"
+#include <SFML/System.hpp>
+
+using std::map;
 
 namespace screen {
 
@@ -31,8 +35,13 @@ namespace screen {
          * Constructor for all children to call
          */
         ScreenTemplate();
+
+        /**
+         * All the textures and sprites for this screen
+         */
+        ImagesManager images;
     };
 
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_SCREENTEMPLATE_H

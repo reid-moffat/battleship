@@ -8,7 +8,7 @@
 #include <unistd.h>
 #endif
 
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 #include "gameplay.hpp"
 
 using entity::SquareType;
@@ -207,18 +207,18 @@ void Gameplay::updateSecondaryTarget(Coordinate coordinate) {
     this->secondaryTargetSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
 }
 
-void Gameplay::updateGrid(Coordinate coordinate, sf::RenderWindow &gui) {
+void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             SquareType attack = this->gridP2->attack(coordinate);
             if (attack == SquareType::WATER) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 sleepMS();
                 State::player = State::Player::P2;
             } else if (attack == SquareType::SHIP) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 sleepMS();
                 if (lost(*(this->gridP2))) {
                     this->resetGridMarkers();
@@ -254,14 +254,14 @@ void Gameplay::updateGrid(Coordinate coordinate, sf::RenderWindow &gui) {
             SquareType attack = this->gridP2->attack(coordinate);
             if (attack == SquareType::WATER) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 this->updateSecondaryTarget(coordinate);
                 sleepMS();
                 State::player = State::Player::P2;
                 State::changeScreen(Screens::INTERMEDIARY);
             } else if (attack == SquareType::SHIP) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 this->updateSecondaryTarget(coordinate);
                 sleepMS();
                 if (lost(*(this->gridP2))) {
@@ -278,14 +278,14 @@ void Gameplay::updateGrid(Coordinate coordinate, sf::RenderWindow &gui) {
             SquareType attack = this->gridP1->attack(coordinate);
             if (attack == SquareType::WATER) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 this->updateSecondaryTarget(coordinate);
                 sleepMS();
                 State::player = State::Player::P1;
                 State::changeScreen(Screens::INTERMEDIARY);
             } else if (attack == SquareType::SHIP) {
                 this->updateGridMarkers(attack, coordinate);
-                this->render(gui);
+                this->render();
                 this->updateSecondaryTarget(coordinate);
                 if (lost(*(this->gridP1))) {
                     sleepMS();
@@ -364,14 +364,14 @@ void Gameplay::setFleetLayout(map<shipNames, tuple<Coordinate, bool>> &fleetLayo
     }
 }
 
-void Gameplay::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
-    updateMousePosition(gui, mousePos);
+void Gameplay::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
 
-    this->surrenderButton->updateButtonState(mousePos);
-    this->instructionsButton->updateButtonState(mousePos);
+    this->surrenderButton->updateButtonState(mousePosition);
+    this->instructionsButton->updateButtonState(mousePosition);
 
     for (auto &target : this->targetVector) {
-        target.updateTargetState(mousePos);
+        target.updateTargetState(mousePosition);
     }
 
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
@@ -386,19 +386,24 @@ void Gameplay::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
 
     if ((State::gameMode == State::GameMode::SINGLE_PLAYER) && (State::player == State::Player::P2)) {
         if (State::difficulty == State::Difficulty::EASY) {
-            this->updateGrid(this->randomAttack(), gui);
+            Coordinate attack = this->randomAttack();
+            this->updateGrid(attack, *State::gui);
         } else {
             // TODO: Add hard algorithm
-            this->updateGrid(this->randomAttack(), gui);
+            Coordinate attack = this->randomAttack();
+            this->updateGrid(attack, *State::gui);
         }
     }
 
     State::lockedFlag = false;
 }
 
-void Gameplay::poll(sf::RenderWindow &gui) {
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+void Gameplay::poll() {
+    sf::RenderWindow &gui = *State::gui;
+    sf::Event &event = State::event;
+
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();
@@ -416,7 +421,8 @@ void Gameplay::poll(sf::RenderWindow &gui) {
                     for (auto &target : this->targetVector) {
                         if (target.getTargetState()) {
                             State::lockedFlag = true;
-                            this->updateGrid(target.getTargetCoordinate(), gui);
+                            Coordinate targetCoord = target.getTargetCoordinate();
+                            this->updateGrid(targetCoord, gui);
                         }
                     }
                     break;
@@ -430,7 +436,8 @@ void Gameplay::poll(sf::RenderWindow &gui) {
     }
 }
 
-void Gameplay::renderShipStatus(Grid &grid, sf::RenderWindow &gui) {
+void Gameplay::renderShipStatus(Grid &grid) {
+    sf::RenderWindow &gui = *State::gui;
     map<shipNames, bool> shipStatus = grid.getShipStatus();
 
     if (shipStatus[shipNames::BATTLESHIP]) {
@@ -458,7 +465,8 @@ void Gameplay::renderShipStatus(Grid &grid, sf::RenderWindow &gui) {
     }
 }
 
-void Gameplay::render(sf::RenderWindow &gui) {
+void Gameplay::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     if (State::gameMode == State::SINGLE_PLAYER) {
@@ -517,12 +525,12 @@ void Gameplay::render(sf::RenderWindow &gui) {
     }
 
     if (State::gameMode == State::SINGLE_PLAYER) {
-        this->renderShipStatus(*(this->gridP2), gui);
+        this->renderShipStatus(*(this->gridP2));
     } else {
         if (State::player == State::Player::P1) {
-            this->renderShipStatus(*(screen::Gameplay::gridP2), gui);
+            this->renderShipStatus(*(screen::Gameplay::gridP2));
         } else {
-            this->renderShipStatus(*(screen::Gameplay::gridP1), gui);
+            this->renderShipStatus(*(screen::Gameplay::gridP1));
         }
     }
 
@@ -536,9 +544,9 @@ void Gameplay::render(sf::RenderWindow &gui) {
 }
 
 void Gameplay::run() {
-    this->update(*State::gui, this->mousePosition);
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->update();
+    this->poll();
+    this->render();
 }
 
 void screen::Gameplay::sleepMS() {

@@ -1,7 +1,6 @@
 /**
  * Grid class header
  * Provides a player's grid
- *
  */
 
 #ifndef BATTLESHIP_GRID_H
@@ -43,7 +42,7 @@ namespace entity {
          * 2. If the square is a ship, change it to a hit ship and update the ship that was hit
          * 3. If the square is a hit ship (or hit water), do nothing (attack doesn't go through)
          */
-        SquareType attack(Coordinate coord);
+        SquareType attack(Coordinate &coord);
 
         /**
          * Returns the location of each ship on this board

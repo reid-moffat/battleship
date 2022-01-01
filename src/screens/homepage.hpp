@@ -5,11 +5,11 @@
 #ifndef BATTLESHIP_HOMEPAGE_H
 #define BATTLESHIP_HOMEPAGE_H
 
-#include "../entity/button.hpp"
 #include "../controllers/screenTemplate.hpp"
-#include <SFML/System.hpp>
+#include "../entity/button.hpp"
 
 using entity::Button;
+using std::map;
 
 namespace screen {
     class Homepage : public ScreenTemplate {
@@ -38,63 +38,35 @@ namespace screen {
         /**
          * Singleton instance
          */
-        static Homepage *instance;
+        static std::unique_ptr<Homepage> instance;
 
         /**
-         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
-         */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
-
-        /**
-         * Polls for system events
-         */
-        void poll(sf::RenderWindow &gui);
-
-        /**
-         * Renders all sprites
-         */
-        void render(sf::RenderWindow &gui);
-
-        /**
-         * Constructor
+         * Singleton constructor
          */
         Homepage();
 
-        /**
-         * Background texture
-         */
-        sf::Texture homepageBackgroundTexture;
+        // SFML event loop helpers
+        void update();
+        void poll();
+        void render();
 
         /**
-         * Idle play button texture
+         * Names to refer to the textures on this screen
          */
-        sf::Texture idlePlayButtonTexture;
+        enum textureNames { Background,
+                            IdlePlayButton,
+                            ActivePlayButton };
 
         /**
-         * Active play button texture
+         * Names to refer to the sprites on this screen
          */
-        sf::Texture activePlayButtonTexture;
+        enum spriteNames { Backgrounds };
 
         /**
-         * Background sprite
+         * Play button
          */
-        sf::Sprite backgroundSprite;
-
-        /**
-         * Play button 
-         */
-        Button *playButton;
-
-        /**
-         * Mouse position vector
-         */
-        sf::Vector2f mousePosition;
-
-        /**
-         * System event
-         */
-        sf::Event event{};
+        std::unique_ptr<Button> playButton;
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_HOMEPAGE_H

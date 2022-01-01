@@ -4,7 +4,7 @@
  */
 
 #include "gameModeSelection.hpp"
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 
 using screen::GameModeSelection;
 
@@ -29,17 +29,20 @@ GameModeSelection::GameModeSelection() : ScreenTemplate() {
     this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButtonTexture, this->activeInstructionsButtonTexture);
 }
 
-void GameModeSelection::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    updateMousePosition(gui, mousePosition);
+void GameModeSelection::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
     this->onePlayerButton->updateButtonState(mousePosition);
     this->twoPlayerButton->updateButtonState(mousePosition);
     this->backButton->updateButtonState(mousePosition);
     this->instructionsButton->updateButtonState(mousePosition);
 }
 
-void GameModeSelection::poll(sf::RenderWindow &gui) {
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+void GameModeSelection::poll() {
+    sf::RenderWindow &gui = *State::gui;
+    sf::Event &event = State::event;
+
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();
@@ -70,7 +73,8 @@ void GameModeSelection::poll(sf::RenderWindow &gui) {
     }
 }
 
-void GameModeSelection::render(sf::RenderWindow &gui) {
+void GameModeSelection::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     gui.draw(this->backgroundSprite);
@@ -85,9 +89,9 @@ void GameModeSelection::render(sf::RenderWindow &gui) {
 }
 
 void GameModeSelection::run() {
-    this->update(*State::gui, this->mousePosition);
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->update();
+    this->poll();
+    this->render();
 }
 
 GameModeSelection &screen::GameModeSelection::getInstance() {

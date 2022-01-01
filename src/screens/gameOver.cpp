@@ -1,10 +1,9 @@
 /**
- * File: gameOver.cpp
  * Description: Front-end class that defines the behaviour of the Game Over screens
  */
 
 #include "gameOver.hpp"
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 
 using screen::GameOver;
 
@@ -26,14 +25,17 @@ GameOver::GameOver() : ScreenTemplate() {
     this->homepageButton = new Button(sf::Vector2f(136 * 5, 108 * 5), sf::Vector2f(5, 5), this->idleHomepageButtonTexture, this->activeHomepageButtonTexture);
 }
 
-void GameOver::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    updateMousePosition(gui, mousePosition);
+void GameOver::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
     this->homepageButton->updateButtonState(mousePosition);
 }
 
-void GameOver::poll(sf::RenderWindow &gui) {
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+void GameOver::poll() {
+    sf::RenderWindow &gui = *State::gui;
+    sf::Event &event = State::event;
+
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();
@@ -53,7 +55,9 @@ void GameOver::poll(sf::RenderWindow &gui) {
     }
 }
 
-void GameOver::render(sf::RenderWindow &gui) {
+void GameOver::render() {
+    sf::RenderWindow &gui = *State::gui;
+
     gui.clear();
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
@@ -77,9 +81,9 @@ void GameOver::render(sf::RenderWindow &gui) {
 }
 
 void GameOver::run() {
-    this->update(*State::gui, this->mousePosition);
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->update();
+    this->poll();
+    this->render();
 }
 
 GameOver& screen::GameOver::getInstance() {

@@ -15,18 +15,24 @@
 
 using screen::Screens;
 using std::string;
+using std::unique_ptr;
 
 class State {
 public:
     /**
+     * SFML window for rendering
+     */
+    static unique_ptr<sf::RenderWindow> gui;
+
+    /**
+     * Stores the current SFML event (MouseClicked, Closed, etc)
+     */
+    static sf::Event event;
+
+    /**
      * Screen lock condition (if this is true, no user input will be registered)
      */
     static bool lockedFlag;
-
-    /**
-     * SFML window for rendering
-     */
-    static sf::RenderWindow *gui;
 
     /**
      * The possible game modes: SINGLE_PLAYER and MULTI_PLAYER
@@ -91,6 +97,11 @@ public:
      */
     static void previousScreen();
 
+    /**
+     * Returns the current mouse position as a 2-d vector of floats
+     */
+    static sf::Vector2f getMousePosition();
+
 private:
     /**
      * The screens that is currently being rendered
@@ -105,6 +116,7 @@ private:
      * makes going back easier and less buggy
      */
     static Screens previous;
+
 };
 
 #endif// BATTLESHIP_STATE_H

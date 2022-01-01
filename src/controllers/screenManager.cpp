@@ -3,6 +3,7 @@
  */
 
 #include "screenManager.hpp"
+
 #include "../screens/difficultySelection.hpp"
 #include "../screens/fleetPlacement.hpp"
 #include "../screens/gameModeSelection.hpp"
@@ -16,7 +17,7 @@ using screen::ScreenManager;
 using screen::Screens;
 
 ScreenManager::ScreenManager() {
-    State::gui = new sf::RenderWindow(sf::VideoMode(State::width, State::height), "Battleship", sf::Style::Titlebar | sf::Style::Close);
+    State::gui = std::make_unique<sf::RenderWindow>(sf::VideoMode(State::width, State::height), "Battleship", sf::Style::Titlebar | sf::Style::Close);
     State::gui->setFramerateLimit(60);
 
     screenList[HOMEPAGE] = &Homepage::getInstance();

@@ -1,5 +1,4 @@
 /**
- * File: gameOver.h
  * Description: Front-end class that defines the behaviour of the Game Over screens
  */
 
@@ -71,29 +70,19 @@ namespace screen {
         Button *homepageButton;
 
         /**
-         * Mouse position vector
-         */
-        sf::Vector2f mousePosition;
-
-        /**
-         * System event
-         */
-        sf::Event event{};
-
-        /**
          * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
          */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void update();
 
         /**
          * Polls for system events
          */
-        void poll(sf::RenderWindow &gui);
+        void poll();
 
         /**
          * Renders all sprites
          */
-        void render(sf::RenderWindow &gui);
+        void render();
 
         /**
          * Constructor

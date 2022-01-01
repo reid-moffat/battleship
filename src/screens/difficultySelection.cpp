@@ -4,7 +4,7 @@
  */
 
 #include "difficultySelection.hpp"
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 
 using screen::DifficultySelection;
 
@@ -36,17 +36,20 @@ DifficultySelection &screen::DifficultySelection::getInstance() {
     return *instance;
 }
 
-void DifficultySelection::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
-    updateMousePosition(gui, mousePos);
-    this->easyButton->updateButtonState(mousePos);
-    this->hardButton->updateButtonState(mousePos);
-    this->backButton->updateButtonState(mousePos);
-    this->instructionsButton->updateButtonState(mousePos);
+void DifficultySelection::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
+    this->easyButton->updateButtonState(mousePosition);
+    this->hardButton->updateButtonState(mousePosition);
+    this->backButton->updateButtonState(mousePosition);
+    this->instructionsButton->updateButtonState(mousePosition);
 }
 
-void DifficultySelection::poll(sf::RenderWindow &gui) {
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+void DifficultySelection::poll() {
+    sf::RenderWindow &gui = *State::gui;
+    sf::Event &event = State::event;
+
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();
@@ -77,7 +80,8 @@ void DifficultySelection::poll(sf::RenderWindow &gui) {
     }
 }
 
-void DifficultySelection::render(sf::RenderWindow &gui) {
+void DifficultySelection::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     gui.draw(this->backgroundSprite);
@@ -92,7 +96,7 @@ void DifficultySelection::render(sf::RenderWindow &gui) {
 }
 
 void DifficultySelection::run() {
-    this->update(*State::gui, this->mousePosition);
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->update();
+    this->poll();
+    this->render();
 }

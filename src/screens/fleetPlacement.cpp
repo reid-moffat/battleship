@@ -4,13 +4,13 @@
  */
 
 #include "fleetPlacement.hpp"
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 #include "gameplay.hpp"
 
 using screen::FleetPlacement;
 using std::get;
 
-FleetPlacement* FleetPlacement::instance = nullptr;
+FleetPlacement *FleetPlacement::instance = nullptr;
 
 FleetPlacement::FleetPlacement() : ScreenTemplate() {
     loadTexture(this->fleetPlacementDefaultBackgroundTexture, "fleetPlacement/FleetPlacementBackground.png");
@@ -216,16 +216,19 @@ void FleetPlacement::resetFleetLayout() {
     this->rowBoatSprite.setRotation(0);
 }
 
-void FleetPlacement::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
-    updateMousePosition(gui, mousePos);
-    this->readyButton->updateButtonState(mousePos);
-    this->randomizeButton->updateButtonState(mousePos);
-    this->instructionsButton->updateButtonState(mousePos);
+void FleetPlacement::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
+    this->readyButton->updateButtonState(mousePosition);
+    this->randomizeButton->updateButtonState(mousePosition);
+    this->instructionsButton->updateButtonState(mousePosition);
 }
 
-void FleetPlacement::poll(sf::RenderWindow &gui) {
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+void FleetPlacement::poll() {
+    sf::RenderWindow &gui = *State::gui;
+    sf::Event &event = State::event;
+
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();
@@ -276,7 +279,8 @@ void FleetPlacement::poll(sf::RenderWindow &gui) {
     }
 }
 
-void FleetPlacement::render(sf::RenderWindow &gui) {
+void FleetPlacement::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     if (State::gameMode == State::SINGLE_PLAYER) {
@@ -309,9 +313,9 @@ void FleetPlacement::render(sf::RenderWindow &gui) {
 }
 
 void FleetPlacement::run() {
-    this->update(*State::gui, this->mousePosition);
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->update();
+    this->poll();
+    this->render();
 }
 
 FleetPlacement &screen::FleetPlacement::getInstance() {

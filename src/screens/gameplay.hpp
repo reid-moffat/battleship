@@ -91,16 +91,6 @@ namespace screen {
         set<Coordinate> coordinateSet;
 
         /**
-         * Mouse position vector
-         */
-        sf::Vector2f mousePosition;
-
-        /**
-         * System event
-         */
-        sf::Event event{};
-
-        /**
          * Generates a set of grid coordinates
          */
         void createCoordinateSet();
@@ -143,7 +133,7 @@ namespace screen {
         /**
          * Updates grid state
          */
-        void updateGrid(Coordinate coordinate, sf::RenderWindow &grid);
+        void updateGrid(Coordinate &coordinate, sf::RenderWindow &grid);
 
         /**
          * Sets the fleet layout of the current player
@@ -153,22 +143,22 @@ namespace screen {
         /**
          * Calls helpers::updateMousePosition(), Button::updateButtonState(), Target::updateTargetState(), Grid::getShips(), and Gameplay::setFleetLayout()
          */
-        void update(sf::RenderWindow &gui, sf::Vector2f mousePosition);
+        void update();
 
         /**
          * Polls for system events
          */
-        void poll(sf::RenderWindow &gui);
+        void poll();
 
         /**
          * Renders ship status
          */
-        void renderShipStatus(Grid &grid, sf::RenderWindow &gui);
+        void renderShipStatus(Grid &grid);
 
         /**
          * Renders all sprites
          */
-        void render(sf::RenderWindow &gui);
+        void render();
 
         /**
          * The sleep time after a player attacks in milliseconds

@@ -4,7 +4,7 @@
  */
 
 #include "instructions.hpp"
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 
 using screen::Instructions;
 
@@ -20,14 +20,17 @@ Instructions::Instructions() : ScreenTemplate() {
     this->backButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleBackButtonTexture, this->activeBackButtonTexture);
 }
 
-void Instructions::update(sf::RenderWindow &gui, sf::Vector2f mousePosition) {
-    updateMousePosition(gui, mousePosition);
+void Instructions::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
     this->backButton->updateButtonState(mousePosition);
 }
 
-void Instructions::poll(sf::RenderWindow &gui) {
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+void Instructions::poll() {
+    sf::RenderWindow &gui = *State::gui;
+    sf::Event &event = State::event;
+
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();
@@ -47,7 +50,8 @@ void Instructions::poll(sf::RenderWindow &gui) {
     }
 }
 
-void Instructions::render(sf::RenderWindow &gui) {
+void Instructions::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     gui.draw(this->backgroundSprite);
@@ -59,9 +63,9 @@ void Instructions::render(sf::RenderWindow &gui) {
 }
 
 void Instructions::run() {
-    this->update(*State::gui, this->mousePosition);
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->update();
+    this->poll();
+    this->render();
 }
 
 Instructions &screen::Instructions::getInstance() {

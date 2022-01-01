@@ -4,7 +4,7 @@
  */
 
 #include "intermediary.hpp"
-#include "../helpers.hpp"
+#include "../helpers/helperFunctions.hpp"
 
 using screen::Intermediary;
 
@@ -22,14 +22,17 @@ Intermediary::Intermediary() : ScreenTemplate() {
     this->continueButton = new Button(sf::Vector2f(144 * 5, 108 * 5), sf::Vector2f(5, 5), this->idleContinueButtonTexture, this->activeContinueButtonTexture);
 }
 
-void Intermediary::update(sf::RenderWindow &gui, sf::Vector2f mousePos) {
-    updateMousePosition(gui, mousePos);
-    this->continueButton->updateButtonState(mousePos);
+void Intermediary::update() {
+    sf::Vector2f mousePosition = State::getMousePosition();
+    this->continueButton->updateButtonState(mousePosition);
 }
 
-void Intermediary::poll(sf::RenderWindow &gui) {
-    while (gui.pollEvent(this->event)) {
-        switch (this->event.type) {
+void Intermediary::poll() {
+    sf::RenderWindow &gui = *State::gui;
+    sf::Event &event = State::event;
+
+    while (gui.pollEvent(event)) {
+        switch (event.type) {
 
             case sf::Event::Closed:
                 gui.close();
@@ -60,7 +63,8 @@ void Intermediary::poll(sf::RenderWindow &gui) {
     }
 }
 
-void Intermediary::render(sf::RenderWindow &gui) {
+void Intermediary::render() {
+    sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
     if (State::player == State::Player::P2) {
@@ -76,9 +80,9 @@ void Intermediary::render(sf::RenderWindow &gui) {
 }
 
 void Intermediary::run() {
-    this->update(*State::gui, this->mousePosition);
-    this->poll(*State::gui);
-    this->render(*State::gui);
+    this->update();
+    this->poll();
+    this->render();
 }
 
 Intermediary &screen::Intermediary::getInstance() {
