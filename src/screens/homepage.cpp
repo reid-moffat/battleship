@@ -19,7 +19,7 @@ Homepage &Homepage::getInstance() {
 
 Homepage::Homepage() {
     const vector<string> texturePaths{"homepage/HomepageBackground.png", "homepage/IdlePlayButton.png", "homepage/ActivePlayButton.png"};
-    this->images = ImagesManager(texturePaths, {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background}});
+    this->images = ScreenResourceManager(texturePaths, {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background}});
 
     this->playButton = std::make_unique<Button>(sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5),
                                                 images.getTexture(textureNames::IdlePlayButton),

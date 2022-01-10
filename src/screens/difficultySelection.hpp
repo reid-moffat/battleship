@@ -6,8 +6,8 @@
 #ifndef BATTLESHIP_DIFFICULTYSELECTION_H
 #define BATTLESHIP_DIFFICULTYSELECTION_H
 
-#include "../entity/button.hpp"
 #include "../controllers/screenTemplate.hpp"
+#include "../entity/button.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
@@ -18,7 +18,7 @@ namespace screen {
         /**
          *
          */
-        static DifficultySelection& getInstance();
+        static DifficultySelection &getInstance();
 
         /**
          * Copy constructor
@@ -32,14 +32,36 @@ namespace screen {
 
     private:
         /**
-         *
+         * Singleton instance
          */
-        static DifficultySelection *instance;
+        static std::unique_ptr<DifficultySelection> instance;
 
         /**
-         *
+         * Singleton constructor
          */
         DifficultySelection();
+
+        // SFML event loop helpers
+        void update() override;
+        void poll() override;
+        void render() override;
+
+        /**
+         * Names to refer to the textures on this screen
+         */
+        enum textureNames { Background,
+                            IdlePlayButton,
+                            ActivePlayButton };
+
+        /**
+         * Names to refer to the sprites on this screen
+         */
+        enum spriteNames { Backgrounds };
+
+        /**
+         * Play button
+         */
+        std::unique_ptr<Button> playButton;
 
         /**
          * Background texture
@@ -94,39 +116,23 @@ namespace screen {
         /**
          * Easy button
          */
-        Button *easyButton;
+        std::unique_ptr<Button> easyButton;
 
         /**
          * Hard button
          */
-        Button *hardButton;
+        std::unique_ptr<Button> hardButton;
 
         /**
          * Back button
          */
-        Button *backButton;
+        std::unique_ptr<Button> backButton;
 
         /**
          * Instructions button
          */
         std::unique_ptr<Button> instructionsButton;
-
-        /**
-         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
-         */
-        void update();
-
-        /**
-         * Polls for system events
-         */
-        void poll();
-
-        /**
-         * Renders all sprites
-         */
-        void render();
-
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_DIFFICULTYSELECTION_H

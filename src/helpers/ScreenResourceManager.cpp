@@ -2,12 +2,12 @@
  *
  */
 
-#include "ImagesManager.hpp"
+#include "ScreenResourceManager.hpp"
 #include <sstream>
 
 using std::get;
 
-ImagesManager::ImagesManager(const vector<string>& texturePaths, const vector<tuple<sf::Vector2f, sf::Vector2f, int>>& spritesData) {
+ScreenResourceManager::ScreenResourceManager(const vector<string>& texturePaths, const vector<tuple<sf::Vector2f, sf::Vector2f, int>>& spritesData) {
     for (int i = 0; i < texturePaths.size(); ++i) {
         // Add a new texture
         this->textures.emplace_back();
@@ -31,7 +31,7 @@ ImagesManager::ImagesManager(const vector<string>& texturePaths, const vector<tu
     }
 }
 
-sf::Texture &ImagesManager::getTexture(const int index) {
+sf::Texture &ScreenResourceManager::getTexture(const int index) {
     if (index > textures.size()) {
         std::ostringstream errMsg;
         errMsg << "Error: must provide an index between 0 and " << textures.size() << "; " << index << " is invalid";
@@ -40,7 +40,7 @@ sf::Texture &ImagesManager::getTexture(const int index) {
     return textures[index];
 }
 
-sf::Sprite &ImagesManager::getSprite(const int index) {
+sf::Sprite &ScreenResourceManager::getSprite(const int index) {
     if (index > sprites.size()) {
         std::ostringstream errMsg;
         errMsg << "Error: must provide an index between 0 and " << sprites.size() << "; " << index << " is invalid";
@@ -49,4 +49,13 @@ sf::Sprite &ImagesManager::getSprite(const int index) {
     return sprites[index];
 }
 
-ImagesManager::ImagesManager() = default;
+Button &ScreenResourceManager::getButton(const int index) {
+    if (index > sprites.size()) {
+        std::ostringstream errMsg;
+        errMsg << "Error: must provide an index between 0 and " << buttons.size() << "; " << index << " is invalid";
+        throw std::invalid_argument(errMsg.str());
+    }
+    return buttons[index];
+}
+
+ScreenResourceManager::ScreenResourceManager() = default;

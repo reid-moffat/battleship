@@ -5,7 +5,7 @@
 #ifndef BATTLESHIP_SCREENTEMPLATE_H
 #define BATTLESHIP_SCREENTEMPLATE_H
 
-#include "../helpers/ImagesManager.hpp"
+#include "../helpers/ScreenResourceManager.hpp"
 #include "state.hpp"
 #include <SFML/System.hpp>
 
@@ -39,7 +39,7 @@ namespace screen {
         /**
          * All the textures and sprites for this screen
          */
-        ImagesManager images;
+        ScreenResourceManager images;
 
         /**
          *

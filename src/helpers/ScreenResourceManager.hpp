@@ -5,12 +5,14 @@
 #ifndef BATTLESHIP_RESOURCEMANAGER_H
 #define BATTLESHIP_RESOURCEMANAGER_H
 
+#include "../entity/button.hpp"
 #include "helperFunctions.hpp"
 
-using std::vector;
 using std::tuple;
+using std::vector;
+using entity::Button;
 
-class ImagesManager {
+class ScreenResourceManager {
 public:
     /**
      * Initializes this manager with textures and sprites
@@ -21,12 +23,12 @@ public:
      *                -The scale of the sprite (sf::Vector2f)
      *                -The corresponding texture (its index in the texturePaths)
      */
-    ImagesManager(const vector<string>& texturePaths, const vector<tuple<sf::Vector2f, sf::Vector2f, int>>& sprites);
+    ScreenResourceManager(const vector<string> &texturePaths, const vector<tuple<sf::Vector2f, sf::Vector2f, int>> &sprites);
 
     /**
      * Default constructor
      */
-    ImagesManager();
+    ScreenResourceManager();
 
     /**
      * Returns a reference to the texture at the specified index
@@ -38,6 +40,11 @@ public:
      */
     sf::Sprite &getSprite(int index);
 
+    /**
+     * Returns a reference to the button at the specified index
+     */
+    Button &getButton(int index);
+
 private:
     /**
      * All the SFML textures in this manager
@@ -48,6 +55,12 @@ private:
      * All the SFML sprites in this manager
      */
     vector<sf::Sprite> sprites;
+
+    /**
+     * All the SFML buttons in this manager
+     */
+    vector<Button> buttons;
+
 };
 
 #endif//BATTLESHIP_RESOURCEMANAGER_H
