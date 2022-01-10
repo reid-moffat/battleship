@@ -114,7 +114,7 @@ namespace screen {
         /**
          * Instructions button
          */
-        Button *instructionsButton;
+        std::unique_ptr<Button> instructionsButton;
 
         /**
          * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()

@@ -8,7 +8,7 @@
 
 using screen::DifficultySelection;
 
-DifficultySelection* DifficultySelection::instance = nullptr;
+DifficultySelection *DifficultySelection::instance = nullptr;
 
 DifficultySelection::DifficultySelection() : ScreenTemplate() {
     loadTexture(this->difficultyBackgroundTexture, "difficultySelection/DifficultyBackground.png");
@@ -26,7 +26,7 @@ DifficultySelection::DifficultySelection() : ScreenTemplate() {
     this->easyButton = new Button(sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleEasyButtonTexture, this->activeEasyButtonTexture);
     this->hardButton = new Button(sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleHardButtonTexture, this->activeHardButtonTexture);
     this->backButton = new Button(sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleBackButtonTexture, this->activeBackButtonTexture);
-    this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButton, this->activeInstructionsButton);
+    this->instructionsButton = std::make_unique<Button>(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButton, this->activeInstructionsButton);
 }
 
 DifficultySelection &screen::DifficultySelection::getInstance() {
