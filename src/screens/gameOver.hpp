@@ -110,10 +110,6 @@ namespace screen {
          */
         GameOver &operator=(const GameOver &source) = delete;
 
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
     };
 }// namespace screens
 

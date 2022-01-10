@@ -4,7 +4,6 @@
  */
 
 #include "fleetPlacement.hpp"
-#include "../helpers/helperFunctions.hpp"
 #include "gameplay.hpp"
 
 using screen::FleetPlacement;
@@ -310,12 +309,6 @@ void FleetPlacement::render() {
     if (State::getCurrentScreen() == Screens::FLEET_PLACEMENT) {
         gui.display();
     }
-}
-
-void FleetPlacement::run() {
-    this->update();
-    this->poll();
-    this->render();
 }
 
 FleetPlacement &screen::FleetPlacement::getInstance() {

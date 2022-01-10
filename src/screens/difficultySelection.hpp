@@ -30,11 +30,6 @@ namespace screen {
          */
         DifficultySelection &operator=(const DifficultySelection &source) = delete;
 
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
-
     private:
         /**
          *

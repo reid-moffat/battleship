@@ -543,12 +543,6 @@ void Gameplay::render() {
     }
 }
 
-void Gameplay::run() {
-    this->update();
-    this->poll();
-    this->render();
-}
-
 void screen::Gameplay::sleepMS() {
 #ifdef _WIN32
     Sleep(sleepTimeMS);

@@ -226,11 +226,6 @@ namespace screen {
         FleetPlacement &operator=(const FleetPlacement &source) = delete;
 
         /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
-
-        /**
          *
          */
         static FleetPlacement &getInstance();

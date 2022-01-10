@@ -49,11 +49,6 @@ namespace screen {
          */
         static void setP2Grid(const map<shipNames, tuple<Coordinate, bool>> &ships);
 
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
-
     private:
         /**
          * Constructor

@@ -79,12 +79,6 @@ void Intermediary::render() {
     }
 }
 
-void Intermediary::run() {
-    this->update();
-    this->poll();
-    this->render();
-}
-
 Intermediary &screen::Intermediary::getInstance() {
     if (instance == nullptr) {
         instance = new Intermediary();

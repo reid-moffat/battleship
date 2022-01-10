@@ -92,10 +92,6 @@ namespace screen {
          */
         Intermediary &operator=(const Intermediary &source) = delete;
 
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
     };
 }// namespace screens
 

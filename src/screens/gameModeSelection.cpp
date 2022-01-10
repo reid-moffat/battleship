@@ -88,12 +88,6 @@ void GameModeSelection::render() {
     }
 }
 
-void GameModeSelection::run() {
-    this->update();
-    this->poll();
-    this->render();
-}
-
 GameModeSelection &screen::GameModeSelection::getInstance() {
     if (instance == nullptr) {
         instance = new GameModeSelection();

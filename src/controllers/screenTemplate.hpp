@@ -18,7 +18,7 @@ namespace screen {
         /**
          * Renders this screens to the GUI
          */
-        virtual void run() = 0;
+        void run();
 
         /**
          * Copy constructor for heap memory
@@ -40,6 +40,21 @@ namespace screen {
          * All the textures and sprites for this screen
          */
         ImagesManager images;
+
+        /**
+         *
+         */
+        virtual void update() = 0;
+
+        /**
+         *
+         */
+        virtual void poll() = 0;
+
+        /**
+         *
+         */
+        virtual void render() = 0;
     };
 
 }// namespace screen

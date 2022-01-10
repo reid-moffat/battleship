@@ -82,10 +82,6 @@ namespace screen {
          */
         Instructions &operator=(const Instructions &source) = delete;
 
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
     };
 }// namespace screens
 

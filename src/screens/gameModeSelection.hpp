@@ -126,10 +126,6 @@ namespace screen {
          */
         GameModeSelection &operator=(const GameModeSelection &source) = delete;
 
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
     };
 }// namespace screen
 

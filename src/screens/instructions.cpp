@@ -62,12 +62,6 @@ void Instructions::render() {
     }
 }
 
-void Instructions::run() {
-    this->update();
-    this->poll();
-    this->render();
-}
-
 Instructions &screen::Instructions::getInstance() {
     if (instance == nullptr) {
         instance = new Instructions;

@@ -20,11 +20,6 @@ namespace screen {
         static Homepage &getInstance();
 
         /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
-
-        /**
          * Copy constructor
          */
         Homepage(const Homepage &source) = delete;
@@ -46,9 +41,9 @@ namespace screen {
         Homepage();
 
         // SFML event loop helpers
-        void update();
-        void poll();
-        void render();
+        void update() override;
+        void poll() override;
+        void render() override;
 
         /**
          * Names to refer to the textures on this screen

@@ -4,7 +4,6 @@
  */
 
 #include "difficultySelection.hpp"
-#include "../helpers/helperFunctions.hpp"
 
 using screen::DifficultySelection;
 
@@ -93,10 +92,4 @@ void DifficultySelection::render() {
     if (State::getCurrentScreen() == Screens::DIFFICULTY_SELECTION) {
         gui.display();
     }
-}
-
-void DifficultySelection::run() {
-    this->update();
-    this->poll();
-    this->render();
 }

@@ -7,3 +7,9 @@
 using screen::ScreenTemplate;
 
 ScreenTemplate::ScreenTemplate() = default;
+
+void screen::ScreenTemplate::run() {
+    this->update();
+    this->poll();
+    this->render();
+}

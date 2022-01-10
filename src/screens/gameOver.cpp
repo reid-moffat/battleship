@@ -80,12 +80,6 @@ void GameOver::render() {
     }
 }
 
-void GameOver::run() {
-    this->update();
-    this->poll();
-    this->render();
-}
-
 GameOver& screen::GameOver::getInstance() {
     if (instance == nullptr) {
         instance = new GameOver();

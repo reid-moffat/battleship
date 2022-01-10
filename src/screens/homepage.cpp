@@ -17,12 +17,6 @@ Homepage &Homepage::getInstance() {
     return *instance;
 }
 
-void Homepage::run() {
-    this->update();
-    this->poll();
-    this->render();
-}
-
 Homepage::Homepage() {
     const vector<string> texturePaths{"homepage/HomepageBackground.png", "homepage/IdlePlayButton.png", "homepage/ActivePlayButton.png"};
     this->images = ImagesManager(texturePaths, {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background}});
