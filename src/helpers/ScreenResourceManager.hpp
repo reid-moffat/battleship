@@ -8,9 +8,9 @@
 #include "../entity/button.hpp"
 #include "helperFunctions.hpp"
 
+using entity::Button;
 using std::tuple;
 using std::vector;
-using entity::Button;
 
 class ScreenResourceManager {
 public:
@@ -22,8 +22,15 @@ public:
      *                -The initial position (sf::Vector2f)
      *                -The scale of the sprite (sf::Vector2f)
      *                -The corresponding texture (its index in the texturePaths)
+     * @param buttons data to initialize each button:
+     *                -The initial position (sf::Vector2f)
+     *                -The scale of the button (sf::Vector2f)
+     *                -The corresponding texture for when the button is idle (its index in the texturePaths)
+     *                -The corresponding texture for when the button is active (its index in the texturePaths)
      */
-    ScreenResourceManager(const vector<string> &texturePaths, const vector<tuple<sf::Vector2f, sf::Vector2f, int>> &sprites);
+    ScreenResourceManager(const vector<string> &texturePaths,
+                          const vector<tuple<sf::Vector2f, sf::Vector2f, int>> &sprites,
+                          const vector<tuple<sf::Vector2f, sf::Vector2f, int, int>> &buttons);
 
     /**
      * Default constructor
@@ -59,8 +66,7 @@ private:
     /**
      * All the SFML buttons in this manager
      */
-    vector<Button> buttons;
-
+    vector<unique_ptr<Button>> buttons;
 };
 
 #endif//BATTLESHIP_RESOURCEMANAGER_H

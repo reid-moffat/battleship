@@ -45,22 +45,13 @@ namespace screen {
         void poll() override;
         void render() override;
 
-        /**
-         * Names to refer to the textures on this screen
-         */
+        // Names to refer to resources on this screen
         enum textureNames { Background,
                             IdlePlayButton,
                             ActivePlayButton };
-
-        /**
-         * Names to refer to the sprites on this screen
-         */
         enum spriteNames { Backgrounds };
+        enum buttonNames { PlayButton } ;
 
-        /**
-         * Play button
-         */
-        std::unique_ptr<Button> playButton;
     };
 }// namespace screen
 

@@ -7,7 +7,10 @@
 
 using std::get;
 
-ScreenResourceManager::ScreenResourceManager(const vector<string>& texturePaths, const vector<tuple<sf::Vector2f, sf::Vector2f, int>>& spritesData) {
+ScreenResourceManager::ScreenResourceManager(const vector<string> &texturePaths,
+                                             const vector<tuple<sf::Vector2f, sf::Vector2f, int>> &spritesData,
+                                             const vector<tuple<sf::Vector2f, sf::Vector2f, int, int>> &buttons) {
+
     for (int i = 0; i < texturePaths.size(); ++i) {
         // Add a new texture
         this->textures.emplace_back();
@@ -23,11 +26,16 @@ ScreenResourceManager::ScreenResourceManager(const vector<string>& texturePaths,
         // Add a new sprite
         this->sprites.emplace_back();
 
-        // Set the required data for the sprite
+        // Get the required data for the sprite
         auto sprite = &this->sprites[i];
-        sprite->setPosition(get<0>(spritesData[i]));
-        sprite->setScale(get<1>(spritesData[i]));
-        sprite->setTexture(textures[get<2>(spritesData[i])]);
+        auto const position = get<0>(spritesData[i]);
+        auto const scale = get<1>(spritesData[i]);
+        auto const texture = textures[get<2>(spritesData[i])];
+
+        // Initialize the sprite with its required data
+        sprite->setPosition(position);
+        sprite->setScale(scale);
+        sprite->setTexture(texture);
     }
 }
 
@@ -55,7 +63,7 @@ Button &ScreenResourceManager::getButton(const int index) {
         errMsg << "Error: must provide an index between 0 and " << buttons.size() << "; " << index << " is invalid";
         throw std::invalid_argument(errMsg.str());
     }
-    return buttons[index];
+    return *buttons[index];
 }
 
 ScreenResourceManager::ScreenResourceManager() = default;
