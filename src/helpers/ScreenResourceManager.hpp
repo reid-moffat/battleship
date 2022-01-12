@@ -66,7 +66,7 @@ private:
     /**
      * All the SFML buttons in this manager
      */
-    vector<unique_ptr<Button>> buttons;
+    vector<Button> buttons;
 };
 
 #endif//BATTLESHIP_RESOURCEMANAGER_H

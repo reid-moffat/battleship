@@ -39,7 +39,7 @@ namespace screen {
         /**
          * All the textures and sprites for this screen
          */
-        ScreenResourceManager images;
+        ScreenResourceManager resources;
 
         /**
          *
