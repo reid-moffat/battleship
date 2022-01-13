@@ -40,7 +40,7 @@ void Homepage::poll() {
                 gui.close();
                 break;
             case sf::Event::MouseButtonReleased:
-                if ((event.mouseButton.button == sf::Mouse::Left) && (resources.getButton(buttonNames::PlayButton).getButtonState())) {
+                if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::PlayButton).getButtonState()) {
                     State::changeScreen(Screens::GAME_MODE_SELECTION);
                     break;
                 } else {

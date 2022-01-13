@@ -31,12 +31,12 @@ ScreenResourceManager::ScreenResourceManager(const vector<string> &texturePaths,
         auto sprite = &this->sprites[i];
         auto const position = get<0>(spritesData[i]);
         auto const scale = get<1>(spritesData[i]);
-        auto const texture = textures[get<2>(spritesData[i])];
+        auto const *texture = &textures[get<2>(spritesData[i])];
 
         // Initialize the sprite with its required data
         sprite->setPosition(position);
         sprite->setScale(scale);
-        sprite->setTexture(texture);
+        sprite->setTexture(*texture);
     }
 
     // Initialize the buttons
