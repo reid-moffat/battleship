@@ -30,14 +30,10 @@ namespace screen {
         Homepage &operator=(const Homepage &source) = delete;
 
     private:
-        /**
-         * Singleton instance
-         */
+        // Singleton instance
         static std::unique_ptr<Homepage> instance;
 
-        /**
-         * Singleton constructor
-         */
+        // Singleton constructor
         Homepage();
 
         // SFML event loop helpers
@@ -46,10 +42,10 @@ namespace screen {
         void render() override;
 
         // Names to refer to resources on this screen
-        enum textureNames { Background,
+        enum textureNames { Background_,
                             IdlePlayButton,
                             ActivePlayButton };
-        enum spriteNames { Backgrounds };
+        enum spriteNames { Background };
         enum buttonNames { PlayButton } ;
 
     };
