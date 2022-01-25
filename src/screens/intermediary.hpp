@@ -1,81 +1,18 @@
 /**
- * File: intermediary.h
- * Description: Front-end class that defines the behaviour of the Intermediary screens
+ * Front-end class that defines the behaviour of the Intermediary screens
  */
 
 #ifndef BATTLESHIP_INTERMEDIARY_H
 #define BATTLESHIP_INTERMEDIARY_H
 
-#include "../entity/button.hpp"
 #include "../controllers/screenTemplate.hpp"
-
+#include "../entity/button.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
 
 namespace screen {
     class Intermediary : public ScreenTemplate {
-    private:
-        /**
-         * P1 background texture
-         */
-        sf::Texture intermediaryP1BackgroundTexture;
-
-        /**
-         * P2 background texture
-         */
-        sf::Texture intermediaryP2BackgroundTexture;
-
-        /**
-         * Idle continue button texture
-         */
-        sf::Texture idleContinueButtonTexture;
-
-        /**
-         * Active continue button texture
-         */
-        sf::Texture activeContinueButtonTexture;
-
-        /**
-         * Background P1 sprite
-         */
-        sf::Sprite backgroundP1Sprite;
-
-        /**
-         * Background P2 sprite
-         */
-        sf::Sprite backgroundP2Sprite;
-
-        /**
-         * Continue button 
-         */
-        Button *continueButton;
-
-        /**
-         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
-         */
-        void update();
-
-        /**
-         * Polls for system events
-         */
-        void poll();
-
-        /**
-         * Renders all sprites
-         */
-        void render();
-
-        /**
-         *
-         */
-        static Intermediary *instance;
-
-        /**
-         * Constructor
-         */
-        Intermediary();
-
     public:
         /**
          *
@@ -92,7 +29,27 @@ namespace screen {
          */
         Intermediary &operator=(const Intermediary &source) = delete;
 
+    private:
+        // Singleton instance
+        static std::unique_ptr<Intermediary> instance;
+
+        // Singleton constructor
+        Intermediary();
+
+        // SFML event loop helpers
+        void update() override;
+        void poll() override;
+        void render() override;
+
+        // Names to refer to resources on this screen
+        enum textureNames { IntermediaryP1Background,
+                            IntermediaryP2Background,
+                            IdleContinueButton,
+                            ActiveContinueButton };
+        enum spriteNames { BackgroundP1,
+                           BackgroundP2 };
+        enum buttonNames { ContinueButton };
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_INTERMEDIARY_H
