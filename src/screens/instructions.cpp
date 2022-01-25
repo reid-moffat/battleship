@@ -4,7 +4,6 @@
  */
 
 #include "instructions.hpp"
-#include "../helpers/helperFunctions.hpp"
 
 using screen::Instructions;
 
@@ -19,10 +18,10 @@ Instructions &screen::Instructions::getInstance() {
 
 Instructions::Instructions() : ScreenTemplate() {
     const vector<string> texturePaths{"instructions/InstructionsBackground.png", "instructions/IdleBackButton.png", "instructions/ActiveBackButton.png"};
-
     this->resources = ScreenResourceManager(texturePaths,
                                             {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background_}},
-                                            {{sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), textureNames::IdleBackButton, textureNames::ActiveBackButton}});
+                                            {{sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5),
+                                              textureNames::IdleBackButton, textureNames::ActiveBackButton}});
 }
 
 void Instructions::update() {

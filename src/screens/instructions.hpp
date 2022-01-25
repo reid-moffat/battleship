@@ -8,7 +8,6 @@
 
 #include "../controllers/screenTemplate.hpp"
 #include "../entity/button.hpp"
-
 #include <SFML/System.hpp>
 
 using entity::Button;
@@ -48,8 +47,7 @@ namespace screen {
                             IdleBackButton,
                             ActiveBackButton };
         enum spriteNames { Background };
-        enum buttonNames { BackButton } ;
-
+        enum buttonNames { BackButton };
     };
 }// namespace screen
 
