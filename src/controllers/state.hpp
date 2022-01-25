@@ -116,7 +116,6 @@ private:
      * makes going back easier and less buggy
      */
     static Screens previous;
-
 };
 
 #endif// BATTLESHIP_STATE_H

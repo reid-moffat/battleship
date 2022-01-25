@@ -80,7 +80,7 @@ void GameOver::render() {
     }
 }
 
-GameOver& screen::GameOver::getInstance() {
+GameOver &screen::GameOver::getInstance() {
     if (instance == nullptr) {
         instance = new GameOver();
     }

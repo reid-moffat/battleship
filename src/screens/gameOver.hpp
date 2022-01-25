@@ -5,8 +5,8 @@
 #ifndef BATTLESHIP_GAMEOVER_H
 #define BATTLESHIP_GAMEOVER_H
 
-#include "../entity/button.hpp"
 #include "../controllers/screenTemplate.hpp"
+#include "../entity/button.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
@@ -109,8 +109,7 @@ namespace screen {
          * Overloaded assignment operator
          */
         GameOver &operator=(const GameOver &source) = delete;
-
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_GAMEOVER_H

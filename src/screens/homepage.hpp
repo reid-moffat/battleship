@@ -46,8 +46,7 @@ namespace screen {
                             IdlePlayButton,
                             ActivePlayButton };
         enum spriteNames { Background };
-        enum buttonNames { PlayButton } ;
-
+        enum buttonNames { PlayButton };
     };
 }// namespace screen
 

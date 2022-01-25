@@ -7,7 +7,7 @@
 
 using entity::Button;
 
-Button::Button(sf::Vector2f position, sf::Vector2f scale, sf::Texture& idleTexture, sf::Texture& activeTexture) {
+Button::Button(sf::Vector2f position, sf::Vector2f scale, sf::Texture &idleTexture, sf::Texture &activeTexture) {
     this->active = false;
     this->idleTexture = &idleTexture;
     this->activeTexture = &activeTexture;
@@ -26,7 +26,7 @@ void Button::render(sf::RenderWindow &window) const {
 }
 
 void Button::updateButtonState(const sf::Vector2f mousePosition) {
-    if (this->sprite->getGlobalBounds().contains(mousePosition)) { // Mouse is on the button
+    if (this->sprite->getGlobalBounds().contains(mousePosition)) {// Mouse is on the button
         this->active = true;
         this->sprite->setTexture(*this->activeTexture);
     } else {

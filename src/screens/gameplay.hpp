@@ -6,12 +6,12 @@
 #ifndef BATTLESHIP_GAMEPLAY_H
 #define BATTLESHIP_GAMEPLAY_H
 
+#include "../controllers/screenTemplate.hpp"
 #include "../entity/button.hpp"
 #include "../entity/coordinate.hpp"
 #include "../entity/grid.hpp"
-#include "../enums/shipNames.hpp"
 #include "../entity/target.hpp"
-#include "../controllers/screenTemplate.hpp"
+#include "../enums/shipNames.hpp"
 #include <SFML/System.hpp>
 #include <set>
 
@@ -425,6 +425,6 @@ namespace screen {
          */
         vector<sf::Sprite> secondaryMarkersP2Vector;
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_GAMEPLAY_H

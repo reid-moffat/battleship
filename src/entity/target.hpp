@@ -70,7 +70,6 @@ namespace entity {
          * Location of the target
          */
         Coordinate targetCoordinate;
-
     };
 
 }// namespace entity

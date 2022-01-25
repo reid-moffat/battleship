@@ -6,12 +6,12 @@
 #ifndef BATTLESHIP_GRID_H
 #define BATTLESHIP_GRID_H
 
-#include "coordinate.hpp"
 #include "../enums/shipNames.hpp"
 #include "../enums/squareType.hpp"
+#include "coordinate.hpp"
+#include <map>
 #include <memory>
 #include <vector>
-#include <map>
 
 using std::map;
 using std::tuple;

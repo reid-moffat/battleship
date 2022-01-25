@@ -125,7 +125,6 @@ namespace screen {
          * Overloaded assignment operator
          */
         GameModeSelection &operator=(const GameModeSelection &source) = delete;
-
     };
 }// namespace screen
 
