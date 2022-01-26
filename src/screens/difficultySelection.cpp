@@ -18,6 +18,10 @@ DifficultySelection::DifficultySelection() : ScreenTemplate() {
     this->resources = ScreenResourceManager(texturePaths,
                                             {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background_}},
                                             {});
+    this->resources.addButton(sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), textureNames::IdleEasyButton, textureNames::ActiveEasyButton);
+    this->resources.addButton(sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), textureNames::IdleHardButton, textureNames::ActiveHardButton);
+    this->resources.addButton(sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), textureNames::IdleBackButton, textureNames::ActiveBackButton);
+    this->resources.addButton(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), textureNames::IdleInstructionsButton, textureNames::ActiveInstructionsButton);
 
     loadTexture(this->difficultyBackgroundTexture, "difficultySelection/DifficultyBackground.png");
     loadTexture(this->idleEasyButtonTexture, "difficultySelection/IdleEasyButton.png");
