@@ -41,17 +41,14 @@ ScreenResourceManager::ScreenResourceManager(const vector<string> &texturePaths,
 
     // Initialize the buttons
     for (const auto &button : buttons) {
-        this->buttons.emplace_back(get<0>(button), get<1>(button), textures[get<2>(button)], textures[get<3>(button)]);
-    }
-}
+        // Get the button data
+        auto const position = get<0>(button);
+        auto const scale = get<1>(button);
+        auto *idleTexture = &textures[get<2>(button)];
+        auto *activeTexture = &textures[get<3>(button)];
 
-sf::Texture &ScreenResourceManager::getTexture(const int index) {
-    if (index > textures.size()) {
-        std::ostringstream errMsg;
-        errMsg << "Error: must provide an index between 0 and " << textures.size() << "; " << index << " is invalid";
-        throw std::invalid_argument(errMsg.str());
+        this->buttons.emplace_back(position, scale, *idleTexture, *activeTexture);
     }
-    return textures[index];
 }
 
 sf::Sprite &ScreenResourceManager::getSprite(const int index) {

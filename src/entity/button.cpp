@@ -7,7 +7,7 @@
 
 using entity::Button;
 
-Button::Button(sf::Vector2f position, sf::Vector2f scale, sf::Texture &idleTexture, sf::Texture &activeTexture) {
+Button::Button(const sf::Vector2f position, const sf::Vector2f scale, sf::Texture &idleTexture, sf::Texture &activeTexture) {
     this->active = false;
     this->idleTexture = &idleTexture;
     this->activeTexture = &activeTexture;

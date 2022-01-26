@@ -38,11 +38,6 @@ public:
     ScreenResourceManager();
 
     /**
-     * Returns a reference to the texture at the specified index
-     */
-    sf::Texture &getTexture(int index);
-
-    /**
      * Returns a reference to the sprite at the specified index
      */
     sf::Sprite &getSprite(int index);
