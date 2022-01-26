@@ -58,30 +58,29 @@ void DifficultySelection::poll() {
 
     while (gui.pollEvent(event)) {
         switch (event.type) {
-
             case sf::Event::Closed:
                 gui.close();
                 break;
-
             case sf::Event::MouseButtonReleased:
-                if ((event.mouseButton.button == sf::Mouse::Left) && (this->easyButton->getButtonState())) {
-                    State::difficulty = State::Difficulty::EASY;
-                    State::changeScreen(Screens::FLEET_PLACEMENT);
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->hardButton->getButtonState())) {
-                    State::difficulty = State::Difficulty::HARD;
-                    State::changeScreen(Screens::FLEET_PLACEMENT);
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->backButton->getButtonState())) {
-                    State::changeScreen(Screens::GAME_MODE_SELECTION);
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->instructionsButton->getButtonState())) {
-                    State::changeScreen(Screens::INSTRUCTIONS);
-                    break;
-                } else {
-                    break;
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    if (this->easyButton->getButtonState()) {
+                        State::difficulty = State::Difficulty::EASY;
+                        State::changeScreen(Screens::FLEET_PLACEMENT);
+                        break;
+                    } else if (this->hardButton->getButtonState()) {
+                        State::difficulty = State::Difficulty::HARD;
+                        State::changeScreen(Screens::FLEET_PLACEMENT);
+                        break;
+                    } else if (this->backButton->getButtonState()) {
+                        State::changeScreen(Screens::GAME_MODE_SELECTION);
+                        break;
+                    } else if (this->instructionsButton->getButtonState()) {
+                        State::changeScreen(Screens::INSTRUCTIONS);
+                        break;
+                    } else {
+                        break;
+                    }
                 }
-
             default:
                 break;
         }
@@ -92,7 +91,7 @@ void DifficultySelection::render() {
     sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
-    gui.draw(this->backgroundSprite);
+    gui.draw(resources.getSprite(spriteNames::Background));
     easyButton->render(gui);
     hardButton->render(gui);
     backButton->render(gui);
