@@ -32,6 +32,10 @@ public:
                           const vector<tuple<sf::Vector2f, sf::Vector2f, int>> &sprites,
                           const vector<tuple<sf::Vector2f, sf::Vector2f, int, int>> &buttons);
 
+    void addSprite(sf::Vector2f, sf::Vector2f, int);
+
+    void addButton(sf::Vector2f, sf::Vector2f, int, int);
+
     /**
      * Default constructor
      */

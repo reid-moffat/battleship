@@ -43,30 +43,29 @@ void GameModeSelection::poll() {
 
     while (gui.pollEvent(event)) {
         switch (event.type) {
-
             case sf::Event::Closed:
                 gui.close();
                 break;
-
             case sf::Event::MouseButtonReleased:
-                if ((event.mouseButton.button == sf::Mouse::Left) && (this->onePlayerButton->getButtonState())) {
-                    State::gameMode = State::GameMode::SINGLE_PLAYER;
-                    State::changeScreen(Screens::DIFFICULTY_SELECTION);
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->twoPlayerButton->getButtonState())) {
-                    State::gameMode = State::GameMode::MULTI_PLAYER;
-                    State::changeScreen(Screens::FLEET_PLACEMENT);
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->backButton->getButtonState())) {
-                    State::previousScreen();
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->instructionsButton->getButtonState())) {
-                    State::changeScreen(Screens::INSTRUCTIONS);
-                    break;
-                } else {
-                    break;
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    if (this->onePlayerButton->getButtonState()) {
+                        State::gameMode = State::GameMode::SINGLE_PLAYER;
+                        State::changeScreen(Screens::DIFFICULTY_SELECTION);
+                        break;
+                    } else if (this->twoPlayerButton->getButtonState()) {
+                        State::gameMode = State::GameMode::MULTI_PLAYER;
+                        State::changeScreen(Screens::FLEET_PLACEMENT);
+                        break;
+                    } else if (this->backButton->getButtonState()) {
+                        State::previousScreen();
+                        break;
+                    } else if (this->instructionsButton->getButtonState()) {
+                        State::changeScreen(Screens::INSTRUCTIONS);
+                        break;
+                    } else {
+                        break;
+                    }
                 }
-
             default:
                 break;
         }

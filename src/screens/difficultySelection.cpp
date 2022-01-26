@@ -10,6 +10,15 @@ using screen::DifficultySelection;
 std::unique_ptr<DifficultySelection> DifficultySelection::instance = nullptr;
 
 DifficultySelection::DifficultySelection() : ScreenTemplate() {
+    const vector<string> texturePaths{"difficultySelection/DifficultyBackground.png",
+                                      "difficultySelection/IdleEasyButton.png", "difficultySelection/ActiveEasyButton.png",
+                                      "difficultySelection/IdleHardButton.png", "difficultySelection/ActiveHardButton.png",
+                                      "difficultySelection/IdleBackButton.png", "difficultySelection/ActiveBackButton.png",
+                                      "difficultySelection/IdleInstructionsButton.png", "difficultySelection/ActiveInstructionsButton.png"};
+    this->resources = ScreenResourceManager(texturePaths,
+                                            {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background_}},
+                                            {});
+
     loadTexture(this->difficultyBackgroundTexture, "difficultySelection/DifficultyBackground.png");
     loadTexture(this->idleEasyButtonTexture, "difficultySelection/IdleEasyButton.png");
     loadTexture(this->activeEasyButtonTexture, "difficultySelection/ActiveEasyButton.png");

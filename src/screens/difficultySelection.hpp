@@ -31,14 +31,10 @@ namespace screen {
         DifficultySelection &operator=(const DifficultySelection &source) = delete;
 
     private:
-        /**
-         * Singleton instance
-         */
+        // Singleton instance
         static std::unique_ptr<DifficultySelection> instance;
 
-        /**
-         * Singleton constructor
-         */
+        // Singleton constructor
         DifficultySelection();
 
         // SFML event loop helpers
@@ -46,91 +42,43 @@ namespace screen {
         void poll() override;
         void render() override;
 
-        /**
-         * Names to refer to the textures on this screen
-         */
-        enum textureNames { Background,
-                            IdlePlayButton,
-                            ActivePlayButton };
+        // Names to refer to resources on this screen
+        enum textureNames {
+            Background_,
+            IdleEasyButton,
+            ActiveEasyButton,
+            IdleHardButton,
+            ActiveHardButton,
+            IdleBackButton,
+            ActiveBackButton,
+            IdleInstructionsButton,
+            ActiveInstructionsButton
+        };
+        enum spriteNames {
+            Background
+        };
+        enum buttonNames {
+            EasyButton,
+            HardButton,
+            BackButton,
+            InstructionsButton
+        };
 
-        /**
-         * Names to refer to the sprites on this screen
-         */
-        enum spriteNames { Backgrounds };
-
-        /**
-         * Play button
-         */
-        std::unique_ptr<Button> playButton;
-
-        /**
-         * Background texture
-         */
         sf::Texture difficultyBackgroundTexture;
-
-        /**
-         * Idle easy button texture
-         */
         sf::Texture idleEasyButtonTexture;
-
-        /**
-         * Active easy button texture
-         */
         sf::Texture activeEasyButtonTexture;
-
-        /**
-         * Idle hard button texture
-         */
         sf::Texture idleHardButtonTexture;
-
-        /**
-         * Active hard button texture
-         */
         sf::Texture activeHardButtonTexture;
-
-        /**
-         * Idle back button texture
-         */
         sf::Texture idleBackButtonTexture;
-
-        /**
-         * Active back button texture
-         */
         sf::Texture activeBackButtonTexture;
-
-        /**
-         * Idle instructions button texture
-         */
         sf::Texture idleInstructionsButton;
-
-        /**
-         * Active instructions button texture
-         */
         sf::Texture activeInstructionsButton;
 
-        /**
-         * Background sprite
-         */
         sf::Sprite backgroundSprite;
 
-        /**
-         * Easy button
-         */
         std::unique_ptr<Button> easyButton;
-
-        /**
-         * Hard button
-         */
         std::unique_ptr<Button> hardButton;
-
-        /**
-         * Back button
-         */
         std::unique_ptr<Button> backButton;
-
-        /**
-         * Instructions button
-         */
         std::unique_ptr<Button> instructionsButton;
     };
 }// namespace screen
