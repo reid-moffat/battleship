@@ -29,8 +29,6 @@ DifficultySelection::DifficultySelection() : ScreenTemplate() {
     loadTexture(this->idleInstructionsButton, "difficultySelection/IdleInstructionsButton.png");
     loadTexture(this->activeInstructionsButton, "difficultySelection/ActiveInstructionsButton.png");
 
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->difficultyBackgroundTexture, this->backgroundSprite);
-
     this->easyButton = std::make_unique<Button>(sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleEasyButtonTexture, this->activeEasyButtonTexture);
     this->hardButton = std::make_unique<Button>(sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleHardButtonTexture, this->activeHardButtonTexture);
     this->backButton = std::make_unique<Button>(sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleBackButtonTexture, this->activeBackButtonTexture);
