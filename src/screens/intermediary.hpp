@@ -42,13 +42,19 @@ namespace screen {
         void render() override;
 
         // Names to refer to resources on this screen
-        enum textureNames { IntermediaryP1Background,
-                            IntermediaryP2Background,
-                            IdleContinueButton,
-                            ActiveContinueButton };
-        enum spriteNames { BackgroundP1,
-                           BackgroundP2 };
-        enum buttonNames { ContinueButton };
+        enum textureNames {
+            IntermediaryP1Background,
+            IntermediaryP2Background,
+            IdleContinueButton,
+            ActiveContinueButton
+        };
+        enum spriteNames {
+            BackgroundP1,
+            BackgroundP2
+        };
+        enum buttonNames {
+            ContinueButton
+        };
     };
 }// namespace screen
 

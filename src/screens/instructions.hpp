@@ -43,11 +43,17 @@ namespace screen {
         void render() override;
 
         // Names to refer to resources on this screen
-        enum textureNames { Background_,
-                            IdleBackButton,
-                            ActiveBackButton };
-        enum spriteNames { Background };
-        enum buttonNames { BackButton };
+        enum textureNames {
+            Background_,
+            IdleBackButton,
+            ActiveBackButton
+        };
+        enum spriteNames {
+            Background
+        };
+        enum buttonNames {
+            BackButton
+        };
     };
 }// namespace screen
 
