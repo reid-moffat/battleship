@@ -7,7 +7,7 @@
 
 using screen::GameOver;
 
-GameOver *GameOver::instance = nullptr;
+std::unique_ptr<GameOver> GameOver::instance = nullptr;
 
 GameOver::GameOver() : ScreenTemplate() {
     loadTexture(this->gameOverWinBackgroundTexture, "gameOver/GameOverWinBackground.png");
@@ -82,7 +82,7 @@ void GameOver::render() {
 
 GameOver &screen::GameOver::getInstance() {
     if (instance == nullptr) {
-        instance = new GameOver();
+        instance.reset(new GameOver());
     }
     return *instance;
 }
