@@ -31,13 +31,11 @@ GameOver::GameOver() : ScreenTemplate() {
     setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverLoseBackgroundTexture, this->backgroundLoseSprite);
     setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverP1BackgroundTexture, this->backgroundP1Sprite);
     setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverP2BackgroundTexture, this->backgroundP2Sprite);
-
-    this->homepageButton = new Button(sf::Vector2f(136 * 5, 108 * 5), sf::Vector2f(5, 5), this->idleHomepageButtonTexture, this->activeHomepageButtonTexture);
 }
 
 void GameOver::update() {
     sf::Vector2f mousePosition = State::getMousePosition();
-    this->homepageButton->updateButtonState(mousePosition);
+    resources.getButton(buttonNames::Homepage).updateButtonState(mousePosition);
 }
 
 void GameOver::poll() {
@@ -46,19 +44,16 @@ void GameOver::poll() {
 
     while (gui.pollEvent(event)) {
         switch (event.type) {
-
             case sf::Event::Closed:
                 gui.close();
                 break;
-
             case sf::Event::MouseButtonReleased:
-                if ((event.mouseButton.button == sf::Mouse::Left) && (this->homepageButton->getButtonState())) {
+                if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::Homepage).getButtonState()) {
                     State::changeScreen(Screens::HOMEPAGE);
                     break;
                 } else {
                     break;
                 }
-
             default:
                 break;
         }
@@ -83,7 +78,7 @@ void GameOver::render() {
         }
     }
 
-    homepageButton->render(gui);
+    resources.getButton(buttonNames::Homepage).render(gui);
 
     if (State::getCurrentScreen() == Screens::GAME_OVER) {
         gui.display();
