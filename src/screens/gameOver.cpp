@@ -10,6 +10,12 @@ using screen::GameOver;
 std::unique_ptr<GameOver> GameOver::instance = nullptr;
 
 GameOver::GameOver() : ScreenTemplate() {
+    const vector<string> texturePaths = {"homepage/HomepageBackground.png",
+                                      "homepage/IdlePlayButton.png", "homepage/ActivePlayButton.png"};
+    const vector<sprite> sprites = {};
+    const vector<button> buttons = {};
+    this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
+
     loadTexture(this->gameOverWinBackgroundTexture, "gameOver/GameOverWinBackground.png");
     loadTexture(this->gameOverLoseBackgroundTexture, "gameOver/GameOverLoseBackground.png");
     loadTexture(this->gameOverP1BackgroundTexture, "gameOver/GameOverP1Background.png");

@@ -8,6 +8,11 @@
 #include "../entity/button.hpp"
 #include "helperFunctions.hpp"
 
+// Required data to initialize a sprite: std::tuple<sf::Vector2f, sf::Vector2f, int>
+typedef std::tuple<sf::Vector2f, sf::Vector2f, int> sprite;
+// Required data to initialize a button: std::tuple<sf::Vector2f, sf::Vector2f, int, int>
+typedef std::tuple<sf::Vector2f, sf::Vector2f, int, int> button;
+
 using entity::Button;
 using std::tuple;
 using std::vector;
@@ -29,8 +34,8 @@ public:
      *                -The corresponding texture for when the button is active (its index in the texturePaths)
      */
     ScreenResourceManager(const vector<string> &texturePaths,
-                          const vector<tuple<sf::Vector2f, sf::Vector2f, int>> &sprites,
-                          const vector<tuple<sf::Vector2f, sf::Vector2f, int, int>> &buttons);
+                          const vector<sprite> &sprites,
+                          const vector<button> &buttons);
 
     void addSprite(sf::Vector2f, sf::Vector2f, int);
 
