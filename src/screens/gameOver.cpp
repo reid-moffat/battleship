@@ -3,17 +3,21 @@
  */
 
 #include "gameOver.hpp"
-#include "../helpers/helperFunctions.hpp"
 
 using screen::GameOver;
 
 std::unique_ptr<GameOver> GameOver::instance = nullptr;
 
 GameOver::GameOver() : ScreenTemplate() {
-    const vector<string> texturePaths = {"homepage/HomepageBackground.png",
-                                      "homepage/IdlePlayButton.png", "homepage/ActivePlayButton.png"};
-    const vector<sprite> sprites = {};
-    const vector<button> buttons = {};
+    const vector<string> texturePaths = {"gameOver/GameOverWinBackground.png", "gameOver/GameOverLoseBackground.png",
+                                         "gameOver/GameOverP1Background.png", "gameOver/GameOverP2Background.png",
+                                         "gameOver/IdleHomepageButton.png", "gameOver/ActiveHomepageButton.png"};
+    const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::GameOverWinBackground},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::GameOverLoseBackground},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::GameOverP1Background},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::GameOverP2Background}};
+    const vector<button> buttons = {{sf::Vector2f(136 * 5, 108 * 5), sf::Vector2f(5, 5),
+                                     textureNames::IdleHomepageButton, textureNames::ActiveHomepageButton}};
     this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
 
     loadTexture(this->gameOverWinBackgroundTexture, "gameOver/GameOverWinBackground.png");
