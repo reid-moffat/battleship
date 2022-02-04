@@ -19,18 +19,6 @@ GameOver::GameOver() : ScreenTemplate() {
     const vector<button> buttons = {{sf::Vector2f(136 * 5, 108 * 5), sf::Vector2f(5, 5),
                                      textureNames::IdleHomepageButton, textureNames::ActiveHomepageButton}};
     this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
-
-    loadTexture(this->gameOverWinBackgroundTexture, "gameOver/GameOverWinBackground.png");
-    loadTexture(this->gameOverLoseBackgroundTexture, "gameOver/GameOverLoseBackground.png");
-    loadTexture(this->gameOverP1BackgroundTexture, "gameOver/GameOverP1Background.png");
-    loadTexture(this->gameOverP2BackgroundTexture, "gameOver/GameOverP2Background.png");
-    loadTexture(this->idleHomepageButtonTexture, "gameOver/IdleHomepageButton.png");
-    loadTexture(this->activeHomepageButtonTexture, "gameOver/ActiveHomepageButton.png");
-
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverWinBackgroundTexture, this->backgroundWinSprite);
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverLoseBackgroundTexture, this->backgroundLoseSprite);
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverP1BackgroundTexture, this->backgroundP1Sprite);
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameOverP2BackgroundTexture, this->backgroundP2Sprite);
 }
 
 void GameOver::update() {
@@ -66,15 +54,15 @@ void GameOver::render() {
     gui.clear();
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
-            gui.draw(this->backgroundLoseSprite);
+            gui.draw(resources.getSprite(spriteNames::BackgroundLose));
         } else {
-            gui.draw(this->backgroundWinSprite);
+            gui.draw(resources.getSprite(spriteNames::BackgroundWin));
         }
     } else {
         if (State::player == State::Player::P1) {
-            gui.draw(this->backgroundP2Sprite);
+            gui.draw(resources.getSprite(spriteNames::BackgroundP2));
         } else {
-            gui.draw(this->backgroundP1Sprite);
+            gui.draw(resources.getSprite(spriteNames::BackgroundP1));
         }
     }
 
