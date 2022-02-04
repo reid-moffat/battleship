@@ -8,6 +8,13 @@ using screen::GameOver;
 
 std::unique_ptr<GameOver> GameOver::instance = nullptr;
 
+GameOver &screen::GameOver::getInstance() {
+    if (instance == nullptr) {
+        instance.reset(new GameOver());
+    }
+    return *instance;
+}
+
 GameOver::GameOver() : ScreenTemplate() {
     const vector<string> texturePaths = {"gameOver/GameOverWinBackground.png", "gameOver/GameOverLoseBackground.png",
                                          "gameOver/GameOverP1Background.png", "gameOver/GameOverP2Background.png",
@@ -38,10 +45,8 @@ void GameOver::poll() {
             case sf::Event::MouseButtonReleased:
                 if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::Homepage).getButtonState()) {
                     State::changeScreen(Screens::HOMEPAGE);
-                    break;
-                } else {
-                    break;
                 }
+                break;
             default:
                 break;
         }
@@ -52,30 +57,17 @@ void GameOver::render() {
     sf::RenderWindow &gui = *State::gui;
 
     gui.clear();
+    sf::Sprite background;
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
-        if (State::player == State::Player::P1) {
-            gui.draw(resources.getSprite(spriteNames::BackgroundLose));
-        } else {
-            gui.draw(resources.getSprite(spriteNames::BackgroundWin));
-        }
+        background = State::player == State::Player::P1 ? resources.getSprite(spriteNames::BackgroundLose) : resources.getSprite(spriteNames::BackgroundWin);
     } else {
-        if (State::player == State::Player::P1) {
-            gui.draw(resources.getSprite(spriteNames::BackgroundP2));
-        } else {
-            gui.draw(resources.getSprite(spriteNames::BackgroundP1));
-        }
+        background = State::player == State::Player::P1 ? resources.getSprite(spriteNames::BackgroundP2) : resources.getSprite(spriteNames::BackgroundP1);
     }
+    gui.draw(background);
 
     resources.getButton(buttonNames::Homepage).render(gui);
 
     if (State::getCurrentScreen() == Screens::GAME_OVER) {
         gui.display();
     }
-}
-
-GameOver &screen::GameOver::getInstance() {
-    if (instance == nullptr) {
-        instance.reset(new GameOver());
-    }
-    return *instance;
 }

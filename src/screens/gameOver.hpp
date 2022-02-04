@@ -30,20 +30,6 @@ namespace screen {
         GameOver &operator=(const GameOver &source) = delete;
 
     private:
-        sf::Texture gameOverWinBackgroundTexture;
-        sf::Texture gameOverLoseBackgroundTexture;
-        sf::Texture gameOverP1BackgroundTexture;
-        sf::Texture gameOverP2BackgroundTexture;
-        sf::Texture idleHomepageButtonTexture;
-        sf::Texture activeHomepageButtonTexture;
-
-        sf::Sprite backgroundWinSprite;
-        sf::Sprite backgroundLoseSprite;
-        sf::Sprite backgroundP1Sprite;
-        sf::Sprite backgroundP2Sprite;
-
-        Button *homepageButton;
-
         // Singleton instance
         static std::unique_ptr<GameOver> instance;
 
