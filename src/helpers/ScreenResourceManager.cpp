@@ -18,6 +18,7 @@ ScreenResourceManager::ScreenResourceManager(const vector<string> &texturePaths,
         // Attempt to load the texture image
         auto texture = &this->textures[i];
         if (!texture->loadFromFile("../res/images/" + texturePaths[i])) {
+            std::cout << "Error: unable to open file: /res/images/" << texturePaths[i] << std::endl;
             exit(-1);
         }
     }
