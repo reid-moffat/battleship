@@ -64,6 +64,7 @@ namespace screen {
             InstructionsButton
         };
 
+        sf::Texture difficultyBackgroundTexture;
         sf::Texture idleEasyButtonTexture;
         sf::Texture activeEasyButtonTexture;
         sf::Texture idleHardButtonTexture;
@@ -72,6 +73,8 @@ namespace screen {
         sf::Texture activeBackButtonTexture;
         sf::Texture idleInstructionsButton;
         sf::Texture activeInstructionsButton;
+
+        sf::Sprite backgroundSprite;
 
         std::unique_ptr<Button> easyButton;
         std::unique_ptr<Button> hardButton;
