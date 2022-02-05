@@ -37,26 +37,21 @@ namespace entity {
          */
         void updateButtonState(sf::Vector2f mousePosition);
 
-        // Big three
-        Button(const Button &source);
-        ~Button();
-        Button &operator=(const Button &source);
-
     private:
         /**
          * Texture when the button does not have the mouse over it
          */
-        sf::Texture *idleTexture;
+        std::unique_ptr<sf::Texture> idleTexture;
 
         /**
          * Texture when the button has the mouse over it
          */
-        sf::Texture *activeTexture;
+        std::unique_ptr<sf::Texture> activeTexture;
 
         /**
          * Button sprite (the object that renders)
          */
-        sf::Sprite *sprite;
+        std::unique_ptr<sf::Sprite> sprite;
 
         /**
          * Button state (true and Idle = false)
