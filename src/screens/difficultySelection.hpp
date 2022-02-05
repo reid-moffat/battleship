@@ -1,6 +1,5 @@
 /**
- * File: difficultySelection.h
- * Description: Front-end class that defines the behaviour of the Difficulty selection screens
+ * Front-end class that defines the behaviour of the Difficulty selection screens
  */
 
 #ifndef BATTLESHIP_DIFFICULTYSELECTION_H
@@ -63,23 +62,6 @@ namespace screen {
             BackButton,
             InstructionsButton
         };
-
-        sf::Texture difficultyBackgroundTexture;
-        sf::Texture idleEasyButtonTexture;
-        sf::Texture activeEasyButtonTexture;
-        sf::Texture idleHardButtonTexture;
-        sf::Texture activeHardButtonTexture;
-        sf::Texture idleBackButtonTexture;
-        sf::Texture activeBackButtonTexture;
-        sf::Texture idleInstructionsButton;
-        sf::Texture activeInstructionsButton;
-
-        sf::Sprite backgroundSprite;
-
-        std::unique_ptr<Button> easyButton;
-        std::unique_ptr<Button> hardButton;
-        std::unique_ptr<Button> backButton;
-        std::unique_ptr<Button> instructionsButton;
     };
 }// namespace screen
 

@@ -1,6 +1,5 @@
 /**
- * File: difficultySelection.cpp
- * Description: Front-end class that defines the behaviour of the Difficulty selection screens
+ * Front-end class that defines the behaviour of the Difficulty selection screens
  */
 
 #include "difficultySelection.hpp"
@@ -20,19 +19,8 @@ DifficultySelection::DifficultySelection() : ScreenTemplate() {
                                     {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), textureNames::IdleHardButton, textureNames::ActiveHardButton},
                                     {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), textureNames::IdleBackButton, textureNames::ActiveBackButton},
                                     {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), textureNames::IdleInstructionsButton, textureNames::ActiveInstructionsButton}};
+
     this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
-
-    loadTexture(this->difficultyBackgroundTexture, "difficultySelection/DifficultyBackground.png");
-    loadTexture(this->idleHardButtonTexture, "difficultySelection/IdleHardButton.png");
-    loadTexture(this->activeHardButtonTexture, "difficultySelection/ActiveHardButton.png");
-    loadTexture(this->idleBackButtonTexture, "difficultySelection/IdleBackButton.png");
-    loadTexture(this->activeBackButtonTexture, "difficultySelection/ActiveBackButton.png");
-    loadTexture(this->idleInstructionsButton, "difficultySelection/IdleInstructionsButton.png");
-    loadTexture(this->activeInstructionsButton, "difficultySelection/ActiveInstructionsButton.png");
-
-    this->hardButton = std::make_unique<Button>(sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), this->idleHardButtonTexture, this->activeHardButtonTexture);
-    this->backButton = std::make_unique<Button>(sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleBackButtonTexture, this->activeBackButtonTexture);
-    this->instructionsButton = std::make_unique<Button>(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButton, this->activeInstructionsButton);
 }
 
 DifficultySelection &screen::DifficultySelection::getInstance() {
@@ -44,10 +32,11 @@ DifficultySelection &screen::DifficultySelection::getInstance() {
 
 void DifficultySelection::update() {
     sf::Vector2f mousePosition = State::getMousePosition();
+
     resources.getButton(buttonNames::EasyButton).updateButtonState(mousePosition);
-    this->hardButton->updateButtonState(mousePosition);
-    this->backButton->updateButtonState(mousePosition);
-    this->instructionsButton->updateButtonState(mousePosition);
+    resources.getButton(buttonNames::HardButton).updateButtonState(mousePosition);
+    resources.getButton(buttonNames::BackButton).updateButtonState(mousePosition);
+    resources.getButton(buttonNames::InstructionsButton).updateButtonState(mousePosition);
 }
 
 void DifficultySelection::poll() {
@@ -65,14 +54,14 @@ void DifficultySelection::poll() {
                         State::difficulty = State::Difficulty::EASY;
                         State::changeScreen(Screens::FLEET_PLACEMENT);
                         break;
-                    } else if (this->hardButton->getButtonState()) {
+                    } else if (resources.getButton(buttonNames::HardButton).getButtonState()) {
                         State::difficulty = State::Difficulty::HARD;
                         State::changeScreen(Screens::FLEET_PLACEMENT);
                         break;
-                    } else if (this->backButton->getButtonState()) {
+                    } else if (resources.getButton(buttonNames::BackButton).getButtonState()) {
                         State::changeScreen(Screens::GAME_MODE_SELECTION);
                         break;
-                    } else if (this->instructionsButton->getButtonState()) {
+                    } else if (resources.getButton(buttonNames::InstructionsButton).getButtonState()) {
                         State::changeScreen(Screens::INSTRUCTIONS);
                         break;
                     } else {
@@ -91,9 +80,9 @@ void DifficultySelection::render() {
 
     gui.draw(resources.getSprite(spriteNames::Background));
     resources.getButton(buttonNames::EasyButton).render(gui);
-    hardButton->render(gui);
-    backButton->render(gui);
-    instructionsButton->render(gui);
+    resources.getButton(buttonNames::HardButton).render(gui);
+    resources.getButton(buttonNames::BackButton).render(gui);
+    resources.getButton(buttonNames::InstructionsButton).render(gui);
 
     if (State::getCurrentScreen() == Screens::DIFFICULTY_SELECTION) {
         gui.display();
