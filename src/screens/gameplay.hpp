@@ -1,6 +1,5 @@
 /**
- * File: gameplay.h
- * Description: Front-end class that defines the behaviour of the Gameplay screens
+ * Front-end class that defines the behaviour of the Gameplay screens
  */
 
 #ifndef BATTLESHIP_GAMEPLAY_H
@@ -20,6 +19,9 @@ using entity::Grid;
 using entity::SquareType;
 using entity::Target;
 using std::set;
+
+//Orientation of ships: Its name, top left coordinate and if it's horizontal
+typedef map<shipNames, tuple<Coordinate, bool>> shipOrientations;
 
 namespace screen {
     class Gameplay : public ScreenTemplate {
@@ -42,13 +44,12 @@ namespace screen {
         /**
          * Initializes P1 grid
          */
-         // TODO: take out the static part
-        static void setP1Grid(const map<shipNames, tuple<Coordinate, bool>> &ships);
+        void setP1Grid(const shipOrientations &ships);
 
         /**
          * Initializes P2 grid
          */
-        static void setP2Grid(const map<shipNames, tuple<Coordinate, bool>> &ships);
+        void setP2Grid(const shipOrientations &ships);
 
     private:
         // Singleton instance
@@ -105,22 +106,22 @@ namespace screen {
         /**
          * Map of P1 fleet layout
          */
-        static map<shipNames, tuple<Coordinate, bool>> fleetLayoutP1;
+        std::unique_ptr<shipOrientations> fleetLayoutP1;
 
         /**
          * Map of P2 fleet layout
          */
-        static map<shipNames, tuple<Coordinate, bool>> fleetLayoutP2;
+        std::unique_ptr<shipOrientations> fleetLayoutP2;
 
         /**
          * P1 Grid
          */
-        static Grid *gridP1;
+        std::unique_ptr<Grid> gridP1;
 
         /**
          * P2 Grid
          */
-        static Grid *gridP2;
+        std::unique_ptr<Grid> gridP2;
 
         /**
          * Set of grid coordinates used by environment
@@ -145,7 +146,7 @@ namespace screen {
         /**
          * Checks if the game is lost for a specified player (true: P1, false: P2)
          */
-        static bool lost(Grid &grid);
+        bool lost(Grid &grid);
 
         /**
          * Updates grid markers
@@ -165,7 +166,7 @@ namespace screen {
         /**
          * Sleeps the process (works for windows and unix-based systems)
          */
-        static void sleepMS();
+        void sleepMS();
 
         /**
          * Updates grid state
@@ -175,7 +176,7 @@ namespace screen {
         /**
          * Sets the fleet layout of the current player
          */
-        void setFleetLayout(map<shipNames, tuple<Coordinate, bool>> &fleetLayout);
+        void setFleetLayout(shipOrientations &fleetLayout);
 
         /**
          * Renders ship status

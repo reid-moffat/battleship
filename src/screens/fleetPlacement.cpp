@@ -227,31 +227,30 @@ void FleetPlacement::poll() {
 
     while (gui.pollEvent(event)) {
         switch (event.type) {
-
             case sf::Event::Closed:
                 gui.close();
                 break;
-
             case sf::Event::MouseButtonReleased:
                 if ((event.mouseButton.button == sf::Mouse::Left) && (resources.getButton(Ready).getButtonState())) {
+                    Gameplay *gameplayInstance = &Gameplay::getInstance();
                     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
-                        Gameplay::setP1Grid(ships);
+                        gameplayInstance->setP1Grid(ships);
                         this->resetFleetLayout();
                         this->layoutGenerated = false;
                         this->randomize();
-                        Gameplay::setP2Grid(ships);
+                        gameplayInstance->setP2Grid(ships);
                         State::changeScreen(Screens::GAMEPLAY);
                         break;
                     } else {
                         if (State::player == State::Player::P1) {
-                            Gameplay::setP1Grid(ships);
+                            gameplayInstance->setP1Grid(ships);
                             this->resetFleetLayout();
                             this->layoutGenerated = false;
                             State::player = State::Player::P2;
                             State::changeScreen(Screens::INTERMEDIARY);
                             break;
                         } else {
-                            Gameplay::setP2Grid(ships);
+                            gameplayInstance->setP2Grid(ships);
                             this->resetFleetLayout();
                             this->layoutGenerated = false;
                             State::player = State::Player::P1;
@@ -270,7 +269,6 @@ void FleetPlacement::poll() {
                 } else {
                     break;
                 }
-
             default:
                 break;
         }

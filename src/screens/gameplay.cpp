@@ -4,6 +4,8 @@
 
 #ifdef _WIN32
 #include <Windows.h>
+
+#include <memory>
 #else
 #include <unistd.h>
 #endif
@@ -15,15 +17,16 @@ using entity::SquareType;
 using screen::Gameplay;
 using std::get;
 
-// TODO: re-design the grid implementation
-Grid *Gameplay::gridP1 = new Grid();
-Grid *Gameplay::gridP2 = new Grid();
-map<shipNames, tuple<Coordinate, bool>> Gameplay::fleetLayoutP1 = *new map<shipNames, tuple<Coordinate, bool>>;
-map<shipNames, tuple<Coordinate, bool>> Gameplay::fleetLayoutP2 = *new map<shipNames, tuple<Coordinate, bool>>;
-
 std::unique_ptr<Gameplay> Gameplay::instance = nullptr;
 
 Gameplay::Gameplay() : ScreenTemplate() {
+    //
+    gridP1 = std::make_unique<Grid>();
+    gridP2 = std::make_unique<Grid>();
+
+    fleetLayoutP1 = std::make_unique<shipOrientations>();
+    fleetLayoutP2 = std::make_unique<shipOrientations>();
+
     loadTexture(this->gameplayDefaultBackgroundTexture, "gameplay/GameplayBackground.png");
     loadTexture(this->gameplayP1BackgroundTexture, "gameplay/GameplayP1Background.png");
     loadTexture(this->gameplayP2BackgroundTexture, "gameplay/GameplayP2Background.png");
@@ -98,14 +101,15 @@ Gameplay::Gameplay() : ScreenTemplate() {
     this->createCoordinateSet();
 }
 
-void Gameplay::setP1Grid(const map<shipNames, tuple<Coordinate, bool>> &ships) {
-    Gameplay::gridP1 = new Grid(ships);
-    Gameplay::fleetLayoutP1 = gridP1->getShips();
+void Gameplay::setP1Grid(const shipOrientations &ships) {
+    // TODO
+    gridP1.reset(new Grid(ships));
+    fleetLayoutP1.reset(&gridP1->getShips());
 }
 
-void Gameplay::setP2Grid(const map<shipNames, tuple<Coordinate, bool>> &ships) {
-    Gameplay::gridP2 = new Grid(ships);
-    Gameplay::fleetLayoutP2 = gridP2->getShips();
+void Gameplay::setP2Grid(const shipOrientations &ships) {
+    gridP2.reset(new Grid(ships));
+    fleetLayoutP2.reset(&gridP2->getShips());
 }
 
 void Gameplay::createCoordinateSet() {
@@ -302,7 +306,7 @@ void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
     }
 }
 
-void Gameplay::setFleetLayout(map<shipNames, tuple<Coordinate, bool>> &fleetLayout) {
+void Gameplay::setFleetLayout(shipOrientations &fleetLayout) {
     if (get<1>(fleetLayout[shipNames::BATTLESHIP]) == 1) {
         this->battleshipSprite.setPosition(sf::Vector2f((64 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getX() * 8)) * 5,
                                                         (44 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getY() * 8)) * 5));
@@ -375,12 +379,12 @@ void Gameplay::update() {
     }
 
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
-        this->setFleetLayout(this->fleetLayoutP1);
+        this->setFleetLayout(*this->fleetLayoutP1);
     } else {
         if (State::player == State::Player::P1) {
-            this->setFleetLayout(this->fleetLayoutP1);
+            this->setFleetLayout(*this->fleetLayoutP1);
         } else {
-            this->setFleetLayout(this->fleetLayoutP2);
+            this->setFleetLayout(*this->fleetLayoutP2);
         }
     }
 
