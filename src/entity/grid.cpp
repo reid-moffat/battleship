@@ -27,13 +27,14 @@ Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
         int x = get<0>(ship.second).getX();         // Topmost/leftmost x coordinate
         int y = get<0>(ship.second).getY();         // Topmost/leftmost y coordinate
         const bool horizontal = get<1>(ship.second);// If the ship is aligned horizontally
+        const int length = shipSize(shipName);      // Number of squares in this ship
 
         // Array of coordinates this ship occupies
-        Coordinate *&coordinates = get<0>(ships[shipName]);
-        coordinates = new Coordinate[shipSize(shipName)];
+        vector<Coordinate> &coordinates = get<0>(ships[shipName]);
+        coordinates = vector<Coordinate>(length);
 
         // Initializes the squares the ship occupies (from the top/left)
-        for (int i = 0; i < shipSize(shipName); ++i) {
+        for (int i = 0; i < length; ++i) {
             coordinates[i] = Coordinate(x, y);
             squares[y][x] = SHIP;
             horizontal ? x++ : y++;
@@ -63,9 +64,9 @@ SquareType Grid::attack(Coordinate &coord) {
         int &hitCount = get<1>(ships[shipName]);
 
         // Loop through the squares in this ship to see if it was hit
-        Coordinate *coords = get<0>(ship.second);
+        vector<Coordinate> coordinates = get<0>(ship.second);
         for (int i = 0; i < shipSize(shipName); ++i) {
-            if (coords[i] == coord) {// Found it!
+            if (coordinates[i] == coord) {// Found it!
                 hitCount++;
                 if (hitCount == shipSize(shipName)) {
                     shipStatuses[shipName] = true;// Ship has been sunk

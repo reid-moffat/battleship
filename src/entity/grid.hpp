@@ -66,7 +66,7 @@ namespace entity {
          *  -The coordinates it occupies on the board
          *  -The number of hits on this ship
          */
-        map<shipNames, tuple<Coordinate *, int>> ships;
+        map<shipNames, tuple<vector<Coordinate>, int>> ships;
 
         /**
          * Each ship with its top/left coordinate and whether it is horizontal or not
