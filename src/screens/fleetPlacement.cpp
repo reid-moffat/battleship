@@ -1,6 +1,5 @@
 /**
- * File: fleetPlacement.cpp
- * Description: Front-end class that defines the behaviour of the Fleet Placement screens
+ * Front-end class that defines the behaviour of the Fleet Placement screens
  */
 
 #include "fleetPlacement.hpp"
@@ -9,9 +8,36 @@
 using screen::FleetPlacement;
 using std::get;
 
-FleetPlacement *FleetPlacement::instance = nullptr;
+std::unique_ptr<FleetPlacement> FleetPlacement::instance = nullptr;
 
 FleetPlacement::FleetPlacement() : ScreenTemplate() {
+    const vector<string> texturePaths = {"fleetPlacement/FleetPlacementBackground.png", "fleetPlacement/FleetPlacementP1Background.png",
+                                         "fleetPlacement/FleetPlacementP2Background.png",
+                                         "fleetPlacement/IdleReadyButton.png", "fleetPlacement/ActiveReadyButton.png",
+                                         "fleetPlacement/IdleRandomizeButton.png", "fleetPlacement/ActiveRandomizeButton.png",
+                                         "fleetPlacement/IdleInstructionsButton.png", "fleetPlacement/ActiveInstructionsButton.png",
+                                         "fleetPlacement/BattleShip.png", "fleetPlacement/AircraftCarrier.png",
+                                         "fleetPlacement/Destroyer.png", "fleetPlacement/Submarine.png",
+                                         "fleetPlacement/PatrolBoat.png", "fleetPlacement/RowBoat.png"};
+    const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefault_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Battleship_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), AircraftCarrier_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Destroyer_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Submarine_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PatrolBoat_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), RowBoat_}};
+    const vector<button> buttons = {{sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), IdleReadyButton, ActiveReadyButton},
+                                    {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), IdleRandomizeButton, ActiveRandomizeButton},
+                                    {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ReadyInstructionsButton}};
+
+    this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
+
+    this->layoutGenerated = false;
+
+
+
     loadTexture(this->fleetPlacementDefaultBackgroundTexture, "fleetPlacement/FleetPlacementBackground.png");
     loadTexture(this->fleetPlacementP1BackgroundTexture, "fleetPlacement/FleetPlacementP1Background.png");
     loadTexture(this->fleetPlacementP2BackgroundTexture, "fleetPlacement/FleetPlacementP2Background.png");
@@ -44,8 +70,6 @@ FleetPlacement::FleetPlacement() : ScreenTemplate() {
     this->readyButton = new Button(sf::Vector2f(320 * 5, 124 * 5), sf::Vector2f(5, 5), this->idleReadyButtonTexture, this->activeReadyButtonTexture);
     this->randomizeButton = new Button(sf::Vector2f(328 * 5, 76 * 5), sf::Vector2f(5, 5), this->idleRandomizeButtonTexture, this->activeRandomizeButtonTexture);
     this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButtonTexture, this->activeInstructionsButtonTexture);
-
-    this->layoutGenerated = false;
 }
 
 void FleetPlacement::addCoord(vector<Coordinate> &coordinates, int x, int y) {
@@ -313,7 +337,7 @@ void FleetPlacement::render() {
 
 FleetPlacement &screen::FleetPlacement::getInstance() {
     if (instance == nullptr) {
-        instance = new FleetPlacement();
+        instance.reset(new FleetPlacement());
     }
     return *instance;
 }
