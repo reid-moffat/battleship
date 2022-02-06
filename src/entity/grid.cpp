@@ -13,11 +13,10 @@ using std::get;
 
 Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
     // Initialize the grid itself with all water to start
-    squares = new SquareType *[size];
     for (int i = 0; i < size; ++i) {
-        squares[i] = new SquareType[size];
+        squares.emplace_back(vector<SquareType>());
         for (int j = 0; j < size; ++j) {
-            squares[i][j] = WATER;
+            squares[i].push_back(WATER);
         }
     }
 
@@ -88,44 +87,4 @@ map<shipNames, bool> &Grid::getShipStatus() {
 
 entity::Grid::Grid() {
     ;
-}
-
-
-// Big three
-Grid::~Grid() {
-    for (int i = 0; i < size; ++i) {
-        delete[] squares[i];
-    }
-    delete[] squares;
-}
-
-Grid::Grid(Grid &grid) {
-    // Copy the other ship's coordinates and number of hits
-    for (auto const &ship : grid.ships) {
-        *get<0>(ships[ship.first]) = *get<0>(ship.second);
-        get<1>(ships[ship.first]) = get<1>(ship.second);
-    }
-
-    // Copy the grid
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < size; ++j) {
-            this->squares[i][j] = grid.squares[i][j];
-        }
-    }
-}
-
-Grid &Grid::operator=(Grid *rhs) {
-    if (this == rhs) return *this;
-
-    this->ships.clear();
-    for (const auto ship : rhs->ships) {
-        this->ships.insert(ship);
-    }
-
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < size; ++j) {
-            squares[i][j] = rhs->squares[i][j];
-        }
-    }
-    return *this;
 }

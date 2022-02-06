@@ -23,7 +23,6 @@ namespace entity {
     class Grid {
     public:
         /**
-         * Constructs a grid
          * Constructs a grid with a list of ships
          *
          * @param ships the six ships on the grid with their orientations
@@ -60,11 +59,6 @@ namespace entity {
          */
         Grid();
 
-        // Big three
-        ~Grid();
-        Grid(Grid &other);
-        Grid &operator=(Grid *other);
-
     private:
         /**
          * The six ships on this board
@@ -89,7 +83,7 @@ namespace entity {
         /**
          * 10-by-10 array of grid squares
          */
-        SquareType **squares;
+        vector<vector<SquareType>> squares;
 
         /**
          * Size of the grid (both width and height) i.e 10
