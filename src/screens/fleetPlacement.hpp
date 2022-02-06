@@ -85,37 +85,6 @@ namespace screen {
             Instructions
         };
 
-//        sf::Texture fleetPlacementDefaultBackgroundTexture;
-//        sf::Texture fleetPlacementP1BackgroundTexture;
-//        sf::Texture fleetPlacementP2BackgroundTexture;
-//        sf::Texture idleReadyButtonTexture;
-//        sf::Texture activeReadyButtonTexture;
-//        sf::Texture idleRandomizeButtonTexture;
-//        sf::Texture activeRandomizeButtonTexture;
-//        sf::Texture idleInstructionsButtonTexture;
-//        sf::Texture activeInstructionsButtonTexture;
-//        sf::Texture battleshipTexture;
-//        sf::Texture aircraftCarrierTexture;
-//        sf::Texture destroyerTexture;
-//        sf::Texture submarineTexture;
-//        sf::Texture patrolBoatTexture;
-//        sf::Texture rowBoatTexture;
-//
-//        sf::Sprite backgroundDefaultSprite;
-//        sf::Sprite backgroundP1Sprite;
-//        sf::Sprite backgroundP2Sprite;
-//        sf::Sprite battleshipSprite;
-//        sf::Sprite aircraftCarrierSprite;
-//        sf::Sprite destroyerSprite;
-//        sf::Sprite submarineSprite;
-//        sf::Sprite patrolBoatSprite;
-//        sf::Sprite rowBoatSprite;
-//
-//        Button *readyButton;
-//        Button *randomizeButton;
-//        Button *instructionsButton;
-
-
         /**
          *
          */
@@ -148,8 +117,6 @@ namespace screen {
          * Resets ship sprites and orientations
          */
         void resetFleetLayout();
-
-
 
     };
 }// namespace screen
