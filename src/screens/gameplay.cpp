@@ -20,12 +20,27 @@ using std::get;
 std::unique_ptr<Gameplay> Gameplay::instance = nullptr;
 
 Gameplay::Gameplay() : ScreenTemplate() {
-    //
     gridP1 = std::make_unique<Grid>();
     gridP2 = std::make_unique<Grid>();
 
     fleetLayoutP1 = std::make_unique<shipOrientations>();
     fleetLayoutP2 = std::make_unique<shipOrientations>();
+
+    const vector<string> texturePaths = {"gameplay/GameplayBackground.png", "gameplay/GameplayP1Background.png",
+                                         "gameplay/GameplayP2Background.png",
+                                         "gameplay/IdleSurrenderButton.png", "gameplay/ActiveSurrenderButton.png",
+                                         "gameplay/IdleInstructionsButton.png", "gameplay/ActiveInstructionsButton.png",
+                                         "gameplay/BattleShip.png", "gameplay/AircraftCarrier.png", "gameplay/Destroyer.png",
+                                         "gameplay/Submarine.png", "gameplay/PatrolBoat.png", "gameplay/RowBoat.png",
+                                         "gameplay/BattleShipSunk.png", "gameplay/AircraftCarrierSunk.png", "gameplay/DestroyerSunk.png",
+                                         "gameplay/SubmarineSunk.png", "gameplay/PatrolBoatSunk.png", "gameplay/RowBoatSunk.png",
+                                         "gameplay/PrimaryHitMarker.png", "gameplay/PrimaryMissMarker.png",
+                                         "gameplay/SecondaryHitMarker.png", "gameplay/SecondaryMissMarker.png",
+                                         "gameplay/SecondaryTarget.png"};
+    const vector<sprite> sprites = {};
+    const vector<button> buttons = {};
+
+    this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
 
     loadTexture(this->gameplayDefaultBackgroundTexture, "gameplay/GameplayBackground.png");
     loadTexture(this->gameplayP1BackgroundTexture, "gameplay/GameplayP1Background.png");
