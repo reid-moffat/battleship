@@ -21,7 +21,7 @@ Grid *Gameplay::gridP2 = new Grid();
 map<shipNames, tuple<Coordinate, bool>> Gameplay::fleetLayoutP1 = *new map<shipNames, tuple<Coordinate, bool>>;
 map<shipNames, tuple<Coordinate, bool>> Gameplay::fleetLayoutP2 = *new map<shipNames, tuple<Coordinate, bool>>;
 
-Gameplay *Gameplay::instance = nullptr;
+std::unique_ptr<Gameplay> Gameplay::instance = nullptr;
 
 Gameplay::Gameplay() : ScreenTemplate() {
     loadTexture(this->gameplayDefaultBackgroundTexture, "gameplay/GameplayBackground.png");
@@ -553,7 +553,7 @@ void screen::Gameplay::sleepMS() {
 
 Gameplay &screen::Gameplay::getInstance() {
     if (instance == nullptr) {
-        instance = new Gameplay;
+        instance.reset(new Gameplay);
     }
     return *instance;
 }
