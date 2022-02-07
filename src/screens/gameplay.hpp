@@ -197,25 +197,20 @@ namespace screen {
         static constexpr int sleepTimeMS = 400;
 
 
-        sf::Texture gameplayDefaultBackgroundTexture;
-        sf::Texture gameplayP1BackgroundTexture;
-        sf::Texture gameplayP2BackgroundTexture;
-        sf::Texture idleSurrenderButtonTexture;
-        sf::Texture activeSurrenderButtonTexture;
-        sf::Texture idleInstructionsButtonTexture;
-        sf::Texture activeInstructionsButtonTexture;
         sf::Texture battleshipTexture;
         sf::Texture aircraftCarrierTexture;
         sf::Texture destroyerTexture;
         sf::Texture submarineTexture;
         sf::Texture patrolBoatTexture;
         sf::Texture rowBoatTexture;
+
         sf::Texture battleshipSunkTexture;
         sf::Texture aircraftCarrierSunkTexture;
         sf::Texture destroyerSunkTexture;
         sf::Texture submarineSunkTexture;
         sf::Texture patrolBoatSunkTexture;
         sf::Texture rowBoatSunkTexture;
+
         sf::Texture primaryHitMarkerTexture;
         sf::Texture primaryMissMarkerTexture;
         sf::Texture secondaryHitMarkerTexture;
@@ -223,29 +218,27 @@ namespace screen {
         sf::Texture idlePrimaryTargetTexture;
         sf::Texture activePrimaryTargetTexture;
         sf::Texture secondaryTargetTexture;
-        sf::Sprite backgroundDefaultSprite;
-        sf::Sprite backgroundP1Sprite;
-        sf::Sprite backgroundP2Sprite;
+
+
         sf::Sprite battleshipSprite;
         sf::Sprite aircraftCarrierSprite;
         sf::Sprite destroyerSprite;
         sf::Sprite submarineSprite;
         sf::Sprite patrolBoatSprite;
         sf::Sprite rowBoatSprite;
+
         sf::Sprite battleshipSunkSprite;
         sf::Sprite aircraftCarrierSunkSprite;
         sf::Sprite destroyerSunkSprite;
         sf::Sprite submarineSunkSprite;
         sf::Sprite patrolBoatSunkSprite;
         sf::Sprite rowBoatSunkSprite;
+
         sf::Sprite primaryHitMarkerSprite;
         sf::Sprite primaryMissMarkerSprite;
         sf::Sprite secondaryHitMarkerSprite;
         sf::Sprite secondaryMissMarkerSprite;
         sf::Sprite secondaryTargetSprite;
-
-        Button *surrenderButton;
-        Button *instructionsButton;
 
         vector<Target> targetVector;
 

@@ -37,20 +37,13 @@ Gameplay::Gameplay() : ScreenTemplate() {
                                          "gameplay/PrimaryHitMarker.png", "gameplay/PrimaryMissMarker.png",
                                          "gameplay/SecondaryHitMarker.png", "gameplay/SecondaryMissMarker.png",
                                          "gameplay/SecondaryTarget.png"};
-    const vector<sprite> sprites = {};
+    const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefault_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2}};
     const vector<button> buttons = {{sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleSurrenderButton, ActiveSurrenderButton},
                                     {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
 
     this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
-
-    loadTexture(this->gameplayDefaultBackgroundTexture, "gameplay/GameplayBackground.png");
-    loadTexture(this->gameplayP1BackgroundTexture, "gameplay/GameplayP1Background.png");
-    loadTexture(this->gameplayP2BackgroundTexture, "gameplay/GameplayP2Background.png");
-
-    loadTexture(this->idleSurrenderButtonTexture, "gameplay/IdleSurrenderButton.png");
-    loadTexture(this->activeSurrenderButtonTexture, "gameplay/ActiveSurrenderButton.png");
-    loadTexture(this->idleInstructionsButtonTexture, "gameplay/IdleInstructionsButton.png");
-    loadTexture(this->activeInstructionsButtonTexture, "gameplay/ActiveInstructionsButton.png");
 
     loadTexture(this->battleshipTexture, "gameplay/Battleship.png");
     loadTexture(this->aircraftCarrierTexture, "gameplay/AircraftCarrier.png");
@@ -73,10 +66,6 @@ Gameplay::Gameplay() : ScreenTemplate() {
 
     Target::initializeTextures();
     loadTexture(this->secondaryTargetTexture, "gameplay/SecondaryTarget.png");
-
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayDefaultBackgroundTexture, this->backgroundDefaultSprite);
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayP1BackgroundTexture, this->backgroundP1Sprite);
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayP2BackgroundTexture, this->backgroundP2Sprite);
 
     setSprite(sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), this->battleshipSunkTexture, this->battleshipSunkSprite);
     setSprite(sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), this->aircraftCarrierSunkTexture, this->aircraftCarrierSunkSprite);
@@ -109,9 +98,6 @@ Gameplay::Gameplay() : ScreenTemplate() {
 
     this->secondaryTargetSprite.setTexture(this->secondaryTargetTexture);
     this->secondaryTargetSprite.setScale(sf::Vector2f(5, 5));
-
-    // this->surrenderButton = new Button(sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleSurrenderButtonTexture, this->activeSurrenderButtonTexture);
-    // this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButtonTexture, this->activeInstructionsButtonTexture);
 
     this->setTargetVector();
     this->createCoordinateSet();
@@ -388,10 +374,8 @@ void Gameplay::setFleetLayout(shipOrientations &fleetLayout) {
 void Gameplay::update() {
     sf::Vector2f mousePosition = State::getMousePosition();
 
-    // resources.getButton(Surrender).updateButtonState(mousePosition);
-    // resources.getButton(Surrender).updateButtonState(mousePosition);
-    this->surrenderButton->updateButtonState(mousePosition);
-    this->instructionsButton->updateButtonState(mousePosition);
+    resources.getButton(Surrender).updateButtonState(mousePosition);
+    resources.getButton(Instructions).updateButtonState(mousePosition);
 
     for (auto &target : this->targetVector) {
         target.updateTargetState(mousePosition);
@@ -427,32 +411,27 @@ void Gameplay::poll() {
 
     while (gui.pollEvent(event)) {
         switch (event.type) {
-
             case sf::Event::Closed:
                 gui.close();
                 break;
-
             case sf::Event::MouseButtonReleased:
-                if ((event.mouseButton.button == sf::Mouse::Left) && (this->surrenderButton->getButtonState())) {
-                    this->resetGridMarkers();
-                    State::changeScreen(Screens::GAME_OVER);
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->instructionsButton->getButtonState())) {
-                    State::changeScreen(Screens::INSTRUCTIONS);
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && !State::lockedFlag) {
-                    for (auto &target : this->targetVector) {
-                        if (target.getTargetState()) {
-                            State::lockedFlag = true;
-                            Coordinate targetCoord = target.getTargetCoordinate();
-                            this->updateGrid(targetCoord, gui);
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    if (resources.getButton(Surrender).getButtonState()) {
+                        this->resetGridMarkers();
+                        State::changeScreen(Screens::GAME_OVER);
+                    } else if (resources.getButton(Instructions).getButtonState()) {
+                        State::changeScreen(Screens::INSTRUCTIONS);
+                    } else if (!State::lockedFlag) {
+                        for (auto &target : this->targetVector) {
+                            if (target.getTargetState()) {
+                                State::lockedFlag = true;
+                                Coordinate targetCoord = target.getTargetCoordinate();
+                                this->updateGrid(targetCoord, gui);
+                            }
                         }
                     }
                     break;
-                } else {
-                    break;
                 }
-
             default:
                 break;
         }
@@ -493,17 +472,17 @@ void Gameplay::render() {
     gui.clear();
 
     if (State::gameMode == State::SINGLE_PLAYER) {
-        gui.draw(this->backgroundDefaultSprite);
+        gui.draw(resources.getSprite(BackgroundDefault));
     } else {
         if (State::player == State::Player::P1) {
-            gui.draw(this->backgroundP1Sprite);
+            gui.draw(resources.getSprite(BackgroundP1));
         } else {
-            gui.draw(this->backgroundP2Sprite);
+            gui.draw(resources.getSprite(BackgroundP2));
         }
     }
 
-    surrenderButton->render(gui);
-    instructionsButton->render(gui);
+    resources.getButton(Surrender).render(gui);
+    resources.getButton(Instructions).render(gui);
 
     gui.draw(this->battleshipSprite);
     gui.draw(this->aircraftCarrierSprite);
