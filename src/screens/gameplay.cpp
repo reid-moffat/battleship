@@ -39,7 +39,13 @@ Gameplay::Gameplay() : ScreenTemplate() {
                                          "gameplay/SecondaryTarget.png"};
     const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefault_},
                                     {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2}};
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2},
+                                    {sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), BattleShipSunk_},
+                                    {sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), AircraftCarrierSunk_},
+                                    {sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), DestroyerSunk_},
+                                    {sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), SubmarineSunk_},
+                                    {sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), PatrolBoatSunk_},
+                                    {sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), RowBoatSunk_}};
     const vector<button> buttons = {{sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleSurrenderButton, ActiveSurrenderButton},
                                     {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
 
@@ -52,13 +58,6 @@ Gameplay::Gameplay() : ScreenTemplate() {
     loadTexture(this->patrolBoatTexture, "gameplay/PatrolBoat.png");
     loadTexture(this->rowBoatTexture, "gameplay/RowBoat.png");
 
-    loadTexture(this->battleshipSunkTexture, "gameplay/BattleshipSunk.png");
-    loadTexture(this->aircraftCarrierSunkTexture, "gameplay/AircraftCarrierSunk.png");
-    loadTexture(this->destroyerSunkTexture, "gameplay/DestroyerSunk.png");
-    loadTexture(this->submarineSunkTexture, "gameplay/SubmarineSunk.png");
-    loadTexture(this->patrolBoatSunkTexture, "gameplay/PatrolBoatSunk.png");
-    loadTexture(this->rowBoatSunkTexture, "gameplay/RowBoatSunk.png");
-
     loadTexture(this->primaryHitMarkerTexture, "gameplay/PrimaryHitMarker.png");
     loadTexture(this->primaryMissMarkerTexture, "gameplay/PrimaryMissMarker.png");
     loadTexture(this->secondaryHitMarkerTexture, "gameplay/SecondaryHitMarker.png");
@@ -66,13 +65,6 @@ Gameplay::Gameplay() : ScreenTemplate() {
 
     Target::initializeTextures();
     loadTexture(this->secondaryTargetTexture, "gameplay/SecondaryTarget.png");
-
-    setSprite(sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), this->battleshipSunkTexture, this->battleshipSunkSprite);
-    setSprite(sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), this->aircraftCarrierSunkTexture, this->aircraftCarrierSunkSprite);
-    setSprite(sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), this->destroyerSunkTexture, this->destroyerSunkSprite);
-    setSprite(sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), this->submarineSunkTexture, this->submarineSunkSprite);
-    setSprite(sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), this->patrolBoatSunkTexture, this->patrolBoatSunkSprite);
-    setSprite(sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), this->rowBoatSunkTexture, this->rowBoatSunkSprite);
 
     this->battleshipSprite.setTexture(this->battleshipTexture);
     this->battleshipSprite.setScale(sf::Vector2f(5, 5));
@@ -235,7 +227,6 @@ void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
                     State::player = State::Player::P2;
                 }
             }
-
         } else {
             SquareType attack = this->gridP1->attack(coordinate);
             if (attack == SquareType::WATER) {
@@ -254,8 +245,6 @@ void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
                 }
             }
         }
-
-
     } else {
         if (State::player == State::Player::P1) {
             SquareType attack = this->gridP2->attack(coordinate);
@@ -443,27 +432,27 @@ void Gameplay::renderShipStatus(Grid &grid) {
     map<shipNames, bool> shipStatus = grid.getShipStatus();
 
     if (shipStatus[shipNames::BATTLESHIP]) {
-        gui.draw(this->battleshipSunkSprite);
+        gui.draw(resources.getSprite(BattleShipSunk));
     }
 
     if (shipStatus[shipNames::AIRCRAFT_CARRIER]) {
-        gui.draw(this->aircraftCarrierSunkSprite);
+        gui.draw(resources.getSprite(AircraftCarrierSunk));
     }
 
     if (shipStatus[shipNames::DESTROYER]) {
-        gui.draw(this->destroyerSunkSprite);
+        gui.draw(resources.getSprite(DestroyerSunk));
     }
 
     if (shipStatus[shipNames::SUBMARINE]) {
-        gui.draw(this->submarineSunkSprite);
+        gui.draw(resources.getSprite(SubmarineSunk));
     }
 
     if (shipStatus[shipNames::PATROL_BOAT]) {
-        gui.draw(this->patrolBoatSunkSprite);
+        gui.draw(resources.getSprite(PatrolBoatSunk));
     }
 
     if (shipStatus[shipNames::ROW_BOAT]) {
-        gui.draw(this->rowBoatSunkSprite);
+        gui.draw(resources.getSprite(RowBoatSunk));
     }
 }
 

@@ -81,12 +81,12 @@ namespace screen {
             PatrolBoat_,
             RowBoat_,
 
-            BattleShipSunk,
-            AircraftCarrierSunk,
-            DestroyerSunk,
-            SubmarineSunk,
-            PatrolBoatSunk,
-            RowBoatSunk,
+            BattleShipSunk_,
+            AircraftCarrierSunk_,
+            DestroyerSunk_,
+            SubmarineSunk_,
+            PatrolBoatSunk_,
+            RowBoatSunk_,
 
             PrimaryHitMarker,
             PrimaryMissMarker,
@@ -98,6 +98,12 @@ namespace screen {
             BackgroundDefault,
             BackgroundP1,
             BackgroundP2,
+            BattleShipSunk,
+            AircraftCarrierSunk,
+            DestroyerSunk,
+            SubmarineSunk,
+            PatrolBoatSunk,
+            RowBoatSunk,
             Battleship,
             AircraftCarrier,
             Destroyer,
@@ -204,13 +210,6 @@ namespace screen {
         sf::Texture patrolBoatTexture;
         sf::Texture rowBoatTexture;
 
-        sf::Texture battleshipSunkTexture;
-        sf::Texture aircraftCarrierSunkTexture;
-        sf::Texture destroyerSunkTexture;
-        sf::Texture submarineSunkTexture;
-        sf::Texture patrolBoatSunkTexture;
-        sf::Texture rowBoatSunkTexture;
-
         sf::Texture primaryHitMarkerTexture;
         sf::Texture primaryMissMarkerTexture;
         sf::Texture secondaryHitMarkerTexture;
@@ -226,13 +225,6 @@ namespace screen {
         sf::Sprite submarineSprite;
         sf::Sprite patrolBoatSprite;
         sf::Sprite rowBoatSprite;
-
-        sf::Sprite battleshipSunkSprite;
-        sf::Sprite aircraftCarrierSunkSprite;
-        sf::Sprite destroyerSunkSprite;
-        sf::Sprite submarineSunkSprite;
-        sf::Sprite patrolBoatSunkSprite;
-        sf::Sprite rowBoatSunkSprite;
 
         sf::Sprite primaryHitMarkerSprite;
         sf::Sprite primaryMissMarkerSprite;
