@@ -39,8 +39,8 @@ Gameplay::Gameplay() : ScreenTemplate() {
                                          "gameplay/SecondaryTarget.png"};
 
     const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefault_},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1_},
+                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2_},
 
                                     {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Battleship_},
                                     {sf::Vector2f(0, 0), sf::Vector2f(5, 5), AircraftCarrier_},
