@@ -35,15 +35,16 @@ namespace screen {
 
         // Names to refer to resources on this screen
         enum textureNames {
-            Background_,
-            IdleEasyButton,
-            ActiveEasyButton,
-            IdleHardButton,
-            ActiveHardButton,
-            IdleBackButton,
-            ActiveBackButton,
-            IdleInstructionsButton,
-            ActiveInstructionsButton
+            BackgroundTexture,
+
+            IdleEasyButtonTexture,
+            ActiveEasyButtonTexture,
+            IdleHardButtonTexture,
+            ActiveHardButtonTexture,
+            IdleBackButtonTexture,
+            ActiveBackButtonTexture,
+            IdleInstructionsButtonTexture,
+            ActiveInstructionsButtonTexture
         };
         enum spriteNames {
             Background

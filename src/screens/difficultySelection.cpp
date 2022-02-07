@@ -11,8 +11,9 @@ std::unique_ptr<DifficultySelection> DifficultySelection::instance = nullptr;
 DifficultySelection::DifficultySelection() : ScreenTemplate() {
     // Data required for all the SFML objects on this screen
     const vector<string> texturePaths = {
-            "DifficultyBackground.png",
-            "IdleEasyButton.png",
+            "DifficultyBackground.png", // Background
+
+            "IdleEasyButton.png", // Buttons
             "ActiveEasyButton.png",
             "IdleHardButton.png",
             "ActiveHardButton.png",
@@ -22,13 +23,13 @@ DifficultySelection::DifficultySelection() : ScreenTemplate() {
             "ActiveInstructionsButton.png",
     };
     const vector<sprite> sprites = {
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Background_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundTexture},
     };
     const vector<button> buttons = {
-            {sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), IdleEasyButton, ActiveEasyButton},
-            {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), IdleHardButton, ActiveHardButton},
-            {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleBackButton, ActiveBackButton},
-            {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton},
+            {sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), IdleEasyButtonTexture, ActiveEasyButtonTexture},
+            {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), IdleHardButtonTexture, ActiveHardButtonTexture},
+            {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleBackButtonTexture, ActiveBackButtonTexture},
+            {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButtonTexture, ActiveInstructionsButtonTexture},
     };
 
     // Initialize SFML objects
