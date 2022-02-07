@@ -68,18 +68,31 @@ namespace screen {
             BackgroundDefault_,
             BackgroundP1_,
             BackgroundP2_,
-            IdleReadyButton,
-            ActiveReadyButton,
-            IdleRandomizeButton,
-            ActiveRandomizeButton,
+
+            IdleSurrenderButton,
+            ActiveSurrenderButton,
             IdleInstructionsButton,
-            ReadyInstructionsButton,
+            ActiveInstructionsButton,
+
             Battleship_,
             AircraftCarrier_,
             Destroyer_,
             Submarine_,
             PatrolBoat_,
-            RowBoat_
+            RowBoat_,
+
+            BattleShipSunk,
+            AircraftCarrierSunk,
+            DestroyerSunk,
+            SubmarineSunk,
+            PatrolBoatSunk,
+            RowBoatSunk,
+
+            PrimaryHitMarker,
+            PrimaryMissMarker,
+            SecondaryHitMarker,
+            SecondaryMissMarker,
+            SecondaryTarget
         };
         enum spriteNames {
             BackgroundDefault,
@@ -93,14 +106,9 @@ namespace screen {
             RowBoat
         };
         enum buttonNames {
-            Ready,
-            Randomize,
+            Surrender,
             Instructions
         };
-
-
-
-
 
 
         /**

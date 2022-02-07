@@ -30,15 +30,16 @@ Gameplay::Gameplay() : ScreenTemplate() {
                                          "gameplay/GameplayP2Background.png",
                                          "gameplay/IdleSurrenderButton.png", "gameplay/ActiveSurrenderButton.png",
                                          "gameplay/IdleInstructionsButton.png", "gameplay/ActiveInstructionsButton.png",
-                                         "gameplay/BattleShip.png", "gameplay/AircraftCarrier.png", "gameplay/Destroyer.png",
+                                         "gameplay/Battleship.png", "gameplay/AircraftCarrier.png", "gameplay/Destroyer.png",
                                          "gameplay/Submarine.png", "gameplay/PatrolBoat.png", "gameplay/RowBoat.png",
-                                         "gameplay/BattleShipSunk.png", "gameplay/AircraftCarrierSunk.png", "gameplay/DestroyerSunk.png",
+                                         "gameplay/BattleshipSunk.png", "gameplay/AircraftCarrierSunk.png", "gameplay/DestroyerSunk.png",
                                          "gameplay/SubmarineSunk.png", "gameplay/PatrolBoatSunk.png", "gameplay/RowBoatSunk.png",
                                          "gameplay/PrimaryHitMarker.png", "gameplay/PrimaryMissMarker.png",
                                          "gameplay/SecondaryHitMarker.png", "gameplay/SecondaryMissMarker.png",
                                          "gameplay/SecondaryTarget.png"};
     const vector<sprite> sprites = {};
-    const vector<button> buttons = {};
+    const vector<button> buttons = {{sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleSurrenderButton, ActiveSurrenderButton},
+                                    {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
 
     this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
 
@@ -51,14 +52,14 @@ Gameplay::Gameplay() : ScreenTemplate() {
     loadTexture(this->idleInstructionsButtonTexture, "gameplay/IdleInstructionsButton.png");
     loadTexture(this->activeInstructionsButtonTexture, "gameplay/ActiveInstructionsButton.png");
 
-    loadTexture(this->battleshipTexture, "gameplay/BattleShip.png");
+    loadTexture(this->battleshipTexture, "gameplay/Battleship.png");
     loadTexture(this->aircraftCarrierTexture, "gameplay/AircraftCarrier.png");
     loadTexture(this->destroyerTexture, "gameplay/Destroyer.png");
     loadTexture(this->submarineTexture, "gameplay/Submarine.png");
     loadTexture(this->patrolBoatTexture, "gameplay/PatrolBoat.png");
     loadTexture(this->rowBoatTexture, "gameplay/RowBoat.png");
 
-    loadTexture(this->battleshipSunkTexture, "gameplay/BattleShipSunk.png");
+    loadTexture(this->battleshipSunkTexture, "gameplay/BattleshipSunk.png");
     loadTexture(this->aircraftCarrierSunkTexture, "gameplay/AircraftCarrierSunk.png");
     loadTexture(this->destroyerSunkTexture, "gameplay/DestroyerSunk.png");
     loadTexture(this->submarineSunkTexture, "gameplay/SubmarineSunk.png");
@@ -109,8 +110,8 @@ Gameplay::Gameplay() : ScreenTemplate() {
     this->secondaryTargetSprite.setTexture(this->secondaryTargetTexture);
     this->secondaryTargetSprite.setScale(sf::Vector2f(5, 5));
 
-    this->surrenderButton = new Button(sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleSurrenderButtonTexture, this->activeSurrenderButtonTexture);
-    this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButtonTexture, this->activeInstructionsButtonTexture);
+    // this->surrenderButton = new Button(sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleSurrenderButtonTexture, this->activeSurrenderButtonTexture);
+    // this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButtonTexture, this->activeInstructionsButtonTexture);
 
     this->setTargetVector();
     this->createCoordinateSet();
@@ -123,6 +124,7 @@ void Gameplay::setP1Grid(const shipOrientations &ships) {
 }
 
 void Gameplay::setP2Grid(const shipOrientations &ships) {
+    // TODO
     gridP2.reset(new Grid(ships));
     fleetLayoutP2.reset(&gridP2->getShips());
 }
@@ -386,6 +388,8 @@ void Gameplay::setFleetLayout(shipOrientations &fleetLayout) {
 void Gameplay::update() {
     sf::Vector2f mousePosition = State::getMousePosition();
 
+    // resources.getButton(Surrender).updateButtonState(mousePosition);
+    // resources.getButton(Surrender).updateButtonState(mousePosition);
     this->surrenderButton->updateButtonState(mousePosition);
     this->instructionsButton->updateButtonState(mousePosition);
 
