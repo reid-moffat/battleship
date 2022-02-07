@@ -26,64 +26,87 @@ Gameplay::Gameplay() : ScreenTemplate() {
     fleetLayoutP1 = std::make_unique<shipOrientations>();
     fleetLayoutP2 = std::make_unique<shipOrientations>();
 
-    const vector<string> texturePaths = {"gameplay/GameplayBackground.png", "gameplay/GameplayP1Background.png",
-                                         "gameplay/GameplayP2Background.png",
-                                         "gameplay/IdleSurrenderButton.png", "gameplay/ActiveSurrenderButton.png",
-                                         "gameplay/IdleInstructionsButton.png", "gameplay/ActiveInstructionsButton.png",
-                                         "gameplay/Battleship.png", "gameplay/AircraftCarrier.png", "gameplay/Destroyer.png",
-                                         "gameplay/Submarine.png", "gameplay/PatrolBoat.png", "gameplay/RowBoat.png",
-                                         "gameplay/BattleshipSunk.png", "gameplay/AircraftCarrierSunk.png", "gameplay/DestroyerSunk.png",
-                                         "gameplay/SubmarineSunk.png", "gameplay/PatrolBoatSunk.png", "gameplay/RowBoatSunk.png",
-                                         "gameplay/PrimaryHitMarker.png", "gameplay/PrimaryMissMarker.png",
-                                         "gameplay/SecondaryHitMarker.png", "gameplay/SecondaryMissMarker.png",
-                                         "gameplay/SecondaryTarget.png"};
+    const vector<string> texturePaths = {
+            "gameplay/GameplayBackground.png",
+            "gameplay/GameplayP1Background.png",
+            "gameplay/GameplayP2Background.png",
+            "gameplay/IdleSurrenderButton.png",
+            "gameplay/ActiveSurrenderButton.png",
+            "gameplay/IdleInstructionsButton.png",
+            "gameplay/ActiveInstructionsButton.png",
+            "gameplay/Battleship.png",
+            "gameplay/AircraftCarrier.png",
+            "gameplay/Destroyer.png",
+            "gameplay/Submarine.png",
+            "gameplay/PatrolBoat.png",
+            "gameplay/RowBoat.png",
+            "gameplay/BattleshipSunk.png",
+            "gameplay/AircraftCarrierSunk.png",
+            "gameplay/DestroyerSunk.png",
+            "gameplay/SubmarineSunk.png",
+            "gameplay/PatrolBoatSunk.png",
+            "gameplay/RowBoatSunk.png",
+            "gameplay/PrimaryHitMarker.png",
+            "gameplay/PrimaryMissMarker.png",
+            "gameplay/SecondaryHitMarker.png",
+            "gameplay/SecondaryMissMarker.png",
+            "gameplay/SecondaryTarget.png",
+    };
 
-    const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefault_},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1_},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2_},
+    const vector<sprite> sprites = {
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefault_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2_},
 
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Battleship_},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), AircraftCarrier_},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Destroyer_},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Submarine_},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PatrolBoat_},
-                                    {sf::Vector2f(0, 0), sf::Vector2f(5, 5), RowBoat_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Battleship_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), AircraftCarrier_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Destroyer_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Submarine_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PatrolBoat_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), RowBoat_},
 
-                                    {sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), BattleshipSunk_},
-                                    {sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), AircraftCarrierSunk_},
-                                    {sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), DestroyerSunk_},
-                                    {sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), SubmarineSunk_},
-                                    {sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), PatrolBoatSunk_},
-                                    {sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), RowBoatSunk_}};
+            {sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), BattleshipSunk_},
+            {sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), AircraftCarrierSunk_},
+            {sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), DestroyerSunk_},
+            {sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), SubmarineSunk_},
+            {sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), PatrolBoatSunk_},
+            {sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), RowBoatSunk_},
+
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PrimaryHitMarker_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PrimaryMissMarker_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryHitMarker_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryMissMarker_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryTarget_},
+    };
 
     const vector<button> buttons = {{sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleSurrenderButton, ActiveSurrenderButton},
                                     {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
 
     this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
 
-
-    loadTexture(this->primaryHitMarkerTexture, "gameplay/PrimaryHitMarker.png");
-    loadTexture(this->primaryMissMarkerTexture, "gameplay/PrimaryMissMarker.png");
-    loadTexture(this->secondaryHitMarkerTexture, "gameplay/SecondaryHitMarker.png");
-    loadTexture(this->secondaryMissMarkerTexture, "gameplay/SecondaryMissMarker.png");
-
     Target::initializeTextures();
-    loadTexture(this->secondaryTargetTexture, "gameplay/SecondaryTarget.png");
-
-    this->primaryHitMarkerSprite.setTexture(this->primaryHitMarkerTexture);
-    this->primaryHitMarkerSprite.setScale(sf::Vector2f(5, 5));
-    this->primaryMissMarkerSprite.setTexture(this->primaryMissMarkerTexture);
-    this->primaryMissMarkerSprite.setScale(sf::Vector2f(5, 5));
-    this->secondaryHitMarkerSprite.setTexture(this->secondaryHitMarkerTexture);
-    this->secondaryHitMarkerSprite.setScale(sf::Vector2f(5, 5));
-    this->secondaryMissMarkerSprite.setTexture(this->secondaryMissMarkerTexture);
-    this->secondaryMissMarkerSprite.setScale(sf::Vector2f(5, 5));
-
-    this->secondaryTargetSprite.setTexture(this->secondaryTargetTexture);
-    this->secondaryTargetSprite.setScale(sf::Vector2f(5, 5));
-
     this->setTargetVector();
     this->createCoordinateSet();
+
+    //    loadTexture(this->primaryHitMarkerTexture, "gameplay/PrimaryHitMarker.png");
+    //    loadTexture(this->primaryMissMarkerTexture, "gameplay/PrimaryMissMarker.png");
+    //    loadTexture(this->secondaryHitMarkerTexture, "gameplay/SecondaryHitMarker.png");
+    //    loadTexture(this->secondaryMissMarkerTexture, "gameplay/SecondaryMissMarker.png");
+
+
+    //    loadTexture(this->secondaryTargetTexture, "gameplay/SecondaryTarget.png");
+    //
+    //    this->primaryHitMarkerSprite.setTexture(this->primaryHitMarkerTexture);
+    //    this->primaryHitMarkerSprite.setScale(sf::Vector2f(5, 5));
+    //    this->primaryMissMarkerSprite.setTexture(this->primaryMissMarkerTexture);
+    //    this->primaryMissMarkerSprite.setScale(sf::Vector2f(5, 5));
+    //    this->secondaryHitMarkerSprite.setTexture(this->secondaryHitMarkerTexture);
+    //    this->secondaryHitMarkerSprite.setScale(sf::Vector2f(5, 5));
+    //    this->secondaryMissMarkerSprite.setTexture(this->secondaryMissMarkerTexture);
+    //    this->secondaryMissMarkerSprite.setScale(sf::Vector2f(5, 5));
+    //
+    //    this->secondaryTargetSprite.setTexture(this->secondaryTargetTexture);
+    //    this->secondaryTargetSprite.setScale(sf::Vector2f(5, 5));
 }
 
 void Gameplay::setP1Grid(const shipOrientations &ships) {
@@ -137,50 +160,52 @@ void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             if (attack == SquareType::WATER) {
-                this->primaryMissMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP1Vector.push_back(this->primaryMissMarkerSprite);
+                resources.getSprite(PrimaryMissMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryMissMarker));
             } else {
-                this->primaryHitMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP1Vector.push_back(this->primaryHitMarkerSprite);
+                resources.getSprite(PrimaryHitMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryHitMarker));
             }
         } else {
             if (attack == SquareType::WATER) {
-                this->secondaryMissMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP1Vector.push_back(this->secondaryMissMarkerSprite);
+                resources.getSprite(SecondaryMissMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryMissMarker));
             } else {
-                this->secondaryHitMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP1Vector.push_back(this->secondaryHitMarkerSprite);
+                resources.getSprite(SecondaryHitMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         }
 
     } else {
         if (State::player == State::Player::P1) {
             if (attack == SquareType::WATER) {
-                this->primaryMissMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP1Vector.push_back(this->primaryMissMarkerSprite);
+                resources.getSprite(PrimaryMissMarker)
+                        .setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryMissMarker));
 
-                this->secondaryMissMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP2Vector.push_back(this->secondaryMissMarkerSprite);
+                resources.getSprite(SecondaryMissMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP2Vector.push_back(resources.getSprite(SecondaryMissMarker));
             } else {
-                this->primaryHitMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP1Vector.push_back(this->primaryHitMarkerSprite);
+                resources.getSprite(PrimaryHitMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryHitMarker));
 
-                this->secondaryHitMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP2Vector.push_back(this->secondaryHitMarkerSprite);
+                resources.getSprite(SecondaryHitMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP2Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         } else {
             if (attack == SquareType::WATER) {
-                this->primaryMissMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP2Vector.push_back(this->primaryMissMarkerSprite);
+                resources.getSprite(PrimaryMissMarker)
+                        .setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP2Vector.push_back(resources.getSprite(PrimaryMissMarker));
 
-                this->secondaryMissMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP1Vector.push_back(this->secondaryMissMarkerSprite);
+                resources.getSprite(SecondaryMissMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryMissMarker));
             } else {
-                this->primaryHitMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP2Vector.push_back(this->primaryHitMarkerSprite);
+                resources.getSprite(PrimaryHitMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP2Vector.push_back(resources.getSprite(PrimaryHitMarker));
 
-                this->secondaryHitMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP1Vector.push_back(this->secondaryHitMarkerSprite);
+                resources.getSprite(SecondaryHitMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         }
     }
@@ -194,7 +219,8 @@ void Gameplay::resetGridMarkers() {
 }
 
 void Gameplay::updateSecondaryTarget(Coordinate coordinate) {
-    this->secondaryTargetSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+    resources.getSprite(SecondaryTarget)
+            .setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
 }
 
 void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
@@ -506,11 +532,11 @@ void Gameplay::render() {
     }
 
     if ((State::player == State::Player::P1) && !this->secondaryMarkersP1Vector.empty()) {
-        gui.draw(this->secondaryTargetSprite);
+        gui.draw(resources.getSprite(SecondaryTarget));
     }
 
     if ((State::player == State::Player::P2) && !this->secondaryMarkersP2Vector.empty()) {
-        gui.draw(this->secondaryTargetSprite);
+        gui.draw(resources.getSprite(SecondaryTarget));
     }
 
     if (State::gameMode == State::SINGLE_PLAYER) {

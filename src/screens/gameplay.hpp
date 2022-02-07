@@ -88,11 +88,11 @@ namespace screen {
             PatrolBoatSunk_,
             RowBoatSunk_,
 
-            PrimaryHitMarker,
-            PrimaryMissMarker,
-            SecondaryHitMarker,
-            SecondaryMissMarker,
-            SecondaryTarget
+            PrimaryHitMarker_,
+            PrimaryMissMarker_,
+            SecondaryHitMarker_,
+            SecondaryMissMarker_,
+            SecondaryTarget_
         };
         enum spriteNames {
             BackgroundDefault,
@@ -111,7 +111,13 @@ namespace screen {
             DestroyerSunk,
             SubmarineSunk,
             PatrolBoatSunk,
-            RowBoatSunk
+            RowBoatSunk,
+
+            PrimaryHitMarker,
+            PrimaryMissMarker,
+            SecondaryHitMarker,
+            SecondaryMissMarker,
+            SecondaryTarget
         };
         enum buttonNames {
             Surrender,
@@ -205,20 +211,20 @@ namespace screen {
         static constexpr int sleepTimeMS = 400;
 
 
-        sf::Texture primaryHitMarkerTexture;
-        sf::Texture primaryMissMarkerTexture;
-        sf::Texture secondaryHitMarkerTexture;
-        sf::Texture secondaryMissMarkerTexture;
-        sf::Texture idlePrimaryTargetTexture;
-        sf::Texture activePrimaryTargetTexture;
-        sf::Texture secondaryTargetTexture;
-
-
-        sf::Sprite primaryHitMarkerSprite;
-        sf::Sprite primaryMissMarkerSprite;
-        sf::Sprite secondaryHitMarkerSprite;
-        sf::Sprite secondaryMissMarkerSprite;
-        sf::Sprite secondaryTargetSprite;
+//        sf::Texture primaryHitMarkerTexture;
+//        sf::Texture primaryMissMarkerTexture;
+//        sf::Texture secondaryHitMarkerTexture;
+//        sf::Texture secondaryMissMarkerTexture;
+//        sf::Texture idlePrimaryTargetTexture;
+//        sf::Texture activePrimaryTargetTexture;
+//        sf::Texture secondaryTargetTexture;
+//
+//
+//        sf::Sprite primaryHitMarkerSprite;
+//        sf::Sprite primaryMissMarkerSprite;
+//        sf::Sprite secondaryHitMarkerSprite;
+//        sf::Sprite secondaryMissMarkerSprite;
+//        sf::Sprite secondaryTargetSprite;
 
         vector<Target> targetVector;
 
