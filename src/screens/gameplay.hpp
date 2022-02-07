@@ -81,7 +81,7 @@ namespace screen {
             PatrolBoat_,
             RowBoat_,
 
-            BattleShipSunk_,
+            BattleshipSunk_,
             AircraftCarrierSunk_,
             DestroyerSunk_,
             SubmarineSunk_,
@@ -98,18 +98,20 @@ namespace screen {
             BackgroundDefault,
             BackgroundP1,
             BackgroundP2,
-            BattleShipSunk,
-            AircraftCarrierSunk,
-            DestroyerSunk,
-            SubmarineSunk,
-            PatrolBoatSunk,
-            RowBoatSunk,
+
             Battleship,
             AircraftCarrier,
             Destroyer,
             Submarine,
             PatrolBoat,
-            RowBoat
+            RowBoat,
+
+            BattleShipSunk,
+            AircraftCarrierSunk,
+            DestroyerSunk,
+            SubmarineSunk,
+            PatrolBoatSunk,
+            RowBoatSunk
         };
         enum buttonNames {
             Surrender,
@@ -203,13 +205,6 @@ namespace screen {
         static constexpr int sleepTimeMS = 400;
 
 
-        sf::Texture battleshipTexture;
-        sf::Texture aircraftCarrierTexture;
-        sf::Texture destroyerTexture;
-        sf::Texture submarineTexture;
-        sf::Texture patrolBoatTexture;
-        sf::Texture rowBoatTexture;
-
         sf::Texture primaryHitMarkerTexture;
         sf::Texture primaryMissMarkerTexture;
         sf::Texture secondaryHitMarkerTexture;
@@ -218,13 +213,6 @@ namespace screen {
         sf::Texture activePrimaryTargetTexture;
         sf::Texture secondaryTargetTexture;
 
-
-        sf::Sprite battleshipSprite;
-        sf::Sprite aircraftCarrierSprite;
-        sf::Sprite destroyerSprite;
-        sf::Sprite submarineSprite;
-        sf::Sprite patrolBoatSprite;
-        sf::Sprite rowBoatSprite;
 
         sf::Sprite primaryHitMarkerSprite;
         sf::Sprite primaryMissMarkerSprite;
