@@ -88,7 +88,7 @@ Gameplay::Gameplay() : ScreenTemplate() {
 
     this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
 
-    Target::initializeTextures();
+    Target::initializeTextures("gameplay/idlePrimaryTarget.png", "gameplay/ActivePrimaryTarget.png");
     this->setTargetVector();
     this->createCoordinateSet();
 }
