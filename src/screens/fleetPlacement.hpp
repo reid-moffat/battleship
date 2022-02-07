@@ -10,7 +10,6 @@
 #include "../entity/coordinate.hpp"
 #include "../enums/shipNames.hpp"
 #include <SFML/System.hpp>
-#include <random>
 #include <vector>
 
 using entity::Button;
@@ -52,26 +51,29 @@ namespace screen {
 
         // Names to refer to resources on this screen
         enum textureNames {
-            BackgroundDefault_,
-            BackgroundP1_,
-            BackgroundP2_,
-            IdleReadyButton,
-            ActiveReadyButton,
-            IdleRandomizeButton,
-            ActiveRandomizeButton,
-            IdleInstructionsButton,
-            ReadyInstructionsButton,
-            Battleship_,
-            AircraftCarrier_,
-            Destroyer_,
-            Submarine_,
-            PatrolBoat_,
-            RowBoat_
+            BackgroundDefaultTexture,
+            BackgroundP1Texture,
+            BackgroundP2Texture,
+
+            BattleshipTexture,
+            AircraftCarrierTexture,
+            DestroyerTexture,
+            SubmarineTexture,
+            PatrolBoatTexture,
+            RowBoatTexture,
+
+            IdleReadyButtonTexture,
+            ActiveReadyButtonTexture,
+            IdleRandomizeButtonTexture,
+            ActiveRandomizeButtonTexture,
+            IdleInstructionsButtonTexture,
+            ReadyInstructionsButtonTexture
         };
         enum spriteNames {
             BackgroundDefault,
             BackgroundP1,
             BackgroundP2,
+
             Battleship,
             AircraftCarrier,
             Destroyer,
@@ -86,11 +88,6 @@ namespace screen {
         };
 
         /**
-         *
-         */
-        bool layoutGenerated;
-
-        /**
          * Ships map:
          * ShipNames -> specifies the ship name and size
          * Coordinate -> specifies the topmost or leftmost coordinate of the ship
@@ -98,26 +95,20 @@ namespace screen {
          */
         map<shipNames, tuple<Coordinate, bool>> ships;
 
-        /**
-         * Adds a coordinate to a vector if the coordinate is valid
-         */
+        // If a ship orientation has been generated yet
+        bool layoutGenerated;
+
+        // Adds a coordinate to a vector if the x and y are valid
         static void addCoord(vector<Coordinate> &coordinates, int x, int y);
 
-        /**
-         * Generates a random fleet layout
-         */
+        //Generates a random fleet layout
         void randomize();
 
-        /**
-         * Updates ship sprites and orientations
-         */
+        // Updates ship sprites and orientations
         void updateFleetLayout();
 
-        /**
-         * Resets ship sprites and orientations
-         */
+        //Resets ship sprites and orientations
         void resetFleetLayout();
-
     };
 }// namespace screen
 

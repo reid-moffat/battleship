@@ -7,7 +7,8 @@
 
 using std::get;
 
-ScreenResourceManager::ScreenResourceManager(const vector<string> &texturePaths,
+ScreenResourceManager::ScreenResourceManager(const string& screenName,
+                                             const vector<string> &texturePaths,
                                              const vector<tuple<sf::Vector2f, sf::Vector2f, int>> &spritesData,
                                              const vector<tuple<sf::Vector2f, sf::Vector2f, int, int>> &buttons) {
     // Initialize the textures
@@ -17,7 +18,7 @@ ScreenResourceManager::ScreenResourceManager(const vector<string> &texturePaths,
 
         // Attempt to load the texture image
         auto texture = &this->textures[i];
-        if (!texture->loadFromFile("../res/images/" + texturePaths[i])) {
+        if (!texture->loadFromFile("../res/images/" + screenName + "/" + texturePaths[i])) {
             std::cout << "Error: unable to open file: /res/images/" << texturePaths[i] << std::endl;
             exit(-1);
         }
