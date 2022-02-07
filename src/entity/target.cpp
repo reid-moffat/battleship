@@ -15,8 +15,8 @@ void entity::Target::initializeTextures(const string &idlePath, const string &ac
     Target::idleTexture = std::make_unique<sf::Texture>();
     Target::activeTexture = std::make_unique<sf::Texture>();
 
-    loadTexture(*Target::idleTexture, idlePath);
-    loadTexture(*Target::activeTexture, activePath);
+    loadTexture(*Target::idleTexture, "gameplay/" + idlePath);
+    loadTexture(*Target::activeTexture, "gameplay/" + activePath);
 }
 
 Target::Target(Coordinate coordinate, sf::Vector2f position, sf::Vector2f scale) {

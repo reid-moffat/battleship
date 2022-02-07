@@ -9,18 +9,18 @@ using screen::GameModeSelection;
 std::unique_ptr<GameModeSelection> GameModeSelection::instance = nullptr;
 
 GameModeSelection::GameModeSelection() : ScreenTemplate() {
-    const vector<string> texturePaths{"gameModeSelection/GameModeBackground.png",
-                                      "gameModeSelection/Idle1PlayerButton.png", "gameModeSelection/Active1PlayerButton.png",
-                                      "gameModeSelection/Idle2PlayerButton.png", "gameModeSelection/Active2PlayerButton.png",
-                                      "gameModeSelection/IdleBackButton.png", "gameModeSelection/ActiveBackButton.png",
-                                      "gameModeSelection/IdleInstructionsButton.png", "gameModeSelection/ActiveInstructionsButton.png"};
+    const vector<string> texturePaths{"GameModeBackground.png",
+                                      "Idle1PlayerButton.png", "Active1PlayerButton.png",
+                                      "Idle2PlayerButton.png", "Active2PlayerButton.png",
+                                      "IdleBackButton.png", "ActiveBackButton.png",
+                                      "IdleInstructionsButton.png", "ActiveInstructionsButton.png"};
     const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), Background_}};
     const vector<button> buttons = {{sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), IdleOnePlayer, ActiveOnePlayer},
                                     {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), IdleTwoPlayer, ActiveTwoPlayer},
                                     {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleBackButton, ActiveBackButton},
                                     {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
 
-    this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
+    this->resources = ScreenResourceManager("gameModeSelection", texturePaths, sprites, buttons);
 }
 
 void GameModeSelection::update() {

@@ -17,11 +17,9 @@ ScreenResourceManager::ScreenResourceManager(const string& screenName,
         this->textures.emplace_back();
 
         // Attempt to load the texture image
-        auto texture = &this->textures[i];
-        if (!texture->loadFromFile("../res/images/" + screenName + "/" + texturePaths[i])) {
-            std::cout << "Error: unable to open file: /res/images/" << texturePaths[i] << std::endl;
-            exit(-1);
-        }
+        sf::Texture &texture = this->textures[i];
+        string texturePath = screenName + "/" + texturePaths[i];
+        loadTexture(texture, texturePath);
     }
 
     // Initialize the sprites

@@ -9,18 +9,18 @@ using screen::DifficultySelection;
 std::unique_ptr<DifficultySelection> DifficultySelection::instance = nullptr;
 
 DifficultySelection::DifficultySelection() : ScreenTemplate() {
-    const vector<string> texturePaths{"difficultySelection/DifficultyBackground.png",
-                                      "difficultySelection/IdleEasyButton.png", "difficultySelection/ActiveEasyButton.png",
-                                      "difficultySelection/IdleHardButton.png", "difficultySelection/ActiveHardButton.png",
-                                      "difficultySelection/IdleBackButton.png", "difficultySelection/ActiveBackButton.png",
-                                      "difficultySelection/IdleInstructionsButton.png", "difficultySelection/ActiveInstructionsButton.png"};
+    const vector<string> texturePaths{"DifficultyBackground.png",
+                                      "IdleEasyButton.png", "ActiveEasyButton.png",
+                                      "IdleHardButton.png", "ActiveHardButton.png",
+                                      "IdleBackButton.png", "ActiveBackButton.png",
+                                      "IdleInstructionsButton.png", "ActiveInstructionsButton.png"};
     const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), Background_}};
     const vector<button> buttons = {{sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), IdleEasyButton, ActiveEasyButton},
                                     {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), IdleHardButton, ActiveHardButton},
                                     {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleBackButton, ActiveBackButton},
                                     {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
 
-    this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
+    this->resources = ScreenResourceManager("difficultySelection", texturePaths, sprites, buttons);
 }
 
 DifficultySelection &screen::DifficultySelection::getInstance() {

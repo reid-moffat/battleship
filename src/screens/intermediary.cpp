@@ -16,9 +16,9 @@ Intermediary &screen::Intermediary::getInstance() {
 }
 
 Intermediary::Intermediary() : ScreenTemplate() {
-    const vector<string> texturePaths{"intermediary/IntermediaryP1Background.png", "intermediary/IntermediaryP2Background.png",
-                                      "intermediary/IdleContinueButton.png", "intermediary/ActiveContinueButton.png"};
-    this->resources = ScreenResourceManager(texturePaths,
+    const vector<string> texturePaths{"IntermediaryP1Background.png", "IntermediaryP2Background.png",
+                                      "IdleContinueButton.png", "ActiveContinueButton.png"};
+    this->resources = ScreenResourceManager("intermediary",texturePaths,
                                             {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::IntermediaryP1Background},
                                              {sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::IntermediaryP2Background}},
                                             {{sf::Vector2f(144 * 5, 108 * 5), sf::Vector2f(5, 5),

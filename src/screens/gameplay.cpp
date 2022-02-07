@@ -27,34 +27,34 @@ Gameplay::Gameplay() : ScreenTemplate() {
     fleetLayoutP2 = std::make_unique<shipOrientations>();
 
     const vector<string> texturePaths = {
-            "gameplay/GameplayBackground.png",
-            "gameplay/GameplayP1Background.png",
-            "gameplay/GameplayP2Background.png",
+            "GameplayBackground.png",
+            "GameplayP1Background.png",
+            "GameplayP2Background.png",
 
-            "gameplay/Battleship.png",
-            "gameplay/AircraftCarrier.png",
-            "gameplay/Destroyer.png",
-            "gameplay/Submarine.png",
-            "gameplay/PatrolBoat.png",
-            "gameplay/RowBoat.png",
+            "Battleship.png",
+            "AircraftCarrier.png",
+            "Destroyer.png",
+            "Submarine.png",
+            "PatrolBoat.png",
+            "RowBoat.png",
 
-            "gameplay/BattleshipSunk.png",
-            "gameplay/AircraftCarrierSunk.png",
-            "gameplay/DestroyerSunk.png",
-            "gameplay/SubmarineSunk.png",
-            "gameplay/PatrolBoatSunk.png",
-            "gameplay/RowBoatSunk.png",
+            "BattleshipSunk.png",
+            "AircraftCarrierSunk.png",
+            "DestroyerSunk.png",
+            "SubmarineSunk.png",
+            "PatrolBoatSunk.png",
+            "RowBoatSunk.png",
 
-            "gameplay/PrimaryHitMarker.png",
-            "gameplay/PrimaryMissMarker.png",
-            "gameplay/SecondaryHitMarker.png",
-            "gameplay/SecondaryMissMarker.png",
-            "gameplay/SecondaryTarget.png",
+            "PrimaryHitMarker.png",
+            "PrimaryMissMarker.png",
+            "SecondaryHitMarker.png",
+            "SecondaryMissMarker.png",
+            "SecondaryTarget.png",
 
-            "gameplay/IdleSurrenderButton.png",
-            "gameplay/ActiveSurrenderButton.png",
-            "gameplay/IdleInstructionsButton.png",
-            "gameplay/ActiveInstructionsButton.png",
+            "IdleSurrenderButton.png",
+            "ActiveSurrenderButton.png",
+            "IdleInstructionsButton.png",
+            "ActiveInstructionsButton.png",
     };
 
     const vector<sprite> sprites = {
@@ -86,9 +86,9 @@ Gameplay::Gameplay() : ScreenTemplate() {
     const vector<button> buttons = {{sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleSurrenderButton, ActiveSurrenderButton},
                                     {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
 
-    this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
+    this->resources = ScreenResourceManager("gameplay", texturePaths, sprites, buttons);
 
-    Target::initializeTextures("gameplay/idlePrimaryTarget.png", "gameplay/ActivePrimaryTarget.png");
+    Target::initializeTextures("idlePrimaryTarget.png", "ActivePrimaryTarget.png");
     this->setTargetVector();
     this->createCoordinateSet();
 }

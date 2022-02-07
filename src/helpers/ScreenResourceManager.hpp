@@ -23,6 +23,7 @@ public:
      * Initializes this manager with textures and sprites
      *
      * @param screenName the name of the screen i.e folder in res/images/ where the textures are located
+     *                   (do not include a leading or trailing forward slash)
      * @param texturePaths paths to textures to load relative to res/images/[<i>screenName</i>]
      * @param sprites data to initialize each sprite:<p>
      *                -The initial position (sf::Vector2f)<p>

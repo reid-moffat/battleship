@@ -18,8 +18,8 @@ Homepage &Homepage::getInstance() {
 }
 
 Homepage::Homepage() {
-    const vector<string> texturePaths{"homepage/HomepageBackground.png", "homepage/IdlePlayButton.png", "homepage/ActivePlayButton.png"};
-    this->resources = ScreenResourceManager(texturePaths,
+    const vector<string> texturePaths{"HomepageBackground.png", "IdlePlayButton.png", "ActivePlayButton.png"};
+    this->resources = ScreenResourceManager("homepage",texturePaths,
                                             {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background_}},
                                             {{sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5),
                                               textureNames::IdlePlayButton, textureNames::ActivePlayButton}});

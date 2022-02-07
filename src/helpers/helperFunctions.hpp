@@ -38,6 +38,7 @@ inline int randomInt(const int start, const int end) {
  */
 inline void loadTexture(sf::Texture &texture, const string &path) {
     if (!texture.loadFromFile("../res/images/" + path)) {
+        std::cout << "Error: unable to open file: /res/images/" << path << std::endl;
         exit(-1);
     }
 }

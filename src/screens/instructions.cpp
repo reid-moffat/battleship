@@ -17,8 +17,8 @@ Instructions &screen::Instructions::getInstance() {
 }
 
 Instructions::Instructions() : ScreenTemplate() {
-    const vector<string> texturePaths{"instructions/InstructionsBackground.png", "instructions/IdleBackButton.png", "instructions/ActiveBackButton.png"};
-    this->resources = ScreenResourceManager(texturePaths,
+    const vector<string> texturePaths{"InstructionsBackground.png", "IdleBackButton.png", "ActiveBackButton.png"};
+    this->resources = ScreenResourceManager("instructions",texturePaths,
                                             {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background_}},
                                             {{sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5),
                                               textureNames::IdleBackButton, textureNames::ActiveBackButton}});

@@ -12,23 +12,23 @@ std::unique_ptr<FleetPlacement> FleetPlacement::instance = nullptr;
 
 FleetPlacement::FleetPlacement() : ScreenTemplate() {
     const vector<string> texturePaths = {
-            "fleetPlacement/FleetPlacementBackground.png", // Background textures
-            "fleetPlacement/FleetPlacementP1Background.png",
-            "fleetPlacement/FleetPlacementP2Background.png",
+            "FleetPlacementBackground.png", // Background textures
+            "FleetPlacementP1Background.png",
+            "FleetPlacementP2Background.png",
 
-            "fleetPlacement/BattleShip.png", // Ship textures
-            "fleetPlacement/AircraftCarrier.png",
-            "fleetPlacement/Destroyer.png",
-            "fleetPlacement/Submarine.png",
-            "fleetPlacement/PatrolBoat.png",
-            "fleetPlacement/RowBoat.png",
+            "BattleShip.png", // Ship textures
+            "AircraftCarrier.png",
+            "Destroyer.png",
+            "Submarine.png",
+            "PatrolBoat.png",
+            "RowBoat.png",
 
-            "fleetPlacement/IdleReadyButton.png", // Button idle and active textures
-            "fleetPlacement/ActiveReadyButton.png",
-            "fleetPlacement/IdleRandomizeButton.png",
-            "fleetPlacement/ActiveRandomizeButton.png",
-            "fleetPlacement/IdleInstructionsButton.png",
-            "fleetPlacement/ActiveInstructionsButton.png",
+            "IdleReadyButton.png", // Button idle and active textures
+            "ActiveReadyButton.png",
+            "IdleRandomizeButton.png",
+            "ActiveRandomizeButton.png",
+            "IdleInstructionsButton.png",
+            "ActiveInstructionsButton.png",
     };
     const vector<sprite> sprites = {
             {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefaultTexture},// Background sprites
