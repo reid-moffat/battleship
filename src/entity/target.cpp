@@ -7,10 +7,12 @@
 
 using entity::Target;
 
+// TODO: change to smart pointer
 sf::Texture Target::idleTexture = *new sf::Texture();
 sf::Texture Target::activeTexture = *new sf::Texture();
 
 void entity::Target::initializeTextures() {
+    // TODO: Take hte path as a param
     loadTexture(Target::idleTexture, "gameplay/idlePrimaryTarget.png");
     loadTexture(Target::activeTexture, "gameplay/ActivePrimaryTarget.png");
 }

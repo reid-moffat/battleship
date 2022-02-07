@@ -30,27 +30,31 @@ Gameplay::Gameplay() : ScreenTemplate() {
             "gameplay/GameplayBackground.png",
             "gameplay/GameplayP1Background.png",
             "gameplay/GameplayP2Background.png",
-            "gameplay/IdleSurrenderButton.png",
-            "gameplay/ActiveSurrenderButton.png",
-            "gameplay/IdleInstructionsButton.png",
-            "gameplay/ActiveInstructionsButton.png",
+
             "gameplay/Battleship.png",
             "gameplay/AircraftCarrier.png",
             "gameplay/Destroyer.png",
             "gameplay/Submarine.png",
             "gameplay/PatrolBoat.png",
             "gameplay/RowBoat.png",
+
             "gameplay/BattleshipSunk.png",
             "gameplay/AircraftCarrierSunk.png",
             "gameplay/DestroyerSunk.png",
             "gameplay/SubmarineSunk.png",
             "gameplay/PatrolBoatSunk.png",
             "gameplay/RowBoatSunk.png",
+
             "gameplay/PrimaryHitMarker.png",
             "gameplay/PrimaryMissMarker.png",
             "gameplay/SecondaryHitMarker.png",
             "gameplay/SecondaryMissMarker.png",
             "gameplay/SecondaryTarget.png",
+
+            "gameplay/IdleSurrenderButton.png",
+            "gameplay/ActiveSurrenderButton.png",
+            "gameplay/IdleInstructionsButton.png",
+            "gameplay/ActiveInstructionsButton.png",
     };
 
     const vector<sprite> sprites = {
@@ -87,26 +91,6 @@ Gameplay::Gameplay() : ScreenTemplate() {
     Target::initializeTextures();
     this->setTargetVector();
     this->createCoordinateSet();
-
-    //    loadTexture(this->primaryHitMarkerTexture, "gameplay/PrimaryHitMarker.png");
-    //    loadTexture(this->primaryMissMarkerTexture, "gameplay/PrimaryMissMarker.png");
-    //    loadTexture(this->secondaryHitMarkerTexture, "gameplay/SecondaryHitMarker.png");
-    //    loadTexture(this->secondaryMissMarkerTexture, "gameplay/SecondaryMissMarker.png");
-
-
-    //    loadTexture(this->secondaryTargetTexture, "gameplay/SecondaryTarget.png");
-    //
-    //    this->primaryHitMarkerSprite.setTexture(this->primaryHitMarkerTexture);
-    //    this->primaryHitMarkerSprite.setScale(sf::Vector2f(5, 5));
-    //    this->primaryMissMarkerSprite.setTexture(this->primaryMissMarkerTexture);
-    //    this->primaryMissMarkerSprite.setScale(sf::Vector2f(5, 5));
-    //    this->secondaryHitMarkerSprite.setTexture(this->secondaryHitMarkerTexture);
-    //    this->secondaryHitMarkerSprite.setScale(sf::Vector2f(5, 5));
-    //    this->secondaryMissMarkerSprite.setTexture(this->secondaryMissMarkerTexture);
-    //    this->secondaryMissMarkerSprite.setScale(sf::Vector2f(5, 5));
-    //
-    //    this->secondaryTargetSprite.setTexture(this->secondaryTargetTexture);
-    //    this->secondaryTargetSprite.setScale(sf::Vector2f(5, 5));
 }
 
 void Gameplay::setP1Grid(const shipOrientations &ships) {

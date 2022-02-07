@@ -69,11 +69,6 @@ namespace screen {
             BackgroundP1_,
             BackgroundP2_,
 
-            IdleSurrenderButton,
-            ActiveSurrenderButton,
-            IdleInstructionsButton,
-            ActiveInstructionsButton,
-
             Battleship_,
             AircraftCarrier_,
             Destroyer_,
@@ -92,7 +87,12 @@ namespace screen {
             PrimaryMissMarker_,
             SecondaryHitMarker_,
             SecondaryMissMarker_,
-            SecondaryTarget_
+            SecondaryTarget_,
+
+            IdleSurrenderButton,
+            ActiveSurrenderButton,
+            IdleInstructionsButton,
+            ActiveInstructionsButton,
         };
         enum spriteNames {
             BackgroundDefault,
@@ -210,22 +210,7 @@ namespace screen {
          */
         static constexpr int sleepTimeMS = 400;
 
-
-//        sf::Texture primaryHitMarkerTexture;
-//        sf::Texture primaryMissMarkerTexture;
-//        sf::Texture secondaryHitMarkerTexture;
-//        sf::Texture secondaryMissMarkerTexture;
-//        sf::Texture idlePrimaryTargetTexture;
-//        sf::Texture activePrimaryTargetTexture;
-//        sf::Texture secondaryTargetTexture;
-//
-//
-//        sf::Sprite primaryHitMarkerSprite;
-//        sf::Sprite primaryMissMarkerSprite;
-//        sf::Sprite secondaryHitMarkerSprite;
-//        sf::Sprite secondaryMissMarkerSprite;
-//        sf::Sprite secondaryTargetSprite;
-
+        // TODO: Simplify
         vector<Target> targetVector;
 
         vector<sf::Sprite> primaryMarkersP1Vector;
