@@ -11,6 +11,8 @@ using entity::shipNames;
 using entity::SquareType;
 using std::get;
 
+entity::Grid::Grid() = default;
+
 Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
     // Initialize the grid itself with all water to start
     for (int i = 0; i < size; ++i) {
@@ -84,8 +86,4 @@ map<shipNames, tuple<Coordinate, bool>> &entity::Grid::getShips() {
 
 map<shipNames, bool> &Grid::getShipStatus() {
     return this->shipStatuses;
-}
-
-entity::Grid::Grid() {
-    ;
 }

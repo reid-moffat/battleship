@@ -55,7 +55,7 @@ namespace entity {
         map<shipNames, bool> &getShipStatus();
 
         /**
-         * Default, empty constructor (allows static grids to be initialized without data)
+         * Default, empty constructor
          */
         Grid();
 
