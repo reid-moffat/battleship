@@ -6,36 +6,23 @@
 #define BATTLESHIP_FLEETPLACEMENT_H
 
 #include "../controllers/screenTemplate.hpp"
-#include "../entity/button.hpp"
 #include "../entity/coordinate.hpp"
-#include "../enums/shipNames.hpp"
-#include <SFML/System.hpp>
-#include <vector>
 
-using entity::Button;
 using entity::Coordinate;
-using entity::shipNames;
-using std::map;
-using std::tuple;
-using std::vector;
 
 namespace screen {
     class FleetPlacement : public ScreenTemplate {
     public:
         /**
-         * Copy constructor
-         */
-        FleetPlacement(const FleetPlacement &source) = delete;
-
-        /**
-         * Overloaded assignment operator
-         */
-        FleetPlacement &operator=(const FleetPlacement &source) = delete;
-
-        /**
          *
          */
         static FleetPlacement &getInstance();
+
+        // Do not allow copying of this screen's instance
+        FleetPlacement(const FleetPlacement &source) = delete;
+
+        // Do not allow assignment of this screen's instance
+        FleetPlacement &operator=(const FleetPlacement &source) = delete;
 
     private:
         // Singleton instance
@@ -87,12 +74,7 @@ namespace screen {
             Instructions
         };
 
-        /**
-         * Ships map:
-         * ShipNames -> specifies the ship name and size
-         * Coordinate -> specifies the topmost or leftmost coordinate of the ship
-         * Bool -> specifies the ship orientation (horizontal = true)
-         */
+        // Ships on this screen, with their name, top left coordinate and if it is horizontal
         map<shipNames, tuple<Coordinate, bool>> ships;
 
         // If a ship orientation has been generated yet
@@ -101,7 +83,7 @@ namespace screen {
         // Adds a coordinate to a vector if the x and y are valid
         static void addCoord(vector<Coordinate> &coordinates, int x, int y);
 
-        //Generates a random fleet layout
+        // Generates a random fleet layout
         void randomize();
 
         // Updates ship sprites and orientations
