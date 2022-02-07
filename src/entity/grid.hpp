@@ -6,12 +6,12 @@
 #ifndef BATTLESHIP_GRID_H
 #define BATTLESHIP_GRID_H
 
-#include "coordinate.hpp"
 #include "../enums/shipNames.hpp"
 #include "../enums/squareType.hpp"
+#include "coordinate.hpp"
+#include <map>
 #include <memory>
 #include <vector>
-#include <map>
 
 using std::map;
 using std::tuple;
@@ -23,7 +23,6 @@ namespace entity {
     class Grid {
     public:
         /**
-         * Constructs a grid
          * Constructs a grid with a list of ships
          *
          * @param ships the six ships on the grid with their orientations
@@ -60,11 +59,6 @@ namespace entity {
          */
         Grid();
 
-        // Big three
-        ~Grid();
-        Grid(Grid &other);
-        Grid &operator=(Grid *other);
-
     private:
         /**
          * The six ships on this board
@@ -72,7 +66,7 @@ namespace entity {
          *  -The coordinates it occupies on the board
          *  -The number of hits on this ship
          */
-        map<shipNames, tuple<Coordinate *, int>> ships;
+        map<shipNames, tuple<vector<Coordinate>, int>> ships;
 
         /**
          * Each ship with its top/left coordinate and whether it is horizontal or not
@@ -89,7 +83,7 @@ namespace entity {
         /**
          * 10-by-10 array of grid squares
          */
-        SquareType **squares;
+        vector<vector<SquareType>> squares;
 
         /**
          * Size of the grid (both width and height) i.e 10

@@ -18,6 +18,6 @@ namespace screen {
         GAME_OVER
     };
 
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_SCREENS_H

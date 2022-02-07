@@ -1,13 +1,12 @@
 /**
- * File: difficultySelection.h
- * Description: Front-end class that defines the behaviour of the Difficulty selection screens
+ * Front-end class that defines the behaviour of the Difficulty selection screens
  */
 
 #ifndef BATTLESHIP_DIFFICULTYSELECTION_H
 #define BATTLESHIP_DIFFICULTYSELECTION_H
 
-#include "../entity/button.hpp"
 #include "../controllers/screenTemplate.hpp"
+#include "../entity/button.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
@@ -18,7 +17,7 @@ namespace screen {
         /**
          *
          */
-        static DifficultySelection& getInstance();
+        static DifficultySelection &getInstance();
 
         /**
          * Copy constructor
@@ -30,108 +29,40 @@ namespace screen {
          */
         DifficultySelection &operator=(const DifficultySelection &source) = delete;
 
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
-
     private:
-        /**
-         *
-         */
-        static DifficultySelection *instance;
+        // Singleton instance
+        static std::unique_ptr<DifficultySelection> instance;
 
-        /**
-         *
-         */
+        // Singleton constructor
         DifficultySelection();
 
-        /**
-         * Background texture
-         */
-        sf::Texture difficultyBackgroundTexture;
+        // SFML event loop helpers
+        void update() override;
+        void poll() override;
+        void render() override;
 
-        /**
-         * Idle easy button texture
-         */
-        sf::Texture idleEasyButtonTexture;
-
-        /**
-         * Active easy button texture
-         */
-        sf::Texture activeEasyButtonTexture;
-
-        /**
-         * Idle hard button texture
-         */
-        sf::Texture idleHardButtonTexture;
-
-        /**
-         * Active hard button texture
-         */
-        sf::Texture activeHardButtonTexture;
-
-        /**
-         * Idle back button texture
-         */
-        sf::Texture idleBackButtonTexture;
-
-        /**
-         * Active back button texture
-         */
-        sf::Texture activeBackButtonTexture;
-
-        /**
-         * Idle instructions button texture
-         */
-        sf::Texture idleInstructionsButton;
-
-        /**
-         * Active instructions button texture
-         */
-        sf::Texture activeInstructionsButton;
-
-        /**
-         * Background sprite
-         */
-        sf::Sprite backgroundSprite;
-
-        /**
-         * Easy button
-         */
-        Button *easyButton;
-
-        /**
-         * Hard button
-         */
-        Button *hardButton;
-
-        /**
-         * Back button
-         */
-        Button *backButton;
-
-        /**
-         * Instructions button
-         */
-        Button *instructionsButton;
-
-        /**
-         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
-         */
-        void update();
-
-        /**
-         * Polls for system events
-         */
-        void poll();
-
-        /**
-         * Renders all sprites
-         */
-        void render();
-
+        // Names to refer to resources on this screen
+        enum textureNames {
+            Background_,
+            IdleEasyButton,
+            ActiveEasyButton,
+            IdleHardButton,
+            ActiveHardButton,
+            IdleBackButton,
+            ActiveBackButton,
+            IdleInstructionsButton,
+            ActiveInstructionsButton
+        };
+        enum spriteNames {
+            Background
+        };
+        enum buttonNames {
+            EasyButton,
+            HardButton,
+            BackButton,
+            InstructionsButton
+        };
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_DIFFICULTYSELECTION_H

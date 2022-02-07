@@ -5,95 +5,14 @@
 #ifndef BATTLESHIP_GAMEOVER_H
 #define BATTLESHIP_GAMEOVER_H
 
-#include "../entity/button.hpp"
 #include "../controllers/screenTemplate.hpp"
+#include "../entity/button.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
 
 namespace screen {
     class GameOver : public ScreenTemplate {
-    private:
-        /**
-         * Win background texture
-         */
-        sf::Texture gameOverWinBackgroundTexture;
-
-        /**
-         * Lose background texture
-         */
-        sf::Texture gameOverLoseBackgroundTexture;
-
-        /**
-         * P1 background texture
-         */
-        sf::Texture gameOverP1BackgroundTexture;
-
-        /**
-         * P2 background texture
-         */
-        sf::Texture gameOverP2BackgroundTexture;
-
-        /**
-         * Idle homepage button texture
-         */
-        sf::Texture idleHomepageButtonTexture;
-
-        /**
-         * Active continue button texture
-         */
-        sf::Texture activeHomepageButtonTexture;
-
-        /**
-         * Backgroud win sprite
-         */
-        sf::Sprite backgroundWinSprite;
-
-        /**
-         * Backgroud lose sprite
-         */
-        sf::Sprite backgroundLoseSprite;
-
-        /**
-         * Backgroud P1 sprite
-         */
-        sf::Sprite backgroundP1Sprite;
-
-        /**
-         * Backgroud P2 sprite
-         */
-        sf::Sprite backgroundP2Sprite;
-
-        /**
-         * Homepage button 
-         */
-        Button *homepageButton;
-
-        /**
-         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
-         */
-        void update();
-
-        /**
-         * Polls for system events
-         */
-        void poll();
-
-        /**
-         * Renders all sprites
-         */
-        void render();
-
-        /**
-         * Constructor
-         */
-        GameOver();
-
-        /**
-         *
-         */
-        static GameOver *instance;
-
     public:
         /**
          *
@@ -110,11 +29,37 @@ namespace screen {
          */
         GameOver &operator=(const GameOver &source) = delete;
 
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
+    private:
+        // Singleton instance
+        static std::unique_ptr<GameOver> instance;
+
+        // Singleton constructor
+        GameOver();
+
+        // SFML event loop helpers
+        void update() override;
+        void poll() override;
+        void render() override;
+
+        // Names to refer to resources on this screen
+        enum textureNames {
+            GameOverWinBackground,
+            GameOverLoseBackground,
+            GameOverP1Background,
+            GameOverP2Background,
+            IdleHomepageButton,
+            ActiveHomepageButton
+        };
+        enum spriteNames {
+            BackgroundWin,
+            BackgroundLose,
+            BackgroundP1,
+            BackgroundP2
+        };
+        enum buttonNames {
+            Homepage
+        };
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_GAMEOVER_H

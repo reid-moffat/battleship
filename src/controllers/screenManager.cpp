@@ -3,7 +3,6 @@
  */
 
 #include "screenManager.hpp"
-
 #include "../screens/difficultySelection.hpp"
 #include "../screens/fleetPlacement.hpp"
 #include "../screens/gameModeSelection.hpp"

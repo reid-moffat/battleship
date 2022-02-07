@@ -6,66 +6,14 @@
 #ifndef BATTLESHIP_INSTRUCTIONS_H
 #define BATTLESHIP_INSTRUCTIONS_H
 
-#include "../entity/button.hpp"
 #include "../controllers/screenTemplate.hpp"
-
+#include "../entity/button.hpp"
 #include <SFML/System.hpp>
 
 using entity::Button;
 
 namespace screen {
     class Instructions : public ScreenTemplate {
-    private:
-        /**
-         * Background texture
-         */
-        sf::Texture instructionsBackgroundTexture;
-
-        /**
-         * Idle back button texture
-         */
-        sf::Texture idleBackButtonTexture;
-
-        /**
-         * Active back button texture
-         */
-        sf::Texture activeBackButtonTexture;
-
-        /**
-         * Background sprite
-         */
-        sf::Sprite backgroundSprite;
-
-        /**
-         * Back button 
-         */
-        Button *backButton;
-
-        /**
-         * Calls helpers::updateMousePosition() and entity::Button::updateButtonState()
-         */
-        void update();
-
-        /**
-         * Polls for system events
-         */
-        void poll();
-
-        /**
-         * Renders all sprites
-         */
-        void render();
-
-        /**
-         * Constructor
-         */
-        Instructions();
-
-        /**
-         *
-         */
-        static Instructions *instance;
-
     public:
         /**
          *
@@ -82,11 +30,31 @@ namespace screen {
          */
         Instructions &operator=(const Instructions &source) = delete;
 
-        /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
+    private:
+        // Singleton instance
+        static std::unique_ptr<Instructions> instance;
+
+        // Singleton constructor
+        Instructions();
+
+        // SFML event loop helpers
+        void update() override;
+        void poll() override;
+        void render() override;
+
+        // Names to refer to resources on this screen
+        enum textureNames {
+            Background_,
+            IdleBackButton,
+            ActiveBackButton
+        };
+        enum spriteNames {
+            Background
+        };
+        enum buttonNames {
+            BackButton
+        };
     };
-}// namespace screens
+}// namespace screen
 
 #endif// BATTLESHIP_INSTRUCTIONS_H

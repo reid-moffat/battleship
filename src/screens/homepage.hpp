@@ -20,11 +20,6 @@ namespace screen {
         static Homepage &getInstance();
 
         /**
-         * Overridden run method of screenTemplate
-         */
-        void run() override;
-
-        /**
          * Copy constructor
          */
         Homepage(const Homepage &source) = delete;
@@ -35,37 +30,29 @@ namespace screen {
         Homepage &operator=(const Homepage &source) = delete;
 
     private:
-        /**
-         * Singleton instance
-         */
+        // Singleton instance
         static std::unique_ptr<Homepage> instance;
 
-        /**
-         * Singleton constructor
-         */
+        // Singleton constructor
         Homepage();
 
         // SFML event loop helpers
-        void update();
-        void poll();
-        void render();
+        void update() override;
+        void poll() override;
+        void render() override;
 
-        /**
-         * Names to refer to the textures on this screen
-         */
-        enum textureNames { Background,
-                            IdlePlayButton,
-                            ActivePlayButton };
-
-        /**
-         * Names to refer to the sprites on this screen
-         */
-        enum spriteNames { Backgrounds };
-
-        /**
-         * Play button
-         */
-        std::unique_ptr<Button> playButton;
+        // Names to refer to resources on this screen
+        enum textureNames {
+            Background_,
+            IdlePlayButton,
+            ActivePlayButton
+        };
+        enum spriteNames {
+            Background
+        };
+        enum buttonNames {
+            PlayButton
+        };
     };
 }// namespace screen
 

@@ -4,6 +4,8 @@
 
 #ifdef _WIN32
 #include <Windows.h>
+
+#include <memory>
 #else
 #include <unistd.h>
 #endif
@@ -15,97 +17,92 @@ using entity::SquareType;
 using screen::Gameplay;
 using std::get;
 
-// TODO: re-design the grid implementation
-Grid *Gameplay::gridP1 = new Grid();
-Grid *Gameplay::gridP2 = new Grid();
-map<shipNames, tuple<Coordinate, bool>> Gameplay::fleetLayoutP1 = *new map<shipNames, tuple<Coordinate, bool>>;
-map<shipNames, tuple<Coordinate, bool>> Gameplay::fleetLayoutP2 = *new map<shipNames, tuple<Coordinate, bool>>;
-
-Gameplay *Gameplay::instance = nullptr;
+std::unique_ptr<Gameplay> Gameplay::instance = nullptr;
 
 Gameplay::Gameplay() : ScreenTemplate() {
-    loadTexture(this->gameplayDefaultBackgroundTexture, "gameplay/GameplayBackground.png");
-    loadTexture(this->gameplayP1BackgroundTexture, "gameplay/GameplayP1Background.png");
-    loadTexture(this->gameplayP2BackgroundTexture, "gameplay/GameplayP2Background.png");
+    gridP1 = std::make_unique<Grid>();
+    gridP2 = std::make_unique<Grid>();
 
-    loadTexture(this->idleSurrenderButtonTexture, "gameplay/IdleSurrenderButton.png");
-    loadTexture(this->activeSurrenderButtonTexture, "gameplay/ActiveSurrenderButton.png");
-    loadTexture(this->idleInstructionsButtonTexture, "gameplay/IdleInstructionsButton.png");
-    loadTexture(this->activeInstructionsButtonTexture, "gameplay/ActiveInstructionsButton.png");
+    fleetLayoutP1 = std::make_unique<shipOrientations>();
+    fleetLayoutP2 = std::make_unique<shipOrientations>();
 
-    loadTexture(this->battleshipTexture, "gameplay/BattleShip.png");
-    loadTexture(this->aircraftCarrierTexture, "gameplay/AircraftCarrier.png");
-    loadTexture(this->destroyerTexture, "gameplay/Destroyer.png");
-    loadTexture(this->submarineTexture, "gameplay/Submarine.png");
-    loadTexture(this->patrolBoatTexture, "gameplay/PatrolBoat.png");
-    loadTexture(this->rowBoatTexture, "gameplay/RowBoat.png");
+    const vector<string> texturePaths = {
+            "gameplay/GameplayBackground.png",
+            "gameplay/GameplayP1Background.png",
+            "gameplay/GameplayP2Background.png",
 
-    loadTexture(this->battleshipSunkTexture, "gameplay/BattleShipSunk.png");
-    loadTexture(this->aircraftCarrierSunkTexture, "gameplay/AircraftCarrierSunk.png");
-    loadTexture(this->destroyerSunkTexture, "gameplay/DestroyerSunk.png");
-    loadTexture(this->submarineSunkTexture, "gameplay/SubmarineSunk.png");
-    loadTexture(this->patrolBoatSunkTexture, "gameplay/PatrolBoatSunk.png");
-    loadTexture(this->rowBoatSunkTexture, "gameplay/RowBoatSunk.png");
+            "gameplay/Battleship.png",
+            "gameplay/AircraftCarrier.png",
+            "gameplay/Destroyer.png",
+            "gameplay/Submarine.png",
+            "gameplay/PatrolBoat.png",
+            "gameplay/RowBoat.png",
 
-    loadTexture(this->primaryHitMarkerTexture, "gameplay/PrimaryHitMarker.png");
-    loadTexture(this->primaryMissMarkerTexture, "gameplay/PrimaryMissMarker.png");
-    loadTexture(this->secondaryHitMarkerTexture, "gameplay/SecondaryHitMarker.png");
-    loadTexture(this->secondaryMissMarkerTexture, "gameplay/SecondaryMissMarker.png");
+            "gameplay/BattleshipSunk.png",
+            "gameplay/AircraftCarrierSunk.png",
+            "gameplay/DestroyerSunk.png",
+            "gameplay/SubmarineSunk.png",
+            "gameplay/PatrolBoatSunk.png",
+            "gameplay/RowBoatSunk.png",
+
+            "gameplay/PrimaryHitMarker.png",
+            "gameplay/PrimaryMissMarker.png",
+            "gameplay/SecondaryHitMarker.png",
+            "gameplay/SecondaryMissMarker.png",
+            "gameplay/SecondaryTarget.png",
+
+            "gameplay/IdleSurrenderButton.png",
+            "gameplay/ActiveSurrenderButton.png",
+            "gameplay/IdleInstructionsButton.png",
+            "gameplay/ActiveInstructionsButton.png",
+    };
+
+    const vector<sprite> sprites = {
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefault_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2_},
+
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Battleship_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), AircraftCarrier_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Destroyer_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Submarine_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PatrolBoat_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), RowBoat_},
+
+            {sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), BattleshipSunk_},
+            {sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), AircraftCarrierSunk_},
+            {sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), DestroyerSunk_},
+            {sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), SubmarineSunk_},
+            {sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), PatrolBoatSunk_},
+            {sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), RowBoatSunk_},
+
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PrimaryHitMarker_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PrimaryMissMarker_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryHitMarker_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryMissMarker_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryTarget_},
+    };
+
+    const vector<button> buttons = {{sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleSurrenderButton, ActiveSurrenderButton},
+                                    {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
+
+    this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
 
     Target::initializeTextures();
-    loadTexture(this->secondaryTargetTexture, "gameplay/SecondaryTarget.png");
-
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayDefaultBackgroundTexture, this->backgroundDefaultSprite);
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayP1BackgroundTexture, this->backgroundP1Sprite);
-    setSprite(sf::Vector2f(0, 0), sf::Vector2f(5, 5), this->gameplayP2BackgroundTexture, this->backgroundP2Sprite);
-
-    setSprite(sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), this->battleshipSunkTexture, this->battleshipSunkSprite);
-    setSprite(sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), this->aircraftCarrierSunkTexture, this->aircraftCarrierSunkSprite);
-    setSprite(sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), this->destroyerSunkTexture, this->destroyerSunkSprite);
-    setSprite(sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), this->submarineSunkTexture, this->submarineSunkSprite);
-    setSprite(sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), this->patrolBoatSunkTexture, this->patrolBoatSunkSprite);
-    setSprite(sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), this->rowBoatSunkTexture, this->rowBoatSunkSprite);
-
-    this->battleshipSprite.setTexture(this->battleshipTexture);
-    this->battleshipSprite.setScale(sf::Vector2f(5, 5));
-    this->aircraftCarrierSprite.setTexture(this->aircraftCarrierTexture);
-    this->aircraftCarrierSprite.setScale(sf::Vector2f(5, 5));
-    this->destroyerSprite.setTexture(this->destroyerTexture);
-    this->destroyerSprite.setScale(sf::Vector2f(5, 5));
-    this->submarineSprite.setTexture(this->submarineTexture);
-    this->submarineSprite.setScale(sf::Vector2f(5, 5));
-    this->patrolBoatSprite.setTexture(this->patrolBoatTexture);
-    this->patrolBoatSprite.setScale(sf::Vector2f(5, 5));
-    this->rowBoatSprite.setTexture(this->rowBoatTexture);
-    this->rowBoatSprite.setScale(sf::Vector2f(5, 5));
-
-    this->primaryHitMarkerSprite.setTexture(this->primaryHitMarkerTexture);
-    this->primaryHitMarkerSprite.setScale(sf::Vector2f(5, 5));
-    this->primaryMissMarkerSprite.setTexture(this->primaryMissMarkerTexture);
-    this->primaryMissMarkerSprite.setScale(sf::Vector2f(5, 5));
-    this->secondaryHitMarkerSprite.setTexture(this->secondaryHitMarkerTexture);
-    this->secondaryHitMarkerSprite.setScale(sf::Vector2f(5, 5));
-    this->secondaryMissMarkerSprite.setTexture(this->secondaryMissMarkerTexture);
-    this->secondaryMissMarkerSprite.setScale(sf::Vector2f(5, 5));
-
-    this->secondaryTargetSprite.setTexture(this->secondaryTargetTexture);
-    this->secondaryTargetSprite.setScale(sf::Vector2f(5, 5));
-
-    this->surrenderButton = new Button(sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleSurrenderButtonTexture, this->activeSurrenderButtonTexture);
-    this->instructionsButton = new Button(sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), this->idleInstructionsButtonTexture, this->activeInstructionsButtonTexture);
-
     this->setTargetVector();
     this->createCoordinateSet();
 }
 
-void Gameplay::setP1Grid(const map<shipNames, tuple<Coordinate, bool>> &ships) {
-    Gameplay::gridP1 = new Grid(ships);
-    Gameplay::fleetLayoutP1 = gridP1->getShips();
+void Gameplay::setP1Grid(const shipOrientations &ships) {
+    // TODO
+    gridP1.reset(new Grid(ships));
+    fleetLayoutP1.reset(&gridP1->getShips());
 }
 
-void Gameplay::setP2Grid(const map<shipNames, tuple<Coordinate, bool>> &ships) {
-    Gameplay::gridP2 = new Grid(ships);
-    Gameplay::fleetLayoutP2 = gridP2->getShips();
+void Gameplay::setP2Grid(const shipOrientations &ships) {
+    // TODO
+    gridP2.reset(new Grid(ships));
+    fleetLayoutP2.reset(&gridP2->getShips());
 }
 
 void Gameplay::createCoordinateSet() {
@@ -147,50 +144,52 @@ void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             if (attack == SquareType::WATER) {
-                this->primaryMissMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP1Vector.push_back(this->primaryMissMarkerSprite);
+                resources.getSprite(PrimaryMissMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryMissMarker));
             } else {
-                this->primaryHitMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP1Vector.push_back(this->primaryHitMarkerSprite);
+                resources.getSprite(PrimaryHitMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryHitMarker));
             }
         } else {
             if (attack == SquareType::WATER) {
-                this->secondaryMissMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP1Vector.push_back(this->secondaryMissMarkerSprite);
+                resources.getSprite(SecondaryMissMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryMissMarker));
             } else {
-                this->secondaryHitMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP1Vector.push_back(this->secondaryHitMarkerSprite);
+                resources.getSprite(SecondaryHitMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         }
 
     } else {
         if (State::player == State::Player::P1) {
             if (attack == SquareType::WATER) {
-                this->primaryMissMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP1Vector.push_back(this->primaryMissMarkerSprite);
+                resources.getSprite(PrimaryMissMarker)
+                        .setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryMissMarker));
 
-                this->secondaryMissMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP2Vector.push_back(this->secondaryMissMarkerSprite);
+                resources.getSprite(SecondaryMissMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP2Vector.push_back(resources.getSprite(SecondaryMissMarker));
             } else {
-                this->primaryHitMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP1Vector.push_back(this->primaryHitMarkerSprite);
+                resources.getSprite(PrimaryHitMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryHitMarker));
 
-                this->secondaryHitMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP2Vector.push_back(this->secondaryHitMarkerSprite);
+                resources.getSprite(SecondaryHitMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP2Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         } else {
             if (attack == SquareType::WATER) {
-                this->primaryMissMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP2Vector.push_back(this->primaryMissMarkerSprite);
+                resources.getSprite(PrimaryMissMarker)
+                        .setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP2Vector.push_back(resources.getSprite(PrimaryMissMarker));
 
-                this->secondaryMissMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP1Vector.push_back(this->secondaryMissMarkerSprite);
+                resources.getSprite(SecondaryMissMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryMissMarker));
             } else {
-                this->primaryHitMarkerSprite.setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
-                this->primaryMarkersP2Vector.push_back(this->primaryHitMarkerSprite);
+                resources.getSprite(PrimaryHitMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                this->primaryMarkersP2Vector.push_back(resources.getSprite(PrimaryHitMarker));
 
-                this->secondaryHitMarkerSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
-                this->secondaryMarkersP1Vector.push_back(this->secondaryHitMarkerSprite);
+                resources.getSprite(SecondaryHitMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         }
     }
@@ -204,7 +203,8 @@ void Gameplay::resetGridMarkers() {
 }
 
 void Gameplay::updateSecondaryTarget(Coordinate coordinate) {
-    this->secondaryTargetSprite.setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+    resources.getSprite(SecondaryTarget)
+            .setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
 }
 
 void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
@@ -228,7 +228,6 @@ void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
                     State::player = State::Player::P2;
                 }
             }
-
         } else {
             SquareType attack = this->gridP1->attack(coordinate);
             if (attack == SquareType::WATER) {
@@ -247,8 +246,6 @@ void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
                 }
             }
         }
-
-
     } else {
         if (State::player == State::Player::P1) {
             SquareType attack = this->gridP2->attack(coordinate);
@@ -302,85 +299,92 @@ void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
     }
 }
 
-void Gameplay::setFleetLayout(map<shipNames, tuple<Coordinate, bool>> &fleetLayout) {
+void Gameplay::setFleetLayout(shipOrientations &fleetLayout) {
+    sf::Sprite &battleship = resources.getSprite(Battleship);
+    sf::Sprite &aircraftCarrier = resources.getSprite(AircraftCarrier);
+    sf::Sprite &destroyer = resources.getSprite(Destroyer);
+    sf::Sprite &submarine = resources.getSprite(Submarine);
+    sf::Sprite &patrolBoat = resources.getSprite(PatrolBoat);
+    sf::Sprite &rowBoat = resources.getSprite(RowBoat);
+
     if (get<1>(fleetLayout[shipNames::BATTLESHIP]) == 1) {
-        this->battleshipSprite.setPosition(sf::Vector2f((64 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getX() * 8)) * 5,
-                                                        (44 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getY() * 8)) * 5));
-        this->battleshipSprite.setRotation(90.f);
+        battleship.setPosition(sf::Vector2f((64 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getX() * 8)) * 5,
+                                            (44 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getY() * 8)) * 5));
+        battleship.setRotation(90.f);
     } else {
-        this->battleshipSprite.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getX() * 8)) * 5,
-                                                        (44 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getY() * 8)) * 5));
-        this->battleshipSprite.setRotation(0);
+        battleship.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getX() * 8)) * 5,
+                                            (44 + (get<0>(fleetLayout[shipNames::BATTLESHIP]).getY() * 8)) * 5));
+        battleship.setRotation(0);
     }
 
     if (get<1>(fleetLayout[shipNames::AIRCRAFT_CARRIER]) == 1) {
-        this->aircraftCarrierSprite.setPosition(sf::Vector2f((56 + (get<0>(fleetLayout[shipNames::AIRCRAFT_CARRIER]).getX() * 8)) * 5,
-                                                             (44 + (get<0>(fleetLayout[shipNames::AIRCRAFT_CARRIER]).getY() * 8)) * 5));
-        this->aircraftCarrierSprite.setRotation(90.f);
+        aircraftCarrier.setPosition(sf::Vector2f((56 + (get<0>(fleetLayout[shipNames::AIRCRAFT_CARRIER]).getX() * 8)) * 5,
+                                                 (44 + (get<0>(fleetLayout[shipNames::AIRCRAFT_CARRIER]).getY() * 8)) * 5));
+        aircraftCarrier.setRotation(90.f);
     } else {
-        this->aircraftCarrierSprite.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::AIRCRAFT_CARRIER]).getX() * 8)) * 5,
-                                                             (44 + (get<0>(fleetLayout[shipNames::AIRCRAFT_CARRIER]).getY() * 8)) * 5));
-        this->aircraftCarrierSprite.setRotation(0);
+        aircraftCarrier.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::AIRCRAFT_CARRIER]).getX() * 8)) * 5,
+                                                 (44 + (get<0>(fleetLayout[shipNames::AIRCRAFT_CARRIER]).getY() * 8)) * 5));
+        aircraftCarrier.setRotation(0);
     }
 
     if (get<1>(fleetLayout[shipNames::DESTROYER]) == 1) {
-        this->destroyerSprite.setPosition(sf::Vector2f((48 + (get<0>(fleetLayout[shipNames::DESTROYER]).getX() * 8)) * 5,
-                                                       (44 + (get<0>(fleetLayout[shipNames::DESTROYER]).getY() * 8)) * 5));
-        this->destroyerSprite.setRotation(90.f);
+        destroyer.setPosition(sf::Vector2f((48 + (get<0>(fleetLayout[shipNames::DESTROYER]).getX() * 8)) * 5,
+                                           (44 + (get<0>(fleetLayout[shipNames::DESTROYER]).getY() * 8)) * 5));
+        destroyer.setRotation(90.f);
     } else {
-        this->destroyerSprite.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::DESTROYER]).getX() * 8)) * 5,
-                                                       (44 + (get<0>(fleetLayout[shipNames::DESTROYER]).getY() * 8)) * 5));
-        this->destroyerSprite.setRotation(0);
+        destroyer.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::DESTROYER]).getX() * 8)) * 5,
+                                           (44 + (get<0>(fleetLayout[shipNames::DESTROYER]).getY() * 8)) * 5));
+        destroyer.setRotation(0);
     }
 
     if (get<1>(fleetLayout[shipNames::SUBMARINE]) == 1) {
-        this->submarineSprite.setPosition(sf::Vector2f((40 + (get<0>(fleetLayout[shipNames::SUBMARINE]).getX() * 8)) * 5,
-                                                       (44 + (get<0>(fleetLayout[shipNames::SUBMARINE]).getY() * 8)) * 5));
-        this->submarineSprite.setRotation(90.f);
+        submarine.setPosition(sf::Vector2f((40 + (get<0>(fleetLayout[shipNames::SUBMARINE]).getX() * 8)) * 5,
+                                           (44 + (get<0>(fleetLayout[shipNames::SUBMARINE]).getY() * 8)) * 5));
+        submarine.setRotation(90.f);
     } else {
-        this->submarineSprite.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::SUBMARINE]).getX() * 8)) * 5,
-                                                       (44 + (get<0>(fleetLayout[shipNames::SUBMARINE]).getY() * 8)) * 5));
-        this->submarineSprite.setRotation(0);
+        submarine.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::SUBMARINE]).getX() * 8)) * 5,
+                                           (44 + (get<0>(fleetLayout[shipNames::SUBMARINE]).getY() * 8)) * 5));
+        submarine.setRotation(0);
     }
 
     if (get<1>(fleetLayout[shipNames::PATROL_BOAT]) == 1) {
-        this->patrolBoatSprite.setPosition(sf::Vector2f((32 + (get<0>(fleetLayout[shipNames::PATROL_BOAT]).getX() * 8)) * 5,
-                                                        (44 + (get<0>(fleetLayout[shipNames::PATROL_BOAT]).getY() * 8)) * 5));
-        this->patrolBoatSprite.setRotation(90.f);
+        patrolBoat.setPosition(sf::Vector2f((32 + (get<0>(fleetLayout[shipNames::PATROL_BOAT]).getX() * 8)) * 5,
+                                            (44 + (get<0>(fleetLayout[shipNames::PATROL_BOAT]).getY() * 8)) * 5));
+        patrolBoat.setRotation(90.f);
     } else {
-        this->patrolBoatSprite.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::PATROL_BOAT]).getX() * 8)) * 5,
-                                                        (44 + (get<0>(fleetLayout[shipNames::PATROL_BOAT]).getY() * 8)) * 5));
-        this->patrolBoatSprite.setRotation(0);
+        patrolBoat.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::PATROL_BOAT]).getX() * 8)) * 5,
+                                            (44 + (get<0>(fleetLayout[shipNames::PATROL_BOAT]).getY() * 8)) * 5));
+        patrolBoat.setRotation(0);
     }
 
     if (get<1>(fleetLayout[shipNames::ROW_BOAT]) == 1) {
-        this->rowBoatSprite.setPosition(sf::Vector2f((24 + (get<0>(fleetLayout[shipNames::ROW_BOAT]).getX() * 8)) * 5,
-                                                     (44 + (get<0>(fleetLayout[shipNames::ROW_BOAT]).getY() * 8)) * 5));
-        this->rowBoatSprite.setRotation(90.0);
+        rowBoat.setPosition(sf::Vector2f((24 + (get<0>(fleetLayout[shipNames::ROW_BOAT]).getX() * 8)) * 5,
+                                         (44 + (get<0>(fleetLayout[shipNames::ROW_BOAT]).getY() * 8)) * 5));
+        rowBoat.setRotation(90.0);
     } else {
-        this->rowBoatSprite.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::ROW_BOAT]).getX() * 8)) * 5,
-                                                     (44 + (get<0>(fleetLayout[shipNames::ROW_BOAT]).getY() * 8)) * 5));
-        this->rowBoatSprite.setRotation(0);
+        rowBoat.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::ROW_BOAT]).getX() * 8)) * 5,
+                                         (44 + (get<0>(fleetLayout[shipNames::ROW_BOAT]).getY() * 8)) * 5));
+        rowBoat.setRotation(0);
     }
 }
 
 void Gameplay::update() {
     sf::Vector2f mousePosition = State::getMousePosition();
 
-    this->surrenderButton->updateButtonState(mousePosition);
-    this->instructionsButton->updateButtonState(mousePosition);
+    resources.getButton(Surrender).updateButtonState(mousePosition);
+    resources.getButton(Instructions).updateButtonState(mousePosition);
 
     for (auto &target : this->targetVector) {
         target.updateTargetState(mousePosition);
     }
 
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
-        this->setFleetLayout(this->fleetLayoutP1);
+        this->setFleetLayout(*this->fleetLayoutP1);
     } else {
         if (State::player == State::Player::P1) {
-            this->setFleetLayout(this->fleetLayoutP1);
+            this->setFleetLayout(*this->fleetLayoutP1);
         } else {
-            this->setFleetLayout(this->fleetLayoutP2);
+            this->setFleetLayout(*this->fleetLayoutP2);
         }
     }
 
@@ -404,32 +408,27 @@ void Gameplay::poll() {
 
     while (gui.pollEvent(event)) {
         switch (event.type) {
-
             case sf::Event::Closed:
                 gui.close();
                 break;
-
             case sf::Event::MouseButtonReleased:
-                if ((event.mouseButton.button == sf::Mouse::Left) && (this->surrenderButton->getButtonState())) {
-                    this->resetGridMarkers();
-                    State::changeScreen(Screens::GAME_OVER);
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (this->instructionsButton->getButtonState())) {
-                    State::changeScreen(Screens::INSTRUCTIONS);
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && !State::lockedFlag) {
-                    for (auto &target : this->targetVector) {
-                        if (target.getTargetState()) {
-                            State::lockedFlag = true;
-                            Coordinate targetCoord = target.getTargetCoordinate();
-                            this->updateGrid(targetCoord, gui);
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    if (resources.getButton(Surrender).getButtonState()) {
+                        this->resetGridMarkers();
+                        State::changeScreen(Screens::GAME_OVER);
+                    } else if (resources.getButton(Instructions).getButtonState()) {
+                        State::changeScreen(Screens::INSTRUCTIONS);
+                    } else if (!State::lockedFlag) {
+                        for (auto &target : this->targetVector) {
+                            if (target.getTargetState()) {
+                                State::lockedFlag = true;
+                                Coordinate targetCoord = target.getTargetCoordinate();
+                                this->updateGrid(targetCoord, gui);
+                            }
                         }
                     }
                     break;
-                } else {
-                    break;
                 }
-
             default:
                 break;
         }
@@ -441,27 +440,27 @@ void Gameplay::renderShipStatus(Grid &grid) {
     map<shipNames, bool> shipStatus = grid.getShipStatus();
 
     if (shipStatus[shipNames::BATTLESHIP]) {
-        gui.draw(this->battleshipSunkSprite);
+        gui.draw(resources.getSprite(BattleShipSunk));
     }
 
     if (shipStatus[shipNames::AIRCRAFT_CARRIER]) {
-        gui.draw(this->aircraftCarrierSunkSprite);
+        gui.draw(resources.getSprite(AircraftCarrierSunk));
     }
 
     if (shipStatus[shipNames::DESTROYER]) {
-        gui.draw(this->destroyerSunkSprite);
+        gui.draw(resources.getSprite(DestroyerSunk));
     }
 
     if (shipStatus[shipNames::SUBMARINE]) {
-        gui.draw(this->submarineSunkSprite);
+        gui.draw(resources.getSprite(SubmarineSunk));
     }
 
     if (shipStatus[shipNames::PATROL_BOAT]) {
-        gui.draw(this->patrolBoatSunkSprite);
+        gui.draw(resources.getSprite(PatrolBoatSunk));
     }
 
     if (shipStatus[shipNames::ROW_BOAT]) {
-        gui.draw(this->rowBoatSunkSprite);
+        gui.draw(resources.getSprite(RowBoatSunk));
     }
 }
 
@@ -470,24 +469,24 @@ void Gameplay::render() {
     gui.clear();
 
     if (State::gameMode == State::SINGLE_PLAYER) {
-        gui.draw(this->backgroundDefaultSprite);
+        gui.draw(resources.getSprite(BackgroundDefault));
     } else {
         if (State::player == State::Player::P1) {
-            gui.draw(this->backgroundP1Sprite);
+            gui.draw(resources.getSprite(BackgroundP1));
         } else {
-            gui.draw(this->backgroundP2Sprite);
+            gui.draw(resources.getSprite(BackgroundP2));
         }
     }
 
-    surrenderButton->render(gui);
-    instructionsButton->render(gui);
+    resources.getButton(Surrender).render(gui);
+    resources.getButton(Instructions).render(gui);
 
-    gui.draw(this->battleshipSprite);
-    gui.draw(this->aircraftCarrierSprite);
-    gui.draw(this->destroyerSprite);
-    gui.draw(this->submarineSprite);
-    gui.draw(this->patrolBoatSprite);
-    gui.draw(this->rowBoatSprite);
+    gui.draw(resources.getSprite(Battleship));
+    gui.draw(resources.getSprite(AircraftCarrier));
+    gui.draw(resources.getSprite(Destroyer));
+    gui.draw(resources.getSprite(Battleship));
+    gui.draw(resources.getSprite(PatrolBoat));
+    gui.draw(resources.getSprite(RowBoat));
 
     if (State::gameMode == State::SINGLE_PLAYER) {
         for (auto &primaryMarker : this->primaryMarkersP1Vector) {
@@ -517,11 +516,11 @@ void Gameplay::render() {
     }
 
     if ((State::player == State::Player::P1) && !this->secondaryMarkersP1Vector.empty()) {
-        gui.draw(this->secondaryTargetSprite);
+        gui.draw(resources.getSprite(SecondaryTarget));
     }
 
     if ((State::player == State::Player::P2) && !this->secondaryMarkersP2Vector.empty()) {
-        gui.draw(this->secondaryTargetSprite);
+        gui.draw(resources.getSprite(SecondaryTarget));
     }
 
     if (State::gameMode == State::SINGLE_PLAYER) {
@@ -543,12 +542,6 @@ void Gameplay::render() {
     }
 }
 
-void Gameplay::run() {
-    this->update();
-    this->poll();
-    this->render();
-}
-
 void screen::Gameplay::sleepMS() {
 #ifdef _WIN32
     Sleep(sleepTimeMS);
@@ -559,7 +552,7 @@ void screen::Gameplay::sleepMS() {
 
 Gameplay &screen::Gameplay::getInstance() {
     if (instance == nullptr) {
-        instance = new Gameplay;
+        instance.reset(new Gameplay);
     }
     return *instance;
 }

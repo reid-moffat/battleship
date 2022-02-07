@@ -13,11 +13,10 @@ using std::get;
 
 Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
     // Initialize the grid itself with all water to start
-    squares = new SquareType *[size];
     for (int i = 0; i < size; ++i) {
-        squares[i] = new SquareType[size];
+        squares.emplace_back(vector<SquareType>());
         for (int j = 0; j < size; ++j) {
-            squares[i][j] = WATER;
+            squares[i].push_back(WATER);
         }
     }
 
@@ -28,13 +27,14 @@ Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
         int x = get<0>(ship.second).getX();         // Topmost/leftmost x coordinate
         int y = get<0>(ship.second).getY();         // Topmost/leftmost y coordinate
         const bool horizontal = get<1>(ship.second);// If the ship is aligned horizontally
+        const int length = shipSize(shipName);      // Number of squares in this ship
 
         // Array of coordinates this ship occupies
-        Coordinate *&coordinates = get<0>(ships[shipName]);
-        coordinates = new Coordinate[shipSize(shipName)];
+        vector<Coordinate> &coordinates = get<0>(ships[shipName]);
+        coordinates = vector<Coordinate>(length);
 
         // Initializes the squares the ship occupies (from the top/left)
-        for (int i = 0; i < shipSize(shipName); ++i) {
+        for (int i = 0; i < length; ++i) {
             coordinates[i] = Coordinate(x, y);
             squares[y][x] = SHIP;
             horizontal ? x++ : y++;
@@ -64,9 +64,9 @@ SquareType Grid::attack(Coordinate &coord) {
         int &hitCount = get<1>(ships[shipName]);
 
         // Loop through the squares in this ship to see if it was hit
-        Coordinate *coords = get<0>(ship.second);
+        vector<Coordinate> coordinates = get<0>(ship.second);
         for (int i = 0; i < shipSize(shipName); ++i) {
-            if (coords[i] == coord) {// Found it!
+            if (coordinates[i] == coord) {// Found it!
                 hitCount++;
                 if (hitCount == shipSize(shipName)) {
                     shipStatuses[shipName] = true;// Ship has been sunk
@@ -88,44 +88,4 @@ map<shipNames, bool> &Grid::getShipStatus() {
 
 entity::Grid::Grid() {
     ;
-}
-
-
-// Big three
-Grid::~Grid() {
-    for (int i = 0; i < size; ++i) {
-        delete[] squares[i];
-    }
-    delete[] squares;
-}
-
-Grid::Grid(Grid &grid) {
-    // Copy the other ship's coordinates and number of hits
-    for (auto const &ship : grid.ships) {
-        *get<0>(ships[ship.first]) = *get<0>(ship.second);
-        get<1>(ships[ship.first]) = get<1>(ship.second);
-    }
-
-    // Copy the grid
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < size; ++j) {
-            this->squares[i][j] = grid.squares[i][j];
-        }
-    }
-}
-
-Grid &Grid::operator=(Grid *rhs) {
-    if (this == rhs) return *this;
-
-    this->ships.clear();
-    for (const auto ship : rhs->ships) {
-        this->ships.insert(ship);
-    }
-
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < size; ++j) {
-            squares[i][j] = rhs->squares[i][j];
-        }
-    }
-    return *this;
 }

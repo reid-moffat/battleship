@@ -17,24 +17,17 @@ Homepage &Homepage::getInstance() {
     return *instance;
 }
 
-void Homepage::run() {
-    this->update();
-    this->poll();
-    this->render();
-}
-
 Homepage::Homepage() {
     const vector<string> texturePaths{"homepage/HomepageBackground.png", "homepage/IdlePlayButton.png", "homepage/ActivePlayButton.png"};
-    this->images = ImagesManager(texturePaths, {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background}});
-
-    this->playButton = std::make_unique<Button>(sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5),
-                                                images.getTexture(textureNames::IdlePlayButton),
-                                                images.getTexture(textureNames::ActivePlayButton));
+    this->resources = ScreenResourceManager(texturePaths,
+                                            {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background_}},
+                                            {{sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5),
+                                              textureNames::IdlePlayButton, textureNames::ActivePlayButton}});
 }
 
 void Homepage::update() {
     sf::Vector2f mousePosition = State::getMousePosition();
-    this->playButton->updateButtonState(mousePosition);
+    resources.getButton(buttonNames::PlayButton).updateButtonState(mousePosition);
 }
 
 void Homepage::poll() {
@@ -47,7 +40,7 @@ void Homepage::poll() {
                 gui.close();
                 break;
             case sf::Event::MouseButtonReleased:
-                if ((event.mouseButton.button == sf::Mouse::Left) && (this->playButton->getButtonState())) {
+                if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::PlayButton).getButtonState()) {
                     State::changeScreen(Screens::GAME_MODE_SELECTION);
                     break;
                 } else {
@@ -63,8 +56,8 @@ void Homepage::render() {
     sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
-    gui.draw(images.getSprite(spriteNames::Backgrounds));
-    playButton->render(gui);
+    gui.draw(resources.getSprite(spriteNames::Background));
+    resources.getButton(buttonNames::PlayButton).render(gui);
 
     if (State::getCurrentScreen() == Screens::HOMEPAGE) {
         gui.display();
