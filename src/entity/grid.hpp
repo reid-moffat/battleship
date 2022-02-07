@@ -10,12 +10,10 @@
 #include "../enums/squareType.hpp"
 #include "coordinate.hpp"
 #include <map>
-#include <memory>
 #include <vector>
 
 using std::map;
 using std::tuple;
-using std::unique_ptr;
 using std::vector;
 
 namespace entity {
