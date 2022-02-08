@@ -9,27 +9,47 @@ using screen::GameModeSelection;
 std::unique_ptr<GameModeSelection> GameModeSelection::instance = nullptr;
 
 GameModeSelection::GameModeSelection() : ScreenTemplate() {
-    const vector<string> texturePaths{"GameModeBackground.png",
-                                      "Idle1PlayerButton.png", "Active1PlayerButton.png",
-                                      "Idle2PlayerButton.png", "Active2PlayerButton.png",
-                                      "IdleBackButton.png", "ActiveBackButton.png",
-                                      "IdleInstructionsButton.png", "ActiveInstructionsButton.png"};
-    const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), Background_}};
-    const vector<button> buttons = {{sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), IdleOnePlayer, ActiveOnePlayer},
-                                    {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), IdleTwoPlayer, ActiveTwoPlayer},
-                                    {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleBackButton, ActiveBackButton},
-                                    {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
+    // Data required for all the SFML objects on this screen
+    const vector<string> texturePaths{
+            "GameModeBackground.png",
 
+            "Idle1PlayerButton.png",
+            "Active1PlayerButton.png",
+            "Idle2PlayerButton.png",
+            "Active2PlayerButton.png",
+            "IdleBackButton.png",
+            "ActiveBackButton.png",
+            "IdleInstructionsButton.png",
+            "ActiveInstructionsButton.png",
+    };
+    const vector<sprite> sprites = {
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Background_},
+    };
+    const vector<button> buttons = {
+            {sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), IdleOnePlayerButtonTexture, ActiveOnePlayerButtonTexture},
+            {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), IdleTwoPlayerButtonTexture, ActiveTwoPlayerButtonTexture},
+            {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleBackButtonTexture, ActiveBackButtonTexture},
+            {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButtonTexture, ActiveInstructionsButtonTexture},
+    };
+
+    // Initialize SFML objects
     this->resources = ScreenResourceManager("gameModeSelection", texturePaths, sprites, buttons);
+}
+
+GameModeSelection &screen::GameModeSelection::getInstance() {
+    if (instance == nullptr) {
+        instance.reset(new GameModeSelection());
+    }
+    return *instance;
 }
 
 void GameModeSelection::update() {
     sf::Vector2f mousePosition = State::getMousePosition();
 
-    resources.getButton(OnePlayer).updateButtonState(mousePosition);
-    resources.getButton(TwoPlayers).updateButtonState(mousePosition);
-    resources.getButton(Back).updateButtonState(mousePosition);
-    resources.getButton(Instructions).updateButtonState(mousePosition);
+    // Update every button's state
+    for (int i = OnePlayer; i <= Instructions; ++i) {
+        resources.getButton(i).updateButtonState(mousePosition);
+    }
 }
 
 void GameModeSelection::poll() {
@@ -42,25 +62,20 @@ void GameModeSelection::poll() {
                 gui.close();
                 break;
             case sf::Event::MouseButtonReleased:
-                if (event.mouseButton.button == sf::Mouse::Left) {
-                    if (resources.getButton(OnePlayer).getButtonState()) {
-                        State::gameMode = State::GameMode::SINGLE_PLAYER;
-                        State::changeScreen(Screens::DIFFICULTY_SELECTION);
-                        break;
-                    } else if (resources.getButton(TwoPlayers).getButtonState()) {
-                        State::gameMode = State::GameMode::MULTI_PLAYER;
-                        State::changeScreen(Screens::FLEET_PLACEMENT);
-                        break;
-                    } else if (resources.getButton(Back).getButtonState()) {
-                        State::previousScreen();
-                        break;
-                    } else if (resources.getButton(Instructions).getButtonState()) {
-                        State::changeScreen(Screens::INSTRUCTIONS);
-                        break;
-                    } else {
-                        break;
-                    }
+                if (event.mouseButton.button != sf::Mouse::Left) break;
+
+                if (resources.getButton(OnePlayer).getButtonState()) {
+                    State::gameMode = State::GameMode::SINGLE_PLAYER;
+                    State::changeScreen(Screens::DIFFICULTY_SELECTION);
+                } else if (resources.getButton(TwoPlayers).getButtonState()) {
+                    State::gameMode = State::GameMode::MULTI_PLAYER;
+                    State::changeScreen(Screens::FLEET_PLACEMENT);
+                } else if (resources.getButton(Back).getButtonState()) {
+                    State::previousScreen();
+                } else if (resources.getButton(Instructions).getButtonState()) {
+                    State::changeScreen(Screens::INSTRUCTIONS);
                 }
+                break;
             default:
                 break;
         }
@@ -72,19 +87,9 @@ void GameModeSelection::render() {
     gui.clear();
 
     gui.draw(resources.getSprite(Background));
-    resources.getButton(OnePlayer).render(gui);
-    resources.getButton(TwoPlayers).render(gui);
-    resources.getButton(Back).render(gui);
-    resources.getButton(Instructions).render(gui);
-
-    if (State::getCurrentScreen() == Screens::GAME_MODE_SELECTION) {
-        gui.display();
+    for (int i = OnePlayer; i <= Instructions; ++i) {
+        resources.getButton(i).render(gui);
     }
-}
 
-GameModeSelection &screen::GameModeSelection::getInstance() {
-    if (instance == nullptr) {
-        instance.reset(new GameModeSelection());
-    }
-    return *instance;
+    gui.display();
 }

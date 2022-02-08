@@ -6,27 +6,19 @@
 #define BATTLESHIP_GAMEMODESELECTION_H
 
 #include "../controllers/screenTemplate.hpp"
-#include "../entity/button.hpp"
-#include <SFML/System.hpp>
-
-using entity::Button;
 
 namespace screen {
     class GameModeSelection : public ScreenTemplate {
     public:
         /**
-         *
+         * Returns the instance of this screen
          */
         static GameModeSelection &getInstance();
 
-        /**
-         * Copy constructor
-         */
+        // Do not allow copying of this screen's instance
         GameModeSelection(const GameModeSelection &source) = delete;
 
-        /**
-         * Overloaded assignment operator
-         */
+        // Do not allow assignment of this screen's instance
         GameModeSelection &operator=(const GameModeSelection &source) = delete;
 
     private:
@@ -44,14 +36,15 @@ namespace screen {
         // Names to refer to resources on this screen
         enum textureNames {
             Background_,
-            IdleOnePlayer,
-            ActiveOnePlayer,
-            IdleTwoPlayer,
-            ActiveTwoPlayer,
-            IdleBackButton,
-            ActiveBackButton,
-            IdleInstructionsButton,
-            ActiveInstructionsButton
+
+            IdleOnePlayerButtonTexture,
+            ActiveOnePlayerButtonTexture,
+            IdleTwoPlayerButtonTexture,
+            ActiveTwoPlayerButtonTexture,
+            IdleBackButtonTexture,
+            ActiveBackButtonTexture,
+            IdleInstructionsButtonTexture,
+            ActiveInstructionsButtonTexture
         };
         enum spriteNames {
             Background
