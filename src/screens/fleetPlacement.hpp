@@ -86,11 +86,16 @@ namespace screen {
         // Generates a random fleet layout
         void randomize();
 
-        // Updates ship sprites and orientations
+        // Updates ship sprites and orientations based on the current state of ships
         void updateFleetLayout();
 
         // Resets ship sprites and orientations
         void resetFleetLayout();
+
+        // Returns true if the specified ship is horizontal
+        inline bool horizontal(shipNames ship) {
+            return std::get<1>(this->ships[ship]);
+        }
     };
 }// namespace screen
 

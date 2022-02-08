@@ -154,7 +154,7 @@ void FleetPlacement::updateFleetLayout() {
     sf::Sprite &patrolBoat = resources.getSprite(PatrolBoat);
     sf::Sprite &rowBoat = resources.getSprite(RowBoat);
 
-    if (get<1>(this->ships[shipNames::Battleship]) == 1) {
+    if (horizontal(shipNames::Battleship)) {
         battleship.setPosition(sf::Vector2f((224 + (get<0>(this->ships[shipNames::Battleship]).getX() * 16)) * 5,
                                             (28 + (get<0>(this->ships[shipNames::Battleship]).getY() * 16)) * 5));
         battleship.setRotation(90.f);
@@ -164,7 +164,7 @@ void FleetPlacement::updateFleetLayout() {
         battleship.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipNames::AircraftCarrier]) == 1) {
+    if (horizontal(shipNames::AircraftCarrier)) {
         aircraftCarrier.setPosition(sf::Vector2f((208 + (get<0>(this->ships[shipNames::AircraftCarrier]).getX() * 16)) * 5,
                                                  (28 + (get<0>(this->ships[shipNames::AircraftCarrier]).getY() * 16)) * 5));
         aircraftCarrier.setRotation(90.f);
@@ -174,7 +174,7 @@ void FleetPlacement::updateFleetLayout() {
         aircraftCarrier.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipNames::Destroyer]) == 1) {
+    if (horizontal(shipNames::Destroyer)) {
         destroyer
                 .setPosition(sf::Vector2f((192 + (get<0>(this->ships[shipNames::Destroyer]).getX() * 16)) * 5,
                                           (28 + (get<0>(this->ships[shipNames::Destroyer]).getY() * 16)) * 5));
@@ -185,7 +185,7 @@ void FleetPlacement::updateFleetLayout() {
         destroyer.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipNames::Submarine]) == 1) {
+    if (horizontal(shipNames::Submarine)) {
         submarine.setPosition(sf::Vector2f((176 + (get<0>(this->ships[shipNames::Submarine]).getX() * 16)) * 5,
                                            (28 + (get<0>(this->ships[shipNames::Submarine]).getY() * 16)) * 5));
         submarine.setRotation(90.f);
@@ -195,7 +195,7 @@ void FleetPlacement::updateFleetLayout() {
         submarine.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipNames::PatrolBoat]) == 1) {
+    if (horizontal(shipNames::PatrolBoat)) {
         patrolBoat.setPosition(sf::Vector2f((160 + (get<0>(this->ships[shipNames::PatrolBoat]).getX() * 16)) * 5,
                                             (28 + (get<0>(this->ships[shipNames::PatrolBoat]).getY() * 16)) * 5));
         patrolBoat.setRotation(90.f);
@@ -205,7 +205,7 @@ void FleetPlacement::updateFleetLayout() {
         patrolBoat.setRotation(0);
     }
 
-    if (get<1>(this->ships[shipNames::RowBoat]) == 1) {
+    if (horizontal(shipNames::RowBoat)) {
         rowBoat.setPosition(sf::Vector2f((144 + (get<0>(this->ships[shipNames::RowBoat]).getX() * 16)) * 5,
                                          (28 + (get<0>(this->ships[shipNames::RowBoat]).getY() * 16)) * 5));
         rowBoat.setRotation(90.0);
