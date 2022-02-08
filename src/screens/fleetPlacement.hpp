@@ -80,7 +80,7 @@ namespace screen {
         // If a ship orientation has been generated yet
         bool layoutGenerated;
 
-        // Adds a coordinate to a vector if the x and y are valid
+        // Adds a coordinate to a vector if it is within the grid's bounds
         static void addCoord(vector<Coordinate> &coordinates, int x, int y);
 
         // Generates a random fleet layout
@@ -89,7 +89,7 @@ namespace screen {
         // Updates ship sprites and orientations
         void updateFleetLayout();
 
-        //Resets ship sprites and orientations
+        // Resets ship sprites and orientations
         void resetFleetLayout();
     };
 }// namespace screen

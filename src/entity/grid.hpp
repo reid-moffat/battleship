@@ -57,6 +57,11 @@ namespace entity {
          */
         Grid();
 
+        /**
+         * Size of the grid (both width and height) i.e 10
+         */
+        static constexpr int size = 10;
+
     private:
         /**
          * The six ships on this board
@@ -83,10 +88,6 @@ namespace entity {
          */
         vector<vector<SquareType>> squares;
 
-        /**
-         * Size of the grid (both width and height) i.e 10
-         */
-        static constexpr int size = 10;
     };
 }// namespace entity
 

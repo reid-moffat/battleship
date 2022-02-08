@@ -6,24 +6,24 @@
 #include "gameplay.hpp"
 
 using screen::FleetPlacement;
-using std::get;
 
 std::unique_ptr<FleetPlacement> FleetPlacement::instance = nullptr;
 
 FleetPlacement::FleetPlacement() : ScreenTemplate() {
+    // Data required for all the SFML objects on this screen
     const vector<string> texturePaths = {
-            "FleetPlacementBackground.png", // Background textures
+            "FleetPlacementBackground.png",// Background textures
             "FleetPlacementP1Background.png",
             "FleetPlacementP2Background.png",
 
-            "BattleShip.png", // Ship textures
+            "BattleShip.png",// Ship textures
             "AircraftCarrier.png",
             "Destroyer.png",
             "Submarine.png",
             "PatrolBoat.png",
             "RowBoat.png",
 
-            "IdleReadyButton.png", // Button idle and active textures
+            "IdleReadyButton.png",// Button idle and active textures
             "ActiveReadyButton.png",
             "IdleRandomizeButton.png",
             "ActiveRandomizeButton.png",
@@ -47,22 +47,23 @@ FleetPlacement::FleetPlacement() : ScreenTemplate() {
             {sf::Vector2f(328 * 5, 76 * 5), sf::Vector2f(5, 5), IdleRandomizeButtonTexture, ActiveRandomizeButtonTexture},
             {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButtonTexture, ReadyInstructionsButtonTexture},
     };
+
+    // Initialize SFML objects
     this->resources = ScreenResourceManager("fleetPlacement", texturePaths, sprites, buttons);
 
     this->layoutGenerated = false;
 }
 
-void FleetPlacement::addCoord(vector<Coordinate> &coordinates, int x, int y) {
-    // If a ship is on the edge, adjacent squares don't exist and that is ok (don't throw an exception)
-    if (x >= 0 && x <= 9 && y >= 0 && y <= 9) {
-        coordinates.emplace_back(Coordinate(x, y));
+void FleetPlacement::addCoord(vector<Coordinate> &coordinates, const int x, const int y) {
+    if (x >= 0 && x < Grid::size && y >= 0 && y < Grid::size) {
+        coordinates.emplace_back(x, y);
     }
 }
 
 
 void FleetPlacement::randomize() {
     // Start with a temporary grid of open spots (false = not occupied)
-    bool grid[10][10];
+    bool grid[Grid::size][Grid::size];
     for (auto &row : grid) {
         for (bool &square : row) {
             square = false;
@@ -84,8 +85,8 @@ void FleetPlacement::randomize() {
             bool horizontal = randomInt(0, 1) % 2 != 0;// Whether the ship is horizontal or vertical
 
             // Determine a random x and y position for the ship (it will be on the board, but might already be occupied)
-            const int maxBoardIndex = 9;       // The maximum coordinate index on the board (since there are 10 squares)
-            const int maxShipStart = 10 - size;// The maximum coordinate index to start the ship at so that it fits on the board
+            const int maxBoardIndex = Grid::size - 1;  // The maximum coordinate index on the board
+            const int maxShipStart = Grid::size - size;// The maximum coordinate index to start the ship at so that it fits on the board
             int x = randomInt(0, horizontal ? maxShipStart : maxBoardIndex);
             int y = randomInt(0, horizontal ? maxBoardIndex : maxShipStart);
 
