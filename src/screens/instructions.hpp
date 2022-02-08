@@ -16,18 +16,14 @@ namespace screen {
     class Instructions : public ScreenTemplate {
     public:
         /**
-         *
+         * Returns the instance of this screen
          */
         static Instructions &getInstance();
 
-        /**
-         * Copy constructor
-         */
+// Do not allow copying of this screen's instance
         Instructions(const Instructions &source) = delete;
 
-        /**
-         * Overloaded assignment operator
-         */
+        // Do not allow assignment of this screen's instance
         Instructions &operator=(const Instructions &source) = delete;
 
     private:
@@ -44,9 +40,10 @@ namespace screen {
 
         // Names to refer to resources on this screen
         enum textureNames {
-            Background_,
-            IdleBackButton,
-            ActiveBackButton
+            BackgroundTexture,
+
+            IdleBackButtonTexture,
+            ActiveBackButtonTexture
         };
         enum spriteNames {
             Background
