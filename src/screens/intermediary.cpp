@@ -16,13 +16,23 @@ Intermediary &screen::Intermediary::getInstance() {
 }
 
 Intermediary::Intermediary() : ScreenTemplate() {
-    const vector<string> texturePaths{"IntermediaryP1Background.png", "IntermediaryP2Background.png",
-                                      "IdleContinueButton.png", "ActiveContinueButton.png"};
-    this->resources = ScreenResourceManager("intermediary",texturePaths,
-                                            {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::IntermediaryP1Background},
-                                             {sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::IntermediaryP2Background}},
-                                            {{sf::Vector2f(144 * 5, 108 * 5), sf::Vector2f(5, 5),
-                                              textureNames::IdleContinueButton, textureNames::ActiveContinueButton}});
+    // Data required for all the SFML objects on this screen
+    const vector<string> texturePaths{
+            "IntermediaryP1Background.png",
+            "IntermediaryP2Background.png",
+            "IdleContinueButton.png",
+            "ActiveContinueButton.png",
+    };
+    const vector<sprite> sprites = {
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), IntermediaryP1BackgroundTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), IntermediaryP2BackgroundTexture},
+    };
+    const vector<button> buttons = {
+            {sf::Vector2f(144 * 5, 108 * 5), sf::Vector2f(5, 5), IdleContinueButtonTexture, ActiveContinueButtonTexture},
+    };
+
+    // Initialize SFML objects
+    this->resources = ScreenResourceManager("intermediary", texturePaths, sprites, buttons);
 }
 
 void Intermediary::update() {
@@ -43,12 +53,11 @@ void Intermediary::poll() {
                 if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::ContinueButton).getButtonState()) {
                     if (State::player == State::Player::P2 && State::getPreviousScreen() == Screens::FLEET_PLACEMENT) {
                         State::changeScreen(Screens::FLEET_PLACEMENT);
-                        break;
                     } else {
                         State::changeScreen(Screens::GAMEPLAY);
-                        break;
                     }
                 }
+                break;
             default:
                 break;
         }
@@ -66,7 +75,5 @@ void Intermediary::render() {
     }
     resources.getButton(buttonNames::ContinueButton).render(gui);
 
-    if (State::getCurrentScreen() == Screens::INTERMEDIARY) {
-        gui.display();
-    }
+    gui.display();
 }
