@@ -484,7 +484,7 @@ void Gameplay::render() {
     gui.draw(resources.getSprite(Battleship));
     gui.draw(resources.getSprite(AircraftCarrier));
     gui.draw(resources.getSprite(Destroyer));
-    gui.draw(resources.getSprite(Battleship));
+    gui.draw(resources.getSprite(Submarine));
     gui.draw(resources.getSprite(PatrolBoat));
     gui.draw(resources.getSprite(RowBoat));
 
