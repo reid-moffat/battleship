@@ -251,44 +251,37 @@ void FleetPlacement::poll() {
                 gui.close();
                 break;
             case sf::Event::MouseButtonReleased:
-                if ((event.mouseButton.button == sf::Mouse::Left) && (resources.getButton(Ready).getButtonState())) {
-                    Gameplay *gameplayInstance = &Gameplay::getInstance();
+                if (event.mouseButton.button != sf::Mouse::Left) break;
+
+                if (resources.getButton(Ready).getButtonState()) {
+                    Gameplay &gameplayInstance = Gameplay::getInstance();
                     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
-                        gameplayInstance->setP1Grid(ships);
+                        gameplayInstance.setP1Grid(ships);
                         this->resetFleetLayout();
                         this->layoutGenerated = false;
                         this->randomize();
-                        gameplayInstance->setP2Grid(ships);
+                        gameplayInstance.setP2Grid(ships);
                         State::changeScreen(Screens::GAMEPLAY);
-                        break;
                     } else {
                         if (State::player == State::Player::P1) {
-                            gameplayInstance->setP1Grid(ships);
-                            this->resetFleetLayout();
-                            this->layoutGenerated = false;
+                            gameplayInstance.setP1Grid(ships);
                             State::player = State::Player::P2;
-                            State::changeScreen(Screens::INTERMEDIARY);
-                            break;
                         } else {
-                            gameplayInstance->setP2Grid(ships);
-                            this->resetFleetLayout();
-                            this->layoutGenerated = false;
+                            gameplayInstance.setP2Grid(ships);
                             State::player = State::Player::P1;
-                            State::changeScreen(Screens::INTERMEDIARY);
-                            break;
                         }
+                        this->resetFleetLayout();
+                        this->layoutGenerated = false;
+                        State::changeScreen(Screens::INTERMEDIARY);
                     }
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (resources.getButton(Randomize).getButtonState())) {
+                } else if (resources.getButton(Randomize).getButtonState()) {
                     this->randomize();
                     this->updateFleetLayout();
                     this->layoutGenerated = true;
-                    break;
-                } else if ((event.mouseButton.button == sf::Mouse::Left) && (resources.getButton(Instructions).getButtonState())) {
+                } else if (resources.getButton(Instructions).getButtonState()) {
                     State::changeScreen(Screens::INSTRUCTIONS);
-                    break;
-                } else {
-                    break;
                 }
+                break;
             default:
                 break;
         }
