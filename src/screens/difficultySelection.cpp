@@ -47,7 +47,7 @@ void DifficultySelection::update() {
     const sf::Vector2f mousePosition = State::getMousePosition();
 
     // Update every button's state
-    for (int i = EasyButton; i < InstructionsButton; ++i) {
+    for (int i = EasyButton; i <= InstructionsButton; ++i) {
         resources.getButton(i).updateButtonState(mousePosition);
     }
 }
@@ -87,7 +87,7 @@ void DifficultySelection::render() {
     gui.clear();
 
     gui.draw(resources.getSprite(Background));
-    for (int i = EasyButton; i < InstructionsButton; ++i) {
+    for (int i = EasyButton; i <= InstructionsButton; ++i) {
         resources.getButton(i).render(gui);
     }
 

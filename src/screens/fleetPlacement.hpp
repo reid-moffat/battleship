@@ -14,7 +14,7 @@ namespace screen {
     class FleetPlacement : public ScreenTemplate {
     public:
         /**
-         *
+         * Returns the instance of this screen
          */
         static FleetPlacement &getInstance();
 

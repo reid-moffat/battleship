@@ -55,6 +55,13 @@ FleetPlacement::FleetPlacement() : ScreenTemplate() {
     this->layoutGenerated = false;
 }
 
+FleetPlacement &screen::FleetPlacement::getInstance() {
+    if (instance == nullptr) {
+        instance.reset(new FleetPlacement());
+    }
+    return *instance;
+}
+
 void FleetPlacement::addCoord(vector<Coordinate> &coordinates, const int x, const int y) {
     if (x >= 0 && x < Grid::size && y >= 0 && y < Grid::size) {
         coordinates.emplace_back(x, y);
@@ -210,7 +217,7 @@ void FleetPlacement::updateFleetLayout() {
 }
 
 void FleetPlacement::resetFleetLayout() {
-    static map<spriteNames, sf::Vector2f> positions = {
+    static const map<spriteNames, sf::Vector2f> positions = {
             {Battleship, sf::Vector2f(21 * 5, 84 * 5)},
             {AircraftCarrier, sf::Vector2f(42 * 5, 92 * 5)},
             {Destroyer, sf::Vector2f(61 * 5, 100 * 5)},
@@ -220,18 +227,18 @@ void FleetPlacement::resetFleetLayout() {
     };
 
     // Reset each ship's position and rotation
-    for (auto &ship : positions) {
+    for (auto const &ship : positions) {
         resources.getSprite(ship.first).setPosition(ship.second);
         resources.getSprite(ship.first).setRotation(0);
     }
 }
 
 void FleetPlacement::update() {
-    sf::Vector2f mousePosition = State::getMousePosition();
+    const sf::Vector2f mousePosition = State::getMousePosition();
 
-    resources.getButton(Ready).updateButtonState(mousePosition);
-    resources.getButton(Randomize).updateButtonState(mousePosition);
-    resources.getButton(Instructions).updateButtonState(mousePosition);
+    for (int button = Ready; button <= Instructions; ++button) {
+        resources.getButton(button).updateButtonState(mousePosition);
+    }
 }
 
 void FleetPlacement::poll() {
@@ -302,28 +309,15 @@ void FleetPlacement::render() {
         }
     }
 
-    if (layoutGenerated) {
-        resources.getButton(Ready).render(gui);
-    }
-
+    // Render buttons
+    if (layoutGenerated) resources.getButton(Ready).render(gui);
     resources.getButton(Randomize).render(gui);
     resources.getButton(Instructions).render(gui);
 
-    gui.draw(resources.getSprite(Battleship));
-    gui.draw(resources.getSprite(AircraftCarrier));
-    gui.draw(resources.getSprite(Destroyer));
-    gui.draw(resources.getSprite(Submarine));
-    gui.draw(resources.getSprite(PatrolBoat));
-    gui.draw(resources.getSprite(RowBoat));
-
-    if (State::getCurrentScreen() == Screens::FLEET_PLACEMENT) {
-        gui.display();
+    // Render ships
+    for (int ship = Battleship; ship <= RowBoat; ++ship) {
+        gui.draw(resources.getSprite(ship));
     }
-}
 
-FleetPlacement &screen::FleetPlacement::getInstance() {
-    if (instance == nullptr) {
-        instance.reset(new FleetPlacement());
-    }
-    return *instance;
+    gui.display();
 }
