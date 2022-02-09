@@ -17,3 +17,5 @@ If you'd like to compile it yourself, make changes or play around with the tests
 * **Reload CMakeLists.txt**
   * For non-windows OSs, you'll need to make a cmake file to compile
 * Run eiher ```battleship``` or ```battleship-tests```
+
+*If you find a bug, feel free to create an issue*
