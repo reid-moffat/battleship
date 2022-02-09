@@ -1,5 +1,6 @@
 /**
- *
+ * Manages SFML textures, sprites and buttons, allowing for automatic loading
+ * and less required member variables
  */
 
 #include "ScreenResourceManager.hpp"
@@ -13,8 +14,7 @@ ScreenResourceManager::ScreenResourceManager(const string& screenName,
                                              const vector<tuple<sf::Vector2f, sf::Vector2f, int, int>> &buttons) {
     // Initialize the textures
     for (int i = 0; i < texturePaths.size(); ++i) {
-        // Add a new texture
-        this->textures.emplace_back();
+        this->textures.emplace_back(); // Add a new texture
 
         // Attempt to load the texture image
         sf::Texture &texture = this->textures[i];
@@ -24,8 +24,7 @@ ScreenResourceManager::ScreenResourceManager(const string& screenName,
 
     // Initialize the sprites
     for (int i = 0; i < spritesData.size(); ++i) {
-        // Add a new sprite
-        this->sprites.emplace_back();
+        this->sprites.emplace_back(); // Add a new sprite
 
         // Get the required data for the sprite
         auto sprite = &this->sprites[i];
@@ -68,5 +67,3 @@ Button &ScreenResourceManager::getButton(const int index) {
     }
     return buttons[index];
 }
-
-ScreenResourceManager::ScreenResourceManager() = default;

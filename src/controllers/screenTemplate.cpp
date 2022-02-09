@@ -6,7 +6,7 @@
 
 using screen::ScreenTemplate;
 
-ScreenTemplate::ScreenTemplate() = default;
+ScreenTemplate::ScreenTemplate() : resources("", {}, {}, {}) {}
 
 void screen::ScreenTemplate::run() {
     this->update();

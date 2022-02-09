@@ -1,5 +1,6 @@
 /**
- *
+ * Manages SFML textures, sprites and buttons, allowing for automatic loading
+ * and less required member variables
  */
 
 #ifndef BATTLESHIP_RESOURCEMANAGER_H
@@ -35,7 +36,7 @@ public:
      *                -The corresponding texture for when the button is idle (its index in the texturePaths)<p>
      *                -The corresponding texture for when the button is active (its index in the texturePaths)
      */
-    ScreenResourceManager(const string& screenName,
+    ScreenResourceManager(const string &screenName,
                           const vector<string> &texturePaths,
                           const vector<sprite> &sprites,
                           const vector<button> &buttons);
@@ -43,7 +44,7 @@ public:
     /**
      * Default constructor
      */
-    ScreenResourceManager();
+    ScreenResourceManager() = delete;
 
     /**
      * Returns a reference to the sprite at the specified index
@@ -56,19 +57,13 @@ public:
     Button &getButton(int index);
 
 private:
-    /**
-     * All the SFML textures in this manager
-     */
+    // All the SFML textures in this manager
     vector<sf::Texture> textures;
 
-    /**
-     * All the SFML sprites in this manager
-     */
+    // All the SFML sprites in this manager
     vector<sf::Sprite> sprites;
 
-    /**
-     * All the SFML buttons in this manager
-     */
+    // All the SFML buttons in this manager
     vector<Button> buttons;
 };
 
