@@ -18,7 +18,7 @@ Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
     for (int i = 0; i < size; ++i) {
         squares.emplace_back(vector<SquareType>());
         for (int j = 0; j < size; ++j) {
-            squares[i].push_back(WATER);
+            squares[i].push_back(Water);
         }
     }
 
@@ -52,9 +52,9 @@ Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
 SquareType Grid::attack(Coordinate &coord) {
     // Determine the type of the square
     SquareType &status = squares[coord.getY()][coord.getX()];
-    if (status == WATER) {// We need to note if water has been hit
+    if (status == Water) {// We need to note if water has been hit
         status = HitWater;
-        return WATER;
+        return Water;
     } else if (status != Ship) {// HitShip or HitWater (do nothing)
         return status;
     }
