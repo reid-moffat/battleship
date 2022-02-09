@@ -1,18 +1,19 @@
+![image](https://user-images.githubusercontent.com/61813081/153123375-0fcfd748-583e-4626-b2e8-19e111ffb8e6.png)
+
 # Battleship
 
-Group project for my Fundamentals of Software Development course
+This was my first major project that I manually designed without a framework and first major C/C++ project, done in a team for my Fundamentals of Software Development course. For this project, I worked as the Software Architect, designing the repository and file structure as well as ensuring quality.
 
-Note: This repository works, but is undergoing heavy refactoring, especially the screen .cpp files
+There are some fundamental design flaws that should have been rectified during planning (such as the non-responsiveness of screens), but for a team with essential no initial software design or C++ experience, I am happy with the result.
 
-### Troubleshooting
+Although the project is not very practically useful, the skills I've learned such as the software design process, repository structure, refactoring, how to fix (many) git issues 🙃, C++ (especially pointers) and CMAKE are immensely important
 
-**I can't run the project or the tests?** You need to load the correct CMakeLists.txt file. To run
-the program itself, load the Cmake in the root directory. To run tests, load the Cmake in the tests/
-folder
+## Repository info
 
-**Issues with running tests or anything about googletest not being found:** Open tests/ and do
-```git clone https://github.com/google/googletest.git```. The googletests repo is not included in
-the repo's VCS because it is not necessary (similar to node_modules- it only takes one command and a
-few seconds to get it, and greatly reduces the repository size)
+### To run the most recent .exe I have made, simply clone the repo (```git clone https://github.com/reid-moffat/battleship.git```) and run ```bin/battleship.exe``` (note: do not move the .exe file from this path)
 
-**Cannot find file while compiling:** Your compiler working directory needs to be the build/ folder
+If you'd like to compile it yourself, make changes or play around with the tests:
+* *(If needed)* Clone googletest into the ```include/``` folder with ```git clone https://github.com/google/googletest.git```
+* **Reload CMakeLists.txt**
+  * For non-windows OSs, you'll need to make a cmake file to compile
+* Run eiher ```battleship``` or ```battleship-tests```
