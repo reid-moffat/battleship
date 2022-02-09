@@ -214,7 +214,7 @@ void Gameplay::resetGridMarkers() {
 }
 
 void Gameplay::updateSecondaryTarget(Coordinate coordinate) {
-    resources.getSprite(SecondaryTarget).setPosition(sf::Vector2f((float) (16 + (coordinate.getX() * 8) * 5), (float) (44 + (coordinate.getY() * 8) * 5)));
+    resources.getSprite(SecondaryTarget).setPosition(sf::Vector2f((float) ((16 + 8 * coordinate.getX()) * 5), (float) ((44 + 8 * coordinate.getY()) * 5)));
 }
 
 void Gameplay::attack(Coordinate &coordinate) {
