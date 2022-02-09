@@ -51,25 +51,6 @@ ScreenResourceManager::ScreenResourceManager(const string& screenName,
     }
 }
 
-void ScreenResourceManager::addSprite(sf::Vector2f position, sf::Vector2f scale, int textureIndex) {
-    // Create a new sprite
-    this->sprites.emplace_back();
-    auto sprite = &this->sprites[sprites.size() - 1];
-    auto const *texture = &textures[textureIndex];
-
-    // Set the sprite attributes
-    sprite->setPosition(position);
-    sprite->setScale(scale);
-    sprite->setTexture(*texture);
-}
-
-void ScreenResourceManager::addButton(sf::Vector2f position, sf::Vector2f scale, int idleIndex, int activeIndex) {
-    auto *idleTexture = &textures[idleIndex];
-    auto *activeTexture = &textures[activeIndex];
-
-    this->buttons.emplace_back(position, scale, *idleTexture, *activeTexture);
-}
-
 sf::Sprite &ScreenResourceManager::getSprite(const int index) {
     if (index > sprites.size()) {
         std::ostringstream errMsg;
