@@ -1,6 +1,6 @@
 ---
 name: Issue template
-about: Describe this issue template's purpose here.
+about: Auto-assign issues to me
 title: ''
 labels: ''
 assignees: reid-moffat
