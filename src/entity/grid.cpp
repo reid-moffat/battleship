@@ -1,5 +1,5 @@
 /**
- * Grid class implementation
+ * Stores a player's grid i.e the status of each square
  */
 
 #include "grid.hpp"

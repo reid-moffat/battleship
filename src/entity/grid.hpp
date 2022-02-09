@@ -1,6 +1,5 @@
 /**
- * Grid class header
- * Provides a player's grid
+ * Stores a player's grid i.e the status of each square
  */
 
 #ifndef BATTLESHIP_GRID_H
@@ -58,7 +57,7 @@ namespace entity {
         Grid();
 
         /**
-         * Size of the grid (both width and height) i.e 10
+         * Size of the grid (both width and height)
          */
         static constexpr int size = 10;
 
@@ -87,7 +86,6 @@ namespace entity {
          * 10-by-10 array of grid squares
          */
         vector<vector<SquareType>> squares;
-
     };
 }// namespace entity
 

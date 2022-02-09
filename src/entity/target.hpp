@@ -46,29 +46,19 @@ namespace entity {
         void updateTargetState(sf::Vector2f mousePosition);
 
     private:
-        /**
-         * Idle target texture (same for all targets)
-         */
+        // Idle target texture (same for all targets)
         static std::unique_ptr<sf::Texture> idleTexture;
 
-        /**
-         * Active target texture (same for all targets)
-         */
+        // Active target texture (same for all targets)
         static std::unique_ptr<sf::Texture> activeTexture;
 
-        /**
-         * Target sprite
-         */
+        // Target's current sprite (idle or active)
         sf::Sprite sprite;
 
-        /**
-         * Target state
-         */
+        // Target state
         bool isActive;
 
-        /**
-         * Location of the target
-         */
+        // Location of the target
         Coordinate targetCoordinate;
     };
 
