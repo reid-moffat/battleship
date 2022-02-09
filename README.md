@@ -2,7 +2,7 @@
 
 # Battleship
 
-This was the first large project that I manually designed without a framework and first large C/C++ project, done in a team for my Fundamentals of Software Development course. For this project, I worked as the Software Architect, designing the repository and file structure as well as ensuring quality.
+This was the first large project that I manually designed without a framework and first large C/C++ project, done in a team for my Fundamentals of Software Development course. For this project, I worked as the Software Architect, designing the repository and file structure as well as ensuring quality (sprites were not created by myself).
 
 There are some fundamental design flaws that should have been rectified during planning (such as the non-responsiveness of screens), but for a team with essentially no initial software design or C++ experience, it didn;t turn out too bad. Although the project is not very practically useful, the skills learned such as the software design process, repository structure, refactoring, how to fix (many) git issues 🙃, C++ (especially pointers) and CMAKE are incredibly useful
 
