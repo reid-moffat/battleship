@@ -6,7 +6,7 @@
 
 using screen::Homepage;
 
-std::unique_ptr<Homepage> Homepage::instance = nullptr;
+std::unique_ptr<class Homepage> Homepage::instance = nullptr;
 
 Homepage::Homepage() {
     const vector<string> texturePaths{
@@ -26,7 +26,7 @@ Homepage::Homepage() {
     this->resources = ScreenResourceManager("homepage", texturePaths, sprites, buttons);
 }
 
-Homepage &Homepage::getInstance() {
+class Homepage &Homepage::getInstance() {
     if (instance == nullptr) {
         instance.reset(new Homepage());
     }

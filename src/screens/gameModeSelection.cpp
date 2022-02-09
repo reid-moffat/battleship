@@ -6,7 +6,7 @@
 
 using screen::GameModeSelection;
 
-std::unique_ptr<GameModeSelection> GameModeSelection::instance = nullptr;
+std::unique_ptr<class GameModeSelection> GameModeSelection::instance = nullptr;
 
 GameModeSelection::GameModeSelection() : ScreenTemplate() {
     // Data required for all the SFML objects on this screen
@@ -36,7 +36,7 @@ GameModeSelection::GameModeSelection() : ScreenTemplate() {
     this->resources = ScreenResourceManager("gameModeSelection", texturePaths, sprites, buttons);
 }
 
-GameModeSelection &screen::GameModeSelection::getInstance() {
+class GameModeSelection &screen::GameModeSelection::getInstance() {
     if (instance == nullptr) {
         instance.reset(new GameModeSelection());
     }

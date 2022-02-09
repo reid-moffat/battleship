@@ -6,9 +6,9 @@
 #ifndef BATTLESHIP_HELPERS_H
 #define BATTLESHIP_HELPERS_H
 
+#include "../controllers/state.hpp"
 #include "../enums/shipNames.hpp"
 #include <random>
-#include <iostream>
 
 using entity::shipNames;
 using std::string;

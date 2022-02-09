@@ -16,7 +16,7 @@ using entity::SquareType;
 using screen::Gameplay;
 using std::get;
 
-std::unique_ptr<Gameplay> Gameplay::instance = nullptr;
+std::unique_ptr<class Gameplay> Gameplay::instance = nullptr;
 
 Gameplay::Gameplay() : ScreenTemplate() {
     // Data required for all the SFML objects on this screen
@@ -109,7 +109,7 @@ Gameplay::Gameplay() : ScreenTemplate() {
     }
 }
 
-Gameplay &screen::Gameplay::getInstance() {
+class Gameplay &screen::Gameplay::getInstance() {
     if (instance == nullptr) {
         instance.reset(new Gameplay);
     }

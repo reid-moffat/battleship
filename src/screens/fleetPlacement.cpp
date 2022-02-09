@@ -8,7 +8,7 @@
 using screen::FleetPlacement;
 using std::get;
 
-std::unique_ptr<FleetPlacement> FleetPlacement::instance = nullptr;
+std::unique_ptr<class FleetPlacement> FleetPlacement::instance = nullptr;
 
 FleetPlacement::FleetPlacement() : ScreenTemplate() {
     // Data required for all the SFML objects on this screen
@@ -55,7 +55,7 @@ FleetPlacement::FleetPlacement() : ScreenTemplate() {
     this->layoutGenerated = false;
 }
 
-FleetPlacement &screen::FleetPlacement::getInstance() {
+class FleetPlacement &screen::FleetPlacement::getInstance() {
     if (instance == nullptr) {
         instance.reset(new FleetPlacement());
     }
@@ -214,7 +214,7 @@ void FleetPlacement::poll() {
                 if (event.mouseButton.button != sf::Mouse::Left) break;
 
                 if (resources.getButton(Ready).getButtonState()) {
-                    Gameplay &gameplayInstance = Gameplay::getInstance();
+                    class Gameplay &gameplayInstance = Gameplay::getInstance();
                     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
                         gameplayInstance.setP1Grid(ships);
                         this->resetFleetLayout();

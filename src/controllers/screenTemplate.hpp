@@ -7,7 +7,6 @@
 
 #include "../helpers/ScreenResourceManager.hpp"
 #include "state.hpp"
-#include <SFML/System.hpp>
 
 using std::map;
 

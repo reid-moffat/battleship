@@ -7,14 +7,7 @@
 
 using screen::Instructions;
 
-std::unique_ptr<Instructions> Instructions::instance = nullptr;
-
-Instructions &screen::Instructions::getInstance() {
-    if (instance == nullptr) {
-        instance.reset(new Instructions);
-    }
-    return *instance;
-}
+std::unique_ptr<class Instructions> Instructions::instance = nullptr;
 
 Instructions::Instructions() : ScreenTemplate() {
     // Data required for all the SFML objects on this screen
@@ -32,6 +25,13 @@ Instructions::Instructions() : ScreenTemplate() {
 
     // Initialize SFML objects
     this->resources = ScreenResourceManager("instructions", texturePaths, sprites, buttons);
+}
+
+class Instructions &screen::Instructions::getInstance() {
+    if (instance == nullptr) {
+        instance.reset(new Instructions);
+    }
+    return *instance;
 }
 
 void Instructions::update() {

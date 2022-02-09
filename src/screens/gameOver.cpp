@@ -6,7 +6,7 @@
 
 using screen::GameOver;
 
-std::unique_ptr<GameOver> GameOver::instance = nullptr;
+std::unique_ptr<class GameOver> GameOver::instance = nullptr;
 
 GameOver::GameOver() : ScreenTemplate() {
     // Data required for all the SFML objects on this screen
@@ -34,7 +34,7 @@ GameOver::GameOver() : ScreenTemplate() {
     this->resources = ScreenResourceManager("gameOver", texturePaths, sprites, buttons);
 }
 
-GameOver &screen::GameOver::getInstance() {
+class GameOver &screen::GameOver::getInstance() {
     if (instance == nullptr) {
         instance.reset(new GameOver());
     }

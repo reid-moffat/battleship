@@ -6,7 +6,7 @@
 
 using screen::DifficultySelection;
 
-std::unique_ptr<DifficultySelection> DifficultySelection::instance = nullptr;
+std::unique_ptr<class DifficultySelection> DifficultySelection::instance = nullptr;
 
 DifficultySelection::DifficultySelection() : ScreenTemplate() {
     // Data required for all the SFML objects on this screen
@@ -36,7 +36,7 @@ DifficultySelection::DifficultySelection() : ScreenTemplate() {
     this->resources = ScreenResourceManager("difficultySelection", texturePaths, sprites, buttons);
 }
 
-DifficultySelection &screen::DifficultySelection::getInstance() {
+class DifficultySelection &screen::DifficultySelection::getInstance() {
     if (instance == nullptr) {
         instance.reset(new DifficultySelection());
     }

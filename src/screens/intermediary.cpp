@@ -6,14 +6,7 @@
 
 using screen::Intermediary;
 
-std::unique_ptr<Intermediary> Intermediary::instance = nullptr;
-
-Intermediary &screen::Intermediary::getInstance() {
-    if (instance == nullptr) {
-        instance.reset(new Intermediary());
-    }
-    return *instance;
-}
+std::unique_ptr<class Intermediary> Intermediary::instance = nullptr;
 
 Intermediary::Intermediary() : ScreenTemplate() {
     // Data required for all the SFML objects on this screen
@@ -33,6 +26,13 @@ Intermediary::Intermediary() : ScreenTemplate() {
 
     // Initialize SFML objects
     this->resources = ScreenResourceManager("intermediary", texturePaths, sprites, buttons);
+}
+
+class Intermediary &screen::Intermediary::getInstance() {
+    if (instance == nullptr) {
+        instance.reset(new Intermediary());
+    }
+    return *instance;
 }
 
 void Intermediary::update() {
