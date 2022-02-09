@@ -49,13 +49,14 @@ void State::previousScreen() {
             State::current = Screens::GameModeSelection;
             break;
         default:
-            // TODO: Update this
-            std::map<Screens, std::string> screenNames = {{Screens::Homepage, "homepage"},
-                                                          {Screens::FleetPlacement, "homepage"},
-                                                          {Screens::Gameplay, "Gameplay"},
-                                                          {Screens::Intermediary, "Intermediary"},
-                                                          {Screens::GameOver, "Game Over"}};
-            throw std::invalid_argument(string("Error: You can't go back from the current screens (") + screenNames[State::current] + "");
+            std::map<Screens, std::string> screenNames = {{Screens::Homepage,       "Homepage"},
+                                                          {Screens::FleetPlacement, "Fleet Placement"},
+                                                          {Screens::Gameplay,       "Gameplay"},
+                                                          {Screens::Intermediary,   "Intermediary"},
+                                                          {Screens::GameOver,       "Game Over"}};
+            string errMsg = "Error: You can't go back from the current screen (" + screenNames[State::current]
+                            + "). This exception should no occur- State::previousScreen() was incorrectly called";
+            throw std::invalid_argument(errMsg);
     }
 }
 
