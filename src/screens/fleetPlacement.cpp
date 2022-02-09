@@ -221,7 +221,7 @@ void FleetPlacement::poll() {
                         this->layoutGenerated = false;
                         this->randomize();
                         gameplayInstance.setP2Grid(ships);
-                        State::changeScreen(Screens::GAMEPLAY);
+                        State::changeScreen(Screens::Gameplay);
                     } else {
                         if (State::player == State::Player::P1) {
                             gameplayInstance.setP1Grid(ships);
@@ -232,14 +232,14 @@ void FleetPlacement::poll() {
                         }
                         this->resetFleetLayout();
                         this->layoutGenerated = false;
-                        State::changeScreen(Screens::INTERMEDIARY);
+                        State::changeScreen(Screens::Intermediary);
                     }
                 } else if (resources.getButton(Randomize).getButtonState()) {
                     this->randomize();
                     this->updateFleetLayout();
                     this->layoutGenerated = true;
                 } else if (resources.getButton(Instructions).getButtonState()) {
-                    State::changeScreen(Screens::INSTRUCTIONS);
+                    State::changeScreen(Screens::Instructions);
                 }
                 break;
             default:

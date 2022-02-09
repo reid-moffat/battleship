@@ -38,7 +38,7 @@ Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
         // Initializes the squares the ship occupies (from the top/left)
         for (int i = 0; i < length; ++i) {
             coordinates[i] = Coordinate(x, y);
-            squares[y][x] = SHIP;
+            squares[y][x] = Ship;
             horizontal ? x++ : y++;
         }
 
@@ -53,14 +53,14 @@ SquareType Grid::attack(Coordinate &coord) {
     // Determine the type of the square
     SquareType &status = squares[coord.getY()][coord.getX()];
     if (status == WATER) {// We need to note if water has been hit
-        status = HIT_WATER;
+        status = HitWater;
         return WATER;
-    } else if (status != SHIP) {// HIT_SHIP or HIT_WATER (do nothing)
+    } else if (status != Ship) {// HitShip or HitWater (do nothing)
         return status;
     }
 
     // If it's not water or an already hit square, it is a ship. Find which ship it is and update it
-    status = HIT_SHIP;
+    status = HitShip;
     for (auto const &ship : this->ships) {
         shipNames shipName = ship.first;
         int &hitCount = get<1>(ships[shipName]);
@@ -73,7 +73,7 @@ SquareType Grid::attack(Coordinate &coord) {
                 if (hitCount == shipSize(shipName)) {
                     shipStatuses[shipName] = true;// Ship has been sunk
                 }
-                return SHIP;
+                return Ship;
             }
         }
     }

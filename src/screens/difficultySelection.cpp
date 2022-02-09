@@ -65,14 +65,14 @@ void DifficultySelection::poll() {
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     if (resources.getButton(EasyButton).getButtonState()) {
                         State::difficulty = State::Difficulty::EASY;
-                        State::changeScreen(Screens::FLEET_PLACEMENT);
+                        State::changeScreen(Screens::FleetPlacement);
                     } else if (resources.getButton(HardButton).getButtonState()) {
                         State::difficulty = State::Difficulty::HARD;
-                        State::changeScreen(Screens::FLEET_PLACEMENT);
+                        State::changeScreen(Screens::FleetPlacement);
                     } else if (resources.getButton(BackButton).getButtonState()) {
-                        State::changeScreen(Screens::GAME_MODE_SELECTION);
+                        State::changeScreen(Screens::GameModeSelection);
                     } else if (resources.getButton(InstructionsButton).getButtonState()) {
-                        State::changeScreen(Screens::INSTRUCTIONS);
+                        State::changeScreen(Screens::Instructions);
                     }
                     break;
                 }

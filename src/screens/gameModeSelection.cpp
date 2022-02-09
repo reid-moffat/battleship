@@ -66,14 +66,14 @@ void GameModeSelection::poll() {
 
                 if (resources.getButton(OnePlayer).getButtonState()) {
                     State::gameMode = State::GameMode::SINGLE_PLAYER;
-                    State::changeScreen(Screens::DIFFICULTY_SELECTION);
+                    State::changeScreen(Screens::DifficultySelection);
                 } else if (resources.getButton(TwoPlayers).getButtonState()) {
                     State::gameMode = State::GameMode::MULTI_PLAYER;
-                    State::changeScreen(Screens::FLEET_PLACEMENT);
+                    State::changeScreen(Screens::FleetPlacement);
                 } else if (resources.getButton(Back).getButtonState()) {
                     State::previousScreen();
                 } else if (resources.getButton(Instructions).getButtonState()) {
-                    State::changeScreen(Screens::INSTRUCTIONS);
+                    State::changeScreen(Screens::Instructions);
                 }
                 break;
             default:

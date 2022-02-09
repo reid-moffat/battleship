@@ -57,7 +57,7 @@ void GameOver::poll() {
                 break;
             case sf::Event::MouseButtonReleased:
                 if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::Homepage).getButtonState()) {
-                    State::changeScreen(Screens::HOMEPAGE);
+                    State::changeScreen(Screens::Homepage);
                 }
                 break;
             default:

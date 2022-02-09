@@ -51,10 +51,10 @@ void Intermediary::poll() {
                 break;
             case sf::Event::MouseButtonReleased:
                 if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::ContinueButton).getButtonState()) {
-                    if (State::player == State::Player::P2 && State::getPreviousScreen() == Screens::FLEET_PLACEMENT) {
-                        State::changeScreen(Screens::FLEET_PLACEMENT);
+                    if (State::player == State::Player::P2 && State::getPreviousScreen() == Screens::FleetPlacement) {
+                        State::changeScreen(Screens::FleetPlacement);
                     } else {
-                        State::changeScreen(Screens::GAMEPLAY);
+                        State::changeScreen(Screens::Gameplay);
                     }
                 }
                 break;

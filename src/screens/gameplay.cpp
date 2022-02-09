@@ -145,7 +145,7 @@ bool Gameplay::lost(Grid &grid) {
 void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
-            if (attack == SquareType::WATER) {
+            if (attack == SquareType::Water) {
                 resources.getSprite(PrimaryMissMarker)
                         .setPosition(sf::Vector2f((float) ((128 + (coordinate.getX() * 16)) * 5), (float) ((28 + (coordinate.getY() * 16)) * 5)));
                 this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryMissMarker));
@@ -155,7 +155,7 @@ void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
                 this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryHitMarker));
             }
         } else {
-            if (attack == SquareType::WATER) {
+            if (attack == SquareType::Water) {
                 resources.getSprite(SecondaryMissMarker)
                         .setPosition(sf::Vector2f((float) ((16 + (coordinate.getX() * 8)) * 5), (float) ((44 + (coordinate.getY() * 8)) * 5)));
                 this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryMissMarker));
@@ -167,7 +167,7 @@ void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
         }
     } else {
         if (State::player == State::Player::P1) {
-            if (attack == SquareType::WATER) {
+            if (attack == SquareType::Water) {
                 resources.getSprite(PrimaryMissMarker)
                         .setPosition(sf::Vector2f((float) ((128 + (coordinate.getX() * 16)) * 5), (float) ((28 + (coordinate.getY() * 16)) * 5)));
                 this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryMissMarker));
@@ -185,7 +185,7 @@ void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
                 this->secondaryMarkersP2Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         } else {
-            if (attack == SquareType::WATER) {
+            if (attack == SquareType::Water) {
                 resources.getSprite(PrimaryMissMarker).
                         setPosition(sf::Vector2f((float) ((128 + (coordinate.getX() * 16)) * 5), (float) ((28 + (coordinate.getY() * 16)) * 5)));
                 this->primaryMarkersP2Vector.push_back(resources.getSprite(PrimaryMissMarker));
@@ -221,36 +221,36 @@ void Gameplay::attack(Coordinate &coordinate) {
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             SquareType attack = this->gridP2->attack(coordinate);
-            if (attack == SquareType::WATER) {
+            if (attack == SquareType::Water) {
                 this->updateGridMarkers(attack, coordinate);
                 this->render();
                 sleepMS();
                 State::player = State::Player::P2;
-            } else if (attack == SquareType::SHIP) {
+            } else if (attack == SquareType::Ship) {
                 this->updateGridMarkers(attack, coordinate);
                 this->render();
                 sleepMS();
                 if (lost(*(this->gridP2))) {
                     this->resetGridMarkers();
                     State::player = State::Player::P2;
-                    State::changeScreen(Screens::GAME_OVER);
+                    State::changeScreen(Screens::GameOver);
                 } else {
                     State::player = State::Player::P2;
                 }
             }
         } else {
             SquareType attack = this->gridP1->attack(coordinate);
-            if (attack == SquareType::WATER) {
+            if (attack == SquareType::Water) {
                 this->updateGridMarkers(attack, coordinate);
                 this->updateSecondaryTarget(coordinate);
                 State::player = State::Player::P1;
-            } else if (attack == SquareType::SHIP) {
+            } else if (attack == SquareType::Ship) {
                 this->updateGridMarkers(attack, coordinate);
                 this->updateSecondaryTarget(coordinate);
                 if (lost(*(this->gridP1))) {
                     this->resetGridMarkers();
                     State::player = State::Player::P1;
-                    State::changeScreen(Screens::GAME_OVER);
+                    State::changeScreen(Screens::GameOver);
                 } else {
                     State::player = State::Player::P1;
                 }
@@ -259,14 +259,14 @@ void Gameplay::attack(Coordinate &coordinate) {
     } else {
         if (State::player == State::Player::P1) {
             SquareType attack = this->gridP2->attack(coordinate);
-            if (attack == SquareType::WATER) {
+            if (attack == SquareType::Water) {
                 this->updateGridMarkers(attack, coordinate);
                 this->render();
                 this->updateSecondaryTarget(coordinate);
                 sleepMS();
                 State::player = State::Player::P2;
-                State::changeScreen(Screens::INTERMEDIARY);
-            } else if (attack == SquareType::SHIP) {
+                State::changeScreen(Screens::Intermediary);
+            } else if (attack == SquareType::Ship) {
                 this->updateGridMarkers(attack, coordinate);
                 this->render();
                 this->updateSecondaryTarget(coordinate);
@@ -274,23 +274,23 @@ void Gameplay::attack(Coordinate &coordinate) {
                 if (lost(*(this->gridP2))) {
                     this->resetGridMarkers();
                     State::player = State::Player::P2;
-                    State::changeScreen(Screens::GAME_OVER);
+                    State::changeScreen(Screens::GameOver);
                 } else {
                     State::player = State::Player::P2;
-                    State::changeScreen(Screens::INTERMEDIARY);
+                    State::changeScreen(Screens::Intermediary);
                 }
             }
 
         } else {
             SquareType attack = this->gridP1->attack(coordinate);
-            if (attack == SquareType::WATER) {
+            if (attack == SquareType::Water) {
                 this->updateGridMarkers(attack, coordinate);
                 this->render();
                 this->updateSecondaryTarget(coordinate);
                 sleepMS();
                 State::player = State::Player::P1;
-                State::changeScreen(Screens::INTERMEDIARY);
-            } else if (attack == SquareType::SHIP) {
+                State::changeScreen(Screens::Intermediary);
+            } else if (attack == SquareType::Ship) {
                 this->updateGridMarkers(attack, coordinate);
                 this->render();
                 this->updateSecondaryTarget(coordinate);
@@ -298,11 +298,11 @@ void Gameplay::attack(Coordinate &coordinate) {
                     sleepMS();
                     this->resetGridMarkers();
                     State::player = State::Player::P1;
-                    State::changeScreen(Screens::GAME_OVER);
+                    State::changeScreen(Screens::GameOver);
                 } else {
                     sleepMS();
                     State::player = State::Player::P1;
-                    State::changeScreen(Screens::INTERMEDIARY);
+                    State::changeScreen(Screens::Intermediary);
                 }
             }
         }
@@ -382,9 +382,9 @@ void Gameplay::poll() {
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     if (resources.getButton(Surrender).getButtonState()) {
                         this->resetGridMarkers();
-                        State::changeScreen(Screens::GAME_OVER);
+                        State::changeScreen(Screens::GameOver);
                     } else if (resources.getButton(Instructions).getButtonState()) {
-                        State::changeScreen(Screens::INSTRUCTIONS);
+                        State::changeScreen(Screens::Instructions);
                     } else if (!State::lockedFlag) {
                         for (auto &target : this->targetVector) {
                             if (target.getTargetState()) {
