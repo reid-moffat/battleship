@@ -4,7 +4,6 @@
 
 #ifdef _WIN32
 #include <Windows.h>
-
 #include <memory>
 #else
 #include <unistd.h>
@@ -20,12 +19,7 @@ using std::get;
 std::unique_ptr<Gameplay> Gameplay::instance = nullptr;
 
 Gameplay::Gameplay() : ScreenTemplate() {
-    gridP1 = std::make_unique<Grid>();
-    gridP2 = std::make_unique<Grid>();
-
-    fleetLayoutP1 = std::make_unique<shipOrientations>();
-    fleetLayoutP2 = std::make_unique<shipOrientations>();
-
+    // Data required for all the SFML objects on this screen
     const vector<string> texturePaths = {
             "GameplayBackground.png",
             "GameplayP1Background.png",
@@ -56,83 +50,91 @@ Gameplay::Gameplay() : ScreenTemplate() {
             "IdleInstructionsButton.png",
             "ActiveInstructionsButton.png",
     };
-
     const vector<sprite> sprites = {
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefault_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundDefaultTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP1Texture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundP2Texture},
 
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Battleship_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), AircraftCarrier_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Destroyer_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), Submarine_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PatrolBoat_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), RowBoat_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BattleshipTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), AircraftCarrierTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), DestroyerTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SubmarineTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PatrolBoatTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), RowBoatTexture},
 
-            {sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), BattleshipSunk_},
-            {sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), AircraftCarrierSunk_},
-            {sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), DestroyerSunk_},
-            {sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), SubmarineSunk_},
-            {sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), PatrolBoatSunk_},
-            {sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), RowBoatSunk_},
+            {sf::Vector2f(330 * 5, 113 * 5), sf::Vector2f(5, 5), BattleshipSunkTexture},
+            {sf::Vector2f(348 * 5, 117 * 5), sf::Vector2f(5, 5), AircraftCarrierSunkTexture},
+            {sf::Vector2f(348 * 5, 75 * 5), sf::Vector2f(5, 5), DestroyerSunkTexture},
+            {sf::Vector2f(330 * 5, 79 * 5), sf::Vector2f(5, 5), SubmarineSunkTexture},
+            {sf::Vector2f(330 * 5, 53 * 5), sf::Vector2f(5, 5), PatrolBoatSunkTexture},
+            {sf::Vector2f(348 * 5, 57 * 5), sf::Vector2f(5, 5), RowBoatSunkTexture},
 
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PrimaryHitMarker_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PrimaryMissMarker_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryHitMarker_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryMissMarker_},
-            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryTarget_},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PrimaryHitMarkerTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), PrimaryMissMarkerTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryHitMarkerTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryMissMarkerTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), SecondaryTargetTexture},
     };
+    const vector<button> buttons = {{sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleSurrenderButtonTexture, ActiveSurrenderButtonTexture},
+                                    {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButtonTexture, ActiveInstructionsButtonTexture}};
 
-    const vector<button> buttons = {{sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleSurrenderButton, ActiveSurrenderButton},
-                                    {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
-
+    // Initialize SFML objects
     this->resources = ScreenResourceManager("gameplay", texturePaths, sprites, buttons);
 
+
+    // Initialize other required objects
+    gridP1 = std::make_unique<Grid>();
+    gridP2 = std::make_unique<Grid>();
+
+    fleetLayoutP1 = std::make_unique<shipOrientations>();
+    fleetLayoutP2 = std::make_unique<shipOrientations>();
+
     Target::initializeTextures("idlePrimaryTarget.png", "ActivePrimaryTarget.png");
-    this->setTargetVector();
-    this->createCoordinateSet();
-}
 
-void Gameplay::setP1Grid(const shipOrientations &ships) {
-    // TODO
-    gridP1.reset(new Grid(ships));
-    fleetLayoutP1.reset(&gridP1->getShips());
-}
+    // Initializes the target locations
+    for (int y = 0; y < 10; ++y) {
+        for (int x = 0; x < 10; ++x) {
+            Coordinate coordinate(x, y);
+            Target target(coordinate, sf::Vector2f((float) (128 + (x * 16)) * 5, (float) (28 + (y * 16)) * 5), sf::Vector2f(5, 5));
+            this->targetVector.push_back(target);
+        }
+    }
 
-void Gameplay::setP2Grid(const shipOrientations &ships) {
-    // TODO
-    gridP2.reset(new Grid(ships));
-    fleetLayoutP2.reset(&gridP2->getShips());
-}
-
-void Gameplay::createCoordinateSet() {
-    for (int y = 0; y < 10; y++) {
-        for (int x = 0; x < 10; x++) {
+    // Initialize the set of possible coordinates the environment can attack
+    for (int y = 0; y < 10; ++y) {
+        for (int x = 0; x < 10; ++x) {
             Coordinate coordinate(x, y);
             this->coordinateSet.insert(coordinate);
         }
     }
 }
 
-Coordinate Gameplay::randomAttack() {
-    // Generate a random index
-    int randGen = randomInt(0, this->coordinateSet.size() - 1);
-    // Find the random coordinate
-    auto itr = this->coordinateSet.begin();
-    advance(itr, randGen);
-    // Remove element from coordinateSet
-    this->coordinateSet.erase(itr);
-    return *itr;
+Gameplay &screen::Gameplay::getInstance() {
+    if (instance == nullptr) {
+        instance.reset(new Gameplay);
+    }
+    return *instance;
 }
 
-void Gameplay::setTargetVector() {
-    for (int y = 0; y < 10; y++) {
-        for (int x = 0; x < 10; x++) {
-            Coordinate coordinate(x, y);
-            Target target(coordinate, sf::Vector2f(((128 + (x * 16)) * 5), ((28 + (y * 16)) * 5)), sf::Vector2f(5, 5));
-            targetVector.push_back(target);
-        }
-    }
+void Gameplay::setP1Grid(const shipOrientations &ships) {
+    gridP1 = std::make_unique<Grid>(ships);
+    fleetLayoutP1.reset(&gridP1->getShips());
+}
+
+void Gameplay::setP2Grid(const shipOrientations &ships) {
+    gridP2 = std::make_unique<Grid>(ships);
+    fleetLayoutP2.reset(&gridP2->getShips());
+}
+
+Coordinate Gameplay::randomAttack() {
+    // Generate a random index and get to the coordinate at that position
+    const int randGen = randomInt(0, (int) this->coordinateSet.size() - 1);
+    auto itr = this->coordinateSet.begin();
+    advance(itr, randGen);
+
+    // Remove the coordinate from the set and return it
+    this->coordinateSet.erase(itr);
+    return *itr;
 }
 
 bool Gameplay::lost(Grid &grid) {
@@ -159,7 +161,6 @@ void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
                 this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         }
-
     } else {
         if (State::player == State::Player::P1) {
             if (attack == SquareType::WATER) {
@@ -203,11 +204,10 @@ void Gameplay::resetGridMarkers() {
 }
 
 void Gameplay::updateSecondaryTarget(Coordinate coordinate) {
-    resources.getSprite(SecondaryTarget)
-            .setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+    resources.getSprite(SecondaryTarget).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
 }
 
-void Gameplay::updateGrid(Coordinate &coordinate, sf::RenderWindow &gui) {
+void Gameplay::attack(Coordinate &coordinate) {
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             SquareType attack = this->gridP2->attack(coordinate);
@@ -378,24 +378,20 @@ void Gameplay::update() {
         target.updateTargetState(mousePosition);
     }
 
-    if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
+    if (State::gameMode == State::GameMode::SINGLE_PLAYER || State::player == State::Player::P1) {
         this->setFleetLayout(*this->fleetLayoutP1);
     } else {
-        if (State::player == State::Player::P1) {
-            this->setFleetLayout(*this->fleetLayoutP1);
-        } else {
-            this->setFleetLayout(*this->fleetLayoutP2);
-        }
+        this->setFleetLayout(*this->fleetLayoutP2);
     }
 
     if ((State::gameMode == State::GameMode::SINGLE_PLAYER) && (State::player == State::Player::P2)) {
         if (State::difficulty == State::Difficulty::EASY) {
             Coordinate attack = this->randomAttack();
-            this->updateGrid(attack, *State::gui);
+            this->attack(attack);
         } else {
             // TODO: Add hard algorithm
             Coordinate attack = this->randomAttack();
-            this->updateGrid(attack, *State::gui);
+            this->attack(attack);
         }
     }
 
@@ -423,7 +419,7 @@ void Gameplay::poll() {
                             if (target.getTargetState()) {
                                 State::lockedFlag = true;
                                 Coordinate targetCoord = target.getTargetCoordinate();
-                                this->updateGrid(targetCoord, gui);
+                                this->attack(targetCoord);
                             }
                         }
                     }
@@ -435,7 +431,7 @@ void Gameplay::poll() {
     }
 }
 
-void Gameplay::renderShipStatus(Grid &grid) {
+void Gameplay::renderSunkShips(Grid &grid) {
     sf::RenderWindow &gui = *State::gui;
     map<shipNames, bool> shipStatus = grid.getShipStatus();
 
@@ -523,23 +519,17 @@ void Gameplay::render() {
         gui.draw(resources.getSprite(SecondaryTarget));
     }
 
-    if (State::gameMode == State::SINGLE_PLAYER) {
-        this->renderShipStatus(*(this->gridP2));
+    if (State::gameMode == State::SINGLE_PLAYER || State::player == State::Player::P1) {
+        this->renderSunkShips(*(this->gridP2));
     } else {
-        if (State::player == State::Player::P1) {
-            this->renderShipStatus(*(screen::Gameplay::gridP2));
-        } else {
-            this->renderShipStatus(*(screen::Gameplay::gridP1));
-        }
+        this->renderSunkShips(*(this->gridP1));
     }
 
     for (auto &target : this->targetVector) {
         target.render(gui);
     }
 
-    if (State::getCurrentScreen() == Screens::GAMEPLAY) {
-        gui.display();
-    }
+    gui.display();
 }
 
 void screen::Gameplay::sleepMS() {
@@ -548,11 +538,4 @@ void screen::Gameplay::sleepMS() {
 #else
     usleep(sleepTimeMS * 1000);
 #endif// _WIN32
-}
-
-Gameplay &screen::Gameplay::getInstance() {
-    if (instance == nullptr) {
-        instance.reset(new Gameplay);
-    }
-    return *instance;
 }

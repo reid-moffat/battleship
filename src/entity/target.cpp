@@ -4,7 +4,6 @@
 
 #include "target.hpp"
 #include "../helpers/helperFunctions.hpp"
-#include <memory>
 
 using entity::Target;
 

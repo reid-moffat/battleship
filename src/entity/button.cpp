@@ -3,7 +3,6 @@
  */
 
 #include "button.hpp"
-#include <memory>
 
 using entity::Button;
 
