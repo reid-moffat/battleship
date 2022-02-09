@@ -1,5 +1,5 @@
 #
-# GitHub C++ gitignore
+# GitHub's C++ gitignore
 # https://github.com/github/gitignore/blob/main/C++.gitignore
 #
 
@@ -50,7 +50,7 @@
 
 
 #
-# Clion .idea files to ignore
+# Clion .idea gitignore files
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 #
 
