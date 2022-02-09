@@ -204,7 +204,7 @@ void Gameplay::resetGridMarkers() {
 }
 
 void Gameplay::updateSecondaryTarget(Coordinate coordinate) {
-    resources.getSprite(SecondaryTarget).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+    resources.getSprite(SecondaryTarget).setPosition(sf::Vector2f((float) (16 + (coordinate.getX() * 8) * 5), (float) (44 + (coordinate.getY() * 8) * 5)));
 }
 
 void Gameplay::attack(Coordinate &coordinate) {
@@ -300,71 +300,32 @@ void Gameplay::attack(Coordinate &coordinate) {
 }
 
 void Gameplay::setFleetLayout(shipOrientations &fleetLayout) {
-    sf::Sprite &battleship = resources.getSprite(Battleship);
-    sf::Sprite &aircraftCarrier = resources.getSprite(AircraftCarrier);
-    sf::Sprite &destroyer = resources.getSprite(Destroyer);
-    sf::Sprite &submarine = resources.getSprite(Submarine);
-    sf::Sprite &patrolBoat = resources.getSprite(PatrolBoat);
-    sf::Sprite &rowBoat = resources.getSprite(RowBoat);
+    static const map<int, shipNames> ships = {
+            {Battleship, shipNames::Battleship},
+            {AircraftCarrier, shipNames::AircraftCarrier},
+            {Destroyer, shipNames::Destroyer},
+            {Submarine, shipNames::Submarine},
+            {PatrolBoat, shipNames::PatrolBoat},
+            {RowBoat, shipNames::RowBoat},
+    };
 
-    if (get<1>(fleetLayout[shipNames::Battleship]) == 1) {
-        battleship.setPosition(sf::Vector2f((64 + (get<0>(fleetLayout[shipNames::Battleship]).getX() * 8)) * 5,
-                                            (44 + (get<0>(fleetLayout[shipNames::Battleship]).getY() * 8)) * 5));
-        battleship.setRotation(90.f);
-    } else {
-        battleship.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::Battleship]).getX() * 8)) * 5,
-                                            (44 + (get<0>(fleetLayout[shipNames::Battleship]).getY() * 8)) * 5));
-        battleship.setRotation(0);
-    }
+    static int xCoord, yCoord, iteration;
+    for (auto ship : ships) {
+        sf::Sprite &sprite = resources.getSprite(ship.first);
+        const shipNames name = ship.second;
+        xCoord = get<0>(fleetLayout[name]).getX();
+        yCoord = get<0>(fleetLayout[name]).getY();
+        iteration = ship.first - Battleship;
 
-    if (get<1>(fleetLayout[shipNames::AircraftCarrier]) == 1) {
-        aircraftCarrier.setPosition(sf::Vector2f((56 + (get<0>(fleetLayout[shipNames::AircraftCarrier]).getX() * 8)) * 5,
-                                                 (44 + (get<0>(fleetLayout[shipNames::AircraftCarrier]).getY() * 8)) * 5));
-        aircraftCarrier.setRotation(90.f);
-    } else {
-        aircraftCarrier.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::AircraftCarrier]).getX() * 8)) * 5,
-                                                 (44 + (get<0>(fleetLayout[shipNames::AircraftCarrier]).getY() * 8)) * 5));
-        aircraftCarrier.setRotation(0);
-    }
-
-    if (get<1>(fleetLayout[shipNames::Destroyer]) == 1) {
-        destroyer.setPosition(sf::Vector2f((48 + (get<0>(fleetLayout[shipNames::Destroyer]).getX() * 8)) * 5,
-                                           (44 + (get<0>(fleetLayout[shipNames::Destroyer]).getY() * 8)) * 5));
-        destroyer.setRotation(90.f);
-    } else {
-        destroyer.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::Destroyer]).getX() * 8)) * 5,
-                                           (44 + (get<0>(fleetLayout[shipNames::Destroyer]).getY() * 8)) * 5));
-        destroyer.setRotation(0);
-    }
-
-    if (get<1>(fleetLayout[shipNames::Submarine]) == 1) {
-        submarine.setPosition(sf::Vector2f((40 + (get<0>(fleetLayout[shipNames::Submarine]).getX() * 8)) * 5,
-                                           (44 + (get<0>(fleetLayout[shipNames::Submarine]).getY() * 8)) * 5));
-        submarine.setRotation(90.f);
-    } else {
-        submarine.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::Submarine]).getX() * 8)) * 5,
-                                           (44 + (get<0>(fleetLayout[shipNames::Submarine]).getY() * 8)) * 5));
-        submarine.setRotation(0);
-    }
-
-    if (get<1>(fleetLayout[shipNames::PatrolBoat]) == 1) {
-        patrolBoat.setPosition(sf::Vector2f((32 + (get<0>(fleetLayout[shipNames::PatrolBoat]).getX() * 8)) * 5,
-                                            (44 + (get<0>(fleetLayout[shipNames::PatrolBoat]).getY() * 8)) * 5));
-        patrolBoat.setRotation(90.f);
-    } else {
-        patrolBoat.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::PatrolBoat]).getX() * 8)) * 5,
-                                            (44 + (get<0>(fleetLayout[shipNames::PatrolBoat]).getY() * 8)) * 5));
-        patrolBoat.setRotation(0);
-    }
-
-    if (get<1>(fleetLayout[shipNames::RowBoat]) == 1) {
-        rowBoat.setPosition(sf::Vector2f((24 + (get<0>(fleetLayout[shipNames::RowBoat]).getX() * 8)) * 5,
-                                         (44 + (get<0>(fleetLayout[shipNames::RowBoat]).getY() * 8)) * 5));
-        rowBoat.setRotation(90.0);
-    } else {
-        rowBoat.setPosition(sf::Vector2f((16 + (get<0>(fleetLayout[shipNames::RowBoat]).getX() * 8)) * 5,
-                                         (44 + (get<0>(fleetLayout[shipNames::RowBoat]).getY() * 8)) * 5));
-        rowBoat.setRotation(0);
+        if (get<1>(fleetLayout[name])) {
+            sprite.setPosition(sf::Vector2f((float) (64 - 8 * iteration + xCoord * 8) * 5,
+                                            (float) (44 + yCoord * 8) * 5));
+            sprite.setRotation(90);
+        } else {
+            sprite.setPosition(sf::Vector2f((float) (16 + xCoord * 8) * 5,
+                                            (float) (44 + yCoord * 8) * 5));
+            sprite.setRotation(0);
+        }
     }
 }
 
@@ -384,7 +345,7 @@ void Gameplay::update() {
         this->setFleetLayout(*this->fleetLayoutP2);
     }
 
-    if ((State::gameMode == State::GameMode::SINGLE_PLAYER) && (State::player == State::Player::P2)) {
+    if (State::gameMode == State::GameMode::SINGLE_PLAYER && State::player == State::Player::P2) {
         if (State::difficulty == State::Difficulty::EASY) {
             Coordinate attack = this->randomAttack();
             this->attack(attack);
@@ -458,6 +419,7 @@ void Gameplay::render() {
     sf::RenderWindow &gui = *State::gui;
     gui.clear();
 
+    // Background rendering
     if (State::gameMode == State::SINGLE_PLAYER) {
         gui.draw(resources.getSprite(BackgroundDefault));
     } else {
@@ -468,55 +430,41 @@ void Gameplay::render() {
         }
     }
 
+    // Buttons and ships
     resources.getButton(Surrender).render(gui);
     resources.getButton(Instructions).render(gui);
 
-    gui.draw(resources.getSprite(Battleship));
-    gui.draw(resources.getSprite(AircraftCarrier));
-    gui.draw(resources.getSprite(Destroyer));
-    gui.draw(resources.getSprite(Submarine));
-    gui.draw(resources.getSprite(PatrolBoat));
-    gui.draw(resources.getSprite(RowBoat));
-
-    if (State::gameMode == State::SINGLE_PLAYER) {
-        for (auto &primaryMarker : this->primaryMarkersP1Vector) {
-            gui.draw(primaryMarker);
-        }
-        for (auto &secondaryMarker : this->secondaryMarkersP1Vector) {
-            gui.draw(secondaryMarker);
-        }
-    } else {
-        if (State::player == State::Player::P1) {
-            for (auto &primaryMarker : this->primaryMarkersP1Vector) {
-                gui.draw(primaryMarker);
-            }
-
-            for (auto &secondaryMarker : this->secondaryMarkersP1Vector) {
-                gui.draw(secondaryMarker);
-            }
-        } else {
-            for (auto &primaryMarker : this->primaryMarkersP2Vector) {
-                gui.draw(primaryMarker);
-            }
-
-            for (auto &secondaryMarker : this->secondaryMarkersP2Vector) {
-                gui.draw(secondaryMarker);
-            }
-        }
-    }
-
-    if ((State::player == State::Player::P1) && !this->secondaryMarkersP1Vector.empty()) {
-        gui.draw(resources.getSprite(SecondaryTarget));
-    }
-
-    if ((State::player == State::Player::P2) && !this->secondaryMarkersP2Vector.empty()) {
-        gui.draw(resources.getSprite(SecondaryTarget));
+    for (int ship = Battleship; ship <= RowBoat; ++ship) {
+        gui.draw(resources.getSprite(ship));
     }
 
     if (State::gameMode == State::SINGLE_PLAYER || State::player == State::Player::P1) {
         this->renderSunkShips(*(this->gridP2));
     } else {
         this->renderSunkShips(*(this->gridP1));
+    }
+
+    // Renders all the target markers
+    vector<sf::Sprite> primaryMarkers, secondaryMarkers;
+    if (State::gameMode == State::SINGLE_PLAYER || State::player == State::Player::P1) {
+        primaryMarkers = primaryMarkersP1Vector;
+        secondaryMarkers = secondaryMarkersP1Vector;
+    } else {
+        primaryMarkers = primaryMarkersP2Vector;
+        secondaryMarkers = secondaryMarkersP2Vector;
+    }
+    for (auto &primaryMarker : primaryMarkers) {
+        gui.draw(primaryMarker);
+    }
+    for (auto &secondaryMarker : secondaryMarkers) {
+        gui.draw(secondaryMarker);
+    }
+
+    if (State::player == State::Player::P1 && !this->secondaryMarkersP1Vector.empty()) {
+        gui.draw(resources.getSprite(SecondaryTarget));
+    }
+    if (State::player == State::Player::P2 && !this->secondaryMarkersP2Vector.empty()) {
+        gui.draw(resources.getSprite(SecondaryTarget));
     }
 
     for (auto &target : this->targetVector) {
