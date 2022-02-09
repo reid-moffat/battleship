@@ -7,21 +7,31 @@
 
 using screen::Instructions;
 
-std::unique_ptr<Instructions> Instructions::instance = nullptr;
+std::unique_ptr<class Instructions> Instructions::instance = nullptr;
 
-Instructions &screen::Instructions::getInstance() {
+Instructions::Instructions() : ScreenTemplate() {
+    // Data required for all the SFML objects on this screen
+    const vector<string> texturePaths = {
+            "InstructionsBackground.png",
+            "IdleBackButton.png",
+            "ActiveBackButton.png",
+    };
+    const vector<sprite> sprites = {
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundTexture},
+    };
+    const vector<button> buttons = {
+            {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleBackButtonTexture, ActiveBackButtonTexture},
+    };
+
+    // Initialize SFML objects
+    this->resources = ScreenResourceManager("instructions", texturePaths, sprites, buttons);
+}
+
+class Instructions &screen::Instructions::getInstance() {
     if (instance == nullptr) {
         instance.reset(new Instructions);
     }
     return *instance;
-}
-
-Instructions::Instructions() : ScreenTemplate() {
-    const vector<string> texturePaths{"instructions/InstructionsBackground.png", "instructions/IdleBackButton.png", "instructions/ActiveBackButton.png"};
-    this->resources = ScreenResourceManager(texturePaths,
-                                            {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background_}},
-                                            {{sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5),
-                                              textureNames::IdleBackButton, textureNames::ActiveBackButton}});
 }
 
 void Instructions::update() {
@@ -35,19 +45,14 @@ void Instructions::poll() {
 
     while (gui.pollEvent(event)) {
         switch (event.type) {
-
             case sf::Event::Closed:
                 gui.close();
                 break;
-
             case sf::Event::MouseButtonReleased:
                 if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::BackButton).getButtonState()) {
                     State::previousScreen();
-                    break;
-                } else {
-                    break;
                 }
-
+                break;
             default:
                 break;
         }
@@ -61,7 +66,5 @@ void Instructions::render() {
     gui.draw(resources.getSprite(spriteNames::Background));
     resources.getButton(buttonNames::BackButton).render(gui);
 
-    if (State::getCurrentScreen() == Screens::INSTRUCTIONS) {
-        gui.display();
-    }
+    gui.display();
 }

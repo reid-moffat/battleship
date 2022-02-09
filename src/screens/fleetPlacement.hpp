@@ -6,37 +6,23 @@
 #define BATTLESHIP_FLEETPLACEMENT_H
 
 #include "../controllers/screenTemplate.hpp"
-#include "../entity/button.hpp"
 #include "../entity/coordinate.hpp"
-#include "../enums/shipNames.hpp"
-#include <SFML/System.hpp>
-#include <random>
-#include <vector>
 
-using entity::Button;
 using entity::Coordinate;
-using entity::shipNames;
-using std::map;
-using std::tuple;
-using std::vector;
 
 namespace screen {
     class FleetPlacement : public ScreenTemplate {
     public:
         /**
-         * Copy constructor
-         */
-        FleetPlacement(const FleetPlacement &source) = delete;
-
-        /**
-         * Overloaded assignment operator
-         */
-        FleetPlacement &operator=(const FleetPlacement &source) = delete;
-
-        /**
-         *
+         * Returns the instance of this screen
          */
         static FleetPlacement &getInstance();
+
+        // Do not allow copying of this screen's instance
+        FleetPlacement(const FleetPlacement &source) = delete;
+
+        // Do not allow assignment of this screen's instance
+        FleetPlacement &operator=(const FleetPlacement &source) = delete;
 
     private:
         // Singleton instance
@@ -52,26 +38,29 @@ namespace screen {
 
         // Names to refer to resources on this screen
         enum textureNames {
-            BackgroundDefault_,
-            BackgroundP1_,
-            BackgroundP2_,
-            IdleReadyButton,
-            ActiveReadyButton,
-            IdleRandomizeButton,
-            ActiveRandomizeButton,
-            IdleInstructionsButton,
-            ReadyInstructionsButton,
-            Battleship_,
-            AircraftCarrier_,
-            Destroyer_,
-            Submarine_,
-            PatrolBoat_,
-            RowBoat_
+            BackgroundDefaultTexture,
+            BackgroundP1Texture,
+            BackgroundP2Texture,
+
+            BattleshipTexture,
+            AircraftCarrierTexture,
+            DestroyerTexture,
+            SubmarineTexture,
+            PatrolBoatTexture,
+            RowBoatTexture,
+
+            IdleReadyButtonTexture,
+            ActiveReadyButtonTexture,
+            IdleRandomizeButtonTexture,
+            ActiveRandomizeButtonTexture,
+            IdleInstructionsButtonTexture,
+            ReadyInstructionsButtonTexture
         };
         enum spriteNames {
             BackgroundDefault,
             BackgroundP1,
             BackgroundP2,
+
             Battleship,
             AircraftCarrier,
             Destroyer,
@@ -85,39 +74,28 @@ namespace screen {
             Instructions
         };
 
-        /**
-         *
-         */
-        bool layoutGenerated;
-
-        /**
-         * Ships map:
-         * ShipNames -> specifies the ship name and size
-         * Coordinate -> specifies the topmost or leftmost coordinate of the ship
-         * Bool -> specifies the ship orientation (horizontal = true)
-         */
+        // Ships on this screen, with their name, top left coordinate and if it is horizontal
         map<shipNames, tuple<Coordinate, bool>> ships;
 
-        /**
-         * Adds a coordinate to a vector if the coordinate is valid
-         */
+        // If a ship orientation has been generated yet
+        bool layoutGenerated;
+
+        // Adds a coordinate to a vector if it is within the grid's bounds
         static void addCoord(vector<Coordinate> &coordinates, int x, int y);
 
-        /**
-         * Generates a random fleet layout
-         */
+        // Generates a random fleet layout
         void randomize();
 
-        /**
-         * Updates ship sprites and orientations
-         */
+        // Updates ship sprites and orientations based on the current state of ships
         void updateFleetLayout();
 
-        /**
-         * Resets ship sprites and orientations
-         */
+        // Resets ship sprites and orientations
         void resetFleetLayout();
 
+        // Returns true if the specified ship is horizontal
+        inline bool horizontal(shipNames ship) {
+            return std::get<1>(this->ships[ship]);
+        }
     };
 }// namespace screen
 

@@ -20,7 +20,7 @@ using std::unique_ptr;
 class State {
 public:
     /**
-     * SFML window for rendering
+     * Game window- all sprites should be rendered here
      */
     static unique_ptr<sf::RenderWindow> gui;
 
@@ -103,18 +103,10 @@ public:
     static sf::Vector2f getMousePosition();
 
 private:
-    /**
-     * The screens that is currently being rendered
-     */
+    // The screen that is currently being rendered
     static Screens current;
 
-    /**
-     * The previously rendered screens
-     *
-     * Used by the information screens since multiple possible screens could
-     * switch to it, and thus we do not know what screens to return to. Also
-     * makes going back easier and less buggy
-     */
+    // The previously rendered screen
     static Screens previous;
 };
 

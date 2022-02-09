@@ -8,12 +8,12 @@
 namespace entity {
 
     enum class shipNames {
-        ROW_BOAT,
-        PATROL_BOAT,
-        SUBMARINE,
-        DESTROYER,
-        AIRCRAFT_CARRIER,
-        BATTLESHIP
+        RowBoat,
+        PatrolBoat,
+        Submarine,
+        Destroyer,
+        AircraftCarrier,
+        Battleship
     };
 
 }// namespace entity

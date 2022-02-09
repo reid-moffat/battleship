@@ -24,9 +24,7 @@ namespace screen {
         void run();
 
     private:
-        /**
-         * All of the different screens instances, mapped to by their name
-         */
+        // All the different screens instances, mapped to by their name
         std::map<Screens, ScreenTemplate *> screenList;
     };
 }// namespace screen

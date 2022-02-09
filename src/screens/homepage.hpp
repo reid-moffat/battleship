@@ -6,27 +6,19 @@
 #define BATTLESHIP_HOMEPAGE_H
 
 #include "../controllers/screenTemplate.hpp"
-#include "../entity/button.hpp"
-
-using entity::Button;
-using std::map;
 
 namespace screen {
     class Homepage : public ScreenTemplate {
     public:
         /**
-         *
+         * Returns the instance of this screen
          */
         static Homepage &getInstance();
 
-        /**
-         * Copy constructor
-         */
+        // Do not allow copying of this screen's instance
         Homepage(const Homepage &source) = delete;
 
-        /**
-         * Overloaded assignment operator
-         */
+        // Do not allow assignment of this screen's instance
         Homepage &operator=(const Homepage &source) = delete;
 
     private:
@@ -43,9 +35,9 @@ namespace screen {
 
         // Names to refer to resources on this screen
         enum textureNames {
-            Background_,
-            IdlePlayButton,
-            ActivePlayButton
+            BackgroundTexture,
+            IdlePlayButtonTexture,
+            ActivePlayButtonTexture
         };
         enum spriteNames {
             Background

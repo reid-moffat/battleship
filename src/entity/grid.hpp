@@ -1,6 +1,5 @@
 /**
- * Grid class header
- * Provides a player's grid
+ * Stores a player's grid i.e the status of each square
  */
 
 #ifndef BATTLESHIP_GRID_H
@@ -10,12 +9,10 @@
 #include "../enums/squareType.hpp"
 #include "coordinate.hpp"
 #include <map>
-#include <memory>
 #include <vector>
 
 using std::map;
 using std::tuple;
-using std::unique_ptr;
 using std::vector;
 
 namespace entity {
@@ -55,9 +52,14 @@ namespace entity {
         map<shipNames, bool> &getShipStatus();
 
         /**
-         * Default, empty constructor (allows static grids to be initialized without data)
+         * Default, empty constructor
          */
         Grid();
+
+        /**
+         * Size of the grid (both width and height)
+         */
+        static constexpr int size = 10;
 
     private:
         /**
@@ -84,11 +86,6 @@ namespace entity {
          * 10-by-10 array of grid squares
          */
         vector<vector<SquareType>> squares;
-
-        /**
-         * Size of the grid (both width and height) i.e 10
-         */
-        static constexpr int size = 10;
     };
 }// namespace entity
 

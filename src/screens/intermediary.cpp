@@ -6,23 +6,33 @@
 
 using screen::Intermediary;
 
-std::unique_ptr<Intermediary> Intermediary::instance = nullptr;
+std::unique_ptr<class Intermediary> Intermediary::instance = nullptr;
 
-Intermediary &screen::Intermediary::getInstance() {
+Intermediary::Intermediary() : ScreenTemplate() {
+    // Data required for all the SFML objects on this screen
+    const vector<string> texturePaths{
+            "IntermediaryP1Background.png",
+            "IntermediaryP2Background.png",
+            "IdleContinueButton.png",
+            "ActiveContinueButton.png",
+    };
+    const vector<sprite> sprites = {
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), IntermediaryP1BackgroundTexture},
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), IntermediaryP2BackgroundTexture},
+    };
+    const vector<button> buttons = {
+            {sf::Vector2f(144 * 5, 108 * 5), sf::Vector2f(5, 5), IdleContinueButtonTexture, ActiveContinueButtonTexture},
+    };
+
+    // Initialize SFML objects
+    this->resources = ScreenResourceManager("intermediary", texturePaths, sprites, buttons);
+}
+
+class Intermediary &screen::Intermediary::getInstance() {
     if (instance == nullptr) {
         instance.reset(new Intermediary());
     }
     return *instance;
-}
-
-Intermediary::Intermediary() : ScreenTemplate() {
-    const vector<string> texturePaths{"intermediary/IntermediaryP1Background.png", "intermediary/IntermediaryP2Background.png",
-                                      "intermediary/IdleContinueButton.png", "intermediary/ActiveContinueButton.png"};
-    this->resources = ScreenResourceManager(texturePaths,
-                                            {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::IntermediaryP1Background},
-                                             {sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::IntermediaryP2Background}},
-                                            {{sf::Vector2f(144 * 5, 108 * 5), sf::Vector2f(5, 5),
-                                              textureNames::IdleContinueButton, textureNames::ActiveContinueButton}});
 }
 
 void Intermediary::update() {
@@ -41,14 +51,13 @@ void Intermediary::poll() {
                 break;
             case sf::Event::MouseButtonReleased:
                 if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::ContinueButton).getButtonState()) {
-                    if (State::player == State::Player::P2 && State::getPreviousScreen() == Screens::FLEET_PLACEMENT) {
-                        State::changeScreen(Screens::FLEET_PLACEMENT);
-                        break;
+                    if (State::player == State::Player::P2 && State::getPreviousScreen() == Screens::FleetPlacement) {
+                        State::changeScreen(Screens::FleetPlacement);
                     } else {
-                        State::changeScreen(Screens::GAMEPLAY);
-                        break;
+                        State::changeScreen(Screens::Gameplay);
                     }
                 }
+                break;
             default:
                 break;
         }
@@ -66,7 +75,5 @@ void Intermediary::render() {
     }
     resources.getButton(buttonNames::ContinueButton).render(gui);
 
-    if (State::getCurrentScreen() == Screens::INTERMEDIARY) {
-        gui.display();
-    }
+    gui.display();
 }

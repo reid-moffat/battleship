@@ -3,26 +3,34 @@
  */
 
 #include "homepage.hpp"
-#include <memory>
 
 using screen::Homepage;
-using std::vector;
 
-std::unique_ptr<Homepage> Homepage::instance = nullptr;
+std::unique_ptr<class Homepage> Homepage::instance = nullptr;
 
-Homepage &Homepage::getInstance() {
+Homepage::Homepage() {
+    const vector<string> texturePaths{
+            "HomepageBackground.png",
+            "IdlePlayButton.png",
+            "ActivePlayButton.png",
+    };
+    const vector<sprite> sprites = {
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundTexture},
+    };
+    const vector<button> buttons = {
+            {sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5),
+             IdlePlayButtonTexture, ActivePlayButtonTexture},
+    };
+
+    // Initialize SFML objects
+    this->resources = ScreenResourceManager("homepage", texturePaths, sprites, buttons);
+}
+
+class Homepage &Homepage::getInstance() {
     if (instance == nullptr) {
         instance.reset(new Homepage());
     }
     return *instance;
-}
-
-Homepage::Homepage() {
-    const vector<string> texturePaths{"homepage/HomepageBackground.png", "homepage/IdlePlayButton.png", "homepage/ActivePlayButton.png"};
-    this->resources = ScreenResourceManager(texturePaths,
-                                            {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), textureNames::Background_}},
-                                            {{sf::Vector2f(232 * 5, 64 * 5), sf::Vector2f(5, 5),
-                                              textureNames::IdlePlayButton, textureNames::ActivePlayButton}});
 }
 
 void Homepage::update() {
@@ -41,11 +49,9 @@ void Homepage::poll() {
                 break;
             case sf::Event::MouseButtonReleased:
                 if (event.mouseButton.button == sf::Mouse::Left && resources.getButton(buttonNames::PlayButton).getButtonState()) {
-                    State::changeScreen(Screens::GAME_MODE_SELECTION);
-                    break;
-                } else {
-                    break;
+                    State::changeScreen(Screens::GameModeSelection);
                 }
+                break;
             default:
                 break;
         }
@@ -59,7 +65,5 @@ void Homepage::render() {
     gui.draw(resources.getSprite(spriteNames::Background));
     resources.getButton(buttonNames::PlayButton).render(gui);
 
-    if (State::getCurrentScreen() == Screens::HOMEPAGE) {
-        gui.display();
-    }
+    gui.display();
 }

@@ -1,6 +1,5 @@
 /**
- * Front-end class for a buttons that can render a texture, change textures
- * and tell if the mouse is hovering over it
+ * Front-end class that creates buttons and manages button states, textures, and sprites
  */
 
 #ifndef BATTLESHIP_BUTTON_H
@@ -38,24 +37,16 @@ namespace entity {
         void updateButtonState(sf::Vector2f mousePosition);
 
     private:
-        /**
-         * Texture when the button does not have the mouse over it
-         */
+        // Texture when the button does not have the mouse over it
         std::unique_ptr<sf::Texture> idleTexture;
 
-        /**
-         * Texture when the button has the mouse over it
-         */
+        // Texture when the button has the mouse over it
         std::unique_ptr<sf::Texture> activeTexture;
 
-        /**
-         * Button sprite (the object that renders)
-         */
+        // Button sprite (the object that renders)
         std::unique_ptr<sf::Sprite> sprite;
 
-        /**
-         * Button state (true and Idle = false)
-         */
+        // Button state (true = active, false = idle)
         bool active;
     };
 

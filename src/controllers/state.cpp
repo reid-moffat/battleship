@@ -15,8 +15,8 @@ State::Player State::player = State::Player::P1;
 State::GameMode State::gameMode = State::GameMode::SINGLE_PLAYER;
 State::Difficulty State::difficulty = State::Difficulty::EASY;
 
-Screens State::previous = Screens::HOMEPAGE;
-Screens State::current = Screens::HOMEPAGE;
+Screens State::previous = Screens::Homepage;
+Screens State::current = Screens::Homepage;
 
 Screens State::getCurrentScreen() {
     return State::current;
@@ -37,25 +37,26 @@ void State::changeScreen(Screens newScreen) {
 
 void State::previousScreen() {
     switch (State::current) {
-        case Screens::HOMEPAGE:// Cannot go back from the homepage
+        case Screens::Homepage:// Cannot go back from the homepage
             throw std::invalid_argument("Error: You can't go back from the home screen");
-        case Screens::INSTRUCTIONS:// Goes back to the previously rendered screens for Instructions
+        case Screens::Instructions:// Goes back to the previously rendered screens for Instructions
             State::current = State::previous;
             break;
-        case Screens::GAME_MODE_SELECTION:// Go back to the homepage for game mode selection
-            State::current = Screens::HOMEPAGE;
+        case Screens::GameModeSelection:// Go back to the homepage for game mode selection
+            State::current = Screens::Homepage;
             break;
-        case Screens::DIFFICULTY_SELECTION:// Go back to game mode selection for difficulty selection
-            State::current = Screens::GAME_MODE_SELECTION;
+        case Screens::DifficultySelection:// Go back to game mode selection for difficulty selection
+            State::current = Screens::GameModeSelection;
             break;
         default:
-            // TODO: Update this
-            std::map<Screens, std::string> screenNames = {{Screens::HOMEPAGE, "homepage"},
-                                                          {Screens::FLEET_PLACEMENT, "homepage"},
-                                                          {Screens::GAMEPLAY, "Gameplay"},
-                                                          {Screens::INTERMEDIARY, "Intermediary"},
-                                                          {Screens::GAME_OVER, "Game Over"}};
-            throw std::invalid_argument(string("Error: You can't go back from the current screens (") + screenNames[State::current] + "");
+            std::map<Screens, std::string> screenNames = {{Screens::Homepage,       "Homepage"},
+                                                          {Screens::FleetPlacement, "Fleet Placement"},
+                                                          {Screens::Gameplay,       "Gameplay"},
+                                                          {Screens::Intermediary,   "Intermediary"},
+                                                          {Screens::GameOver,       "Game Over"}};
+            string errMsg = "Error: You can't go back from the current screen (" + screenNames[State::current]
+                            + "). This exception should no occur- State::previousScreen() was incorrectly called";
+            throw std::invalid_argument(errMsg);
     }
 }
 

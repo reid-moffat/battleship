@@ -7,11 +7,11 @@
 
 #define ASSERT(statement)                                                        \
     {                                                                            \
-        if (!statement) {                                                        \
+        if (!(statement)) {                                                        \
             std::string path = __FILE__;                                         \
             std::stringstream errMsg;                                            \
             errMsg << "\n\nASSERT FAILED: " << #statement << std::endl           \
-                   << "Value: " << statement << std::endl                        \
+                   << "Value: " << (statement) << std::endl                        \
                    << "Location: " << path.substr(path.find("battleship\\test")) \
                    << " (line " << __LINE__ << ")" << std::endl;                 \
             throw std::invalid_argument(errMsg.str());                           \
@@ -24,7 +24,7 @@
             std::string path = __FILE__;                                                              \
             std::stringstream errMsg;                                                                 \
             errMsg << "\n\nASSERT FAILED: " << #left << " " << #operator<< " " << #right << std::endl \
-                   << "Value: " << left << " " << #operator<< " " << right << std::endl               \
+                   << "Value: " << (left) << " " << #operator<< " " << (right) << std::endl               \
                    << "Location: " << path.substr(path.find("battleship/test"))                       \
                    << " (line " << __LINE__ << ")" << std::endl;                                      \
             throw std::invalid_argument(errMsg.str());                                                \

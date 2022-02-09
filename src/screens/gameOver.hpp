@@ -6,27 +6,19 @@
 #define BATTLESHIP_GAMEOVER_H
 
 #include "../controllers/screenTemplate.hpp"
-#include "../entity/button.hpp"
-#include <SFML/System.hpp>
-
-using entity::Button;
 
 namespace screen {
     class GameOver : public ScreenTemplate {
     public:
         /**
-         *
+         * Returns the instance of this screen
          */
         static GameOver &getInstance();
 
-        /**
-         * Copy constructor
-         */
+        // Do not allow copying of this screen's instance
         GameOver(const GameOver &source) = delete;
 
-        /**
-         * Overloaded assignment operator
-         */
+        // Do not allow assignment of this screen's instance
         GameOver &operator=(const GameOver &source) = delete;
 
     private:
@@ -43,12 +35,13 @@ namespace screen {
 
         // Names to refer to resources on this screen
         enum textureNames {
-            GameOverWinBackground,
-            GameOverLoseBackground,
-            GameOverP1Background,
-            GameOverP2Background,
-            IdleHomepageButton,
-            ActiveHomepageButton
+            WinBackgroundTexture,
+            LoseBackgroundTexture,
+            P1BackgroundTexture,
+            P2BackgroundTexture,
+
+            IdleHomepageButtonTexture,
+            ActiveHomepageButtonTexture
         };
         enum spriteNames {
             BackgroundWin,

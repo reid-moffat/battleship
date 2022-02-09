@@ -38,17 +38,9 @@ inline int randomInt(const int start, const int end) {
  */
 inline void loadTexture(sf::Texture &texture, const string &path) {
     if (!texture.loadFromFile("../res/images/" + path)) {
+        std::cout << "Error: unable to open file: /res/images/" << path << std::endl;
         exit(-1);
     }
-}
-
-/**
- * Initializes a sprite with a texture, position and scale
- */
-inline void setSprite(const sf::Vector2f position, const sf::Vector2f scale, const sf::Texture &spriteTexture, sf::Sprite &sprite) {
-    sprite.setTexture(spriteTexture);
-    sprite.setPosition(position);
-    sprite.setScale(scale);
 }
 
 #endif//BATTLESHIP_HELPERS_H

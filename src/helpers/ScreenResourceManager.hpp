@@ -1,5 +1,6 @@
 /**
- *
+ * Manages SFML textures, sprites and buttons, allowing for automatic loading
+ * and less required member variables
  */
 
 #ifndef BATTLESHIP_RESOURCEMANAGER_H
@@ -22,29 +23,28 @@ public:
     /**
      * Initializes this manager with textures and sprites
      *
-     * @param texturePaths paths to textures to load relative to res/images
-     * @param sprites data to initialize each sprite:
-     *                -The initial position (sf::Vector2f)
-     *                -The scale of the sprite (sf::Vector2f)
+     * @param screenName the name of the screen i.e folder in res/images/ where the textures are located
+     *                   (do not include a leading or trailing forward slash)
+     * @param texturePaths paths to textures to load relative to res/images/[<i>screenName</i>]
+     * @param sprites data to initialize each sprite:<p>
+     *                -The initial position (sf::Vector2f)<p>
+     *                -The scale of the sprite (sf::Vector2f)<p>
      *                -The corresponding texture (its index in the texturePaths)
-     * @param buttons data to initialize each button:
-     *                -The initial position (sf::Vector2f)
-     *                -The scale of the button (sf::Vector2f)
-     *                -The corresponding texture for when the button is idle (its index in the texturePaths)
+     * @param buttons data to initialize each button:<p>
+     *                -The initial position (sf::Vector2f)<p>
+     *                -The scale of the button (sf::Vector2f)<p>
+     *                -The corresponding texture for when the button is idle (its index in the texturePaths)<p>
      *                -The corresponding texture for when the button is active (its index in the texturePaths)
      */
-    ScreenResourceManager(const vector<string> &texturePaths,
+    ScreenResourceManager(const string &screenName,
+                          const vector<string> &texturePaths,
                           const vector<sprite> &sprites,
                           const vector<button> &buttons);
-
-    void addSprite(sf::Vector2f, sf::Vector2f, int);
-
-    void addButton(sf::Vector2f, sf::Vector2f, int, int);
 
     /**
      * Default constructor
      */
-    ScreenResourceManager();
+    ScreenResourceManager() = delete;
 
     /**
      * Returns a reference to the sprite at the specified index
@@ -57,19 +57,13 @@ public:
     Button &getButton(int index);
 
 private:
-    /**
-     * All the SFML textures in this manager
-     */
+    // All the SFML textures in this manager
     vector<sf::Texture> textures;
 
-    /**
-     * All the SFML sprites in this manager
-     */
+    // All the SFML sprites in this manager
     vector<sf::Sprite> sprites;
 
-    /**
-     * All the SFML buttons in this manager
-     */
+    // All the SFML buttons in this manager
     vector<Button> buttons;
 };
 

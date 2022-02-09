@@ -6,27 +6,19 @@
 #define BATTLESHIP_DIFFICULTYSELECTION_H
 
 #include "../controllers/screenTemplate.hpp"
-#include "../entity/button.hpp"
-#include <SFML/System.hpp>
-
-using entity::Button;
 
 namespace screen {
     class DifficultySelection : public ScreenTemplate {
     public:
         /**
-         *
+         * Returns the instance of this screen
          */
         static DifficultySelection &getInstance();
 
-        /**
-         * Copy constructor
-         */
+        // Do not allow copying of this screen's instance
         DifficultySelection(const DifficultySelection &source) = delete;
 
-        /**
-         * Overloaded assignment operator
-         */
+        // Do not allow assignment of this screen's instance
         DifficultySelection &operator=(const DifficultySelection &source) = delete;
 
     private:
@@ -43,15 +35,16 @@ namespace screen {
 
         // Names to refer to resources on this screen
         enum textureNames {
-            Background_,
-            IdleEasyButton,
-            ActiveEasyButton,
-            IdleHardButton,
-            ActiveHardButton,
-            IdleBackButton,
-            ActiveBackButton,
-            IdleInstructionsButton,
-            ActiveInstructionsButton
+            BackgroundTexture,
+
+            IdleEasyButtonTexture,
+            ActiveEasyButtonTexture,
+            IdleHardButtonTexture,
+            ActiveHardButtonTexture,
+            IdleBackButtonTexture,
+            ActiveBackButtonTexture,
+            IdleInstructionsButtonTexture,
+            ActiveInstructionsButtonTexture
         };
         enum spriteNames {
             Background

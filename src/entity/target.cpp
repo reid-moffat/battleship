@@ -7,20 +7,21 @@
 
 using entity::Target;
 
-// TODO: change to smart pointer
-sf::Texture Target::idleTexture = *new sf::Texture();
-sf::Texture Target::activeTexture = *new sf::Texture();
+std::unique_ptr<sf::Texture> Target::idleTexture = std::unique_ptr<sf::Texture>();
+std::unique_ptr<sf::Texture> Target::activeTexture = std::unique_ptr<sf::Texture>();
 
-void entity::Target::initializeTextures() {
-    // TODO: Take hte path as a param
-    loadTexture(Target::idleTexture, "gameplay/idlePrimaryTarget.png");
-    loadTexture(Target::activeTexture, "gameplay/ActivePrimaryTarget.png");
+void entity::Target::initializeTextures(const string &idlePath, const string &activePath) {
+    Target::idleTexture = std::make_unique<sf::Texture>();
+    Target::activeTexture = std::make_unique<sf::Texture>();
+
+    loadTexture(*Target::idleTexture, "gameplay/" + idlePath);
+    loadTexture(*Target::activeTexture, "gameplay/" + activePath);
 }
 
 Target::Target(Coordinate coordinate, sf::Vector2f position, sf::Vector2f scale) {
-    this->targetState = false;
+    this->isActive = false;
     this->targetCoordinate = coordinate;
-    this->sprite.setTexture(idleTexture);
+    this->sprite.setTexture(*idleTexture);
     this->sprite.setPosition(position);
     this->sprite.setScale(scale);
 }
@@ -30,7 +31,7 @@ void Target::render(sf::RenderWindow &window) const {
 }
 
 bool Target::getTargetState() const {
-    return this->targetState;
+    return this->isActive;
 }
 
 Coordinate Target::getTargetCoordinate() const {
@@ -39,10 +40,10 @@ Coordinate Target::getTargetCoordinate() const {
 
 void Target::updateTargetState(const sf::Vector2f mousePosition) {
     if (this->sprite.getGlobalBounds().contains(mousePosition)) {
-        this->targetState = true;
-        this->sprite.setTexture(activeTexture);
+        this->isActive = true;
+        this->sprite.setTexture(*activeTexture);
     } else {
-        this->targetState = false;
-        this->sprite.setTexture(idleTexture);
+        this->isActive = false;
+        this->sprite.setTexture(*idleTexture);
     }
 }

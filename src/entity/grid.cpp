@@ -1,5 +1,5 @@
 /**
- * Grid class implementation
+ * Stores a player's grid i.e the status of each square
  */
 
 #include "grid.hpp"
@@ -11,12 +11,14 @@ using entity::shipNames;
 using entity::SquareType;
 using std::get;
 
+entity::Grid::Grid() = default;
+
 Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
     // Initialize the grid itself with all water to start
     for (int i = 0; i < size; ++i) {
         squares.emplace_back(vector<SquareType>());
         for (int j = 0; j < size; ++j) {
-            squares[i].push_back(WATER);
+            squares[i].push_back(Water);
         }
     }
 
@@ -36,7 +38,7 @@ Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
         // Initializes the squares the ship occupies (from the top/left)
         for (int i = 0; i < length; ++i) {
             coordinates[i] = Coordinate(x, y);
-            squares[y][x] = SHIP;
+            squares[y][x] = Ship;
             horizontal ? x++ : y++;
         }
 
@@ -50,15 +52,15 @@ Grid::Grid(const map<shipNames, tuple<Coordinate, bool>> &shipPositions) {
 SquareType Grid::attack(Coordinate &coord) {
     // Determine the type of the square
     SquareType &status = squares[coord.getY()][coord.getX()];
-    if (status == WATER) {// We need to note if water has been hit
-        status = HIT_WATER;
-        return WATER;
-    } else if (status != SHIP) {// HIT_SHIP or HIT_WATER (do nothing)
+    if (status == Water) {// We need to note if water has been hit
+        status = HitWater;
+        return Water;
+    } else if (status != Ship) {// HitShip or HitWater (do nothing)
         return status;
     }
 
     // If it's not water or an already hit square, it is a ship. Find which ship it is and update it
-    status = HIT_SHIP;
+    status = HitShip;
     for (auto const &ship : this->ships) {
         shipNames shipName = ship.first;
         int &hitCount = get<1>(ships[shipName]);
@@ -71,7 +73,7 @@ SquareType Grid::attack(Coordinate &coord) {
                 if (hitCount == shipSize(shipName)) {
                     shipStatuses[shipName] = true;// Ship has been sunk
                 }
-                return SHIP;
+                return Ship;
             }
         }
     }
@@ -84,8 +86,4 @@ map<shipNames, tuple<Coordinate, bool>> &entity::Grid::getShips() {
 
 map<shipNames, bool> &Grid::getShipStatus() {
     return this->shipStatuses;
-}
-
-entity::Grid::Grid() {
-    ;
 }

@@ -7,7 +7,6 @@
 
 #include "../helpers/ScreenResourceManager.hpp"
 #include "state.hpp"
-#include <SFML/System.hpp>
 
 using std::map;
 
@@ -16,18 +15,14 @@ namespace screen {
     class ScreenTemplate {
     public:
         /**
-         * Renders this screens to the GUI
+         * Renders this screen to the GUI
          */
         void run();
 
-        /**
-         * Copy constructor for heap memory
-         */
+        // Do not allow copying of this screen's instance
         ScreenTemplate(const ScreenTemplate &other) = delete;
 
-        /**
-         * Assignment operator overriding
-         */
+        // Do not allow assignment of this screen's instance
         ScreenTemplate &operator=(const ScreenTemplate &rhs) = delete;
 
     protected:
@@ -41,19 +36,14 @@ namespace screen {
          */
         ScreenResourceManager resources;
 
-        /**
-         *
-         */
+        // Place any code needed to update objects before pooling and rendering here
+        // such as checking if the mouse is above a button
         virtual void update() = 0;
 
-        /**
-         *
-         */
+        // Pool for events. Make sure to poll for if the user clicks the X button on the window
         virtual void poll() = 0;
 
-        /**
-         *
-         */
+        // Render all sprites to the screen here
         virtual void render() = 0;
     };
 

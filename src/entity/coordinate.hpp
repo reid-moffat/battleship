@@ -6,7 +6,6 @@
 #ifndef BATTLESHIP_COORDINATE_H
 #define BATTLESHIP_COORDINATE_H
 
-#include <exception>
 #include <iostream>
 
 using std::ostream;
@@ -52,14 +51,10 @@ namespace entity {
         friend ostream &operator<<(std::ostream &output, const Coordinate &coord);
 
     private:
-        /**
-         * Coordinate x position
-         */
+        // Coordinate x position
         int x;
 
-        /**
-         * Coordinate y position
-         */
+        // Coordinate y position
         int y;
     };
 

@@ -6,24 +6,37 @@
 
 using screen::DifficultySelection;
 
-std::unique_ptr<DifficultySelection> DifficultySelection::instance = nullptr;
+std::unique_ptr<class DifficultySelection> DifficultySelection::instance = nullptr;
 
 DifficultySelection::DifficultySelection() : ScreenTemplate() {
-    const vector<string> texturePaths{"difficultySelection/DifficultyBackground.png",
-                                      "difficultySelection/IdleEasyButton.png", "difficultySelection/ActiveEasyButton.png",
-                                      "difficultySelection/IdleHardButton.png", "difficultySelection/ActiveHardButton.png",
-                                      "difficultySelection/IdleBackButton.png", "difficultySelection/ActiveBackButton.png",
-                                      "difficultySelection/IdleInstructionsButton.png", "difficultySelection/ActiveInstructionsButton.png"};
-    const vector<sprite> sprites = {{sf::Vector2f(0, 0), sf::Vector2f(5, 5), Background_}};
-    const vector<button> buttons = {{sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), IdleEasyButton, ActiveEasyButton},
-                                    {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), IdleHardButton, ActiveHardButton},
-                                    {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleBackButton, ActiveBackButton},
-                                    {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButton, ActiveInstructionsButton}};
+    // Data required for all the SFML objects on this screen
+    const vector<string> texturePaths = {
+            "DifficultyBackground.png", // Background
 
-    this->resources = ScreenResourceManager(texturePaths, sprites, buttons);
+            "IdleEasyButton.png", // Buttons
+            "ActiveEasyButton.png",
+            "IdleHardButton.png",
+            "ActiveHardButton.png",
+            "IdleBackButton.png",
+            "ActiveBackButton.png",
+            "IdleInstructionsButton.png",
+            "ActiveInstructionsButton.png",
+    };
+    const vector<sprite> sprites = {
+            {sf::Vector2f(0, 0), sf::Vector2f(5, 5), BackgroundTexture},
+    };
+    const vector<button> buttons = {
+            {sf::Vector2f(88 * 5, 92 * 5), sf::Vector2f(5, 5), IdleEasyButtonTexture, ActiveEasyButtonTexture},
+            {sf::Vector2f(200 * 5, 92 * 5), sf::Vector2f(5, 5), IdleHardButtonTexture, ActiveHardButtonTexture},
+            {sf::Vector2f(320 * 5, 12 * 5), sf::Vector2f(5, 5), IdleBackButtonTexture, ActiveBackButtonTexture},
+            {sf::Vector2f(352 * 5, 12 * 5), sf::Vector2f(5, 5), IdleInstructionsButtonTexture, ActiveInstructionsButtonTexture},
+    };
+
+    // Initialize SFML objects
+    this->resources = ScreenResourceManager("difficultySelection", texturePaths, sprites, buttons);
 }
 
-DifficultySelection &screen::DifficultySelection::getInstance() {
+class DifficultySelection &screen::DifficultySelection::getInstance() {
     if (instance == nullptr) {
         instance.reset(new DifficultySelection());
     }
@@ -31,12 +44,12 @@ DifficultySelection &screen::DifficultySelection::getInstance() {
 }
 
 void DifficultySelection::update() {
-    sf::Vector2f mousePosition = State::getMousePosition();
+    const sf::Vector2f mousePosition = State::getMousePosition();
 
-    resources.getButton(EasyButton).updateButtonState(mousePosition);
-    resources.getButton(HardButton).updateButtonState(mousePosition);
-    resources.getButton(BackButton).updateButtonState(mousePosition);
-    resources.getButton(InstructionsButton).updateButtonState(mousePosition);
+    // Update every button's state
+    for (int i = EasyButton; i <= InstructionsButton; ++i) {
+        resources.getButton(i).updateButtonState(mousePosition);
+    }
 }
 
 void DifficultySelection::poll() {
@@ -52,21 +65,16 @@ void DifficultySelection::poll() {
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     if (resources.getButton(EasyButton).getButtonState()) {
                         State::difficulty = State::Difficulty::EASY;
-                        State::changeScreen(Screens::FLEET_PLACEMENT);
-                        break;
+                        State::changeScreen(Screens::FleetPlacement);
                     } else if (resources.getButton(HardButton).getButtonState()) {
                         State::difficulty = State::Difficulty::HARD;
-                        State::changeScreen(Screens::FLEET_PLACEMENT);
-                        break;
+                        State::changeScreen(Screens::FleetPlacement);
                     } else if (resources.getButton(BackButton).getButtonState()) {
-                        State::changeScreen(Screens::GAME_MODE_SELECTION);
-                        break;
+                        State::changeScreen(Screens::GameModeSelection);
                     } else if (resources.getButton(InstructionsButton).getButtonState()) {
-                        State::changeScreen(Screens::INSTRUCTIONS);
-                        break;
-                    } else {
-                        break;
+                        State::changeScreen(Screens::Instructions);
                     }
+                    break;
                 }
             default:
                 break;
@@ -79,12 +87,9 @@ void DifficultySelection::render() {
     gui.clear();
 
     gui.draw(resources.getSprite(Background));
-    resources.getButton(EasyButton).render(gui);
-    resources.getButton(HardButton).render(gui);
-    resources.getButton(BackButton).render(gui);
-    resources.getButton(InstructionsButton).render(gui);
-
-    if (State::getCurrentScreen() == Screens::DIFFICULTY_SELECTION) {
-        gui.display();
+    for (int i = EasyButton; i <= InstructionsButton; ++i) {
+        resources.getButton(i).render(gui);
     }
+
+    gui.display();
 }

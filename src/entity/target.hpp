@@ -6,10 +6,10 @@
 #define BATTLESHIP_TARGET_H
 
 #include "../entity/coordinate.hpp"
-
 #include <SFML/Graphics.hpp>
 
 using entity::Coordinate;
+using std::string;
 
 namespace entity {
 
@@ -23,7 +23,7 @@ namespace entity {
         /**
          * Loads the static textures for the target
          */
-        static void initializeTextures();
+        static void initializeTextures(const string& idlePath, const string& activePath);
 
         /**
          * Returns true if the target is active (i.e. the cursor is over the targetCoordinate)
@@ -46,29 +46,19 @@ namespace entity {
         void updateTargetState(sf::Vector2f mousePosition);
 
     private:
-        /**
-         * Idle target texture
-         */
-        static sf::Texture idleTexture;
+        // Idle target texture (same for all targets)
+        static std::unique_ptr<sf::Texture> idleTexture;
 
-        /**
-         * Active target texture
-         */
-        static sf::Texture activeTexture;
+        // Active target texture (same for all targets)
+        static std::unique_ptr<sf::Texture> activeTexture;
 
-        /**
-         * Target sprite
-         */
+        // Target's current sprite (idle or active)
         sf::Sprite sprite;
 
-        /**
-         * Target state (active = true and idle = false)
-         */
-        bool targetState;
+        // Target state
+        bool isActive;
 
-        /**
-         * Location of the target
-         */
+        // Location of the target
         Coordinate targetCoordinate;
     };
 

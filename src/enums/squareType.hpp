@@ -8,10 +8,10 @@
 namespace entity {
 
     enum SquareType {
-        WATER,
-        HIT_WATER,
-        SHIP,
-        HIT_SHIP,
+        Water,
+        HitWater,
+        Ship,
+        HitShip,
     };
 
 }

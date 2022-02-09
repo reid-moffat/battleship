@@ -15,18 +15,14 @@ namespace screen {
     class Intermediary : public ScreenTemplate {
     public:
         /**
-         *
+         * Returns the instance of this screen
          */
         static Intermediary &getInstance();
 
-        /**
-         * Copy constructor
-         */
+        // Do not allow copying of this screen's instance
         Intermediary(const Intermediary &source) = delete;
 
-        /**
-         * Overloaded assignment operator
-         */
+        // Do not allow assignment of this screen's instance
         Intermediary &operator=(const Intermediary &source) = delete;
 
     private:
@@ -43,10 +39,11 @@ namespace screen {
 
         // Names to refer to resources on this screen
         enum textureNames {
-            IntermediaryP1Background,
-            IntermediaryP2Background,
-            IdleContinueButton,
-            ActiveContinueButton
+            IntermediaryP1BackgroundTexture,
+            IntermediaryP2BackgroundTexture,
+
+            IdleContinueButtonTexture,
+            ActiveContinueButtonTexture
         };
         enum spriteNames {
             BackgroundP1,

@@ -8,14 +8,14 @@
 namespace screen {
 
     enum Screens {
-        HOMEPAGE,
-        INSTRUCTIONS,
-        GAME_MODE_SELECTION,
-        DIFFICULTY_SELECTION,
-        FLEET_PLACEMENT,
-        GAMEPLAY,
-        INTERMEDIARY,
-        GAME_OVER
+        Homepage,
+        Instructions,
+        GameModeSelection,
+        DifficultySelection,
+        FleetPlacement,
+        Gameplay,
+        Intermediary,
+        GameOver
     };
 
 }// namespace screen

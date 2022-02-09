@@ -19,14 +19,14 @@ ScreenManager::ScreenManager() {
     State::gui = std::make_unique<sf::RenderWindow>(sf::VideoMode(State::width, State::height), "Battleship", sf::Style::Titlebar | sf::Style::Close);
     State::gui->setFramerateLimit(60);
 
-    screenList[HOMEPAGE] = &Homepage::getInstance();
-    screenList[INSTRUCTIONS] = &Instructions::getInstance();
-    screenList[GAME_MODE_SELECTION] = &GameModeSelection::getInstance();
-    screenList[DIFFICULTY_SELECTION] = &DifficultySelection::getInstance();
-    screenList[FLEET_PLACEMENT] = &FleetPlacement::getInstance();
-    screenList[GAMEPLAY] = &Gameplay::getInstance();
-    screenList[INTERMEDIARY] = &Intermediary::getInstance();
-    screenList[GAME_OVER] = &GameOver::getInstance();
+    screenList[Homepage] = &Homepage::getInstance();
+    screenList[Instructions] = &Instructions::getInstance();
+    screenList[GameModeSelection] = &GameModeSelection::getInstance();
+    screenList[DifficultySelection] = &DifficultySelection::getInstance();
+    screenList[FleetPlacement] = &FleetPlacement::getInstance();
+    screenList[Gameplay] = &Gameplay::getInstance();
+    screenList[Intermediary] = &Intermediary::getInstance();
+    screenList[GameOver] = &GameOver::getInstance();
 }
 
 void ScreenManager::run() {
