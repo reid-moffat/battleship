@@ -433,30 +433,24 @@ void Gameplay::poll() {
 
 void Gameplay::renderSunkShips(Grid &grid) {
     sf::RenderWindow &gui = *State::gui;
-    map<shipNames, bool> shipStatus = grid.getShipStatus();
+    map<shipNames, bool> isSunk = grid.getShipStatus();
 
-    if (shipStatus[shipNames::Battleship]) {
-        gui.draw(resources.getSprite(BattleShipSunk));
-    }
+    static const map<int, shipNames> ships = {
+            {BattleShipSunk, shipNames::Battleship},
+            {AircraftCarrierSunk, shipNames::AircraftCarrier},
+            {DestroyerSunk, shipNames::Destroyer},
+            {SubmarineSunk, shipNames::Submarine},
+            {PatrolBoatSunk, shipNames::PatrolBoat},
+            {RowBoatSunk, shipNames::RowBoat},
+    };
 
-    if (shipStatus[shipNames::AircraftCarrier]) {
-        gui.draw(resources.getSprite(AircraftCarrierSunk));
-    }
+    for (auto ship : ships) {
+        const int sunkTexture = ship.first;
+        const shipNames name = ship.second;
 
-    if (shipStatus[shipNames::Destroyer]) {
-        gui.draw(resources.getSprite(DestroyerSunk));
-    }
-
-    if (shipStatus[shipNames::Submarine]) {
-        gui.draw(resources.getSprite(SubmarineSunk));
-    }
-
-    if (shipStatus[shipNames::PatrolBoat]) {
-        gui.draw(resources.getSprite(PatrolBoatSunk));
-    }
-
-    if (shipStatus[shipNames::RowBoat]) {
-        gui.draw(resources.getSprite(RowBoatSunk));
+        if (isSunk[name]) {
+            gui.draw(resources.getSprite(sunkTexture));
+        }
     }
 }
 
