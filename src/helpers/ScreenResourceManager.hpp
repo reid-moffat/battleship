@@ -40,10 +40,6 @@ public:
                           const vector<sprite> &sprites,
                           const vector<button> &buttons);
 
-    void addSprite(sf::Vector2f, sf::Vector2f, int);
-
-    void addButton(sf::Vector2f, sf::Vector2f, int, int);
-
     /**
      * Default constructor
      */

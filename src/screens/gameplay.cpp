@@ -146,18 +146,22 @@ void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
     if (State::gameMode == State::GameMode::SINGLE_PLAYER) {
         if (State::player == State::Player::P1) {
             if (attack == SquareType::WATER) {
-                resources.getSprite(PrimaryMissMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                resources.getSprite(PrimaryMissMarker)
+                        .setPosition(sf::Vector2f((float) ((128 + (coordinate.getX() * 16)) * 5), (float) ((28 + (coordinate.getY() * 16)) * 5)));
                 this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryMissMarker));
             } else {
-                resources.getSprite(PrimaryHitMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                resources.getSprite(PrimaryHitMarker)
+                        .setPosition(sf::Vector2f((float) ((128 + (coordinate.getX() * 16)) * 5), (float) ((28 + (coordinate.getY() * 16)) * 5)));
                 this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryHitMarker));
             }
         } else {
             if (attack == SquareType::WATER) {
-                resources.getSprite(SecondaryMissMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                resources.getSprite(SecondaryMissMarker)
+                        .setPosition(sf::Vector2f((float) ((16 + (coordinate.getX() * 8)) * 5), (float) ((44 + (coordinate.getY() * 8)) * 5)));
                 this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryMissMarker));
             } else {
-                resources.getSprite(SecondaryHitMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                resources.getSprite(SecondaryHitMarker)
+                        .setPosition(sf::Vector2f((float) ((16 + (coordinate.getX() * 8)) * 5), (float) ((44 + (coordinate.getY() * 8)) * 5)));
                 this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         }
@@ -165,31 +169,37 @@ void Gameplay::updateGridMarkers(SquareType attack, Coordinate coordinate) {
         if (State::player == State::Player::P1) {
             if (attack == SquareType::WATER) {
                 resources.getSprite(PrimaryMissMarker)
-                        .setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                        .setPosition(sf::Vector2f((float) ((128 + (coordinate.getX() * 16)) * 5), (float) ((28 + (coordinate.getY() * 16)) * 5)));
                 this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryMissMarker));
 
-                resources.getSprite(SecondaryMissMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                resources.getSprite(SecondaryMissMarker)
+                        .setPosition(sf::Vector2f((float) ((16 + (coordinate.getX() * 8)) * 5), (float) ((44 + (coordinate.getY() * 8)) * 5)));
                 this->secondaryMarkersP2Vector.push_back(resources.getSprite(SecondaryMissMarker));
             } else {
-                resources.getSprite(PrimaryHitMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                resources.getSprite(PrimaryHitMarker)
+                        .setPosition(sf::Vector2f((float) ((128 + (coordinate.getX() * 16)) * 5), (float) ((28 + (coordinate.getY() * 16)) * 5)));
                 this->primaryMarkersP1Vector.push_back(resources.getSprite(PrimaryHitMarker));
 
-                resources.getSprite(SecondaryHitMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                resources.getSprite(SecondaryHitMarker)
+                        .setPosition(sf::Vector2f((float) ((16 + (coordinate.getX() * 8)) * 5), (float) ((44 + (coordinate.getY() * 8)) * 5)));
                 this->secondaryMarkersP2Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         } else {
             if (attack == SquareType::WATER) {
-                resources.getSprite(PrimaryMissMarker)
-                        .setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                resources.getSprite(PrimaryMissMarker).
+                        setPosition(sf::Vector2f((float) ((128 + (coordinate.getX() * 16)) * 5), (float) ((28 + (coordinate.getY() * 16)) * 5)));
                 this->primaryMarkersP2Vector.push_back(resources.getSprite(PrimaryMissMarker));
 
-                resources.getSprite(SecondaryMissMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                resources.getSprite(SecondaryMissMarker)
+                        .setPosition(sf::Vector2f((float) ((16 + (coordinate.getX() * 8)) * 5), (float) ((44 + (coordinate.getY() * 8)) * 5)));
                 this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryMissMarker));
             } else {
-                resources.getSprite(PrimaryHitMarker).setPosition(sf::Vector2f(((128 + (coordinate.getX() * 16)) * 5), ((28 + (coordinate.getY() * 16)) * 5)));
+                resources.getSprite(PrimaryHitMarker)
+                        .setPosition(sf::Vector2f((float) ((128 + (coordinate.getX() * 16)) * 5), (float) ((28 + (coordinate.getY() * 16)) * 5)));
                 this->primaryMarkersP2Vector.push_back(resources.getSprite(PrimaryHitMarker));
 
-                resources.getSprite(SecondaryHitMarker).setPosition(sf::Vector2f(((16 + (coordinate.getX() * 8)) * 5), ((44 + (coordinate.getY() * 8)) * 5)));
+                resources.getSprite(SecondaryHitMarker)
+                        .setPosition(sf::Vector2f((float) ((16 + (coordinate.getX() * 8)) * 5), (float) ((44 + (coordinate.getY() * 8)) * 5)));
                 this->secondaryMarkersP1Vector.push_back(resources.getSprite(SecondaryHitMarker));
             }
         }
