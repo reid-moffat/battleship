@@ -2,21 +2,9 @@
 
 # Battleship
 
-This is the main group project for a C++ software course (software design and project management based) I completed in 2021. For this project, I worked as the software architect, designing the architecture without a framework for the first time (this was also the first large C/C++ project I was part of). In terms of content, I mainly worked on the back-end (ships, board, etc) and ensured quality, while other entities and front-end work like sprites, screens were created by other team members
+This is the main group project for a C++ software course (software design and project management based) I completed in 2021. For this project, I worked as the software architect, designing the architecture without a framework for the first time (this was also the first large C/C++ project I was part of). In terms of content, I mainly worked on the back-end (ships, board, etc) and ensured quality, while other entities and front-end work like sprites and screens were created by other team members.
 
-There are some fundamental design flaws that could have been rectified during planning (such as the non-responsiveness of the screen size), but this was a project made by a team without much C++ experience in a limited amount of time, so we primarily focused on correctness. Although this project isn't that practically useful, it was made to learn important skills such as the software design process, repository structure, refactoring, fixing (many) git issues 🙃, C++ (especially pointers) and CMAKE
-
-## Running the game
-
-### To run the most recent compiled .exe, simply clone the repo (```git clone https://github.com/reid-moffat/battleship.git```) and run ```bin/battleship.exe``` (do not move the .exe file!)
-
-If you'd like to compile it yourself, make some changes or just play around with it:
-* If you're running tests, you need to clone googletest into the ```include/``` folder with ```git clone https://github.com/google/googletest.git```
-* **Reload CMakeLists.txt** when making changes before compiling
-  * This was made on windows; for non-windows OSs, you'll need to make your own script to compile
-* Run ```battleship``` for the game or ```battleship-tests``` for the test suite
-
-*If you find a bug, feel free to create an issue*
+While this project overall is pretty simple & straightforward, my team did this mainly to learn more about C++, which we definitely succeeded in. In a few months, I learned a lot of concepts, including properly using pointers, CMAKE, refactoring & software design, and everyone's favorite: fixing plenty of git merge conflicts 🙃
 
 ## File structure
 
